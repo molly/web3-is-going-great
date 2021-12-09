@@ -1,4 +1,5 @@
 @import _colors
+@import _loading
 
 $display-font: 'Press Start 2P'
 $body-font: 'Source Code Pro'
@@ -70,6 +71,7 @@ footer.page-footer
 .timeline-filter-wrapper
 	background-color: $filterbar-background
 	padding: 10px 0
+	height: 40px
 
 .timeline-filter
 	width: 90%
@@ -86,6 +88,10 @@ footer.page-footer
 		li
 			display: inline
 			padding-right: 20px
+
+div.content-wrapper
+	display: flex
+	min-height: calc(100vh - 340px)
 
 .timeline
 	position: relative

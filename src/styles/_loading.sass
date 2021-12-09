@@ -1,0 +1,24 @@
+@import _colors
+
+.loading-wrapper
+  width: 100px
+  margin: 50px auto 0 auto
+
+.loading-animation
+  font-family: 'Press Start 2P'
+  font-size: 30px
+  color: $accent
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.2)
+
+  &::after
+    overflow: hidden
+    display: inline-block
+    vertical-align: bottom
+    -webkit-animation: ellipsis steps(4, end) 900ms infinite
+    animation: ellipsis steps(4, end) 900ms infinite
+    content: "..."
+    width: 0px
+
+@keyframes ellipsis
+  to
+    width: 100px
