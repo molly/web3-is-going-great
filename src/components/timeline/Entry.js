@@ -153,8 +153,8 @@ Entry.propTypes = {
     id: PropTypes.string.isRequired,
     filters: PropTypes.shape({
       theme: PropTypes.arrayOf(PropTypes.string).isRequired,
-      tech: PropTypes.arrayOf(PropTypes.string).isRequired,
-      blockchain: PropTypes.arrayOf(PropTypes.string).isRequired,
+      tech: PropTypes.arrayOf(PropTypes.string),
+      blockchain: PropTypes.arrayOf(PropTypes.string),
     }),
     color: PropTypes.string,
     faicon: PropTypes.string,
