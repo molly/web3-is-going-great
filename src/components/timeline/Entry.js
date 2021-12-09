@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { STORAGE_URL } from "../../constants/urls";
+import FILTERS from "../../constants/filters";
 import ICONS from "../../constants/icons";
 import { humanizeDate, isWrappedInParagraphTags } from "../../js/utilities";
 
@@ -95,6 +96,33 @@ export default function Entry({ entry, className }) {
     return null;
   };
 
+  const renderTags = () => {
+    const theme = entry.filters.theme
+      .map((theme) => FILTERS.themes[theme])
+      .join(", ");
+    const otherFilters = [];
+    if (entry.filters.tech) {
+      otherFilters.push(
+        entry.filters.tech.map((tech) => FILTERS.tech[tech]).join(", ")
+      );
+    }
+    if (entry.filters.blockchain) {
+      otherFilters.push(
+        entry.filters.blockchain.map((bc) => FILTERS.blockchain[bc]).join(", ")
+      );
+    }
+    return (
+      <div className="tags">
+        <div>{theme}</div>
+        <div>
+          {otherFilters.map((filters) => (
+            <span key={filters}>{filters}</span>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className={`timeline-entry ${className}`}>
       <div className={`timeline-icon ${entry.color || "purple"}`}>
@@ -113,6 +141,7 @@ export default function Entry({ entry, className }) {
         {renderImage()}
         {renderBody()}
         {renderLinks()}
+        {renderTags()}
       </div>
     </div>
   );
@@ -122,6 +151,11 @@ Entry.propTypes = {
   className: PropTypes.string,
   entry: PropTypes.shape({
     id: PropTypes.string.isRequired,
+    filters: PropTypes.shape({
+      theme: PropTypes.arrayOf(PropTypes.string).isRequired,
+      tech: PropTypes.arrayOf(PropTypes.string).isRequired,
+      blockchain: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }),
     color: PropTypes.string,
     faicon: PropTypes.string,
     icon: PropTypes.string,

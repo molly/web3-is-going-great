@@ -8,7 +8,13 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import Timeline from "./components/pages/Timeline";
 
 function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={queryClient}>

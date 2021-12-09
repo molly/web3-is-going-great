@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { functions } from "../../js/functions";
 import { useFunctionsQuery } from "@react-query-firebase/functions";
 
@@ -9,15 +9,16 @@ import Loader from "../timeline/Loader";
 import Footer from "../timeline/Footer";
 
 export default function Timeline() {
+  let [filters, setFilters] = useState({ theme: [], tech: [], blockchain: [] });
+
   let entries = [];
   const query = useFunctionsQuery(
     ["entries", { limit: 2 }],
     functions,
     "getEntries"
   );
-  if (!query.isLoading && !query.isError) {
+  if (entries.len === 0 && !query.isLoading && !query.isError) {
     entries = query.data;
-    console.log(entries);
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -47,7 +48,7 @@ export default function Timeline() {
   return (
     <>
       <Header />
-      <Filters />
+      <Filters filters={filters} setFilters={setFilters} />
       <div className="content-wrapper" aria-busy={query.isLoading}>
         {renderBody()}
       </div>

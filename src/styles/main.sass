@@ -70,6 +70,7 @@ footer.page-footer
 
 .timeline-filter-wrapper
 	background-color: $filterbar-background
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
 	padding: 10px 0
 	height: 40px
 
@@ -131,7 +132,7 @@ div.content-wrapper
 	margin-left: -20px
 	border: 4px solid $timeline-line-color
 	border-radius: 50%
-	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3)
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4)
 	text-align: center
 	vertical-align: middle
 	z-index: 2
@@ -159,9 +160,22 @@ div.content-wrapper
 	width: 45%
 	background-color: $card-background
 	padding: 20px
-	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3)
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1)
 	display: inline-block
 	z-index: 1
+
+	.tags
+		display: flex
+		justify-content: space-between
+		margin-top: 20px
+		padding-top: 10px
+		border-top: 1px solid $timeline-line-color
+		font-style: italic
+		font-size: 70%
+
+		span:not(:first-child):before
+			color: $timeline-line-color
+			content: " | "
 
 	.timestamp
 		font-style: italic
