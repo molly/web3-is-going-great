@@ -1,7 +1,7 @@
 import React from "react";
 import { STORAGE_URL } from "../../constants/urls";
 
-export default function Timeline() {
+export default function Header() {
   return (
     <header className="page-header">
       <div className="constrain-width">

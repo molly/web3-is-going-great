@@ -374,27 +374,3 @@ footer.page-footer
 	@media only screen and (min-width: 415px)
 		.timeline-entry.odd .timeline-description::after
 			border-right-color: $dark-card-background
-
-// NO JS FALLBACK
-.no-js
-	.timeline::before, .timeline-icon
-		left: 0
-
-	.timeline-filter-wrapper
-		display: none
-
-	.timeline-entry
-		margin-top: 25
-
-		&.short
-			margin-top: 25
-
-		.timeline-description
-			margin-left: 50px
-
-			&:after
-				right: 100%
-				border-right-color: $card-background
-
-	.timeline-description
-		width: 90%

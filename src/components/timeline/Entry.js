@@ -1,15 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { humanizeDate, isWrappedInParagraphTags } from "../../utilities";
 
-export default function Entry({ entry }) {
+import { STORAGE_URL } from "../../constants/urls";
+import ICONS from "../../constants/icons";
+import { humanizeDate, isWrappedInParagraphTags } from "../../js/utilities";
+
+export default function Entry({ entry, className }) {
   const renderIcon = () => {
     if (entry.faicon) {
       return <i className={`fas fa-${entry.faicon}`} aria-hidden="true"></i>;
     } else if (entry.icon) {
       return (
         <div className="icon-wrapper">
-          <img src={`/img/icons/${entry.icon.filename}`} aria-hidden="true" />
+          <img
+            src={`${STORAGE_URL}/icons/${ICONS[entry.icon]}`}
+            alt="" // Decorative, hidden to screenreaders
+            aria-hidden="true"
+          />
         </div>
       );
     }
@@ -21,7 +28,12 @@ export default function Entry({ entry }) {
       return null;
     }
 
-    const imageEl = <img src={entry.image.src} alt={entry.image.alt} />;
+    const imageEl = (
+      <img
+        src={`${STORAGE_URL}/entryAssets/${entry.image.src}`}
+        alt={entry.image.alt}
+      />
+    );
     if (entry.image.link) {
       return (
         <a href={entry.image.link} target="_blank" rel="noreferrer">
@@ -33,7 +45,7 @@ export default function Entry({ entry }) {
   };
 
   const renderImageCaption = () => {
-    if (entry.image.caption) {
+    if (entry?.image?.caption) {
       return (
         <>
           <span
@@ -46,6 +58,7 @@ export default function Entry({ entry }) {
         </>
       );
     }
+    return null;
   };
 
   const renderImage = () => {
@@ -58,7 +71,7 @@ export default function Entry({ entry }) {
   };
 
   const renderBody = () => {
-    const body = <div dangerouslySetInnerHTML={{ __html: entry.body }} />;
+    const body = <span dangerouslySetInnerHTML={{ __html: entry.body }} />;
     return isWrappedInParagraphTags(entry.body) ? body : <p>{body}</p>;
   };
 
@@ -83,7 +96,7 @@ export default function Entry({ entry }) {
   };
 
   return (
-    <div className="timeline-entry">
+    <div className={`timeline-entry ${className}`}>
       <div className={`timeline-icon ${entry.color || "purple"}`}>
         {renderIcon()}
       </div>
@@ -106,11 +119,12 @@ export default function Entry({ entry }) {
 }
 
 Entry.propTypes = {
+  className: PropTypes.string,
   entry: PropTypes.shape({
     id: PropTypes.string.isRequired,
     color: PropTypes.string,
     faicon: PropTypes.string,
-    icon: PropTypes.shape({ filename: PropTypes.string.isRequired }),
+    icon: PropTypes.string,
     date: PropTypes.string,
     title: PropTypes.string.isRequired,
     image: PropTypes.shape({
