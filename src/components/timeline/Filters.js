@@ -59,7 +59,7 @@ export default function Filters() {
           disabled={!isMobile}
           onClick={() => setIsFilterGroupExpanded(!isFilterGroupExpanded)}
         >
-          <h2>Filter:</h2>
+          <h2>Filter{!isMobile && ":"}</h2>
           <i className="fas fa-caret-down"></i>
         </button>
         <div
