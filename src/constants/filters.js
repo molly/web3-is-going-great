@@ -1,8 +1,10 @@
 const FILTERS = {
-  themes: {
-    failureToLaunch: "Failure to launch",
+  theme: {
+    badIdea: "Bad idea",
+    bug: "Bug",
+    hack: "Hack or scam",
     rugPull: "Rug pull",
-    hack: "Hacks and scams",
+    shady: "Shady business",
   },
   tech: { nft: "NFT", dao: "DAO", currency: "cryptocurrency" },
   blockchain: { solana: "Solana", ethereum: "Ethereum" },

@@ -1,0 +1,72 @@
+@import _colors
+
+.timeline-filter-wrapper
+  display: flex
+  background-color: $filterbar-background
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
+
+.timeline-filter
+  display: flex
+  flex-wrap: nowrap
+  max-width: 1600px
+  padding: 0 10px
+
+  h2
+    font-size: 1em
+    margin: 0
+
+  .expand-filters-button
+    display: flex
+    align-items: center
+    background-color: transparent
+    border: 0
+    color: $main-text-color
+    cursor: pointer
+
+    &:disabled
+      color: $main-text-color
+
+  .filter-and-button, .filters-expandable
+    display: flex
+    align-items: center
+
+@media only screen and (min-width: 415px)
+  .timeline-filter-wrapper
+    height: 50px
+
+  .timeline-filter
+    width: 90%
+    margin: 0 auto
+
+    .expand-filters-button
+      .fa-caret-down
+        display: none
+
+    .filters-expandable
+      flex-grow: 1
+
+      >*
+        margin-left: 20px
+
+@media only screen and (max-width: 414px)
+  .timeline-filter
+    width: 100%
+    flex-direction: column
+
+    .expand-filters-button
+      height: 30px
+      flex-grow: 1
+      justify-content: space-between
+
+    .filters-expandable
+      display: none
+      flex-direction: column
+      border-top: 1px solid $timeline-line-color
+      margin-bottom: 10px
+
+      &.expanded
+        display: flex
+
+      .filter-select
+        width: 90%
+        margin-top: 10px

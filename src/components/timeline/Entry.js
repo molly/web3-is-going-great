@@ -84,10 +84,10 @@ export default function Entry({ entry, className }) {
             <li key={link.href}>
               <a href={link.href} target="_blank" rel="noreferrer">
                 <span dangerouslySetInnerHTML={{ __html: link.linkText }} />
-                {link.extraText && (
-                  <span dangerouslySetInnerHTML={{ __html: link.extraText }} />
-                )}
               </a>
+              {link.extraText && (
+                <span dangerouslySetInnerHTML={{ __html: link.extraText }} />
+              )}
             </li>
           ))}
         </ul>
@@ -98,17 +98,19 @@ export default function Entry({ entry, className }) {
 
   const renderTags = () => {
     const theme = entry.filters.theme
-      .map((theme) => FILTERS.themes[theme])
+      .map((theme) => FILTERS.theme[theme])
       .join(", ");
     const otherFilters = [];
+    if (entry.filters.blockchain) {
+      otherFilters.push(
+        `Blockchain: ${entry.filters.blockchain
+          .map((bc) => FILTERS.blockchain[bc])
+          .join(", ")}`
+      );
+    }
     if (entry.filters.tech) {
       otherFilters.push(
         entry.filters.tech.map((tech) => FILTERS.tech[tech]).join(", ")
-      );
-    }
-    if (entry.filters.blockchain) {
-      otherFilters.push(
-        entry.filters.blockchain.map((bc) => FILTERS.blockchain[bc]).join(", ")
       );
     }
     return (
