@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useCallback, useMemo, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { InView } from "react-intersection-observer";
@@ -25,27 +24,20 @@ export default function Timeline() {
     [filters]
   );
 
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isLoading,
-    isError,
-    status,
-  } = useInfiniteQuery("entries", getFilteredEntries, {
-    getNextPageParam: (lastPage, pages) => {
-      if (!lastPage) {
-        // This is the first fetch, so we have no cursor
-        return null;
-      }
-      if (!lastPage.hasMore) {
-        // No entries remain, return undefined to signal this to react-query
-        return undefined;
-      }
-      return lastPage.entries[lastPage.entries.length - 1]._key;
-    },
-  });
+  const { data, fetchNextPage, isFetching, isLoading, isError } =
+    useInfiniteQuery("entries", getFilteredEntries, {
+      getNextPageParam: (lastPage, pages) => {
+        if (!lastPage) {
+          // This is the first fetch, so we have no cursor
+          return null;
+        }
+        if (!lastPage.hasMore) {
+          // No entries remain, return undefined to signal this to react-query
+          return undefined;
+        }
+        return lastPage.entries[lastPage.entries.length - 1]._key;
+      },
+    });
 
   const hasMoreEntries = useMemo(() => {
     if (data && data.pages) {
