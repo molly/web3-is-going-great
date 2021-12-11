@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import Timeline from "./components/pages/Timeline";
+import Attribution from "./components/pages/Attribution";
 
 function App() {
   const queryClient = new QueryClient({
@@ -20,7 +21,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
-          <Route index element={<Timeline />} />
+          <Route index exact element={<Timeline />} />
+          <Route path="/attribution" element={<Attribution />} />
         </Routes>
       </Router>
     </QueryClientProvider>
