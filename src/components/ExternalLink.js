@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function Link({ children, href }) {
+export default function ExternalLink({ children, href }) {
   return (
     <a target="_blank" rel="noreferrer" href={href}>
       {children}
@@ -9,7 +9,7 @@ export default function Link({ children, href }) {
   );
 }
 
-Link.propTypes = {
+ExternalLink.propTypes = {
   children: PropTypes.node.isRequired,
   href: PropTypes.string.isRequired,
 };

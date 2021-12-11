@@ -1,5 +1,6 @@
 import React from "react";
-import Link from "../Link";
+import { Link } from "react-router-dom";
+import ExternalLink from "../ExternalLink";
 
 export default function Attribution() {
   return (
@@ -7,63 +8,70 @@ export default function Attribution() {
       <header className="attribution-header">
         <h1>Attribution</h1>
       </header>
+      <nav className="navigation-bar">
+        <div className="contents">
+          <Link to="/">
+            <i className="fas fa-arrow-left-long" /> Back
+          </Link>
+        </div>
+      </nav>
       <div className="content-wrapper">
         <article className="attribution">
           <h3>Monkey illustration created from</h3>
           <ul>
             <li>
-              <Link href="https://opensea.io/assets/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/5262">
+              <ExternalLink href="https://opensea.io/assets/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/5262">
                 <span>#5262</span>
-              </Link>
+              </ExternalLink>
               <span> from OpenSea</span>
             </li>
             <li>
-              <Link href="https://icons8.com/illustrations/illustration/burgundy-123">
+              <ExternalLink href="https://icons8.com/illustrations/illustration/burgundy-123">
                 Earth illustration
-              </Link>
+              </ExternalLink>
               <span> by </span>
-              <Link href="https://icons8.com/illustrations/author/603d1fd6123f9916a4db9ee6">
+              <ExternalLink href="https://icons8.com/illustrations/author/603d1fd6123f9916a4db9ee6">
                 <span>Irina Molchanova</span>
-              </Link>
+              </ExternalLink>
               <span> from </span>
-              <Link href="https://icons8.com/illustrations">
+              <ExternalLink href="https://icons8.com/illustrations">
                 <span>icons8</span>
-              </Link>
+              </ExternalLink>
             </li>
             <li>
-              <Link href="https://icons8.com/illustrations/illustration/burgundy-fire-1">
+              <ExternalLink href="https://icons8.com/illustrations/illustration/burgundy-fire-1">
                 Flame illustration
-              </Link>
+              </ExternalLink>
               <span> by </span>
-              <Link href="https://icons8.com/illustrations/author/603d1fd6123f9916a4db9ee6">
+              <ExternalLink href="https://icons8.com/illustrations/author/603d1fd6123f9916a4db9ee6">
                 <span>Irina Molchanova</span>
-              </Link>
+              </ExternalLink>
               <span> from </span>
-              <Link href="https://icons8.com/illustrations">
+              <ExternalLink href="https://icons8.com/illustrations">
                 <span>icons8</span>
-              </Link>
+              </ExternalLink>
             </li>
           </ul>
 
           <h3>Icons</h3>
           <ul>
             <li>
-              <Link href="https://icons8.com/icon/zq5OEurKP6Ip/robber">
+              <ExternalLink href="https://icons8.com/icon/zq5OEurKP6Ip/robber">
                 <span>Robber</span>
-              </Link>
+              </ExternalLink>
               <span> icon by </span>
-              <Link href="https://icons8.com">
+              <ExternalLink href="https://icons8.com">
                 <span>Icons8</span>
-              </Link>
+              </ExternalLink>
             </li>
             <li>
-              <Link href="https://icons8.com/icon/36931/sun-glasses">
+              <ExternalLink href="https://icons8.com/icon/36931/sun-glasses">
                 <span>Sunglasses</span>
-              </Link>
+              </ExternalLink>
               <span> icon by </span>
-              <Link href="https://icons8.com">
+              <ExternalLink href="https://icons8.com">
                 <span>Icons8</span>
-              </Link>
+              </ExternalLink>
             </li>
           </ul>
 
@@ -71,15 +79,15 @@ export default function Attribution() {
           <ul>
             <li>
               <span>AnubisDAO art from </span>
-              <Link href="https://twitter.com/anubisdao">
+              <ExternalLink href="https://twitter.com/anubisdao">
                 <span>the project's Twitter account</span>
-              </Link>
+              </ExternalLink>
             </li>
             <li>
               <span>Bored Ape Yacht Club NFT from </span>
-              <Link href="https://twitter.com/calvinbecerra/status/1454328591202721796">
+              <ExternalLink href="https://twitter.com/calvinbecerra/status/1454328591202721796">
                 <span>Calvin Becerra's Twitter account</span>
-              </Link>
+              </ExternalLink>
             </li>
           </ul>
         </article>
