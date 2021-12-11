@@ -1,5 +1,6 @@
 @import _colors
 
+@import _admin
 @import _filters
 @import _loading
 
@@ -30,8 +31,30 @@ a
   &:focus
     text-decoration: underline
 
-header.page-header
+header.page-header,
+footer.page-footer
+  display: flex
+  background-color: $header-footer-background
+  justify-content: center
+  align-items: center
+  height: 80px
+
+  h1
+    margin: 0
+
+  .constrain-width
+    max-width: 1440px
+
+  p
+    line-height: 120%
+    color: #eee
+
+  a
+    color: $header-footer-link-color
+
+header.page-header.timeline-page
   height: 300px
+  align-items: start
 
   .constrain-width
     height: 100%
@@ -53,22 +76,6 @@ footer.page-footer
 
   .constrain-width p
     text-align: center
-
-header.page-header,
-footer.page-footer
-  display: flex
-  background-color: $header-footer-background
-  justify-content: center
-
-  .constrain-width
-    max-width: 1440px
-
-  p
-    line-height: 120%
-    color: #eee
-
-  a
-    color: $header-footer-link-color
 
 div.content-wrapper
   display: flex
@@ -144,16 +151,32 @@ div.content-wrapper
 
   .tags
     display: flex
-    justify-content: space-between
     margin-top: 20px
     padding-top: 10px
     border-top: 1px solid $timeline-line-color
     font-style: italic
     font-size: 70%
 
-    >div>span:not(:first-child):before
-      color: $timeline-line-color
-      content: " | "
+    .tag-list
+      white-space: nowrap
+      text-overflow: ellipsis
+      overflow: hidden
+
+      &.theme
+        flex-shrink: 0
+
+      &:not(:first-child):before
+        color: $timeline-line-color
+        content: "|"
+        padding: 0 5px
+
+    .tag-group-right
+      display: flex
+      flex-wrap: wrap
+      justify-content: end
+      flex-grow: 1
+      min-width: 0
+      padding-left: 20px
 
   .timestamp
     font-style: italic
@@ -218,16 +241,6 @@ div.content-wrapper
   clear: both
   margin-top: 30px
 
-.attribution-header
-  display: flex
-  justify-content: center
-  align-items: center
-  height: 80px
-  background-color: $header-footer-background
-
-  h1
-    margin: 0
-
 .attribution
   width: 90%
   max-width: 1600px
@@ -264,6 +277,9 @@ div.content-wrapper
   width: 1px
   height: 1px
   overflow: hidden
+
+.clearfix
+  clear: both
 
 /* ICON COLORS */
 .timeline-icon

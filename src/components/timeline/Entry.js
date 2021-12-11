@@ -5,6 +5,7 @@ import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
 import ICONS from "../../constants/icons";
 import { humanizeDate, isWrappedInParagraphTags } from "../../js/utilities";
+import { EntryPropType } from "../../js/entry";
 
 export default function Entry({ entry, className }) {
   const renderIcon = () => {
@@ -104,32 +105,32 @@ export default function Entry({ entry, className }) {
       .map((theme) => FILTERS.theme[theme])
       .join(", ");
     let blockchain, tech;
-    if (entry.filters.blockchain) {
+    if (entry.filters?.blockchain?.length) {
       blockchain = `Blockchain: ${entry.filters.blockchain
         .map((bc) => FILTERS.blockchain[bc])
         .join(", ")}`;
     }
-    if (entry.filters.tech) {
+    if (entry.filters?.tech?.length) {
       tech = entry.filters.tech.map((tech) => FILTERS.tech[tech]).join(", ");
     }
     return (
       <div className="tags">
-        <div>
+        <div className="tag-list theme">
           <span className="sr-only">Theme tags: </span>
           {theme}
         </div>
-        <div>
+        <div className="tag-group-right">
           {blockchain && (
-            <span>
+            <div className="tag-list">
               <span className="sr-only">Blockchain tags: </span>
               <span>{blockchain}</span>
-            </span>
+            </div>
           )}
           {tech && (
-            <span>
+            <div className="tag-list">
               <span className="sr-only">Tec tags: </span>
               <span>{tech}</span>
-            </span>
+            </div>
           )}
         </div>
       </div>
@@ -154,7 +155,7 @@ export default function Entry({ entry, className }) {
         {renderImage()}
         {renderBody()}
         {renderLinks()}
-        {renderTags()}
+        <div className="clearfix">{renderTags()}</div>
       </div>
     </div>
   );
@@ -162,31 +163,5 @@ export default function Entry({ entry, className }) {
 
 Entry.propTypes = {
   className: PropTypes.string,
-  entry: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    filters: PropTypes.shape({
-      theme: PropTypes.arrayOf(PropTypes.string).isRequired,
-      tech: PropTypes.arrayOf(PropTypes.string),
-      blockchain: PropTypes.arrayOf(PropTypes.string),
-    }),
-    color: PropTypes.string,
-    faicon: PropTypes.string,
-    icon: PropTypes.string,
-    date: PropTypes.string,
-    title: PropTypes.string.isRequired,
-    image: PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      alt: PropTypes.string.isRequired,
-      link: PropTypes.string,
-      caption: PropTypes.string,
-    }),
-    body: PropTypes.string.isRequired,
-    links: PropTypes.arrayOf(
-      PropTypes.shape({
-        href: PropTypes.string.isRequired,
-        linkText: PropTypes.string.isRequired,
-        extraText: PropTypes.string,
-      })
-    ),
-  }),
+  entry: EntryPropType,
 };

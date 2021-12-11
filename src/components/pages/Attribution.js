@@ -5,13 +5,14 @@ import ExternalLink from "../ExternalLink";
 export default function Attribution() {
   return (
     <>
-      <header className="attribution-header">
+      <header className="page-header attribution-header">
         <h1>Attribution</h1>
       </header>
       <nav className="navigation-bar">
         <div className="contents">
           <Link to="/">
-            <i className="fas fa-arrow-left-long" /> Back
+            <i className="fas fa-arrow-left-long" aria-hidden={true} alt="" />{" "}
+            Back
           </Link>
         </div>
       </nav>
@@ -56,8 +57,26 @@ export default function Attribution() {
           <h3>Icons</h3>
           <ul>
             <li>
+              <ExternalLink href="https://icons8.com/icon/93275/delete-message">
+                <span>Delete Message</span>
+              </ExternalLink>
+              <span> icon by </span>
+              <ExternalLink href="https://icons8.com">
+                <span>Icons8</span>
+              </ExternalLink>
+            </li>
+            <li>
               <ExternalLink href="https://icons8.com/icon/zq5OEurKP6Ip/robber">
                 <span>Robber</span>
+              </ExternalLink>
+              <span> icon by </span>
+              <ExternalLink href="https://icons8.com">
+                <span>Icons8</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <ExternalLink href="https://icons8.com/icon/9grWu5NGDWPh/rug">
+                <span>Rug</span>
               </ExternalLink>
               <span> icon by </span>
               <ExternalLink href="https://icons8.com">
@@ -87,6 +106,12 @@ export default function Attribution() {
               <span>Bored Ape Yacht Club NFT from </span>
               <ExternalLink href="https://twitter.com/calvinbecerra/status/1454328591202721796">
                 <span>Calvin Becerra's Twitter account</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <span>McRib NFT image from </span>
+              <ExternalLink href="https://twitter.com/McDonalds/status/1455174998264586243">
+                McDonalds' Twitter account
               </ExternalLink>
             </li>
           </ul>

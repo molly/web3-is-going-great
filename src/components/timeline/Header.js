@@ -3,7 +3,7 @@ import { STORAGE_URL } from "../../constants/urls";
 
 export default function Header() {
   return (
-    <header className="page-header">
+    <header className="timeline-page page-header">
       <div className="constrain-width">
         <img
           className="logo"
