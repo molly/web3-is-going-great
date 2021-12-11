@@ -14,8 +14,6 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@firebase/firestore-types": "^2.5.0",
-    "express": "^4.17.1",
     "firebase-admin": "^9.8.0",
     "firebase-functions": "^3.14.1"
   },
@@ -25,7 +23,6 @@
     "eslint": "^7.6.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.22.0",
-    "firebase-functions-test": "^0.2.0",
     "typescript": "^3.8.0"
   },
   "private": true
