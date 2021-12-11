@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import Select from "react-select";
 
 import FILTERS from "../../constants/filters";
@@ -6,7 +7,7 @@ import { sentenceCase } from "../../js/utilities";
 
 const MOBILE_BREAKPOINT = 768;
 
-export default function Filters() {
+export default function Filters({ filters, setFilters }) {
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < MOBILE_BREAKPOINT
   );
@@ -45,6 +46,13 @@ export default function Filters() {
         styles={{
           menu: (provided) => ({ ...provided, width: "200px" }),
         }}
+        onChange={(values) => {
+          setFilters({ ...filters, [filter]: values.map((v) => v.value) });
+        }}
+        value={filters[filter].map((v) => ({
+          value: v,
+          label: FILTERS[filter][v],
+        }))}
       />
     );
   };
@@ -74,3 +82,16 @@ export default function Filters() {
     </div>
   );
 }
+
+Filters.propTypes = {
+  filters: PropTypes.shape({
+    theme: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(FILTERS.theme)))
+      .isRequired,
+    tech: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(FILTERS.tech)))
+      .isRequired,
+    blockchain: PropTypes.arrayOf(
+      PropTypes.oneOf(Object.keys(FILTERS.blockchain))
+    ).isRequired,
+  }).isRequired,
+  setFilters: PropTypes.func.isRequired,
+};

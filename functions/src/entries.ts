@@ -1,4 +1,4 @@
-import * as admin from "firebase-admin";
+import { firestore, FieldPath } from "./config/firebase";
 import * as functions from "firebase-functions";
 
 type EntryQuery = {
@@ -14,27 +14,22 @@ const DEFAULT_LIMIT = 10;
 export const getEntries = functions.https.onCall(async (data: EntryQuery) => {
   const limit = data?.limit ?? DEFAULT_LIMIT;
 
-  // Fetch one more entry than we actually want so we can set a flag to determine if there are more entries remaining
-  const query = await admin
-    .database()
-    .ref("/entries")
-    .orderByKey()
-    .limitToFirst(limit + 1);
+  let query = await firestore
+    .collection("entries")
+    .orderBy(FieldPath.documentId());
 
-  let snapshot: admin.database.DataSnapshot;
+  let snapshot;
   if (!data.cursor) {
-    snapshot = await query.once("value");
+    snapshot = await query.get();
   } else {
-    snapshot = await query.startAfter(data.cursor).once("value");
+    snapshot = await query.startAfter(data.cursor).get();
   }
 
-  // Returning snapshot.val() will give us an unordered object, so convert to an array before returning to preserve
-  // order
   const entries: object[] = [];
   let hasMore = false;
   snapshot.forEach((child) => {
     if (entries.length < limit) {
-      entries.push({ _key: child.key, ...child.val() });
+      entries.push({ _key: child.id, ...child.data() });
     } else {
       hasMore = true;
     }
