@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
+import { EMPTY_FILTERS_STATE } from "../pages/Timeline";
 
 import FILTERS from "../../constants/filters";
 import { sentenceCase } from "../../js/utilities";
@@ -47,7 +48,10 @@ export default function Filters({ filters, setFilters }) {
           menu: (provided) => ({ ...provided, width: "200px" }),
         }}
         onChange={(values) => {
-          setFilters({ ...filters, [filter]: values.map((v) => v.value) });
+          setFilters({
+            ...EMPTY_FILTERS_STATE,
+            [filter]: values.map((v) => v.value),
+          });
         }}
         value={filters[filter].map((v) => ({
           value: v,

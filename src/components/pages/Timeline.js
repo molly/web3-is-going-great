@@ -10,12 +10,14 @@ import Entry from "../timeline/Entry";
 import Loader from "../timeline/Loader";
 import Footer from "../timeline/Footer";
 
+export const EMPTY_FILTERS_STATE = {
+  theme: [],
+  tech: [],
+  blockchain: [],
+};
+
 export default function Timeline() {
-  const [filters, setFilters] = useState({
-    theme: [],
-    tech: [],
-    blockchain: [],
-  });
+  const [filters, setFilters] = useState(EMPTY_FILTERS_STATE);
 
   const getFilteredEntries = useCallback(
     ({ pageParam = null }) => {
