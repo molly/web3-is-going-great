@@ -7,7 +7,6 @@
 
 .timeline-filter
   display: flex
-  flex-wrap: nowrap
   max-width: 1600px
   padding: 0 10px
 
@@ -30,9 +29,10 @@
     display: flex
     align-items: center
 
-@media only screen and (min-width: 415px)
+@media only screen and (min-width: 769px)
   .timeline-filter-wrapper
-    height: 50px
+    padding: 5px 0
+    min-height: 50px
 
   .timeline-filter
     width: 90%
@@ -48,7 +48,7 @@
       >*
         margin-left: 20px
 
-@media only screen and (max-width: 414px)
+@media only screen and (max-width: 768px)
   .timeline-filter
     width: 100%
     flex-direction: column

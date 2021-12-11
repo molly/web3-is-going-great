@@ -7,395 +7,409 @@ $display-font: 'Press Start 2P'
 $body-font: 'Source Code Pro'
 
 html
-	width: 100%
-	height: 100%
+  width: 100%
+  height: 100%
 
 body
-	width: 100%
-	height: 100%
-	background-color: $main-background
-	color: $main-text-color
-	font-family: $body-font, sans-serif
+  width: 100%
+  height: 100%
+  background-color: $main-background
+  color: $main-text-color
+  font-family: $body-font, sans-serif
 
 h1
-	font-family: $display-font, serif
-	margin-top: 0
-	color: $title-color
+  font-family: $display-font, serif
+  margin-top: 0
+  color: $title-color
 
 a
-	text-decoration: none
-	color: $main-link-color
+  text-decoration: none
+  color: $main-link-color
 
-	&:hover,
-	&:focus
-		text-decoration: underline
+  &:hover,
+  &:focus
+    text-decoration: underline
 
 header.page-header
-	height: 300px
+  height: 300px
 
-	.constrain-width
-		height: 100%
-		display: flex
-		flex-wrap: nowrap
-		justify-content: space-between
+  .constrain-width
+    height: 100%
+    display: flex
+    flex-wrap: nowrap
+    justify-content: space-between
 
-	img.logo
-		margin-left: -65px
-		max-height: 300px
-		object-fit: contain
+  img.logo
+    margin-left: -65px
+    max-height: 300px
+    object-fit: contain
 
-	.header-content
-		padding: 0 30px
-		align-self: center
+  .header-content
+    padding: 0 30px
+    align-self: center
 
 footer.page-footer
-	padding: 10px 0
+  padding: 10px 10px
 
-	.constrain-width p
-		text-align: center
+  .constrain-width p
+    text-align: center
 
 header.page-header,
 footer.page-footer
-	display: flex
-	background-color: $header-footer-background
-	justify-content: center
+  display: flex
+  background-color: $header-footer-background
+  justify-content: center
 
-	.constrain-width
-		max-width: 1440px
+  .constrain-width
+    max-width: 1440px
 
-	p
-		line-height: 120%
-		color: #eee
+  p
+    line-height: 120%
+    color: #eee
 
-	a
-		color: $header-footer-link-color
+  a
+    color: $header-footer-link-color
 
 div.content-wrapper
-	display: flex
-	min-height: calc(100vh - 340px)
+  display: flex
+  min-height: calc(100vh - 340px)
 
 .timeline
-	position: relative
-	width: 90%
-	max-width: 1600px
-	margin: 0px auto
-	padding: 20px 0 100px 0
+  position: relative
+  width: 90%
+  max-width: 1600px
+  margin: 0px auto
+  padding: 20px 0 100px 0
 
-	&::before
-		content: ''
-		position: absolute
-		top: 0
-		left: 50.2%
-		height: 100%
-		width: 4px
-		background: $timeline-line-color
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    left: 50.2%
+    height: 100%
+    width: 4px
+    background: $timeline-line-color
 
 .timeline-entry
-	position: relative
-	margin-top: -150px
+  position: relative
+  margin-top: -150px
 
-	&.first
-		margin-top: 10px
+  &.first
+    margin-top: 10px
 
-	&.short
-		margin-top: -50px
+  &.short
+    margin-top: -50px
 
-	&.odd
-		.timeline-description
-			margin-left: 55%
+  &.odd
+    .timeline-description
+      margin-left: 55%
 
 .timeline-icon
-	position: absolute
-	left: 50%
-	width: 40px
-	height: 40px
-	margin-left: -20px
-	border: 4px solid $timeline-line-color
-	border-radius: 50%
-	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4)
-	text-align: center
-	vertical-align: middle
+  position: absolute
+  left: 50%
+  width: 40px
+  height: 40px
+  margin-left: -20px
+  border: 4px solid $timeline-line-color
+  border-radius: 50%
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4)
+  text-align: center
+  vertical-align: middle
 
-	i
-		color: $timeline-icon-color
-		font-size: 20px
-		line-height: 40px
+  i
+    color: $timeline-icon-color
+    font-size: 20px
+    line-height: 40px
 
-	.icon-wrapper
-		display: flex
-		width: 100%
-		height: 100%
-		align-items: center
-		justify-content: center
+  .icon-wrapper
+    display: flex
+    width: 100%
+    height: 100%
+    align-items: center
+    justify-content: center
 
-	img
-		width: 20px
-		height: 20px
-		object-fit: contain
+  img
+    width: 20px
+    height: 20px
+    object-fit: contain
 
 .timeline-description
-	box-sizing: border-box
-	position: relative
-	width: 45%
-	background-color: $card-background
-	padding: 20px
-	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1)
-	display: inline-block
+  box-sizing: border-box
+  position: relative
+  width: 45%
+  background-color: $card-background
+  padding: 20px
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1)
+  display: inline-block
 
-	.tags
-		display: flex
-		justify-content: space-between
-		margin-top: 20px
-		padding-top: 10px
-		border-top: 1px solid $timeline-line-color
-		font-style: italic
-		font-size: 70%
+  .tags
+    display: flex
+    justify-content: space-between
+    margin-top: 20px
+    padding-top: 10px
+    border-top: 1px solid $timeline-line-color
+    font-style: italic
+    font-size: 70%
 
-		span:not(:first-child):before
-			color: $timeline-line-color
-			content: " | "
+    >div>span:not(:first-child):before
+      color: $timeline-line-color
+      content: " | "
 
-	.timestamp
-		font-style: italic
-		font-size: 80%
+  .timestamp
+    font-style: italic
+    font-size: 80%
 
-		.note
-			color: $timestamp-color
+    .note
+      color: $timestamp-color
 
-	h2
-		font-family: $body-font, serif
-		font-weight: 900
-		line-height: 110%
-		margin: 5px 0
-		-webkit-margin-before: 5px
-		-webkit-margin-after: 5px
+  h2
+    font-family: $body-font, serif
+    font-weight: 900
+    line-height: 110%
+    margin: 5px 0
+    -webkit-margin-before: 5px
+    -webkit-margin-after: 5px
 
-		a
-			text-decoration: inherit
-			color: inherit
-			float: right
-			visibility: hidden
+    a
+      text-decoration: inherit
+      color: inherit
+      float: right
+      visibility: hidden
 
-		&:hover
-			a
-				visibility: visible
-				opacity: 0.5
+    &:hover
+      a
+        visibility: visible
+        opacity: 0.5
 
-	p, ul
-		margin: 5px 0 10px 0
-		-webkit-margin-before: 5px
-		-webkit-margin-after: 10px
+  p, ul
+    margin: 5px 0 10px 0
+    -webkit-margin-before: 5px
+    -webkit-margin-after: 10px
 
-	img
-		max-width: 150px
-		display: block
+  img
+    max-width: 150px
+    display: block
 
-	.landscape
-		img
-			max-width: 200px
+  .landscape
+    img
+      max-width: 200px
 
 .captioned-image
-	max-width: 150px
-	clear: both
+  max-width: 150px
+  clear: both
 
-	.caption
-		display: block
-		line-height: 120%
-		font-style: italic
-		font-size: 90%
+  .caption
+    display: block
+    line-height: 120%
+    font-style: italic
+    font-size: 90%
 
-	.attribution-link
-		font-size: 70%
+  .attribution-link
+    font-size: 70%
 
-	&.landscape
-		max-width: 200px
+  &.landscape
+    max-width: 200px
 
 .image-right
-	float: right
-	padding: 10px 0 20px 20px
+  float: right
+  padding: 10px 0 20px 20px
 
 .sub-entry
-	clear: both
-	margin-top: 30px
+  clear: both
+  margin-top: 30px
 
 .attribution
-	width: 90%
-	max-width: 1600px
-	margin: 0 auto
-	padding-bottom: 20px
+  width: 90%
+  max-width: 1600px
+  margin: 0 auto
+  padding-bottom: 20px
 
 .etc
-	width: 90%
-	max-width: 1600px
-	margin: 0px auto
-	padding: 30px 0
+  width: 90%
+  max-width: 1600px
+  margin: 0px auto
+  padding: 30px 0
 
-	h1
-		color: $header-footer-background
+  h1
+    color: $header-footer-background
 
-	.description
-		font-size: 80%
-		font-style: italic
+  .description
+    font-size: 80%
+    font-style: italic
+
+.sr-only
+  position: absolute
+  left: -10000px
+  top: auto
+  width: 1px
+  height: 1px
+  overflow: hidden
 
 /* ICON COLORS */
 .timeline-icon
-	@each $name, $color in $icon-colors
-		&.#{$name}
-			background-color: $color
+  @each $name, $color in $icon-colors
+    &.#{$name}
+      background-color: $color
 
 /* RESPONSIVENESS */
 @media only screen and (min-width: 769px)
-	.timeline-entry.even .timeline-description:after
-		left: 100%
-		border-left-color: $card-background
+  .timeline-entry.even .timeline-description:after
+    left: 100%
+    border-left-color: $card-background
 
 @media only screen and (max-width: 768px) and (min-width: 415px)
-	.timeline-entry.even .timeline-description:after
-		right: 100%
-		border-right-color: $card-background
+  .timeline-entry.even .timeline-description:after
+    right: 100%
+    border-right-color: $card-background
 
 @media only screen and (min-width: 415px)
-	.timeline-description:after
-		top: 20px
-		border: solid transparent
-		content: ' '
-		height: 0
-		width: 0
-		position: absolute
-		pointer-events: none
-		border-width: 10px
-		margin-top: -10px
+  .timeline-description:after
+    top: 20px
+    border: solid transparent
+    content: ' '
+    height: 0
+    width: 0
+    position: absolute
+    pointer-events: none
+    border-width: 10px
+    margin-top: -10px
 
-	.timeline-entry.odd .timeline-description:after
-		right: 100%
-		border-right-color: $card-background
+  .timeline-entry.odd .timeline-description:after
+    right: 100%
+    border-right-color: $card-background
 
 @media only screen and (max-width: 768px)
-	header.page-header
-		h1
-			font-size: 1.5em
+  header.page-header
+    h1
+      font-size: 1.5em
 
-		p
-			font-size: 14px
+    p
+      font-size: 14px
 
-		.constrain-width
-			align-items: end
+    .constrain-width
+      align-items: end
 
-		img.logo
-			max-height: 200px
+    img.logo
+      max-height: 200px
 
-	.timeline::before,
-	.timeline-icon
-		left: 0
+  .timeline::before,
+  .timeline-icon
+    left: 0
 
-	.timeline-entry,
-	.timeline-entry.short
-		margin-top: 25px
+  .timeline-entry,
+  .timeline-entry.short
+    margin-top: 25px
 
-	.timeline-entry.odd .timeline-description,
-	.timeline-entry.even .timeline-description
-		margin-left: 50px
+  .timeline-entry.odd .timeline-description,
+  .timeline-entry.even .timeline-description
+    margin-left: 50px
 
-	.timeline-description
-		width: 90%
+  .timeline-description
+    width: 90%
 
 @media only screen and (max-width: 414px)
-	header.page-header
-		height: auto
-		padding-top: 20px
+  body
+    font-size: 14px
 
-		h1
-			font-size: 1.5em
+  header.page-header
+    height: auto
+    padding-top: 20px
 
-		p
-			font-size: 14px
+    h1
+      font-size: 1.5em
 
-		.constrain-width
-			align-items: center
-			flex-direction: column-reverse
+    p
+      font-size: 14px
 
-		img.logo
-			margin-left: 0px
-			max-width: 100px
+    .constrain-width
+      align-items: center
+      flex-direction: column-reverse
 
-	.timeline-description img,
-	.captioned-image
-		max-width: none
-		width: 100%
+    img.logo
+      margin-left: 0px
+      max-width: 100px
 
-	.timeline:after
-		display: none
+  .timeline-description img,
+  .captioned-image
+    max-width: none
+    width: 100%
 
-	.timeline-icon
-		width: 30px
-		height: 30px
-		margin-left: -15px
+  .timeline:after
+    display: none
 
-		i
-			font-size: 15px
-			line-height: 30px
+  .timeline-icon
+    width: 30px
+    height: 30px
+    margin-left: -15px
 
-	.timeline-entry.odd .timeline-description,
-	.timeline-entry.even .timeline-description
-		margin-left: 35px
+    i
+      font-size: 15px
+      line-height: 30px
+
+  .timeline-entry.odd .timeline-description,
+  .timeline-entry.even .timeline-description
+    margin-left: 35px
+
+  .tags
+    flex-direction: column
 
 // DARK MODE
 @media (prefers-color-scheme: dark)
-	body
-		background-color: $dark-main-background
+  body
+    background-color: $dark-main-background
 
-	header.page-header,
-	footer.page-footer
-		background-color: $dark-header-footer-background
+  header.page-header,
+  footer.page-footer
+    background-color: $dark-header-footer-background
 
-	body,
-	h1,
-	header.page-header p,
-	footer.page-footer p,
-	.timeline-description,
-	.timeline-filter,
-	.timeline-icon i,
-	.attribution,
-	.etc
-		color: $dark-main-color
+  body,
+  h1,
+  header.page-header p,
+  footer.page-footer p,
+  .timeline-description,
+  .timeline-filter,
+  .timeline-icon i,
+  .attribution,
+  .etc
+    color: $dark-main-color
 
-	.timeline-description a,
-	.attribution a,
-	.etc a
-		color: $dark-link-color
+  .timeline-description a,
+  .attribution a,
+  .etc a
+    color: $dark-link-color
 
-	div.etc h1
-		color: $dark-etc-header-color
+  div.etc h1
+    color: $dark-etc-header-color
 
-	.timeline-description
-		background-color: $dark-card-background
+  .timeline-description
+    background-color: $dark-card-background
 
-	.timeline-filter-wrapper
-		background-color: $dark-filterbar-background
+  .timeline-filter-wrapper
+    background-color: $dark-filterbar-background
 
-	.timeline::before
-		background-color: $dark-timeline-line-color
+  .timeline::before
+    background-color: $dark-timeline-line-color
 
-	.timeline-icon
-		border-color: $dark-timeline-line-color
+  .timeline-icon
+    border-color: $dark-timeline-line-color
 
-	.timeline-icon
-		@each $name, $color in $icon-colors
-			&.#{$name}
-				background-color: darken($color, 20%)
+  .timeline-icon
+    @each $name, $color in $icon-colors
+      &.#{$name}
+        background-color: darken($color, 20%)
 
-	/* Arrows */
-	.no-js .timeline-entry .timeline-description::after
-		border-right-color: $dark-card-background
+  /* Arrows */
+  .no-js .timeline-entry .timeline-description::after
+    border-right-color: $dark-card-background
 
-	@media only screen and (min-width: 769px)
-		.timeline-entry.even .timeline-description::after
-			border-left-color: $dark-card-background
+  @media only screen and (min-width: 769px)
+    .timeline-entry.even .timeline-description::after
+      border-left-color: $dark-card-background
 
-	@media only screen and (max-width: 768px) and (min-width: 415px)
-		.timeline-entry.even .timeline-description::after
-			border-right-color: $dark-card-background
+  @media only screen and (max-width: 768px) and (min-width: 415px)
+    .timeline-entry.even .timeline-description::after
+      border-right-color: $dark-card-background
 
-	@media only screen and (min-width: 415px)
-		.timeline-entry.odd .timeline-description::after
-			border-right-color: $dark-card-background
+  @media only screen and (min-width: 415px)
+    .timeline-entry.odd .timeline-description::after
+      border-right-color: $dark-card-background

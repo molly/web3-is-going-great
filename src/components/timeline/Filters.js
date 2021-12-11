@@ -4,7 +4,7 @@ import Select from "react-select";
 import FILTERS from "../../constants/filters";
 import { sentenceCase } from "../../js/utilities";
 
-const MOBILE_BREAKPOINT = 414;
+const MOBILE_BREAKPOINT = 768;
 
 export default function Filters() {
   const [isMobile, setIsMobile] = useState(

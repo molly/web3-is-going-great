@@ -63,12 +63,15 @@ export default function Entry({ entry, className }) {
   };
 
   const renderImage = () => {
-    return (
-      <div className="captioned-image image-right">
-        {renderImageElement()}
-        {renderImageCaption()}
-      </div>
-    );
+    if (entry.image) {
+      return (
+        <div className="captioned-image image-right">
+          {renderImageElement()}
+          {renderImageCaption()}
+        </div>
+      );
+    }
+    return null;
   };
 
   const renderBody = () => {
@@ -100,26 +103,34 @@ export default function Entry({ entry, className }) {
     const theme = entry.filters.theme
       .map((theme) => FILTERS.theme[theme])
       .join(", ");
-    const otherFilters = [];
+    let blockchain, tech;
     if (entry.filters.blockchain) {
-      otherFilters.push(
-        `Blockchain: ${entry.filters.blockchain
-          .map((bc) => FILTERS.blockchain[bc])
-          .join(", ")}`
-      );
+      blockchain = `Blockchain: ${entry.filters.blockchain
+        .map((bc) => FILTERS.blockchain[bc])
+        .join(", ")}`;
     }
     if (entry.filters.tech) {
-      otherFilters.push(
-        entry.filters.tech.map((tech) => FILTERS.tech[tech]).join(", ")
-      );
+      tech = entry.filters.tech.map((tech) => FILTERS.tech[tech]).join(", ");
     }
     return (
       <div className="tags">
-        <div>{theme}</div>
         <div>
-          {otherFilters.map((filters) => (
-            <span key={filters}>{filters}</span>
-          ))}
+          <span className="sr-only">Theme tags: </span>
+          {theme}
+        </div>
+        <div>
+          {blockchain && (
+            <span>
+              <span className="sr-only">Blockchain tags: </span>
+              <span>{blockchain}</span>
+            </span>
+          )}
+          {tech && (
+            <span>
+              <span className="sr-only">Tec tags: </span>
+              <span>{tech}</span>
+            </span>
+          )}
         </div>
       </div>
     );
