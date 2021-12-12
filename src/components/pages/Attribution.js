@@ -124,6 +124,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>DODO logo from </span>
+              <ExternalLink href="https://twitter.com/BreederDodo">
+                the platform's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
               <ExternalLink href="https://opensea.io/assets/0x233a65b06ef83ccf2fd58832086dd782f9da1642/6946">
                 <span>EvolvedApe #6946</span>
               </ExternalLink>
@@ -134,6 +140,12 @@ export default function Attribution() {
                 <span>iconic 15</span>
               </ExternalLink>
               <span> from SolSea</span>
+            </li>
+            <li>
+              <span>Jay Pegs Auto Mart screenshot from </span>
+              <ExternalLink href="https://jaypegsautomart.com/">
+                <span>the project website</span>
+              </ExternalLink>
             </li>
             <li>
               <span>McRib NFT image from </span>
@@ -194,6 +206,12 @@ export default function Attribution() {
             <li>
               <span>xToken logo from </span>
               <ExternalLink href="https://twitter.com/xtokenmarket">
+                the platform's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
+              <span>yearn.finance logo from </span>
+              <ExternalLink href="https://twitter.com/iearnfinance">
                 the platform's Twitter account
               </ExternalLink>
             </li>

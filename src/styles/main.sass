@@ -107,7 +107,7 @@ div.content-wrapper
     content: ''
     position: absolute
     top: 0
-    left: 50.2%
+    left: calc(50% - 2px) // 50% - 1/2 width
     height: 100%
     width: 4px
     background: $timeline-line-color
@@ -163,6 +163,7 @@ div.content-wrapper
   padding: 20px
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1)
   display: inline-block
+  z-index: 1
 
   .tags
     display: flex
@@ -242,6 +243,7 @@ div.content-wrapper
     line-height: 120%
     font-style: italic
     font-size: 90%
+    margin-top: 10px
 
   .attribution-link
     font-size: 70%
@@ -363,8 +365,9 @@ dt
       max-height: 200px
 
   .timeline::before,
-  .timeline-icon
     left: 0
+  .timeline-icon
+    left: 2px
 
   .timeline-entry,
   .timeline-entry.short
