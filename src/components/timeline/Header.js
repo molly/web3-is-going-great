@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import ExternalLink from "../shared/ExternalLink";
 import { STORAGE_URL } from "../../constants/urls";
 
 export default function Header() {
@@ -17,8 +19,34 @@ export default function Header() {
             fluid on our already-smoldering planet.
           </p>
           <p>
-            Timeline by <a href="https://twitter.com/molly0xFFF">Molly White</a>
-            .
+            Timeline by Molly White (
+            <ExternalLink href="https://twitter.com/molly0xFFF">
+              <i
+                title="Twitter"
+                className="fa-brands fa-twitter"
+                aria-hidden={true}
+              ></i>
+              <span className="sr-only">Twitter</span>
+            </ExternalLink>
+            ,{" "}
+            <ExternalLink href="https://www.mollywhite.net/">
+              <i title="Website" className="fas fa-link" aria-hidden={true}></i>
+              <span className="sr-only">Website</span>
+            </ExternalLink>
+            ).
+          </p>
+          <p>
+            <ul>
+              <li>
+                <Link to="/what">What is web3?</Link>
+              </li>
+              <li>
+                <Link to="/glossary">Glossary</Link>
+              </li>
+              <li>
+                <Link to="/suggest">Suggest a change</Link>
+              </li>
+            </ul>
           </p>
         </div>
       </div>

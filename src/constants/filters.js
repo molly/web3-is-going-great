@@ -14,10 +14,8 @@ const FILTERS = {
     nft: "NFT",
   },
   blockchain: {
-    binance: "Binance Smart Chain",
     bitcoin: "Bitcoin",
     ethereum: "Ethereum",
-    polygon: "Polygon",
     solana: "Solana",
   },
 };

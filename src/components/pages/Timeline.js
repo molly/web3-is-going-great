@@ -8,7 +8,7 @@ import Header from "../timeline/Header";
 import Filters from "../timeline/Filters";
 import Entry from "../timeline/Entry";
 import Loader from "../timeline/Loader";
-import Footer from "../timeline/Footer";
+import Footer from "../shared/Footer";
 
 export const EMPTY_FILTERS_STATE = {
   theme: [],
@@ -111,7 +111,7 @@ export default function Timeline() {
     <>
       <Header />
       <Filters filters={filters} setFilters={setFilters} />
-      <div className="content-wrapper" aria-busy={isLoading}>
+      <div className="timeline-page content-wrapper" aria-busy={isLoading}>
         {renderBody()}
       </div>
       <Footer />

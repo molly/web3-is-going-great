@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -12,14 +13,12 @@ export default function Footer() {
           >
             Creative Commons Attribution 3.0 Unported License
           </a>
-          . All image and asset attribution can be found on the{" "}
-          <a href="/attribution">attribution</a> page.
+          . All attribution can be found on the{" "}
+          <Link to="/attribution">attribution</Link> page.
         </p>
         <p>
           <a href="https://github.com/molly/web3-timeline">Source code</a> |{" "}
-          <a href="https://github.com/molly/static-timeline-generator">
-            Create your own timeline like this
-          </a>
+          <Link to="/suggest">Suggest a change or addition</Link>
         </p>
       </div>
     </footer>

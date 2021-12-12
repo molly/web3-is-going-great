@@ -50,6 +50,7 @@ footer.page-footer
     color: #eee
 
   a
+    border-bottom: 1px dashed lighten($header-footer-background, 20%)
     color: $header-footer-link-color
 
 header.page-header.timeline-page
@@ -71,6 +72,17 @@ header.page-header.timeline-page
     padding: 0 30px
     align-self: center
 
+  ul
+    padding: 0
+
+    li
+      display: inline
+      list-style: none
+
+      &:not(:first-child):before
+        content: "•"
+        padding: 10px
+
 footer.page-footer
   padding: 10px 10px
 
@@ -79,7 +91,10 @@ footer.page-footer
 
 div.content-wrapper
   display: flex
-  min-height: calc(100vh - 340px)
+  min-height: calc(100vh - 215px)
+
+  &.timeline-page
+    min-height: calc(100vh - 340px)
 
 .timeline
   position: relative
@@ -241,11 +256,16 @@ div.content-wrapper
   clear: both
   margin-top: 30px
 
-.attribution
+.generic-page
   width: 90%
   max-width: 1600px
   margin: 0 auto
   padding-bottom: 20px
+  line-height: 130%
+
+dt
+  font-weight: bold
+  margin-top: 20px
 
 .navigation-bar
   background-color: $filterbar-background

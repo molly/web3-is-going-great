@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import ExternalLink from "../ExternalLink";
+import BackBar from "../shared/BackBar";
+import ExternalLink from "../shared/ExternalLink";
+import Footer from "../shared/Footer";
 
 export default function Attribution() {
   return (
@@ -8,16 +9,9 @@ export default function Attribution() {
       <header className="page-header attribution-header">
         <h1>Attribution</h1>
       </header>
-      <nav className="navigation-bar">
-        <div className="contents">
-          <Link to="/">
-            <i className="fas fa-arrow-left-long" aria-hidden={true} alt="" />{" "}
-            Back
-          </Link>
-        </div>
-      </nav>
+      <BackBar />
       <div className="content-wrapper">
-        <article className="attribution">
+        <article className="generic-page">
           <h3>Monkey illustration created from</h3>
           <ul>
             <li>
@@ -103,6 +97,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>BadgerDAO logo from </span>
+              <ExternalLink href="https://twitter.com/BadgerDAO">
+                the organization's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
               <span>Bored Ape Yacht Club NFT from </span>
               <ExternalLink href="https://twitter.com/calvinbecerra/status/1454328591202721796">
                 <span>Calvin Becerra's Twitter account</span>
@@ -114,9 +114,18 @@ export default function Attribution() {
                 McDonalds' Twitter account
               </ExternalLink>
             </li>
+            <li>
+              <span>
+                <i>Wolf Game</i> logo from{" "}
+              </span>
+              <ExternalLink href="https://twitter.com/wolfdotgame">
+                the project's Twitter account
+              </ExternalLink>
+            </li>
           </ul>
         </article>
       </div>
+      <Footer />
     </>
   );
 }
