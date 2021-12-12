@@ -15,8 +15,7 @@ export default function Glossary() {
           <dl>
             <dt>coin</dt>
             <dd>
-              a cryptocurrency — for example, Bitcoin or Dogecoin are both a
-              type of coin
+              a specific cryptocurrency (e.g. Bitcoin, Ethereum, Dogecoin)
             </dd>
             <dt>DAO / decentralized autonomous organization</dt>
             <dd>
@@ -33,9 +32,23 @@ export default function Glossary() {
               a blockchain-based form of finance that does not rely on central
               financial intermediaries such as brokerages, exchanges, or banks
               to offer traditional financial instruments, and instead utilizes
-              smart contracts on blockchains (
+              smart contracts on blockchains. Types of DeFi platforms include
+              crypto exchanges, loan platforms, investment and savings accounts,
+              and insurance providers. (
               <ExternalLink href="https://en.wikipedia.org/wiki/Decentralized_finance">
                 <span>Wikipedia</span>
+              </ExternalLink>
+              )
+            </dd>
+            <dt>flash loan</dt>
+            <dd>
+              unsecured loans that don't require collateral from the borrower.
+              Funds are borrowed, used, and returned all within one transaction,
+              and they are typically used to provide leverage in arbitrage
+              opportunities. They have also become a common entry point for
+              hackers to exploit flaws in various DeFi protocols. (
+              <ExternalLink href="https://www.radixdlt.com/post/what-is-a-flash-loan">
+                Radix
               </ExternalLink>
               )
             </dd>
@@ -98,12 +111,20 @@ export default function Glossary() {
             <dt>stablecoin</dt>
             <dd>
               cryptocurrencies where the price is designed to be pegged to a
-              cryptocurrency, fiat money, or to exchange-traded commodities
+              cryptocurrency, fiat money, or to exchange-traded commodities (
+              <ExternalLink href="https://en.wikipedia.org/wiki/Stablecoin">
+                <span>Wikipedia</span>
+              </ExternalLink>
+              )
             </dd>
             <dt>web3</dt>
             <dd>
               an idea for a version of the Internet that is decentralized and
-              based on peer-to-peer technologies such as public blockchains
+              based on peer-to-peer technologies such as public blockchains (
+              <ExternalLink href="https://en.wikipedia.org/wiki/Web3">
+                <span>Wikipedia</span>
+              </ExternalLink>
+              )
             </dd>
           </dl>
         </article>

@@ -103,15 +103,20 @@ export default function Entry({ entry, className }) {
   const renderTags = () => {
     const theme = entry.filters.theme
       .map((theme) => FILTERS.theme[theme])
+      .sort()
       .join(", ");
     let blockchain, tech;
     if (entry.filters?.blockchain?.length) {
       blockchain = `Blockchain: ${entry.filters.blockchain
         .map((bc) => FILTERS.blockchain[bc])
+        .sort()
         .join(", ")}`;
     }
     if (entry.filters?.tech?.length) {
-      tech = entry.filters.tech.map((tech) => FILTERS.tech[tech]).join(", ");
+      tech = entry.filters.tech
+        .map((tech) => FILTERS.tech[tech])
+        .sort()
+        .join(", ");
     }
     return (
       <div className="tags">

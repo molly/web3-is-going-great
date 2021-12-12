@@ -18,6 +18,9 @@ body
   color: $main-text-color
   font-family: $body-font, sans-serif
 
+*
+  box-sizing: border-box
+
 h1
   font-family: $display-font, serif
   margin-top: 0
@@ -39,6 +42,7 @@ footer.page-footer
   align-items: center
   min-height: 80px
   padding: 20px 20px
+  width: 100%
 
   h1
     margin: 0
@@ -56,6 +60,7 @@ footer.page-footer
 
 header.page-header.timeline-page
   padding-bottom: 0
+  justify-content: normal
 
   .constrain-width
     height: 100%
@@ -136,7 +141,7 @@ div.content-wrapper
   i
     color: $timeline-icon-color
     font-size: 20px
-    line-height: 40px
+    line-height: 150%
 
   .icon-wrapper
     display: flex
@@ -220,6 +225,7 @@ div.content-wrapper
     -webkit-margin-after: 10px
 
   img
+    width: 100%
     max-width: 150px
     display: block
 

@@ -191,6 +191,12 @@ export default function Attribution() {
                 the project's Twitter account
               </ExternalLink>
             </li>
+            <li>
+              <span>xToken logo from </span>
+              <ExternalLink href="https://twitter.com/xtokenmarket">
+                the platform's Twitter account
+              </ExternalLink>
+            </li>
           </ul>
         </article>
       </div>
