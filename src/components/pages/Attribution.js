@@ -86,6 +86,15 @@ export default function Attribution() {
                 <span>Icons8</span>
               </ExternalLink>
             </li>
+            <li>
+              <ExternalLink href="https://icons8.com/icon/95327/wtf">
+                <span>WTF</span>
+              </ExternalLink>
+              <span> icon by </span>
+              <ExternalLink href="https://icons8.com">
+                <span>Icons8</span>
+              </ExternalLink>
+            </li>
           </ul>
 
           <h3>Images</h3>
@@ -109,9 +118,69 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>BurgerSwap logo from </span>
+              <ExternalLink href="https://github.com/burgerswap-org">
+                <span>Github</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <ExternalLink href="https://opensea.io/assets/0x233a65b06ef83ccf2fd58832086dd782f9da1642/6946">
+                <span>EvolvedApe #6946</span>
+              </ExternalLink>
+              <span> from OpenSea</span>
+            </li>
+            <li>
+              <ExternalLink href="https://solsea.io/nft/92g5SJy9CxJWmirMEkwEvYcMW9ajFAkwNqGotUsUvvbX">
+                <span>iconic 15</span>
+              </ExternalLink>
+              <span> from SolSea</span>
+            </li>
+            <li>
               <span>McRib NFT image from </span>
               <ExternalLink href="https://twitter.com/McDonalds/status/1455174998264586243">
                 McDonalds' Twitter account
+              </ExternalLink>
+            </li>
+            <li>
+              <span>"Monkey Jizz" logo from </span>
+              <ExternalLink href="https://www.vice.com/en/article/n7nw4k/unbelievable-monkey-jizz-cryptocurrency-turns-out-to-be-a-scam">
+                Vice
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Pancake Bunny logo </span>
+              <ExternalLink href="https://twitter.com/PancakeBunnyFin">
+                the project's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
+              <ExternalLink href="https://foundation.app/@VincentVanDough/~/107380">
+                <span>"Right Click Save This" NFT</span>
+              </ExternalLink>
+              <span> from Foundation</span>
+            </li>
+            <li>
+              A Solana Towers NFT from an{" "}
+              <ExternalLink href="https://web.archive.org/web/20210928192615/https://solanatowers.com/">
+                <span>archived version of the project's website</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Spartan Protocol logo </span>
+              <ExternalLink href="https://twitter.com/SpartanProtocol">
+                the project's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Titan coin image from </span>
+              <ExternalLink href="https://coinmarketcap.com/currencies/titan-coin/">
+                <span>CoinMarketCap</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Turtledex logo from </span>
+              <ExternalLink href="https://twitter.com/Turtledex1">
+                <span>Twitter</span>
               </ExternalLink>
             </li>
             <li>

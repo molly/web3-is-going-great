@@ -95,6 +95,11 @@ export default function Glossary() {
               </ExternalLink>
               )
             </dd>
+            <dt>stablecoin</dt>
+            <dd>
+              cryptocurrencies where the price is designed to be pegged to a
+              cryptocurrency, fiat money, or to exchange-traded commodities
+            </dd>
             <dt>web3</dt>
             <dd>
               an idea for a version of the Internet that is decentralized and

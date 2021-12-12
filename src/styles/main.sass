@@ -183,7 +183,7 @@ div.content-wrapper
     .tag-group-right
       display: flex
       flex-wrap: wrap
-      justify-content: end
+      justify-content: flex-end
       flex-grow: 1
       min-width: 0
       padding-left: 20px
@@ -316,6 +316,7 @@ dt
       display: inline
 
       &:not(:first-child):before
+        color: $header-footer-body-color
         content: "•"
         padding: 10px
 
@@ -425,6 +426,9 @@ dt
   footer.page-footer
     background-color: $dark-header-footer-background
 
+    h1, p, ul
+      color: $dark-header-footer-body-color
+
     a
       border-bottom: 1px dashed lighten($header-footer-background, 20%)
       color: $dark-header-footer-link-color
@@ -433,9 +437,6 @@ dt
       filter: brightness(50%)
 
   body,
-  h1,
-  header.page-header p,
-  footer.page-footer p,
   .timeline-description,
   .timeline-filter,
   .timeline-icon i,
@@ -457,6 +458,9 @@ dt
 
   .timeline-description
     background-color: $dark-card-background
+
+    .tags
+      border-top: 1px solid $dark-timeline-line-color
 
   .timeline::before
     background-color: $dark-timeline-line-color

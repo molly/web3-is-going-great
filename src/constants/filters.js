@@ -4,6 +4,7 @@ const FILTERS = {
     bug: "Bug",
     fakeNews: "Fake news",
     hack: "Hack or scam",
+    hmm: "Hmm",
     rugPull: "Rug pull",
     shady: "Shady business",
   },
@@ -15,7 +16,9 @@ const FILTERS = {
   },
   blockchain: {
     bitcoin: "Bitcoin",
+    bsc: "BSC",
     ethereum: "Ethereum",
+    flow: "Flow",
     solana: "Solana",
   },
 };

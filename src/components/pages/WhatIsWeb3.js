@@ -13,12 +13,12 @@ export default function WhatIsWeb3() {
       <div className="content-wrapper">
         <article className="generic-page">
           <p>
-            Great question. One of the most distinguishing features of "web3" is
-            the sheer level of handwaviness surrounding it. While you can find
-            thousands of press releases, Twitter crypto bros, venture
-            capitalists, and others extolling the virtues of web3, you will have
-            a much harder time finding any definition that's widely agreed-upon
-            or not so full of buzzwords that it becomes meaningless.
+            One of the most distinguishing features of "web3" is the sheer level
+            of handwaviness surrounding it. While you can find thousands of
+            press releases, Twitter crypto bros, venture capitalists, and others
+            extolling the virtues of web3, you will have a much harder time
+            finding any definition that's widely agreed-upon or not so full of
+            buzzwords that it becomes meaningless.
           </p>
           <p>
             Generally speaking, web3 is an umbrella term to refer to the "future
@@ -33,7 +33,7 @@ export default function WhatIsWeb3() {
           <p>
             Ideas described as web3 tend to incorporate some of the following:
             <ul>
-              <li>cryptocurrency</li>
+              <li>various cryptocurrencies</li>
               <li>decentralized autonomous organizations (DAOs)</li>
               <li>decentralized finance (DeFi)</li>
               <li>non-fungible tokens (NFTs)</li>
@@ -46,14 +46,20 @@ export default function WhatIsWeb3() {
               <li>
                 <ExternalLink href="https://en.wikipedia.org/wiki/Web3">
                   <span>Web3</span>
-                </ExternalLink>{" "}
-                on Wikipedia
+                </ExternalLink>
+                <span> on Wikipedia</span>
               </li>
               <li>
                 <ExternalLink href="https://www.stephendiehl.com/blog/web3-bullshit.html">
                   <span>"Web3 is bullshit"</span>
-                </ExternalLink>{" "}
-                by Stephen Diehl
+                </ExternalLink>
+                <span> by Stephen Diehl</span>
+              </li>
+              <li>
+                <ExternalLink href="https://yesterweb.org/no-to-web3/index.html">
+                  <span>"Keep the web free, say no to Web3"</span>
+                </ExternalLink>
+                <span> by Yesterweb</span>
               </li>
             </ul>
           </p>
