@@ -3,6 +3,7 @@
 .timeline-filter-wrapper
   display: flex
   background-color: $filterbar-background
+  color: $filter-text
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
 
 .timeline-filter
@@ -19,11 +20,11 @@
     align-items: center
     background-color: transparent
     border: 0
-    color: $main-text-color
+    color: $filter-text
     cursor: pointer
 
     &:disabled
-      color: $main-text-color
+      color: $filter-text
 
   .filter-and-button, .filters-expandable
     display: flex
@@ -70,3 +71,35 @@
       .filter-select
         width: 90%
         margin-top: 10px
+
+@media (prefers-color-scheme: dark)
+  .timeline-filter-wrapper
+    background-color: $dark-filterbar-background
+    color: $dark-filter-text
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
+
+  .timeline-filter
+    .expand-filters-button
+      color: $dark-filter-text
+
+      &:disabled
+        color: $dark-filter-text
+
+  .filter-select
+    >div
+      background-color: $dark-card-background
+      border-color: $dark-timeline-line-color
+
+    div[class*="-control"]
+      border-color: $dark-card-background !important
+      box-shadow: $dark-card-background !important
+
+    div[class*="-indicatorContainer"]:hover
+      color: #666666
+
+    div[class*="-menu"] div[class*="option"]
+      background-color: $dark-card-background
+
+      &:hover, &:active
+        background-color: $dark-main-color
+        color: $dark-card-background

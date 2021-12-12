@@ -37,7 +37,8 @@ footer.page-footer
   background-color: $header-footer-background
   justify-content: center
   align-items: center
-  height: 80px
+  min-height: 80px
+  padding: 20px 20px
 
   h1
     margin: 0
@@ -54,8 +55,7 @@ footer.page-footer
     color: $header-footer-link-color
 
 header.page-header.timeline-page
-  height: 300px
-  align-items: start
+  padding-bottom: 0
 
   .constrain-width
     height: 100%
@@ -73,15 +73,10 @@ header.page-header.timeline-page
     align-self: center
 
   ul
-    padding: 0
+    padding: 0px
 
     li
-      display: inline
       list-style: none
-
-      &:not(:first-child):before
-        content: "•"
-        padding: 10px
 
 footer.page-footer
   padding: 10px 10px
@@ -313,6 +308,17 @@ dt
     left: 100%
     border-left-color: $card-background
 
+  header.page-header.timeline-page
+    min-height: 300px
+    align-items: start
+
+    li
+      display: inline
+
+      &:not(:first-child):before
+        content: "•"
+        padding: 10px
+
 @media only screen and (max-width: 768px) and (min-width: 415px)
   .timeline-entry.even .timeline-description:after
     right: 100%
@@ -339,12 +345,13 @@ dt
     h1
       font-size: 1.5em
 
-    p
+    p, ul
       font-size: 14px
 
     .constrain-width
       align-items: end
 
+  header.page-header.timeline-page
     img.logo
       max-height: 200px
 
@@ -418,6 +425,13 @@ dt
   footer.page-footer
     background-color: $dark-header-footer-background
 
+    a
+      border-bottom: 1px dashed lighten($header-footer-background, 20%)
+      color: $dark-header-footer-link-color
+
+    img.logo
+      filter: brightness(50%)
+
   body,
   h1,
   header.page-header p,
@@ -437,17 +451,22 @@ dt
   div.etc h1
     color: $dark-etc-header-color
 
+  .navigation-bar
+    background-color: $dark-filterbar-background
+    color: $dark-filter-text
+
   .timeline-description
     background-color: $dark-card-background
-
-  .timeline-filter-wrapper
-    background-color: $dark-filterbar-background
 
   .timeline::before
     background-color: $dark-timeline-line-color
 
   .timeline-icon
     border-color: $dark-timeline-line-color
+    color: $dark-timeline-icon-color
+
+    img
+      filter: brightness(60%)
 
   .timeline-icon
     @each $name, $color in $icon-colors

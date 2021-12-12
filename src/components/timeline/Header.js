@@ -35,19 +35,17 @@ export default function Header() {
             </ExternalLink>
             ).
           </p>
-          <p>
-            <ul>
-              <li>
-                <Link to="/what">What is web3?</Link>
-              </li>
-              <li>
-                <Link to="/glossary">Glossary</Link>
-              </li>
-              <li>
-                <Link to="/suggest">Suggest a change</Link>
-              </li>
-            </ul>
-          </p>
+          <ul>
+            <li>
+              <Link to="/what">What is web3?</Link>
+            </li>
+            <li>
+              <Link to="/glossary">Glossary</Link>
+            </li>
+            <li>
+              <Link to="/suggest">Suggest a change</Link>
+            </li>
+          </ul>
         </div>
       </div>
     </header>
