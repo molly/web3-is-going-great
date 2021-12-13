@@ -252,10 +252,6 @@ div.content-wrapper
   &.landscape
     max-width: 200px
 
-.image-right
-  float: right
-  padding: 10px 0 20px 20px
-
 .sub-entry
   clear: both
   margin-top: 30px
@@ -361,6 +357,10 @@ dt
     right: 100%
     border-right-color: $card-background
 
+  .image-right
+    float: right
+    padding: 10px 0 20px 20px
+
 @media only screen and (max-width: 768px)
   header.page-header
     h1
@@ -414,10 +414,14 @@ dt
       margin-left: 0px
       max-width: 100px
 
-  .timeline-description img,
   .captioned-image
-    max-width: none
-    width: 100%
+    margin: 20px auto
+    text-align: center
+
+  .timeline-description img,
+    width: auto
+    max-height: 80px
+    margin: 0 auto
 
   .timeline:after
     display: none
@@ -434,9 +438,6 @@ dt
   .timeline-entry.odd .timeline-description,
   .timeline-entry.even .timeline-description
     margin-left: 35px
-
-  .tags
-    flex-direction: column
 
 // DARK MODE
 @media (prefers-color-scheme: dark)

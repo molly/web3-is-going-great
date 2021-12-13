@@ -1,36 +1,28 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import { EMPTY_FILTERS_STATE } from "../../constants/filters";
 
 import FILTERS from "../../constants/filters";
 import { sentenceCase } from "../../js/utilities";
+import { usePrevious } from "../../js/usePrevious";
 
-const MOBILE_BREAKPOINT = 768;
-
-export default function Filters({ filters, setFilters }) {
-  const [isMobile, setIsMobile] = useState(
-    window.innerWidth < MOBILE_BREAKPOINT
+export default function Filters({ filters, setFilters, windowWidth }) {
+  const [isFilterGroupExpanded, setIsFilterGroupExpanded] = useState(
+    windowWidth !== "sm"
   );
-  const [isFilterGroupExpanded, setIsFilterGroupExpanded] = useState(!isMobile);
 
-  const handleResize = useCallback(() => {
-    if (window.innerWidth < MOBILE_BREAKPOINT) {
-      if (!isMobile) {
-        setIsMobile(true);
-        setIsFilterGroupExpanded(false);
-      }
-    } else {
-      setIsMobile(false);
-    }
-  }, [isMobile]);
+  const previousWidth = usePrevious(windowWidth);
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [handleResize]);
+    if (
+      !isFilterGroupExpanded &&
+      previousWidth !== "sm" &&
+      windowWidth === "sm"
+    ) {
+      setIsFilterGroupExpanded(false);
+    }
+  }, [isFilterGroupExpanded, previousWidth, windowWidth]);
 
   const renderFilterGroup = (filter) => {
     return (
@@ -68,10 +60,10 @@ export default function Filters({ filters, setFilters }) {
           className="expand-filters-button"
           aria-controls="filters-expandable"
           aria-expanded={isFilterGroupExpanded}
-          disabled={!isMobile}
+          disabled={windowWidth !== "sm"}
           onClick={() => setIsFilterGroupExpanded(!isFilterGroupExpanded)}
         >
-          <h2>Filter{!isMobile && ":"}</h2>
+          <h2>Filter{windowWidth !== "sm" && ":"}</h2>
           <i className="fas fa-caret-down"></i>
         </button>
         <div
@@ -98,4 +90,5 @@ Filters.propTypes = {
     ).isRequired,
   }).isRequired,
   setFilters: PropTypes.func.isRequired,
+  windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
 };
