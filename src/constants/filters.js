@@ -23,4 +23,10 @@ const FILTERS = {
   },
 };
 
+export const EMPTY_FILTERS_STATE = {
+  theme: [],
+  tech: [],
+  blockchain: [],
+};
+
 export default FILTERS;

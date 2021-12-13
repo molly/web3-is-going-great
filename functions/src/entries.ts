@@ -5,7 +5,7 @@ import { EntryQuery } from "./types";
 
 const DEFAULT_LIMIT = 10;
 
-export const getEntries = functions.https.onCall(async (data: EntryQuery) => {
+export const getEntries = functions.https.onCall(async (data?: EntryQuery) => {
   const limit = data?.limit ?? DEFAULT_LIMIT;
 
   let query = await firestore
@@ -33,13 +33,13 @@ export const getEntries = functions.https.onCall(async (data: EntryQuery) => {
   }
 
   let snapshot: any;
-  if (!data.cursor) {
-    snapshot = await query.limit(limit + 1).get();
-  } else {
+  if (data && data.cursor) {
     snapshot = await query
       .startAfter(data.cursor)
       .limit(limit + 1)
       .get();
+  } else {
+    snapshot = await query.limit(limit + 1).get();
   }
 
   const entries: object[] = [];

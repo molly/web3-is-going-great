@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import { EMPTY_FILTERS_STATE } from "../pages/Timeline";
+import { EMPTY_FILTERS_STATE } from "../../constants/filters";
 
 import FILTERS from "../../constants/filters";
 import { sentenceCase } from "../../js/utilities";

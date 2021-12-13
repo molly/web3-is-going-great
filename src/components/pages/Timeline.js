@@ -1,8 +1,10 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { InView } from "react-intersection-observer";
+import useGA from "../../js/useGA";
 
 import { getEntries } from "../../js/functions";
+import { EMPTY_FILTERS_STATE } from "../../constants/filters";
 
 import Header from "../timeline/Header";
 import Filters from "../timeline/Filters";
@@ -10,13 +12,6 @@ import Entry from "../timeline/Entry";
 import Loader from "../timeline/Loader";
 import Error from "../shared/Error";
 import Footer from "../shared/Footer";
-import useGA from "../../js/useGA";
-
-export const EMPTY_FILTERS_STATE = {
-  theme: [],
-  tech: [],
-  blockchain: [],
-};
 
 export default function Timeline() {
   useGA();
@@ -65,7 +60,6 @@ export default function Timeline() {
     </InView>
   );
 
-  // eslint-disable-next-line no-unused-vars
   const renderEntries = () => {
     return (
       <article className="timeline">
