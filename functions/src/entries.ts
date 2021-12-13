@@ -1,14 +1,7 @@
 import { firestore, FieldPath } from "./config/firebase";
 import * as functions from "firebase-functions";
 import { QueryDocumentSnapshot } from "firebase-functions/v1/firestore";
-
-type EntryQuery = {
-  limit?: number;
-  cursor?: string;
-  tech?: string[];
-  theme?: string[];
-  blockchain?: string[];
-};
+import { EntryQuery } from "./types";
 
 const DEFAULT_LIMIT = 10;
 

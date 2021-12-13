@@ -19,7 +19,7 @@ export default function Header() {
             fluid on our already-smoldering planet.
           </p>
           <p>
-            Timeline by Molly White (
+            2021 timeline by Molly White (
             <ExternalLink href="https://twitter.com/molly0xFFF">
               <i
                 title="Twitter"

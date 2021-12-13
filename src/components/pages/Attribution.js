@@ -196,6 +196,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <ExternalLink href="https://www.kotaku.com.au/2021/12/we-live-in-hell-and-this-ubisoft-nft-that-requires-you-to-play-600-hours-of-ghost-recon-is-proof/">
+                <span>Ubisoft's "Wolf Enhanced Helmet A" NFT</span>
+              </ExternalLink>
+              <span> from Kotaku AU</span>
+            </li>
+            <li>
               <span>
                 <i>Wolf Game</i> logo from{" "}
               </span>

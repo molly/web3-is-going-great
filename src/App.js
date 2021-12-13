@@ -7,7 +7,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 import Timeline from "./components/pages/Timeline";
 import Attribution from "./components/pages/Attribution";
-import Admin from "./components/pages/Admin";
 import Glossary from "./components/pages/Glossary";
 import WhatIsWeb3 from "./components/pages/WhatIsWeb3";
 import Suggest from "./components/pages/Suggest";
@@ -27,7 +26,6 @@ function App() {
         <Routes>
           <Route index element={<Timeline />} />
           <Route path="/attribution" element={<Attribution />} />
-          <Route path="/admin" element={<Admin />} />
           <Route path="/glossary" element={<Glossary />} />
           <Route path="/what" element={<WhatIsWeb3 />} />
           <Route path="/suggest" element={<Suggest />} />
