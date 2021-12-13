@@ -1,28 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import { EMPTY_FILTERS_STATE } from "../../constants/filters";
 
 import FILTERS from "../../constants/filters";
 import { sentenceCase } from "../../js/utilities";
-import { usePrevious } from "../../js/usePrevious";
 
 export default function Filters({ filters, setFilters, windowWidth }) {
-  const [isFilterGroupExpanded, setIsFilterGroupExpanded] = useState(
-    windowWidth !== "sm"
-  );
-
-  const previousWidth = usePrevious(windowWidth);
-
-  useEffect(() => {
-    if (
-      !isFilterGroupExpanded &&
-      previousWidth !== "sm" &&
-      windowWidth === "sm"
-    ) {
-      setIsFilterGroupExpanded(false);
-    }
-  }, [isFilterGroupExpanded, previousWidth, windowWidth]);
+  const [isFilterGroupExpanded, setIsFilterGroupExpanded] = useState(false);
 
   const renderFilterGroup = (filter) => {
     return (
@@ -59,8 +44,8 @@ export default function Filters({ filters, setFilters, windowWidth }) {
         <button
           className="expand-filters-button"
           aria-controls="filters-expandable"
-          aria-expanded={isFilterGroupExpanded}
-          disabled={windowWidth !== "sm"}
+          aria-expanded={windowWidth === "lg" ? null : isFilterGroupExpanded}
+          disabled={windowWidth === "lg"}
           onClick={() => setIsFilterGroupExpanded(!isFilterGroupExpanded)}
         >
           <h2>Filter{windowWidth !== "sm" && ":"}</h2>
