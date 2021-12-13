@@ -341,6 +341,9 @@ dt
     right: 100%
     border-right-color: $card-background
 
+  header.page-header.timeline-page .header-content
+    padding-bottom: 20px
+
 @media only screen and (min-width: 415px)
   .timeline-description:after
     top: 20px
@@ -418,10 +421,20 @@ dt
     margin: 20px auto
     text-align: center
 
-  .timeline-description img,
+  .timeline
     width: auto
-    max-height: 80px
-    margin: 0 auto
+    margin-left: 5px
+
+  .timeline-entry.even,
+  .timeline-entry.odd
+    .timeline-description
+      width: auto
+      margin-left: 10px
+
+      img,
+        width: auto
+        max-height: 80px
+        margin: 0 auto
 
   .timeline:after
     display: none
@@ -429,15 +442,13 @@ dt
   .timeline-icon
     width: 30px
     height: 30px
-    margin-left: -15px
+    margin-left: -5px
+    border-width: 2px
+    z-index: 2
 
     i
       font-size: 15px
       line-height: 30px
-
-  .timeline-entry.odd .timeline-description,
-  .timeline-entry.even .timeline-description
-    margin-left: 35px
 
 // DARK MODE
 @media (prefers-color-scheme: dark)

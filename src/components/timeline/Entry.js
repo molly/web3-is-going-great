@@ -91,11 +91,11 @@ export default function Entry({ entry, className }) {
   };
 
   const renderImage = () => {
-    if (
-      entry.image &&
-      (windowWidth !== "sm" ||
-        (entry.image.caption && !entry.image.caption.includes("logo")))
-    ) {
+    const isLogo =
+      entry.image?.caption &&
+      entry.image.caption.toLowerCase().includes("logo");
+
+    if (entry.image && (windowWidth !== "sm" || !isLogo)) {
       return (
         <div className="captioned-image image-right">
           {renderImageElement()}
@@ -183,9 +183,6 @@ export default function Entry({ entry, className }) {
           <time dateTime={entry.date}>{humanizeDate(entry.date)}</time>
         </span>
         <h2>
-          <a id={entry.id} href={`#${entry.id}`}>
-            <i className="fas fa-link"></i>
-          </a>
           <span dangerouslySetInnerHTML={{ __html: entry.title }} />
         </h2>
         {renderImage()}

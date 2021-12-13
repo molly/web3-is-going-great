@@ -19,21 +19,28 @@ export default function Header() {
             fluid on our already-smoldering planet.
           </p>
           <p>
-            2021 timeline by Molly White (
-            <ExternalLink href="https://twitter.com/molly0xFFF">
-              <i
-                title="Twitter"
-                className="fa-brands fa-twitter"
-                aria-hidden={true}
-              ></i>
-              <span className="sr-only">Twitter</span>
-            </ExternalLink>
-            ,{" "}
-            <ExternalLink href="https://www.mollywhite.net/">
-              <i title="Website" className="fas fa-link" aria-hidden={true}></i>
-              <span className="sr-only">Website</span>
-            </ExternalLink>
-            ).
+            2021 timeline by Molly White{" "}
+            <span style={{ display: "inline-block" }}>
+              (
+              <ExternalLink href="https://twitter.com/molly0xFFF">
+                <i
+                  title="Twitter"
+                  className="fa-brands fa-twitter"
+                  aria-hidden={true}
+                ></i>
+                <span className="sr-only">Twitter</span>
+              </ExternalLink>
+              ,{" "}
+              <ExternalLink href="https://www.mollywhite.net/">
+                <i
+                  title="Website"
+                  className="fas fa-link"
+                  aria-hidden={true}
+                ></i>
+                <span className="sr-only">Website</span>
+              </ExternalLink>
+              )
+            </span>
           </p>
           <ul>
             <li>
