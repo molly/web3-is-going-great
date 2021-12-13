@@ -413,9 +413,20 @@ dt
       align-items: center
       flex-direction: column-reverse
 
-    img.logo
-      margin-left: 0px
-      max-width: 100px
+    .mobile-image-and-links
+      display: flex
+      justify-content: space-between
+      flex-wrap: wrap
+
+      .mobile-image-wrapper
+        display: flex
+        flex-grow: 1
+        justify-content: center
+
+        img.logo
+          margin-left: 0px
+          width: 100%
+          max-width: 100px
 
   .captioned-image
     margin: 20px auto

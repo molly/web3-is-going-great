@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { STORAGE_URL } from "../../constants/urls";
@@ -7,34 +7,7 @@ import ICONS from "../../constants/icons";
 import { humanizeDate, isWrappedInParagraphTags } from "../../js/utilities";
 import { EntryPropType } from "../../js/entry";
 
-const SMALL_BREAKPOINT = 414;
-const MID_BREAKPOINT = 768;
-
-const getWindowWidth = (px) => {
-  if (px < SMALL_BREAKPOINT) {
-    return "sm";
-  } else if (px < MID_BREAKPOINT) {
-    return "md";
-  }
-  return "lg";
-};
-
-export default function Entry({ entry, className }) {
-  const [windowWidth, setWindowWidth] = useState(
-    getWindowWidth(window.innerWidth)
-  );
-
-  const handleResize = useCallback(() => {
-    setWindowWidth(getWindowWidth(window.innerWidth));
-  }, [setWindowWidth]);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [handleResize]);
-
+export default function Entry({ entry, className, windowWidth }) {
   const renderIcon = () => {
     if (entry.faicon) {
       return <i className={`fas fa-${entry.faicon}`} aria-hidden="true"></i>;
@@ -197,4 +170,5 @@ export default function Entry({ entry, className }) {
 Entry.propTypes = {
   className: PropTypes.string,
   entry: EntryPropType,
+  windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
 };

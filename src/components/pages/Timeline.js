@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { InView } from "react-intersection-observer";
 import useGA from "../../js/useGA";
@@ -13,8 +13,34 @@ import Loader from "../timeline/Loader";
 import Error from "../shared/Error";
 import Footer from "../shared/Footer";
 
+const SMALL_BREAKPOINT = 414;
+const MID_BREAKPOINT = 768;
+
+const getWindowWidth = (px) => {
+  if (px < SMALL_BREAKPOINT) {
+    return "sm";
+  } else if (px < MID_BREAKPOINT) {
+    return "md";
+  }
+  return "lg";
+};
+
 export default function Timeline() {
   useGA();
+  const [windowWidth, setWindowWidth] = useState(
+    getWindowWidth(window.innerWidth)
+  );
+
+  const handleResize = useCallback(() => {
+    setWindowWidth(getWindowWidth(window.innerWidth));
+  }, [setWindowWidth]);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
 
   const [filters, setFilters] = useState(EMPTY_FILTERS_STATE);
 
@@ -74,7 +100,12 @@ export default function Timeline() {
                   className += " first";
                 }
                 const entryElement = (
-                  <Entry key={entry.id} entry={entry} className={className} />
+                  <Entry
+                    key={entry.id}
+                    entry={entry}
+                    className={className}
+                    windowWidth={windowWidth}
+                  />
                 );
 
                 // Render the scroll sentinel above the last entry in the last page of results so we can begin loading
@@ -108,7 +139,7 @@ export default function Timeline() {
 
   return (
     <>
-      <Header />
+      <Header windowWidth={windowWidth} />
       <Filters filters={filters} setFilters={setFilters} />
       <div className="timeline-page content-wrapper" aria-busy={isLoading}>
         {renderBody()}
