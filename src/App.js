@@ -1,6 +1,7 @@
 import "./styles/main.sass";
 
 import React from "react";
+import ReactGA from "react-ga";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -18,6 +19,9 @@ function App() {
       },
     },
   });
+
+  ReactGA.initialize("G-97EC5CRB6");
+  ReactGA.pageview();
 
   return (
     <QueryClientProvider client={queryClient}>

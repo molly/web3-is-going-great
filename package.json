@@ -10,6 +10,7 @@
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-ga": "^3.3.0",
     "react-intersection-observer": "^8.32.5",
     "react-query": "^3.34.0",
     "react-router-dom": "^6.0.2",

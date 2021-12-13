@@ -8,6 +8,7 @@ import Header from "../timeline/Header";
 import Filters from "../timeline/Filters";
 import Entry from "../timeline/Entry";
 import Loader from "../timeline/Loader";
+import Error from "../shared/Error";
 import Footer from "../shared/Footer";
 
 export const EMPTY_FILTERS_STATE = {
@@ -61,6 +62,7 @@ export default function Timeline() {
     </InView>
   );
 
+  // eslint-disable-next-line no-unused-vars
   const renderEntries = () => {
     return (
       <article className="timeline">
@@ -102,7 +104,7 @@ export default function Timeline() {
     if (isLoading) {
       return <Loader />;
     } else if (isError) {
-      return <span>Error</span>;
+      return <Error />;
     }
     return renderEntries();
   };
