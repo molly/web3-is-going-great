@@ -1,4 +1,3 @@
-import "./styles/etc.css";
 import "./styles/main.sass";
 
 import React from "react";

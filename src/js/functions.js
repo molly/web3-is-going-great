@@ -1,9 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {
-  getFunctions,
-  connectFunctionsEmulator,
-  httpsCallable,
-} from "firebase/functions";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDLAj91oJ3U_24VU2RW9511RKqYuf-sviQ",
@@ -18,7 +14,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const functions = getFunctions(app);
-connectFunctionsEmulator(functions, "localhost", 5001);
 
 export const getEntries = async (filters) => {
   const resp = await httpsCallable(functions, "getEntries")(filters);
