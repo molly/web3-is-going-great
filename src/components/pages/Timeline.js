@@ -10,6 +10,7 @@ import Entry from "../timeline/Entry";
 import Loader from "../timeline/Loader";
 import Error from "../shared/Error";
 import Footer from "../shared/Footer";
+import useGA from "../../js/useGA";
 
 export const EMPTY_FILTERS_STATE = {
   theme: [],
@@ -18,6 +19,8 @@ export const EMPTY_FILTERS_STATE = {
 };
 
 export default function Timeline() {
+  useGA();
+
   const [filters, setFilters] = useState(EMPTY_FILTERS_STATE);
 
   const getFilteredEntries = useCallback(

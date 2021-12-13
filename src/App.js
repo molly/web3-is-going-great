@@ -21,7 +21,6 @@ function App() {
   });
 
   ReactGA.initialize("G-97EC5CRB6");
-  ReactGA.pageview();
 
   return (
     <QueryClientProvider client={queryClient}>

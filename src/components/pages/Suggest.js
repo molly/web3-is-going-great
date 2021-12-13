@@ -1,9 +1,12 @@
 import React from "react";
+import useGA from "../../js/useGA";
 import BackBar from "../shared/BackBar";
 import ExternalLink from "../shared/ExternalLink";
 import Footer from "../shared/Footer";
 
 export default function Suggest() {
+  useGA();
+
   return (
     <>
       <header className="page-header attribution-header">

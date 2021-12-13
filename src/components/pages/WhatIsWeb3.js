@@ -1,9 +1,11 @@
 import React from "react";
+import useGA from "../../js/useGA";
 import BackBar from "../shared/BackBar";
 import ExternalLink from "../shared/ExternalLink";
 import Footer from "../shared/Footer";
 
 export default function WhatIsWeb3() {
+  useGA();
   return (
     <>
       <header className="page-header">
