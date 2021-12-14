@@ -1,15 +1,17 @@
 export type EntryQuery = {
   limit?: number;
   cursor?: string;
+  theme: string[];
   tech?: string[];
-  theme?: string[];
   blockchain?: string[];
+  sort?: string;
 };
 
 type Filter = {
   theme: string[];
   tech?: string[];
   blockchain?: string[];
+  sort?: string;
 };
 
 type Image = {

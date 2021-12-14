@@ -58,6 +58,23 @@ export default function Filters({ filters, setFilters, windowWidth }) {
           }`}
         >
           {Object.keys(FILTERS).map(renderFilterGroup)}
+          <button
+            className="sort-button"
+            onClick={() =>
+              setFilters({
+                ...filters,
+                sort: filters.sort === "Ascending" ? "Descending" : "Ascending",
+              })
+            }
+          >
+            <i
+              className={`fas fa-caret-${
+                filters.sort === "Ascending" ? "up" : "down"
+              }`}
+              aria-hidden={true}
+            ></i>{" "}
+            {filters.sort}
+          </button>
         </div>
       </section>
     </div>
@@ -73,6 +90,7 @@ Filters.propTypes = {
     blockchain: PropTypes.arrayOf(
       PropTypes.oneOf(Object.keys(FILTERS.blockchain))
     ).isRequired,
+    sort: PropTypes.string.isRequired,
   }).isRequired,
   setFilters: PropTypes.func.isRequired,
   windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),

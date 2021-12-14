@@ -61,7 +61,6 @@ footer.page-footer
 
 header.page-header.timeline-page
   padding-bottom: 0
-  justify-content: normal
 
   .constrain-width
     height: 100%
@@ -376,6 +375,8 @@ dt
       align-items: end
 
   header.page-header.timeline-page
+    justify-content: normal
+
     img.logo
       max-height: 200px
 
@@ -460,6 +461,11 @@ dt
     i
       font-size: 15px
       line-height: 30px
+
+// Very large screens
+@media only screen and (min-width: 1440px)
+  .timeline-entry
+    margin-top: -150px
 
 // DARK MODE
 @media (prefers-color-scheme: dark)

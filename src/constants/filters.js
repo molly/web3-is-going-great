@@ -27,6 +27,7 @@ export const EMPTY_FILTERS_STATE = {
   theme: [],
   tech: [],
   blockchain: [],
+  sort: "Descending",
 };
 
 export default FILTERS;

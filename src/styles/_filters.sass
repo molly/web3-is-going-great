@@ -15,16 +15,24 @@
     font-size: 1em
     margin: 0
 
-  .expand-filters-button
+  .expand-filters-button,
+  .sort-button
     display: flex
     align-items: center
     background-color: transparent
     border: 0
+
+  .expand-filters-button
     color: $filter-text
-    cursor: pointer
 
     &:disabled
       color: $filter-text
+
+  .sort-button
+    color: #808080
+
+    i
+      margin-right: 5px
 
   .filter-and-button, .filters-expandable
     display: flex

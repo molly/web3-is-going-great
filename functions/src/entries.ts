@@ -7,10 +7,9 @@ const DEFAULT_LIMIT = 10;
 
 export const getEntries = functions.https.onCall(async (data?: EntryQuery) => {
   const limit = data?.limit ?? DEFAULT_LIMIT;
-
   let query = await firestore
     .collection("entries")
-    .orderBy(FieldPath.documentId());
+    .orderBy("date", data?.sort === "Ascending" ? "asc" : "desc");
 
   if (data?.theme?.length) {
     query = query.where(
