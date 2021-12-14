@@ -15,6 +15,10 @@ export default function Attribution() {
       <BackBar />
       <div className="content-wrapper">
         <article className="generic-page">
+          <p>
+            All text can be attributed to Molly White except where noted
+            otherwise.
+          </p>
           <h3>Monkey illustration created from</h3>
           <ul>
             <li>
