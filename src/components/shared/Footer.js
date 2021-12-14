@@ -14,8 +14,7 @@ export default function Footer() {
             Creative Commons Attribution 3.0 Unported License
           </a>
           . All attribution can be found on the{" "}
-          <Link to="/attribution">attribution</Link> page. &copy; 2021 Molly
-          White
+          <Link to="/attribution">attribution</Link> page.
         </p>
         <p>
           <a href="https://github.com/molly/web3-timeline">Source code</a> |{" "}
