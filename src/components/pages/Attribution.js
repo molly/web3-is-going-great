@@ -115,9 +115,15 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
-              <span>Bored Ape Yacht Club NFT from </span>
+              <span>Bored Ape #2031 from </span>
               <ExternalLink href="https://twitter.com/calvinbecerra/status/1454328591202721796">
                 <span>Calvin Becerra's Twitter account</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Bored Ape #3547 from </span>
+              <ExternalLink href="https://opensea.io/assets/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/3547">
+                <span>OpenSea</span>
               </ExternalLink>
             </li>
             <li>
@@ -127,7 +133,25 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>C.R.E.A.M. Finance logo from </span>
+              <ExternalLink href=" https://app.cream.finance/">
+                their website
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Constitution image from </span>
+              <ExternalLink href="https://fortune.com/2021/11/18/us-constitution-auction-dao-crypto-collective/">
+                <i>Fortune</i>
+              </ExternalLink>
+            </li>
+            <li>
               <span>DODO logo from </span>
+              <ExternalLink href="https://dydx.exchange/">
+                the platform's website
+              </ExternalLink>
+            </li>
+            <li>
+              <span>dYdX logo from </span>
               <ExternalLink href="https://twitter.com/BreederDodo">
                 the platform's Twitter account
               </ExternalLink>
@@ -163,8 +187,26 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
-              <span>Pancake Bunny logo </span>
+              <span>Paid Network logo from </span>
+              <ExternalLink href="https://paidnetwork.com">
+                their website
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Pancake Bunny logo from </span>
               <ExternalLink href="https://twitter.com/PancakeBunnyFin">
+                the project's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Poly Network logo from </span>
+              <ExternalLink href="https://poly.network/">
+                their website
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Popsicle Finance logo </span>
+              <ExternalLink href="https://twitter.com/PopsicleFinance">
                 the project's Twitter account
               </ExternalLink>
             </li>
@@ -175,15 +217,33 @@ export default function Attribution() {
               <span> from Foundation</span>
             </li>
             <li>
-              A Solana Towers NFT from an{" "}
+              <span>A Solana Towers NFT from an </span>
               <ExternalLink href="https://web.archive.org/web/20210928192615/https://solanatowers.com/">
                 <span>archived version of the project's website</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Seattle Kraken logo from </span>
+              <ExternalLink href="https://orangecomet.com/kraken/#mascot-reveal">
+                Orange Comet
               </ExternalLink>
             </li>
             <li>
               <span>Spartan Protocol logo </span>
               <ExternalLink href="https://twitter.com/SpartanProtocol">
                 the project's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Strawberry iMac from </span>
+              <ExternalLink href="https://onlineonly.christies.com/s/birth-wikipedia/lots/2181">
+                Christie's
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Tether logo from </span>
+              <ExternalLink href="https://twitter.com/Tether_to">
+                the company's Twitter account
               </ExternalLink>
             </li>
             <li>
