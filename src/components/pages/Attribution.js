@@ -139,6 +139,11 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <ExternalLink href="https://twitter.com/CoinDesk/status/1469677423423799302">
+                <span>CoinDesk tweet</span>
+              </ExternalLink>
+            </li>
+            <li>
               <span>Constitution image from </span>
               <ExternalLink href="https://fortune.com/2021/11/18/us-constitution-auction-dao-crypto-collective/">
                 <i>Fortune</i>
@@ -161,6 +166,12 @@ export default function Attribution() {
                 <span>EvolvedApe #6946</span>
               </ExternalLink>
               <span> from OpenSea</span>
+            </li>
+            <li>
+              <span>Kickstarter logo</span>
+              <ExternalLink href="https://www.kickstarter.com/">
+                <span> from their website</span>
+              </ExternalLink>
             </li>
             <li>
               <ExternalLink href="https://solsea.io/nft/92g5SJy9CxJWmirMEkwEvYcMW9ajFAkwNqGotUsUvvbX">
@@ -237,7 +248,13 @@ export default function Attribution() {
             <li>
               <span>Strawberry iMac from </span>
               <ExternalLink href="https://onlineonly.christies.com/s/birth-wikipedia/lots/2181">
-                Christie's
+                <span>Christie's</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Stormtrooper helmet artwork from </span>
+              <ExternalLink href="https://www.ft.com/content/7570bd42-0728-4e7e-b322-be9e5880e3d2">
+                <i>Financial Times</i>
               </ExternalLink>
             </li>
             <li>

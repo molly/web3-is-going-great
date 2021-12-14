@@ -11,6 +11,7 @@ const FILTERS = {
   tech: {
     currency: "cryptocurrency",
     dao: "DAO",
+    dapps: "dApps",
     defi: "DeFi",
     nft: "NFT",
   },

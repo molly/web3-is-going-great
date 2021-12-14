@@ -10,7 +10,6 @@ export const EMPTY_ENTRY = {
     tech: [],
     theme: [],
   },
-  id: "",
   links: [{ linkText: "", href: "", extraText: "" }],
   title: "",
   image: { src: "", alt: "", caption: "" },
@@ -23,7 +22,7 @@ export const LinkFieldPropType = PropTypes.shape({
 });
 
 export const EntryPropType = PropTypes.shape({
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   filters: PropTypes.shape({
     theme: PropTypes.arrayOf(PropTypes.string).isRequired,
     tech: PropTypes.arrayOf(PropTypes.string),
@@ -80,7 +79,7 @@ export const trimEmptyFields = (entry) => {
 };
 
 export const isValidEntry = (entry) => {
-  if (!entry.title || !entry.body || !entry.date || !entry.id) {
+  if (!entry.title || !entry.body || !entry.date) {
     return false;
   }
   if (

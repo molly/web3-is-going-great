@@ -20,6 +20,15 @@ export default function Glossary() {
             <dd>
               a specific cryptocurrency (e.g. Bitcoin, Ethereum, Dogecoin)
             </dd>
+            <dt>dApp / decentralized app</dt>
+            <dd>
+              a computer application that runs on a decentralized computing
+              system (
+              <ExternalLink href="https://en.wikipedia.org/wiki/Decentralized_application">
+                Wikipedia
+              </ExternalLink>
+              )
+            </dd>
             <dt>DAO / decentralized autonomous organization</dt>
             <dd>
               an organization represented by rules encoded as a computer program
