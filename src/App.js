@@ -23,7 +23,7 @@ function App() {
     },
   });
 
-  ReactGA.initialize("G-97EC5CRB6");
+  ReactGA.initialize("UA-215114522-1");
   queryClient.prefetchInfiniteQuery(["entries", EMPTY_FILTERS_STATE], () =>
     getEntries()
   );
