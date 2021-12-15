@@ -37,4 +37,10 @@ export type Entry = {
   color?: string;
   faicon?: string;
   icon?: string;
+  dateString?: string;
 };
+
+export interface RssEntry extends Entry {
+  createdAt: string | null;
+  updatedAt: string | null;
+}

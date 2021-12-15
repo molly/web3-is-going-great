@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed
+  xmlns="http://www.w3.org/2005/Atom"
+  xmlns:webfeeds="http://webfeeds.org/rss/1.0"
+>
+  <id>https://web3isgoinggreat.com/feed.xml</id>
+  <title type="html">Web3 is going just great</title>
+  <author>
+    <name>Molly White</name>
+    <email>molly.white5@gmail.com</email>
+    <uri>https://www.mollywhite.net</uri>
+  </author>
+  <link rel="self" href="https://web3isgoinggreat.com/feed.xml" />
+  <link rel="alternate" href="https://web3isgoinggreat.com" />
+  <icon>https://web3isgoinggreat.com/favicon-32x32.png</icon>
+  <webfeeds:icon>https://web3isgoinggreat.com/favicon-32x32.png</webfeeds:icon>
+  <webfeeds:cover
+    image="https://storage.googleapis.com/web3-334501.appspot.com/monkey-og.png"
+  ></webfeeds:cover>
+  <webfeeds:accentColor>5948a4</webfeeds:accentColor>
+  <category term="technology"/>
+  <rights type="html">CC-BY-SA 3.0</rights>
+  <updated><%= updated %></updated>
+  <% entries.forEach(function(entry){ %>
+  <entry>
+    <title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><%- entry.title %></div></title>
+    <published><%= entry.createdAt %></published>
+    <updated><%= entry.updatedAt %></updated>
+    <id>https://web3isgoinggreat.com/<%= entry.id %></id>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <% if (entry.image){%><img
+          src="<%= storageUrlPrefix %>/<%= entry.image.src %>"
+          alt="<%= entry.image.alt %>"
+          style="max-width: 300px"
+        /><% } %>
+        <%- entry.body %>
+        <ul><% entry.links.forEach(function (link){ %>
+            <li>
+              <a href="<%= link.href%>">
+                <%- link.linkText %>
+              </a>
+              <%- link.extraText %>
+            </li><% }); %>
+        </ul>
+      </div>
+    </content>
+  </entry>
+  <% }); %>
+</feed>

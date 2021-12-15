@@ -16,6 +16,12 @@ export default function Header({ windowWidth }) {
       <li>
         <Link to="/suggest">Suggest a change</Link>
       </li>
+      <li>
+        <a href="/feed.xml">
+          <i className="fas fa-rss"></i>
+          <span className="sr-only">Subscribe to RSS</span>
+        </a>
+      </li>
     </ul>
   );
 
