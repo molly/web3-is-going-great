@@ -19,7 +19,7 @@ body:
     id: description
     attributes:
       label: Description
-      description: Please provide a small blurb (about one paragraph) that describes 
+      description: Please provide a small blurb (about one paragraph) that describes
       placeholder: "Stan Lee fans were outraged when the Twitter account belonging to Lee, who died in 2018, posted a message to promote an upcoming NFT [...]"
     validations:
       required: true
@@ -46,7 +46,7 @@ body:
       placeholder: "First, First Last, or @handle"
     validations:
       required: true
- - type: 
+  - type:
     id: attribution-link
     attributes:
       description: If you'd like, include a link to your personal site, Twitter, or wherever else people could find you.
