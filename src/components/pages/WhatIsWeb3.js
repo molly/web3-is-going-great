@@ -104,6 +104,12 @@ export default function WhatIsWeb3() {
               </ExternalLink>
               <span> by Yesterweb</span>
             </li>
+            <li>
+              <ExternalLink href="https://www.oreilly.com/radar/why-its-too-early-to-get-excited-about-web3/">
+                <span>"Why it’s too early to get excited about Web3"</span>
+              </ExternalLink>
+              <span> by Tim O'Reilly</span>
+            </li>
           </ul>
         </article>
       </div>

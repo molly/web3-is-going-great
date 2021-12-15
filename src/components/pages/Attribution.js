@@ -19,6 +19,20 @@ export default function Attribution() {
             All text can be attributed to Molly White except where noted
             otherwise.
           </p>
+          <h3>Additional text and entries contributed by</h3>
+          <ul>
+            <li>
+              <ExternalLink href="https://twitter.com/jpscribbles">
+                <span>JP Etcheber</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <ExternalLink href="https://github.com/astamos">
+                <span>Alex Stamos</span>
+              </ExternalLink>
+            </li>
+            <li></li>
+          </ul>
           <h3>Monkey illustration created from</h3>
           <ul>
             <li>
