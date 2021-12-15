@@ -17,8 +17,8 @@ export default function Footer() {
           <Link to="/attribution">attribution</Link> page.
         </p>
         <p>
-          <a href="https://github.com/molly/web3-timeline">Source code</a> |{" "}
-          <Link to="/suggest">Suggest a change or addition</Link>
+          <a href="https://github.com/molly/web3-is-going-great">Source code</a>{" "}
+          | <Link to="/suggest">Suggest a change or addition</Link>
         </p>
       </div>
     </footer>

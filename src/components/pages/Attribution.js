@@ -119,6 +119,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>Bored Ape #648 from </span>
+              <ExternalLink href="https://opensea.io/assets/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/648">
+                <span>OpenSea</span>
+              </ExternalLink>
+            </li>
+            <li>
               <span>Bored Ape #2031 from </span>
               <ExternalLink href="https://twitter.com/calvinbecerra/status/1454328591202721796">
                 <span>Calvin Becerra's Twitter account</span>
@@ -190,6 +196,14 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>
+                <i>Legacy logo</i> from{" "}
+              </span>
+              <ExternalLink href="https://kotaku.com/peter-molyneuxs-next-game-is-a-blockchain-business-sim-1848201920">
+                <span>Kotaku</span>
+              </ExternalLink>
+            </li>
+            <li>
               <span>McRib NFT image from </span>
               <ExternalLink href="https://twitter.com/McDonalds/status/1455174998264586243">
                 McDonalds' Twitter account
@@ -199,6 +213,12 @@ export default function Attribution() {
               <span>"Monkey Jizz" logo from </span>
               <ExternalLink href="https://www.vice.com/en/article/n7nw4k/unbelievable-monkey-jizz-cryptocurrency-turns-out-to-be-a-scam">
                 Vice
+              </ExternalLink>
+            </li>
+            <li>
+              <span>ON1 #7253 from </span>
+              <ExternalLink href="https://opensea.io/assets/0x3bf2922f4520a8ba0c2efc3d2a1539678dad5e9d/7253">
+                <span>OpenSea</span>
               </ExternalLink>
             </li>
             <li>
@@ -247,6 +267,12 @@ export default function Attribution() {
               <span>Spartan Protocol logo </span>
               <ExternalLink href="https://twitter.com/SpartanProtocol">
                 the project's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Stan Lee NFT from </span>
+              <ExternalLink href="https://orangecomet.com/chakra/">
+                <span>Orange Comet</span>
               </ExternalLink>
             </li>
             <li>
