@@ -18,7 +18,7 @@ export default function Suggest() {
           <p>
             The best and quickest way to suggest an addition or change to this
             timeline is via Github Issue.{" "}
-            <ExternalLink href="https://github.com/molly/web3-is-going-great/issues/new?assignees=&labels=&template=new-entry.md&title=%5BNEW%5D">
+            <ExternalLink href="https://github.com/molly/web3-is-going-great/issues/new?assignees=&labels=bug%2Ctriage&template=new-entry.yml&title=%5BNEW%5D%3A+">
               <span>Suggest a new entry</span>
             </ExternalLink>
             , or{" "}
