@@ -1,7 +1,7 @@
 name: New Entry Form
 description: Suggest a new entry
 title: "[NEW]: "
-labels: ["bug", "triage"]
+labels: [bug, triage]
 body:
   - type: markdown
     attributes:
