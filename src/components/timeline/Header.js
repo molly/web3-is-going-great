@@ -14,6 +14,9 @@ export default function Header({ windowWidth }) {
         <Link to="/glossary">Glossary</Link>
       </li>
       <li>
+        <Link to="/about">About this project</Link>
+      </li>
+      <li>
         <Link to="/suggest">Suggest a change</Link>
       </li>
       <li>

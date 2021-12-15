@@ -9,6 +9,7 @@ import { getEntries } from "./js/functions";
 import { EMPTY_FILTERS_STATE } from "./constants/filters";
 
 import Timeline from "./components/pages/Timeline";
+import About from "./components/pages/About";
 import Attribution from "./components/pages/Attribution";
 import Glossary from "./components/pages/Glossary";
 import WhatIsWeb3 from "./components/pages/WhatIsWeb3";
@@ -33,6 +34,7 @@ function App() {
       <Router>
         <Routes>
           <Route index element={<Timeline />} />
+          <Route path="/about" element={<About />} />
           <Route path="/attribution" element={<Attribution />} />
           <Route path="/glossary" element={<Glossary />} />
           <Route path="/what" element={<WhatIsWeb3 />} />
