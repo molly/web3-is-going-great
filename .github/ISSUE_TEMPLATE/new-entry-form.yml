@@ -42,13 +42,15 @@ body:
   - type: input
     id: attribution-name
     attributes:
+      label: Attribution name
       description: Please indicate the name you'd like to be displayed in attribution.
       placeholder: "First, First Last, or @handle"
     validations:
       required: true
-  - type:
+  - type: input
     id: attribution-link
     attributes:
+      label: Personal link
       description: If you'd like, include a link to your personal site, Twitter, or wherever else people could find you.
       placeholder: "https://twitter.com/handle"
     validations:
