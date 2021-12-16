@@ -8,6 +8,43 @@ import * as ejs from "ejs";
 import { Entry } from "./types";
 import * as moment from "moment";
 
+type FilterObj = {
+  [key: string]: string;
+};
+
+type Filters = {
+  theme: FilterObj;
+  tech: FilterObj;
+  blockchain: FilterObj;
+};
+
+const FILTERS: Filters = {
+  theme: {
+    badIdea: "Bad idea",
+    bug: "Bug",
+    fakeNews: "Fake news",
+    hack: "Hack or scam",
+    hmm: "Hmm",
+    rugPull: "Rug pull",
+    shady: "Shady business",
+  },
+  tech: {
+    currency: "cryptocurrency",
+    dao: "DAO",
+    dapps: "dApps",
+    defi: "DeFi",
+    nft: "NFT",
+  },
+  blockchain: {
+    bitcoin: "Bitcoin",
+    bsc: "BSC",
+    ethereum: "Ethereum",
+    flow: "Flow",
+    polygon: "Polygon",
+    solana: "Solana",
+  },
+};
+
 export const updateWeb1OnChange = functions.firestore
   .document("/entries/{docId}")
   .onWrite(async () => {
@@ -30,6 +67,17 @@ export const updateWeb1OnChange = functions.firestore
       const entry = child.data() as Entry;
       web1Data.entries.push({
         ...entry,
+        filters: {
+          theme: entry.filters.theme
+            ? entry.filters.theme.map((theme) => FILTERS.theme[theme])
+            : [],
+          tech: entry.filters.tech
+            ? entry.filters.tech.map((tech) => FILTERS.tech[tech])
+            : [],
+          blockchain: entry.filters.blockchain
+            ? entry.filters.blockchain.map((bc) => FILTERS.blockchain[bc])
+            : [],
+        },
         dateString: moment(entry.date, "YYYY-MM-DD").format("MMMM D, YYYY"),
       });
     });

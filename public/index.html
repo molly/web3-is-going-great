@@ -75,11 +75,13 @@
     <title>Web3 is going just great</title>
   </head>
   <body>
-    <noscript
-      >No JavaScript? That's cool too! Check out the
-      <a href="/web1">Web 1.0</a> version of this site, complete with little to
-      no CSS because I made this at 1am.</noscript
-    >
+    <p id="noscript" style="max-width: 300px; margin: 50px auto 0 auto">
+      No JavaScript? That's cool too! Check out the
+      <a href="/web1">Web 1.0</a> version of this site.
+    </p>
+    <script>
+      document.getElementById("noscript").remove();
+    </script>
     <div id="root"></div>
   </body>
 </html>

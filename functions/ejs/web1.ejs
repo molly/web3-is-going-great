@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://web3isgoinggreat.com/web1.css" />
     <link rel="shortcut icon" href="https://web3isgoinggreat.com/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -49,65 +50,126 @@
     <title>Web3 is going just great</title>
   </head>
   <body>
-    <div style="width: 80%; max-width: 1200px; margin: 0 auto;">
-    <% entries.forEach(function (entry) { %>
-    <div class="timeline-entry" style="margin-bottom: 50px;">
-      <div class="timeline-description">
-        <span class="timestamp"
-          ><time datetime="2021-12-14"><%= entry.dateString %></time></span
-        >
-        <h2>
-          <span><%- entry.title %></span>
-        </h2>
-        <% if (entry.image) { %>
-        <div class="captioned-image image-right">
-          <img
-            src="https://storage.googleapis.com/web3-334501.appspot.com/entryAssets/<%= entry.image.src %>"
-            alt="<%= entry.image.alt %>"
-            style="max-width: 300px"
-          />
-          <% if (entry.image.caption) { %>
-          <span class="caption"><%= entry.image.caption %> </span>
-          <span class="attribution-link"
-            ><a href="/attribution">(attribution)</a>
-          </span>
-          <% } %>
+    <header class="timeline-page page-header">
+      <div class="constrain-width">
+        <img
+          class="logo"
+          src="https://storage.googleapis.com/web3-334501.appspot.com/monkey.png"
+          alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
+        />
+        <div class="header-content">
+          <h1>Web3 is going just great</h1>
+          <p>
+            ...and is definitely not an enormous grift that's pouring lighter
+            fluid on our already-smoldering planet.
+          </p>
+          <p>
+            2021 timeline by Molly White
+            <span style="display: inline-block"
+              >(<a
+                target="_blank"
+                rel="noreferrer"
+                href="https://twitter.com/molly0xFFF"
+                >Twitter</a
+              >,
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.mollywhite.net/"
+                >website</a
+              >)</span
+            >
+          </p>
+          <a href="/feed.xml">Subscribe to RSS</a>
         </div>
-        <% } %>
-        <p><%- entry.body %></p>
-        <ul>
-          <% entry.links.forEach(function (link) { %>
-          <li>
-            <a href="<%= link.href %>" target="_blank" rel="noreferrer"
-              ><span><%- link.linkText %></span></a
-            ><span><%- link.extraText %></span>
-          </li>
-          <% }) %>
-        <div class="clearfix">
-          <div class="tags">
-            <% if (entry.filters.theme && entry.filters.theme.length) { %> 
-            <div class="tag-list theme">
-              <span class="sr-only">Theme tags: </span><%- entry.filters.theme.join(", ") %>
+      </div>
+    </header>
+    <div style="width: 80%; max-width: 1200px; margin: 0 auto">
+      <% entries.forEach(function (entry) { %>
+      <div class="timeline-entry" style="margin-bottom: 50px">
+        <div class="timeline-description">
+          <span class="timestamp"
+            ><time datetime="2021-12-14"><%= entry.dateString %></time></span
+          >
+          <h2>
+            <span><%- entry.title %></span>
+          </h2>
+          <div class="flex">
+            <div class="body-wrap">
+              <p><%- entry.body %></p>
+              <ul>
+                <% entry.links.forEach(function (link) { %>
+                <li>
+                  <a href="<%= link.href %>" target="_blank" rel="noreferrer"
+                    ><span><%- link.linkText %></span></a
+                  ><span><%- link.extraText %></span>
+                </li>
+                <% }) %>
+              </ul>
+              <div>
+                <div class="tags">
+                  <% if (entry.filters.theme && entry.filters.theme.length) { %>
+                  <div class="tag-list theme">
+                    <span class="sr-only">Theme tags: </span><%-
+                    entry.filters.theme.join(", ") %>
+                  </div>
+                  <% } %>
+                  <div class="tag-group-right">
+                    <% if (entry.filters.blockchain &&
+                    entry.filters.blockchain.length) { %>
+                    <div class="tag-list">
+                      <span class="sr-only">Blockchain tags: </span
+                      ><span
+                        >Blockchain: <%- entry.filters.blockchain.join(", ")
+                        %></span
+                      >
+                    </div>
+                    <% } %> <% if (entry.filters.tech &&
+                    entry.filters.tech.length) { %>
+                    <div class="tag-list">
+                      <span class="sr-only">Tech tags: </span><%-
+                      entry.filters.tech.join(", ") %>
+                    </div>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% if (entry.image) { %>
+            <div class="captioned-image image-right">
+              <img
+                src="https://storage.googleapis.com/web3-334501.appspot.com/entryAssets/<%= entry.image.src %>"
+                alt="<%= entry.image.alt %>"
+              />
+              <% if (entry.image.caption) { %>
+              <span class="caption"><%- entry.image.caption %> </span>
+              <span class="attribution-link"
+                ><a href="/attribution">(attribution)</a>
+              </span>
+              <% } %>
             </div>
             <% } %>
-            <div class="tag-group-right">
-              <% if (entry.filters.blockchain && entry.filters.theme.blockchain) { %> 
-              <div class="tag-list">
-                <span class="sr-only">Blockchain tags: </span
-                ><span>Blockchain: <%- entry.filters.blockchain.join(", ") %></span>
-              </div>
-              <% } %>
-              <% if (entry.filters.tech && entry.filters.theme.tech) { %> 
-              <div class="tag-list">
-                <span class="sr-only">Tech tags: </span><%- entry.filters.tech.join(", ") %>
-              </div>
-              <% } %>
-            </div>
           </div>
         </div>
       </div>
+      <% }); %>
     </div>
-    <% }); %>
-  </div>
+    <footer class="page-footer">
+      <div class="constrain-width">
+        <p>
+          Text is licensed under a
+          <a
+            rel="license"
+            href="http://creativecommons.org/licenses/by/3.0/deed.en_US"
+            >Creative Commons Attribution 3.0 Unported License</a
+          >. All attribution can be found on the
+          <a href="/attribution">attribution</a> page.
+        </p>
+        <p>
+          <a href="https://github.com/molly/web3-is-going-great">Source code</a>
+          | <a href="/suggest">Suggest a change or addition</a>
+        </p>
+      </div>
+    </footer>
   </body>
 </html>

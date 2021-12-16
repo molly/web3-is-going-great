@@ -29,6 +29,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
           </ul>
+          <p>
+            Thanks also to anyone who{" "}
+            <ExternalLink href="https://github.com/molly/web3-is-going-great">
+              contributed PRs on GitHub
+            </ExternalLink>
+          </p>
           <h3>Monkey illustration created from</h3>
           <ul>
             <li>

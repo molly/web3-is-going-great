@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  line-height: 120%;
+}
+
+header, footer {
+  background-color: #5948a4;
+}
+
+header h1, header p, header a, footer p, footer a {
+  color: #ffffff;
+}
+
+header img.logo {
+  max-width: 200px;
+  margin-right: 20px
+}
+
+.constrain-width {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header .constrain-width {
+  margin: 0 auto 20px auto;
+  display: flex;
+}
+
+footer {
+  padding: 20px 0
+}
+
+footer .constrain-width p{
+  text-align: center;
+}
+
+.flex {
+  display: flex
+}
+
+.image-right {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 20px 20px;
+  text-align: center;
+}
+
+.captioned-image img {
+  max-width: 250px;
+  max-height: 250px;
+}
+
+.timeline-entry {
+  border: 2px dashed #5948a4;
+  padding: 20px;
+}
