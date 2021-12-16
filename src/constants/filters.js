@@ -20,6 +20,7 @@ const FILTERS = {
     bsc: "BSC",
     ethereum: "Ethereum",
     flow: "Flow",
+    litecoin: "Litecoin",
     polygon: "Polygon",
     solana: "Solana",
   },

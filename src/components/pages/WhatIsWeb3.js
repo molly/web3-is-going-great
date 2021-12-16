@@ -110,6 +110,12 @@ export default function WhatIsWeb3() {
               </ExternalLink>
               <span> by Tim O'Reilly</span>
             </li>
+            <li>
+              <ExternalLink href="https://society.robinsloan.com/archive/notes-on-web3/">
+                "Notes on Web3"
+              </ExternalLink>
+              <span> by Robin Sloan</span>
+            </li>
           </ul>
           <h3>Other</h3>
           <ul>

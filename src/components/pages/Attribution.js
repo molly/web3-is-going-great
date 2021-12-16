@@ -225,13 +225,29 @@ export default function Attribution() {
                 <i>Legacy logo</i> from{" "}
               </span>
               <ExternalLink href="https://kotaku.com/peter-molyneuxs-next-game-is-a-blockchain-business-sim-1848201920">
-                <span>Kotaku</span>
+                <span>
+                  <i>Kotaku</i>
+                </span>
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Litecoin price chart from </span>
+              <ExternalLink href="https://mashable.com/article/litecoin-walmart-fake-news">
+                <span>
+                  <i>Mashable</i>
+                </span>
               </ExternalLink>
             </li>
             <li>
               <span>McRib NFT image from </span>
               <ExternalLink href="https://twitter.com/McDonalds/status/1455174998264586243">
                 McDonalds' Twitter account
+              </ExternalLink>
+            </li>
+            <li>
+              <span>"Melania's Vision" NFT from </span>
+              <ExternalLink href="https://decrypt.co/88551/solana-labs-distances-itself-melania-trump-nft">
+                Decrypt
               </ExternalLink>
             </li>
             <li>
