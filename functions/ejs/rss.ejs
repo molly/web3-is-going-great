@@ -30,11 +30,11 @@
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <% if (entry.image){%><img
-          src="<%= storageUrlPrefix %>/<%= entry.image.src %>"
+          src="<%= storageUrlPrefix %>/entryAssets/<%= entry.image.src %>"
           alt="<%= entry.image.alt %>"
           style="max-width: 300px"
         /><% } %>
-        <%- entry.body %>
+        <p><%- entry.body %></p>
         <ul><% entry.links.forEach(function (link){ %>
             <li>
               <a href="<%= link.href%>">
