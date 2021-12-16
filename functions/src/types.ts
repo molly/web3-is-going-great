@@ -37,6 +37,7 @@ export type Entry = {
   color?: string;
   faicon?: string;
   icon?: string;
+  scamTotal?: number;
   dateString?: string;
 };
 

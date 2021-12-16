@@ -12,6 +12,7 @@ import Entry from "../timeline/Entry";
 import Loader from "../timeline/Loader";
 import Error from "../shared/Error";
 import Footer from "../shared/Footer";
+import ScamTotal from "../timeline/ScamTotal";
 
 const SMALL_BREAKPOINT = 414;
 const MID_BREAKPOINT = 768;
@@ -73,6 +74,8 @@ export default function Timeline() {
     return true;
   }, [data]);
 
+  const [currentRunningScamTotal, setCurrentRunningScamTotal] = useState(0);
+
   const renderScrollSentinel = () => (
     <InView
       threshold={0}
@@ -87,6 +90,7 @@ export default function Timeline() {
   );
 
   const renderEntries = () => {
+    let runningScamTotal = 0;
     return (
       <article className="timeline">
         {data.pages.map((page, pageInd) => {
@@ -99,12 +103,19 @@ export default function Timeline() {
                 if (pageInd === 0 && entryInd === 0) {
                   className += " first";
                 }
+                if (entry.scamTotal) {
+                  runningScamTotal += entry.scamTotal;
+                }
+
                 const entryElement = (
                   <Entry
                     key={entry.id}
                     entry={entry}
                     className={className}
                     windowWidth={windowWidth}
+                    runningScamTotal={runningScamTotal}
+                    currentRunningScamTotal={currentRunningScamTotal}
+                    setCurrentRunningScamTotal={setCurrentRunningScamTotal}
                   />
                 );
 
@@ -144,6 +155,7 @@ export default function Timeline() {
       <div className="timeline-page content-wrapper" aria-busy={isLoading}>
         {renderBody()}
       </div>
+      <ScamTotal total={currentRunningScamTotal} />
       <Footer />
     </>
   );

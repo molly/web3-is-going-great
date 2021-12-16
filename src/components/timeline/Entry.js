@@ -6,8 +6,16 @@ import FILTERS from "../../constants/filters";
 import ICONS from "../../constants/icons";
 import { humanizeDate, isWrappedInParagraphTags } from "../../js/utilities";
 import { EntryPropType } from "../../js/entry";
+import InView from "react-intersection-observer";
 
-export default function Entry({ entry, className, windowWidth }) {
+export default function Entry({
+  entry,
+  className,
+  windowWidth,
+  runningScamTotal,
+  currentRunningScamTotal,
+  setCurrentRunningScamTotal,
+}) {
   const renderIcon = () => {
     if (entry.faicon) {
       return <i className={`fas fa-${entry.faicon}`} aria-hidden="true"></i>;
@@ -151,6 +159,7 @@ export default function Entry({ entry, className, windowWidth }) {
       <div className={`timeline-icon ${entry.color || "purple"}`}>
         {renderIcon()}
       </div>
+
       <div className="timeline-description">
         <span className="timestamp">
           <time dateTime={entry.date}>{humanizeDate(entry.date)}</time>
@@ -161,7 +170,17 @@ export default function Entry({ entry, className, windowWidth }) {
         {renderImage()}
         {renderBody()}
         {renderLinks()}
-        <div className="clearfix">{renderTags()}</div>
+        <InView
+          className="clearFix"
+          threshold={1}
+          onChange={(inView) => {
+            if (inView && runningScamTotal !== currentRunningScamTotal) {
+              setCurrentRunningScamTotal(runningScamTotal);
+            }
+          }}
+        >
+          {renderTags()}
+        </InView>
       </div>
     </div>
   );
@@ -171,4 +190,7 @@ Entry.propTypes = {
   className: PropTypes.string,
   entry: EntryPropType,
   windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
+  runningScamTotal: PropTypes.number.isRequired,
+  currentRunningScamTotal: PropTypes.number.isRequired,
+  setCurrentRunningScamTotal: PropTypes.func.isRequired,
 };

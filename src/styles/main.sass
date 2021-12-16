@@ -311,6 +311,39 @@ dt
   span
     margin-top: 20px
 
+.grift-counter
+  position: fixed
+  right: 0
+  bottom: 10px
+  z-index: 5
+  box-sizing: content-box
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4)
+  border-top: 16px solid #0000
+  border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.png);
+  border-image-slice: 16 0
+  border-image-repeat: repeat
+
+  > div
+    background-color: $accent
+    font-family: $display-font
+    color: $title-color
+    padding: 5px 10px
+
+  &.collapsed
+    span
+      display: none
+
+  span
+    margin-left: 10px
+    vertical-align: bottom
+
+  button
+    cursor: pointer
+    background-color: transparent
+    color: $title-color
+    border: 0
+    padding: 0
+
 /* ICON COLORS */
 .timeline-icon
   @each $name, $color in $icon-colors

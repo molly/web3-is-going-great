@@ -13,6 +13,7 @@ export const EMPTY_ENTRY = {
   links: [{ linkText: "", href: "", extraText: "" }],
   title: "",
   image: { src: "", alt: "", caption: "" },
+  scamTotal: 0,
 };
 
 export const LinkFieldPropType = PropTypes.shape({
@@ -41,6 +42,7 @@ export const EntryPropType = PropTypes.shape({
   }),
   body: PropTypes.string.isRequired,
   links: PropTypes.arrayOf(LinkFieldPropType),
+  scamTotal: PropTypes.number,
 });
 
 export const trimEmptyFields = (entry) => {
