@@ -111,6 +111,12 @@ export default function WhatIsWeb3() {
               <span> by Tim O'Reilly</span>
             </li>
           </ul>
+          <h3>Other</h3>
+          <ul>
+            <li>
+              <ExternalLink href="https://rekt.news/">Rekt.news</ExternalLink>
+            </li>
+          </ul>
         </article>
       </div>
       <Footer />

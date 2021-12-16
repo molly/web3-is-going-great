@@ -15,10 +15,7 @@ export default function Attribution() {
       <BackBar />
       <div className="content-wrapper">
         <article className="generic-page">
-          <p>
-            All text can be attributed to Molly White except where noted
-            otherwise.
-          </p>
+          <p>Most text was written by Molly White.</p>
           <h3>Additional text and entries contributed by</h3>
           <ul>
             <li>
@@ -31,7 +28,6 @@ export default function Attribution() {
                 <span>Alex Stamos</span>
               </ExternalLink>
             </li>
-            <li></li>
           </ul>
           <h3>Monkey illustration created from</h3>
           <ul>
