@@ -182,6 +182,15 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <ExternalLink href="https://www.nytimes.com/2021/03/11/arts/design/nft-auction-christies-beeple.html">
+                <span>"Everydays — The First 5000 Days"</span>
+              </ExternalLink>
+              <span>
+                {" "}
+                from <i>The New York Times</i>
+              </span>
+            </li>
+            <li>
               <ExternalLink href="https://opensea.io/assets/0x233a65b06ef83ccf2fd58832086dd782f9da1642/6946">
                 <span>EvolvedApe #6946</span>
               </ExternalLink>
@@ -228,6 +237,12 @@ export default function Attribution() {
             <li>
               <span>ON1 #7253 from </span>
               <ExternalLink href="https://opensea.io/assets/0x3bf2922f4520a8ba0c2efc3d2a1539678dad5e9d/7253">
+                <span>OpenSea</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <span>OpenSea logo from </span>
+              <ExternalLink href="https://opensea.io/">
                 <span>OpenSea</span>
               </ExternalLink>
             </li>
