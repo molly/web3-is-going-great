@@ -24,6 +24,11 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <ExternalLink href="https://github.com/VerifiedJoseph">
+                <span>Joseph</span>
+              </ExternalLink>
+            </li>
+            <li>
               <ExternalLink href="https://github.com/astamos">
                 <span>Alex Stamos</span>
               </ExternalLink>
