@@ -310,9 +310,21 @@ export default function Attribution() {
               <span> from Foundation</span>
             </li>
             <li>
+              <span>Roll logo from </span>
+              <ExternalLink href="https://tryroll.com/">
+                their website
+              </ExternalLink>
+            </li>
+            <li>
               <span>A Solana Towers NFT from an </span>
               <ExternalLink href="https://web.archive.org/web/20210928192615/https://solanatowers.com/">
                 <span>archived version of the project's website</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <span>SDOG chart from </span>
+              <ExternalLink href="https://cryptobriefing.com/olympus-dao-fork-snowdog-hit-by-90-crash/">
+                <i>Crypto Briefing</i>
               </ExternalLink>
             </li>
             <li>
@@ -385,6 +397,12 @@ export default function Attribution() {
               <span>Uranium Finance logo from </span>
               <ExternalLink href="https://twitter.com/uraniumfinance">
                 the platform's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
+              <span>USD Coin logo from </span>
+              <ExternalLink href="https://www.coinbase.com/price/usdc">
+                Coinbase
               </ExternalLink>
             </li>
             <li>
