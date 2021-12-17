@@ -181,6 +181,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>DeFi100 logo from </span>
+              <ExternalLink href="https://twitter.com/DEFI100">
+                the platform's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
               <span>DODO logo from </span>
               <ExternalLink href="https://dydx.exchange/">
                 the platform's website
@@ -352,6 +358,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>Thodex logo from </span>
+              <ExternalLink href="https://www.cryptoninjas.net/2020/12/28/turkish-crypto-exchange-thodex-now-open-to-users-worldwide">
+                CryptoNinjas
+              </ExternalLink>
+            </li>
+            <li>
               <span>Titan coin image from </span>
               <ExternalLink href="https://coinmarketcap.com/currencies/titan-coin/">
                 <span>CoinMarketCap</span>
@@ -368,6 +380,12 @@ export default function Attribution() {
                 <span>Ubisoft's "Wolf Enhanced Helmet A" NFT</span>
               </ExternalLink>
               <span> from Kotaku AU</span>
+            </li>
+            <li>
+              <span>Uranium Finance logo from </span>
+              <ExternalLink href="https://twitter.com/uraniumfinance">
+                the platform's Twitter account
+              </ExternalLink>
             </li>
             <li>
               <span>

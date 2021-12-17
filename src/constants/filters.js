@@ -16,6 +16,7 @@ const FILTERS = {
     nft: "NFT",
   },
   blockchain: {
+    avalanche: "Avalanche",
     bitcoin: "Bitcoin",
     bsc: "BSC",
     ethereum: "Ethereum",
