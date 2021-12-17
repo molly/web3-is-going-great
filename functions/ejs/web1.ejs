@@ -88,9 +88,11 @@
       <% entries.forEach(function (entry) { %>
       <div class="timeline-entry" style="margin-bottom: 50px">
         <div class="timeline-description">
-          <span class="timestamp"
-            ><time datetime="2021-12-14"><%= entry.dateString %></time></span
-          >
+          <span class="timestamp">
+            <a id="<%= entry.id %>"></a>
+            <time datetime="2021-12-14"><%= entry.dateString %></time>
+            </span>
+          </a>
           <h2>
             <span><%- entry.title %></span>
           </h2>
@@ -115,8 +117,7 @@
                   </div>
                   <% } %>
                   <div class="tag-group-right">
-                    <% if (entry.filters.blockchain &&
-                    entry.filters.blockchain.length) { %>
+                    <% if (entry.filters.blockchain && entry.filters.blockchain.length) { %>
                     <div class="tag-list">
                       <span class="sr-only">Blockchain tags: </span
                       ><span

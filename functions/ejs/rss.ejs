@@ -26,7 +26,8 @@
     <title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><%- entry.title %></div></title>
     <published><%= entry.createdAt %></published>
     <updated><%= entry.updatedAt %></updated>
-    <id>https://web3isgoinggreat.com/<%= entry.id %></id>
+    <link rel="alternate">https://web3isgoinggreat.com/web1#<%= entry.id %></link> 
+    <id>https://web3isgoinggreat.com/web1#<%= entry.id %></id>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <% if (entry.image){%><img
