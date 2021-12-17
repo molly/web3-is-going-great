@@ -322,6 +322,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>S.T.A.L.K.E.R. 2 artwork from </span>
+              <ExternalLink href="https://twitter.com/stalker_thegame">
+                <span>the game's Twitter account</span>
+              </ExternalLink>
+            </li>
+            <li>
               <span>Stan Lee NFT from </span>
               <ExternalLink href="https://orangecomet.com/chakra/">
                 <span>Orange Comet</span>
