@@ -1,7 +1,10 @@
-import React, { useCallback, useMemo, useState, useEffect } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { InView } from "react-intersection-observer";
-import useGA from "../../js/useGA";
+
+import useGA from "../../js/hooks/useGA";
+import useGetIdFromQuery from "../../js/hooks/useGetIdFromQuery";
+import useWindowWidth from "../../js/hooks/useWindowWidth";
 
 import { getEntries } from "../../js/functions";
 import { EMPTY_FILTERS_STATE } from "../../constants/filters";
@@ -14,42 +17,18 @@ import Error from "../shared/Error";
 import Footer from "../shared/Footer";
 import ScamTotal from "../timeline/ScamTotal";
 
-const SMALL_BREAKPOINT = 414;
-const MID_BREAKPOINT = 768;
-
-const getWindowWidth = (px) => {
-  if (px < SMALL_BREAKPOINT) {
-    return "sm";
-  } else if (px < MID_BREAKPOINT) {
-    return "md";
-  }
-  return "lg";
-};
-
 export default function Timeline() {
   useGA();
-  const [windowWidth, setWindowWidth] = useState(
-    getWindowWidth(window.innerWidth)
-  );
-
-  const handleResize = useCallback(() => {
-    setWindowWidth(getWindowWidth(window.innerWidth));
-  }, [setWindowWidth]);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [handleResize]);
+  const windowWidth = useWindowWidth();
+  const startAtId = useGetIdFromQuery();
 
   const [filters, setFilters] = useState(EMPTY_FILTERS_STATE);
 
   const getFilteredEntries = useCallback(
     ({ pageParam = null }) => {
-      return getEntries({ ...filters, cursor: pageParam });
+      return getEntries({ ...filters, cursor: pageParam, startAtId });
     },
-    [filters]
+    [filters, startAtId]
   );
 
   const { data, fetchNextPage, isFetching, isLoading, isError } =
@@ -116,6 +95,7 @@ export default function Timeline() {
                     runningScamTotal={runningScamTotal}
                     currentRunningScamTotal={currentRunningScamTotal}
                     setCurrentRunningScamTotal={setCurrentRunningScamTotal}
+                    shouldScrollToElement={entry.id === startAtId}
                   />
                 );
 
@@ -155,7 +135,7 @@ export default function Timeline() {
       <div className="timeline-page content-wrapper" aria-busy={isLoading}>
         {renderBody()}
       </div>
-      <ScamTotal total={currentRunningScamTotal} />
+      {!startAtId && <ScamTotal total={currentRunningScamTotal} />}
       <Footer />
     </>
   );

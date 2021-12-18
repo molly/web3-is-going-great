@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 import { STORAGE_URL } from "../../constants/urls";
@@ -15,7 +15,15 @@ export default function Entry({
   runningScamTotal,
   currentRunningScamTotal,
   setCurrentRunningScamTotal,
+  shouldScrollToElement,
 }) {
+  const ref = useRef();
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollIntoView();
+    }
+  }, [ref]);
+
   const renderIcon = () => {
     if (entry.faicon) {
       return <i className={`fas fa-${entry.faicon}`} aria-hidden="true"></i>;
@@ -155,7 +163,10 @@ export default function Entry({
   };
 
   return (
-    <div className={`timeline-entry ${className}`}>
+    <div
+      className={`timeline-entry ${className}`}
+      ref={shouldScrollToElement ? ref : null}
+    >
       <div className={`timeline-icon ${entry.color || "purple"}`}>
         {renderIcon()}
       </div>
@@ -193,4 +204,5 @@ Entry.propTypes = {
   runningScamTotal: PropTypes.number.isRequired,
   currentRunningScamTotal: PropTypes.number.isRequired,
   setCurrentRunningScamTotal: PropTypes.func.isRequired,
+  shouldScrollToElement: PropTypes.bool.isRequired,
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import useGA from "../../js/useGA";
+import useGA from "../../js/hooks/useGA";
 import { Link } from "react-router-dom";
 
 import BackBar from "../shared/BackBar";
