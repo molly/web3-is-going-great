@@ -382,6 +382,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <ExternalLink href="https://solanart.io/search/?token=9tB9mUpxJQ8bSrJvve98RUHNx3x259QZs1jazHX9UrAt">
+                <span>TROLLz #5372</span>
+              </ExternalLink>
+              <span> from Solanart</span>
+            </li>
+            <li>
               <span>Turtledex logo from </span>
               <ExternalLink href="https://twitter.com/Turtledex1">
                 <span>Twitter</span>
