@@ -238,6 +238,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>Jaxson Davidson tweet screenshot from </span>
+              <ExternalLink href="https://www.reddit.com/r/pcmasterrace/comments/rirt09/gpu_shortage_they_say/">
+                Reddit
+              </ExternalLink>
+            </li>
+            <li>
               <span>
                 <i>Legacy logo</i> from{" "}
               </span>
