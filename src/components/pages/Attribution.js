@@ -193,6 +193,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <ExternalLink href="https://opensea.io/assets/0x8a90cab2b38dba80c64b7734e58ee1db38b8992e/1961">
+                <span>Doodle #1961</span>
+              </ExternalLink>
+              <span> from OpenSea</span>
+            </li>
+            <li>
               <span>dYdX logo from </span>
               <ExternalLink href="https://twitter.com/BreederDodo">
                 the platform's Twitter account

@@ -2,6 +2,7 @@ const FILTERS = {
   theme: {
     badIdea: "Bad idea",
     bug: "Bug",
+    bummer: "Bummer",
     fakeNews: "Fake news",
     hack: "Hack or scam",
     hmm: "Hmm",
