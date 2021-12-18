@@ -116,6 +116,18 @@ export default function WhatIsWeb3() {
               </ExternalLink>
               <span> by Robin Sloan</span>
             </li>
+            <li>
+              <ExternalLink href="https://www.usenix.org/publications/loginonline/web3-fraud">
+                "The Web3 Fraud"
+              </ExternalLink>
+              <span> by Nicholas Weaver</span>
+            </li>
+            <li>
+              <ExternalLink href="https://tante.cc/2021/12/17/the-third-web/">
+                "The Third Web"
+              </ExternalLink>
+              <span> by tante</span>
+            </li>
           </ul>
           <h3>Other</h3>
           <ul>
