@@ -5,8 +5,6 @@ import ReactGA from "react-ga";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { QueryClient, QueryClientProvider } from "react-query";
-import { getEntries } from "./js/functions";
-import { EMPTY_FILTERS_STATE } from "./constants/filters";
 
 import Timeline from "./components/pages/Timeline";
 import About from "./components/pages/About";
@@ -25,9 +23,6 @@ function App() {
   });
 
   ReactGA.initialize("UA-215114522-1");
-  queryClient.prefetchInfiniteQuery(["entries", EMPTY_FILTERS_STATE], () =>
-    getEntries()
-  );
 
   return (
     <QueryClientProvider client={queryClient}>

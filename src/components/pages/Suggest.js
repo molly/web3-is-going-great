@@ -1,5 +1,5 @@
 import React from "react";
-import useGA from "../../js/useGA";
+import useGA from "../../js/hooks/useGA";
 import BackBar from "../shared/BackBar";
 import ExternalLink from "../shared/ExternalLink";
 import Footer from "../shared/Footer";

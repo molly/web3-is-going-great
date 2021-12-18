@@ -1,6 +1,7 @@
 export type EntryQuery = {
   limit?: number;
   cursor?: string;
+  startAtId?: string;
   theme: string[];
   tech?: string[];
   blockchain?: string[];

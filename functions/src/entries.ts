@@ -32,14 +32,14 @@ export const getEntries = functions.https.onCall(async (data?: EntryQuery) => {
   }
 
   let snapshot: any;
-  if (data && data.cursor) {
-    snapshot = await query
-      .startAfter(data.cursor)
-      .limit(limit + 1)
-      .get();
+  if (data?.cursor) {
+    snapshot = await query.startAfter(data.cursor);
+  } else if (data?.startAtId) {
+    snapshot = await query.startAt(data.startAtId);
   } else {
-    snapshot = await query.limit(limit + 1).get();
+    snapshot = query;
   }
+  snapshot = await snapshot.limit(limit + 1).get();
 
   const entries: object[] = [];
   let hasMore = false;
