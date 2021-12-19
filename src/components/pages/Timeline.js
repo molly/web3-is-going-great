@@ -30,7 +30,7 @@ export default function Timeline() {
     [filters, startAtId]
   );
 
-  const { data, fetchNextPage, isFetching, isLoading, isError } =
+  const { data, hasNextPage, fetchNextPage, isFetching, isLoading, isError } =
     useInfiniteQuery(["entries", filters], getFilteredEntries, {
       getNextPageParam: (lastPage, pages) => {
         if (!lastPage) {
@@ -44,13 +44,6 @@ export default function Timeline() {
         return lastPage.entries[lastPage.entries.length - 1]._key;
       },
     });
-
-  const hasMoreEntries = useMemo(() => {
-    if (data && data.pages) {
-      return data.pages[data.pages.length - 1].hasMore;
-    }
-    return true;
-  }, [data]);
 
   const [currentRunningScamTotal, setCurrentRunningScamTotal] = useState(0);
 
@@ -134,7 +127,7 @@ export default function Timeline() {
               </React.Fragment>
             );
           })}
-          {hasMoreEntries && <Loader />}
+          {hasNextPage && <Loader />}
         </article>
       </>
     );
