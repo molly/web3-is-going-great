@@ -94,6 +94,7 @@ div.content-wrapper
   min-height: calc(100vh - 215px)
 
   &.timeline-page
+    display: block
     min-height: calc(100vh - 340px)
 
 .timeline
@@ -201,7 +202,7 @@ div.content-wrapper
     .note
       color: $timestamp-color
 
-  h2
+  h2, h2 > button
     font-family: $body-font, serif
     font-weight: 900
     line-height: 110%
@@ -219,6 +220,35 @@ div.content-wrapper
       a
         visibility: visible
         opacity: 0.5
+
+  h2 button
+    // Resets
+    -webkit-appearance: none
+    -moz-appearance: none
+    background: transparent
+    border: none
+    text-align: left
+    padding: 0
+    cursor: pointer
+
+    .fa-link
+      visibility: hidden
+      margin-left: 10px
+      color: $timestamp-color
+
+    &:hover .fa-link
+      visibility: visible
+
+    .permalink-popup
+      font-family: $body-font
+      font-size: 12px
+      font-weight: normal
+      color: $timestamp-color
+      display: inline-block
+      white-space: nowrap
+      position: absolute
+      padding: 0px 5px
+      margin-left: 5px
 
   p, ul
     margin: 5px 0 10px 0
@@ -346,6 +376,30 @@ dt
     border: 0
     padding: 0
 
+.timeline.dots
+  padding-bottom: 20px
+
+  &::before
+    background: linear-gradient(180deg, $timeline-line-color 25%, $main-background 25%, $main-background 50%, $timeline-line-color 50%, $timeline-line-color 75%, $main-background 75%, $main-background 100%)
+    background-size: 100% 16px
+
+.load-top
+  display: flex
+  justify-content: center
+
+  button
+    margin: 20px 0
+    background-color: $accent
+    font-family: $display-font
+    color: $title-color
+    padding: 10px
+    border: 0
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.4)
+    cursor: pointer
+
+    &:active, &:hover
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4)
+
 /* ICON COLORS */
 .timeline-icon
   @each $name, $color in $icon-colors
@@ -431,6 +485,12 @@ dt
   .timeline-description
     width: 90%
 
+  .load-top
+    justify-content: start
+
+    button
+      margin-left: 5%
+
 @media only screen and (max-width: 414px)
   body
     font-size: 14px
@@ -497,6 +557,9 @@ dt
     i
       font-size: 15px
       line-height: 30px
+
+  .load-top button
+    margin-left: 4px
 
 // DARK MODE
 @media (prefers-color-scheme: dark)

@@ -1,7 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { useInfiniteQuery } from "react-query";
-import { InView } from "react-intersection-observer";
-
 import useGA from "../../js/hooks/useGA";
 import useGetIdFromQuery from "../../js/hooks/useGetIdFromQuery";
 import useWindowWidth from "../../js/hooks/useWindowWidth";
@@ -9,6 +7,7 @@ import useWindowWidth from "../../js/hooks/useWindowWidth";
 import { getEntries } from "../../js/functions";
 import { EMPTY_FILTERS_STATE } from "../../constants/filters";
 
+import { InView } from "react-intersection-observer";
 import Header from "../timeline/Header";
 import Filters from "../timeline/Filters";
 import Entry from "../timeline/Entry";
@@ -68,54 +67,76 @@ export default function Timeline() {
     </InView>
   );
 
+  const renderGoToTop = () => {
+    return (
+      <>
+        <div className="load-top">
+          <button
+            onClick={() => (window.location.href = window.location.origin)}
+          >
+            {filters.sort === "Descending" ? (
+              <span>Load more recent</span>
+            ) : (
+              <span>Load older</span>
+            )}
+          </button>
+        </div>
+        <div className="timeline dots" />
+      </>
+    );
+  };
+
   const renderEntries = () => {
     let runningScamTotal = 0;
     return (
-      <article className="timeline">
-        {data.pages.map((page, pageInd) => {
-          const isLastPage = pageInd === data.pages.length - 1;
-          return (
-            <React.Fragment key={`page-${pageInd}`}>
-              {page.entries.map((entry, entryInd) => {
-                const isLastEntry = entryInd === page.entries.length - 1;
-                let className = entryInd % 2 === 0 ? "even" : "odd";
-                if (pageInd === 0 && entryInd === 0) {
-                  className += " first";
-                }
-                if (entry.scamTotal) {
-                  runningScamTotal += entry.scamTotal;
-                }
+      <>
+        {startAtId && renderGoToTop()}
+        <article className="timeline">
+          {data.pages.map((page, pageInd) => {
+            const isLastPage = pageInd === data.pages.length - 1;
+            return (
+              <React.Fragment key={`page-${pageInd}`}>
+                {page.entries.map((entry, entryInd) => {
+                  const isLastEntry = entryInd === page.entries.length - 1;
+                  let className = entryInd % 2 === 0 ? "even" : "odd";
+                  if (pageInd === 0 && entryInd === 0) {
+                    className += " first";
+                  }
+                  if (entry.scamTotal) {
+                    runningScamTotal += entry.scamTotal;
+                  }
 
-                const entryElement = (
-                  <Entry
-                    key={entry.id}
-                    entry={entry}
-                    className={className}
-                    windowWidth={windowWidth}
-                    runningScamTotal={runningScamTotal}
-                    currentRunningScamTotal={currentRunningScamTotal}
-                    setCurrentRunningScamTotal={setCurrentRunningScamTotal}
-                    shouldScrollToElement={entry.id === startAtId}
-                  />
-                );
-
-                // Render the scroll sentinel above the last entry in the last page of results so we can begin loading
-                // the next page when it comes into view.
-                if (isLastPage && isLastEntry) {
-                  return (
-                    <React.Fragment key={`${entry.id}-withSentinel`}>
-                      {renderScrollSentinel()}
-                      {entryElement}
-                    </React.Fragment>
+                  const entryElement = (
+                    <Entry
+                      key={entry.id}
+                      entry={entry}
+                      className={className}
+                      windowWidth={windowWidth}
+                      runningScamTotal={runningScamTotal}
+                      currentRunningScamTotal={currentRunningScamTotal}
+                      setCurrentRunningScamTotal={setCurrentRunningScamTotal}
+                      shouldScrollToElement={entry.id === startAtId}
+                    />
                   );
-                }
-                return entryElement;
-              })}
-            </React.Fragment>
-          );
-        })}
-        {hasMoreEntries && <Loader />}
-      </article>
+
+                  // Render the scroll sentinel above the last entry in the last page of results so we can begin loading
+                  // the next page when it comes into view.
+                  if (isLastPage && isLastEntry) {
+                    return (
+                      <React.Fragment key={`${entry.id}-withSentinel`}>
+                        {renderScrollSentinel()}
+                        {entryElement}
+                      </React.Fragment>
+                    );
+                  }
+                  return entryElement;
+                })}
+              </React.Fragment>
+            );
+          })}
+          {hasMoreEntries && <Loader />}
+        </article>
+      </>
     );
   };
 

@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
@@ -17,12 +18,25 @@ export default function Entry({
   setCurrentRunningScamTotal,
   shouldScrollToElement,
 }) {
+  const navigate = useNavigate();
   const ref = useRef();
+
+  const [showCopiedPopup, setShowCopiedPopup] = useState(false);
+
   useEffect(() => {
     if (ref.current) {
       ref.current.scrollIntoView();
     }
   }, [ref]);
+
+  const permalink = () => {
+    navigate(`?id=${entry.id}`);
+    navigator.clipboard.writeText(window.location.href);
+    setShowCopiedPopup(true);
+    setTimeout(() => {
+      setShowCopiedPopup(false);
+    }, 1000);
+  };
 
   const renderIcon = () => {
     if (entry.faicon) {
@@ -176,7 +190,11 @@ export default function Entry({
           <time dateTime={entry.date}>{humanizeDate(entry.date)}</time>
         </span>
         <h2>
-          <span dangerouslySetInnerHTML={{ __html: entry.title }} />
+          <button onClick={() => permalink(entry.id)}>
+            <span dangerouslySetInnerHTML={{ __html: entry.title }} />
+            <i className="fas fa-link" aria-hidden={true} />
+            {showCopiedPopup && <div className="permalink-popup">Copied</div>}
+          </button>
         </h2>
         {renderImage()}
         {renderBody()}
