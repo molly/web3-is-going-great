@@ -28,7 +28,9 @@ export default function Entry({
   }, [ref]);
 
   const permalink = (id) => {
-    navigator.clipboard.writeText(window.location.href + `?id=${id}`);
+    const perma = window.location.origin + `?id=${id}`;
+    window.history.pushState(null, null, perma);
+    navigator.clipboard.writeText(perma);
     setShowCopiedPopup(true);
     setTimeout(() => {
       setShowCopiedPopup(false);
