@@ -152,7 +152,7 @@ export default function Timeline() {
   return (
     <>
       <Header windowWidth={windowWidth} />
-      <Filters filters={filters} setFilters={setFilters} />
+      {!startAtId && <Filters filters={filters} setFilters={setFilters} />}
       <div className="timeline-page content-wrapper" aria-busy={isLoading}>
         {renderBody()}
       </div>
