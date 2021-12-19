@@ -226,6 +226,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>Grim Finance logo from </span>
+              <ExternalLink href="https://twitter.com/financegrim">
+                the platform's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
               <ExternalLink href="https://solsea.io/nft/92g5SJy9CxJWmirMEkwEvYcMW9ajFAkwNqGotUsUvvbX">
                 <span>iconic 15</span>
               </ExternalLink>
