@@ -220,6 +220,12 @@ export default function Attribution() {
               <span> from OpenSea</span>
             </li>
             <li>
+              <span>Fame Lady #2269 from </span>
+              <ExternalLink href="https://opensea.io/assets/0xf3e6dbbe461c6fa492cea7cb1f5c5ea660eb1b47/2269">
+                <span>OpenSea</span>
+              </ExternalLink>
+            </li>
+            <li>
               <span>Kickstarter logo</span>
               <ExternalLink href="https://www.kickstarter.com/">
                 <span> from their website</span>
