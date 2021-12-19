@@ -551,7 +551,7 @@ dt
     display: none
 
   .timeline-icon
-    width: 30px
+    widt: 30px
     height: 30px
     margin-left: -5px
     border-width: 2px
@@ -585,10 +585,11 @@ dt
 
   body,
   .timeline-description,
+  h2 button,
   .timeline-filter,
   .timeline-icon i,
   .attribution,
-  .etc
+  .etc,
     color: $dark-main-color
 
   .timeline-description a,
@@ -623,6 +624,9 @@ dt
     @each $name, $color in $icon-colors
       &.#{$name}
         background-color: darken($color, 20%)
+
+  .grift-counter
+    filter: brightness(60%)
 
   /* Arrows */
   .no-js .timeline-entry .timeline-description::after

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import useGA from "../../js/hooks/useGA";
 import useGetIdFromQuery from "../../js/hooks/useGetIdFromQuery";
