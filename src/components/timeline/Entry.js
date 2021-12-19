@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
 
 import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
@@ -18,7 +17,6 @@ export default function Entry({
   setCurrentRunningScamTotal,
   shouldScrollToElement,
 }) {
-  const navigate = useNavigate();
   const ref = useRef();
 
   const [showCopiedPopup, setShowCopiedPopup] = useState(false);
@@ -29,9 +27,8 @@ export default function Entry({
     }
   }, [ref]);
 
-  const permalink = () => {
-    navigate(`?id=${entry.id}`);
-    navigator.clipboard.writeText(window.location.href);
+  const permalink = (id) => {
+    navigator.clipboard.writeText(window.location.href + `?id=${id}`);
     setShowCopiedPopup(true);
     setTimeout(() => {
       setShowCopiedPopup(false);
