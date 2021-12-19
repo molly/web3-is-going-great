@@ -132,6 +132,12 @@ export default function WhatIsWeb3() {
           <h3>Other</h3>
           <ul>
             <li>
+              <ExternalLink href="https://davidgerard.co.uk/blockchain/">
+                "Attack of the 50 Foot Blockchain"
+              </ExternalLink>
+              <span> blog by David Gerard</span>
+            </li>
+            <li>
               <ExternalLink href="https://rekt.news/">Rekt.news</ExternalLink>
             </li>
           </ul>
