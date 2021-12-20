@@ -67,11 +67,7 @@ export default function Timeline() {
           <button
             onClick={() => (window.location.href = window.location.origin)}
           >
-            {filters.sort === "Descending" ? (
-              <span>Load more recent</span>
-            ) : (
-              <span>Load older</span>
-            )}
+            <span>Start from the top</span>
           </button>
         </div>
         <div className="timeline dots" />
