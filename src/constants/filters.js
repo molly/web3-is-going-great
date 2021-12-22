@@ -14,6 +14,7 @@ const FILTERS = {
     dao: "DAO",
     dapps: "dApps",
     defi: "DeFi",
+    metaverse: "metaverse",
     nft: "NFT",
   },
   blockchain: {

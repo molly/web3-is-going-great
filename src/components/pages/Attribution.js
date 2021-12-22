@@ -164,6 +164,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>Fae NFT from </span>
+              <ExternalLink href="https://cinder.io/">
+                Cinder's website
+              </ExternalLink>
+            </li>
+            <li>
               <span>C.R.E.A.M. Finance logo from </span>
               <ExternalLink href=" https://app.cream.finance/">
                 their website
