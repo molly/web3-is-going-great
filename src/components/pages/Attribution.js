@@ -448,6 +448,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>Visor Finance logo from </span>
+              <ExternalLink href="https://github.com/VisorFinance">
+                the platform's Github account
+              </ExternalLink>
+            </li>
+            <li>
               <span>
                 <i>Wolf Game</i> logo from{" "}
               </span>
