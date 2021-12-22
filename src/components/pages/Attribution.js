@@ -187,6 +187,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>DeviantArt Protect screenshot from </span>
+              <ExternalLink href="https://twitter.com/LiamRSharp/status/1471940531554959360">
+                Liam Sharp's Twitter
+              </ExternalLink>
+            </li>
+            <li>
               <span>DODO logo from </span>
               <ExternalLink href="https://dydx.exchange/">
                 the platform's website
@@ -289,6 +295,12 @@ export default function Attribution() {
               <span>"Monkey Jizz" logo from </span>
               <ExternalLink href="https://www.vice.com/en/article/n7nw4k/unbelievable-monkey-jizz-cryptocurrency-turns-out-to-be-a-scam">
                 Vice
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Monkey Kingdom NFT from </span>
+              <ExternalLink href="https://monkeykingdom.io">
+                the project website
               </ExternalLink>
             </li>
             <li>

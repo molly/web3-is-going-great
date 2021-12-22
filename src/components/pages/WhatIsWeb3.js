@@ -99,14 +99,8 @@ export default function WhatIsWeb3() {
               <span> by Stephen Diehl</span>
             </li>
             <li>
-              <ExternalLink href="https://yesterweb.org/no-to-web3/index.html">
-                <span>"Keep the web free, say no to Web3"</span>
-              </ExternalLink>
-              <span> by Yesterweb</span>
-            </li>
-            <li>
               <ExternalLink href="https://www.oreilly.com/radar/why-its-too-early-to-get-excited-about-web3/">
-                <span>"Why it’s too early to get excited about Web3"</span>
+                <span>"Why it's too early to get excited about Web3"</span>
               </ExternalLink>
               <span> by Tim O'Reilly</span>
             </li>
@@ -117,19 +111,25 @@ export default function WhatIsWeb3() {
               <span> by Robin Sloan</span>
             </li>
             <li>
+              <ExternalLink href="https://tante.cc/2021/12/17/the-third-web/">
+                "The Third Web"
+              </ExternalLink>
+              <span> by tante</span>
+            </li>
+            <li>
               <ExternalLink href="https://www.usenix.org/publications/loginonline/web3-fraud">
                 "The Web3 Fraud"
               </ExternalLink>
               <span> by Nicholas Weaver</span>
             </li>
             <li>
-              <ExternalLink href="https://tante.cc/2021/12/17/the-third-web/">
-                "The Third Web"
+              <ExternalLink href="https://yesterweb.org/no-to-web3/index.html">
+                <span>"Keep the web free, say no to Web3"</span>
               </ExternalLink>
-              <span> by tante</span>
+              <span> by Yesterweb</span>
             </li>
           </ul>
-          <h3>Other</h3>
+          <h3>Other resources</h3>
           <ul>
             <li>
               <ExternalLink href="https://davidgerard.co.uk/blockchain/">
@@ -139,6 +139,13 @@ export default function WhatIsWeb3() {
             </li>
             <li>
               <ExternalLink href="https://rekt.news/">Rekt.news</ExternalLink>
+            </li>
+            <li>
+              <span>A list of some really thoughtful </span>
+              <ExternalLink href="https://twitter.com/i/lists/1473337241594388495">
+                Web3 and crypto skeptics
+              </ExternalLink>
+              <span> on Twitter</span>
             </li>
           </ul>
         </article>

@@ -199,7 +199,7 @@ export default function Entry({
         {renderBody()}
         {renderLinks()}
         <InView
-          className="clearFix"
+          className="clearfix"
           threshold={1}
           onChange={(inView) => {
             if (inView && runningScamTotal !== currentRunningScamTotal) {
