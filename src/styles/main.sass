@@ -22,10 +22,15 @@ body
 *
   box-sizing: border-box
 
-h1
+h1 a
   font-family: $display-font, serif
   margin-top: 0
   color: $title-color
+  text-decoration: none
+
+  &:hover,
+  &:focus
+    text-decoration: none
 
 a
   text-decoration: none
@@ -55,6 +60,11 @@ footer.page-footer
     line-height: 120%
     color: #eee
 
+header.page-header .header-content,
+footer.page-footer
+  h1 a
+    border-bottom: none
+
   a
     border-bottom: 1px dashed lighten($header-footer-background, 20%)
     color: $header-footer-link-color
@@ -68,9 +78,11 @@ header.page-header.timeline-page
     flex-wrap: nowrap
     justify-content: space-between
 
+  a.logo-image-link, img.logo
+    max-height: 300px
+
   img.logo
     margin-left: -65px
-    max-height: 300px
     object-fit: contain
 
   .header-content
@@ -570,18 +582,23 @@ dt
     background-color: $dark-main-background
 
   header.page-header,
+  header.page-header .header-content,
   footer.page-footer
     background-color: $dark-header-footer-background
 
-    h1, p, ul
+    h1, h1 a, p, ul
       color: $dark-header-footer-body-color
 
+    img.logo
+      filter: brightness(50%)
+
+  header.page-header .header-content
     a
       border-bottom: 1px dashed lighten($header-footer-background, 20%)
       color: $dark-header-footer-link-color
 
-    img.logo
-      filter: brightness(50%)
+  header.page-header.timeline-page li:not(:first-child):before
+    color: $dark-header-footer-body-color
 
   body,
   .timeline-description,

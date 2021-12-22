@@ -28,31 +28,31 @@ export default function Header({ windowWidth }) {
     </ul>
   );
 
+  const renderImage = () => (
+    <a href="https://web3isgoinggreat.com/" className="logo-image-link">
+      <img
+        className="logo"
+        src={`${STORAGE_URL}/monkey.png`}
+        alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
+      />
+    </a>
+  );
+
   const renderMobileImageAndLinks = () => (
     <div className="mobile-image-and-links">
       {renderLinks()}
-      <div className="mobile-image-wrapper">
-        <img
-          className="logo"
-          src={`${STORAGE_URL}/monkey.png`}
-          alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
-        />
-      </div>
+      <div className="mobile-image-wrapper">{renderImage()}</div>
     </div>
   );
 
   return (
     <header className="timeline-page page-header">
       <div className="constrain-width">
-        {windowWidth !== "sm" && (
-          <img
-            className="logo"
-            src={`${STORAGE_URL}/monkey.png`}
-            alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
-          />
-        )}
+        {windowWidth !== "sm" && renderImage()}
         <div className="header-content">
-          <h1>Web3 is going just great</h1>
+          <h1>
+            <a href="https://web3isgoinggreat.com/">Web3 is going just great</a>
+          </h1>
           <p>
             ...and is definitely not an enormous grift that's pouring lighter
             fluid on our already-smoldering planet.
