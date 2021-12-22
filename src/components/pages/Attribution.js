@@ -140,6 +140,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>Bob Ross NFT from </span>
+              <ExternalLink href="https://digital.funko.com/drop/15/bob-ross-series-1/catalog">
+                <span>Funko</span>
+              </ExternalLink>
+            </li>
+            <li>
               <span>Bored Ape #648 from </span>
               <ExternalLink href="https://opensea.io/assets/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/648">
                 <span>OpenSea</span>

@@ -26,6 +26,7 @@ const FILTERS = {
     litecoin: "Litecoin",
     polygon: "Polygon",
     solana: "Solana",
+    wax: "WAX",
   },
 };
 
