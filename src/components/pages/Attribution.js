@@ -238,6 +238,12 @@ export default function Attribution() {
               <span> from OpenSea</span>
             </li>
             <li>
+              <span>Faces of Open Source promo image from </span>
+              <ExternalLink href="https://www.facesofopensource.com/">
+                <span>the project's website</span>
+              </ExternalLink>
+            </li>
+            <li>
               <span>Fame Lady #2269 from </span>
               <ExternalLink href="https://opensea.io/assets/0xf3e6dbbe461c6fa492cea7cb1f5c5ea660eb1b47/2269">
                 <span>OpenSea</span>
@@ -301,6 +307,12 @@ export default function Attribution() {
               <span>"Melania's Vision" NFT from </span>
               <ExternalLink href="https://decrypt.co/88551/solana-labs-distances-itself-melania-trump-nft">
                 Decrypt
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Mirror polls from </span>
+              <ExternalLink href="https://mirrorprotocol.app/#/gov">
+                the platform's governance page
               </ExternalLink>
             </li>
             <li>

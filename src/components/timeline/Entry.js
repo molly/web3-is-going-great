@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import { STORAGE_URL } from "../../constants/urls";
@@ -20,12 +20,26 @@ export default function Entry({
   const ref = useRef();
 
   const [showCopiedPopup, setShowCopiedPopup] = useState(false);
+  const [showLightbox, setShowLightbox] = useState(false);
 
   useEffect(() => {
     if (ref.current) {
       ref.current.scrollIntoView();
     }
   }, [ref]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", onEsc);
+    return () => {
+      document.removeEventListener("keydown", onEsc);
+    };
+  });
+
+  const onEsc = useCallback((event) => {
+    if (event.keyCode === 27) {
+      setShowLightbox(false);
+    }
+  }, []);
 
   const permalink = (id) => {
     const perma = window.location.origin + `?id=${id}`;
@@ -54,25 +68,18 @@ export default function Entry({
     return null;
   };
 
-  const renderImageElement = () => {
+  const renderImageElement = (onClick = null) => {
     if (!entry.image) {
       return null;
     }
 
-    const imageEl = (
+    return (
       <img
         src={`${STORAGE_URL}/entryAssets/${entry.image.src}`}
         alt={entry.image.alt}
+        onClick={onClick}
       />
     );
-    if (entry.image.link) {
-      return (
-        <a href={entry.image.link} target="_blank" rel="noreferrer">
-          {imageEl}
-        </a>
-      );
-    }
-    return imageEl;
   };
 
   const renderImageCaption = () => {
@@ -100,12 +107,27 @@ export default function Entry({
     if (entry.image && (windowWidth !== "sm" || !isLogo)) {
       return (
         <div className="captioned-image image-right">
-          {renderImageElement()}
+          {renderImageElement(() => setShowLightbox(true))}
           {renderImageCaption()}
         </div>
       );
     }
     return null;
+  };
+
+  const renderLightbox = () => {
+    if (entry.image && showLightbox) {
+      return (
+        <div className="lightbox-container">
+          <button onClick={() => setShowLightbox(false)}>
+            <i className="fas fa-xmark"></i>
+            <span className="sr-only">Close lightbox</span>
+          </button>
+          <div className="image-wrapper">{renderImageElement()}</div>
+          <div className="caption-wrapper">{renderImageCaption()}</div>
+        </div>
+      );
+    }
   };
 
   const renderBody = () => {
@@ -195,7 +217,7 @@ export default function Entry({
             {showCopiedPopup && <div className="permalink-popup">Copied</div>}
           </button>
         </h2>
-        {renderImage()}
+        {renderImage(true)}
         {renderBody()}
         {renderLinks()}
         <InView
@@ -210,6 +232,7 @@ export default function Entry({
           {renderTags()}
         </InView>
       </div>
+      {renderLightbox()}
     </div>
   );
 }

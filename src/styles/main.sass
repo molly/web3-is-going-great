@@ -22,6 +22,16 @@ body
 *
   box-sizing: border-box
 
+button
+  // Resets
+  -webkit-appearance: none
+  -moz-appearance: none
+  background: transparent
+  border: none
+  text-align: left
+  padding: 0
+  cursor: pointer
+
 h1 a
   font-family: $display-font, serif
   margin-top: 0
@@ -234,15 +244,6 @@ div.content-wrapper
         opacity: 0.5
 
   h2 button
-    // Resets
-    -webkit-appearance: none
-    -moz-appearance: none
-    background: transparent
-    border: none
-    text-align: left
-    padding: 0
-    cursor: pointer
-
     .fa-link
       visibility: hidden
       margin-left: 10px
@@ -415,6 +416,38 @@ dt
     &:active, &:hover
       box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4)
 
+.lightbox-container
+  position: fixed
+  top: 5%
+  left: 50%
+  transform: translateX(-50%)
+  z-index: 6
+  padding: 5px 20px 20px 20px
+  max-width: 90%
+  max-height: 90%
+  margin: 0 auto
+  background-color: $card-background
+  display: flex
+  flex-direction: column
+  align-items: center
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4)
+
+  img
+    display: block
+    max-width: 100%
+    max-height: 100%
+
+  .image-wrapper
+    flex: 1
+    height: 100px
+
+  .caption-wrapper
+    flex: 1
+    text-align: center
+
+  button
+    align-self: flex-end
+
 /* ICON COLORS */
 .timeline-icon
   @each $name, $color in $icon-colors
@@ -505,6 +538,9 @@ dt
 
     button
       margin-left: 5%
+
+  .lightbox-container
+    width: 90%
 
 @media only screen and (max-width: 414px)
   body
