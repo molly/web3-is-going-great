@@ -128,6 +128,12 @@ export default function Attribution() {
           <h3>Images</h3>
           <ul>
             <li>
+              <span>8ight Finance logo from </span>
+              <ExternalLink href="https://twitter.com/8ight_finance">
+                <span>the project's Twitter account</span>
+              </ExternalLink>
+            </li>
+            <li>
               <span>AnubisDAO art from </span>
               <ExternalLink href="https://twitter.com/anubisdao">
                 <span>the project's Twitter account</span>
@@ -140,9 +146,27 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>bEarn Fi logo from </span>
+              <ExternalLink href="https://twitter.com/BearnFi">
+                the organization's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Belt Finance logo from </span>
+              <ExternalLink href="https://twitter.com/BELT_Finance">
+                the organization's Twitter account
+              </ExternalLink>
+            </li>
+            <li>
               <span>Bob Ross NFT from </span>
               <ExternalLink href="https://digital.funko.com/drop/15/bob-ross-series-1/catalog">
                 <span>Funko</span>
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Bogged Finance logo from </span>
+              <ExternalLink href="https://www.bogged.finance/">
+                the organization's website
               </ExternalLink>
             </li>
             <li>
