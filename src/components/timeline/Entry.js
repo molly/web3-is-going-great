@@ -78,6 +78,7 @@ export default function Entry({
         src={`${STORAGE_URL}/entryAssets/${entry.image.src}`}
         alt={entry.image.alt}
         onClick={onClick}
+        className={onClick ? "clickable" : null}
       />
     );
   };

@@ -298,6 +298,12 @@ export default function Attribution() {
               </ExternalLink>
             </li>
             <li>
+              <span>CipherPunks NFT from </span>
+              <ExternalLink href="https://opensea.io/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/87079715147692608999806607216135073697858708246143443185687690914171289862154/">
+                <span>OpenSea</span>
+              </ExternalLink>
+            </li>
+            <li>
               <span>McRib NFT image from </span>
               <ExternalLink href="https://twitter.com/McDonalds/status/1455174998264586243">
                 McDonalds' Twitter account
@@ -313,6 +319,12 @@ export default function Attribution() {
               <span>Mirror polls from </span>
               <ExternalLink href="https://mirrorprotocol.app/#/gov">
                 the platform's governance page
+              </ExternalLink>
+            </li>
+            <li>
+              <span>Miss Universe NFT from </span>
+              <ExternalLink href="https://wdny.io/miss-universe/">
+                <span>WDNY.io</span>
               </ExternalLink>
             </li>
             <li>
