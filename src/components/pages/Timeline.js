@@ -11,7 +11,7 @@ import { InView } from "react-intersection-observer";
 import Header from "../timeline/Header";
 import Filters from "../timeline/Filters";
 import Entry from "../timeline/Entry";
-import Loader from "../timeline/Loader";
+import Loader from "../shared/Loader";
 import Error from "../shared/Error";
 import Footer from "../shared/Footer";
 import ScamTotal from "../timeline/ScamTotal";

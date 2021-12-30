@@ -46,3 +46,8 @@ export interface RssEntry extends Entry {
   createdAt: string | null;
   updatedAt: string | null;
 }
+
+export type AttributionEntry = {
+  href: string;
+  text: string;
+};
