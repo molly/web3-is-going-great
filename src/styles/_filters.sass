@@ -29,7 +29,7 @@
       color: $filter-text
 
   .sort-button
-    color: #808080
+    color: $filter-text
 
     i
       margin-right: 5px
@@ -90,7 +90,7 @@
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
 
   .timeline-filter
-    .expand-filters-button
+    .expand-filters-button, .sort-button
       color: $dark-filter-text
 
       &:disabled
@@ -107,6 +107,9 @@
     div[class*="-control"]
       border-color: $dark-card-background !important
       box-shadow: $dark-card-background !important
+
+    div[class*="-placeholder"]
+      color: $dark-filter-text
 
     div[class*="-indicatorContainer"]:hover
       color: #666666

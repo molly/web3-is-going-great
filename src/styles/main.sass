@@ -643,7 +643,7 @@ dt
       color: $dark-header-footer-body-color
 
     img.logo
-      filter: brightness(50%)
+      filter: brightness(80%)
 
   header.page-header .header-content
     a
@@ -660,11 +660,14 @@ dt
   .timeline-icon i,
   .attribution,
   .etc,
+  .lightbox-container,
+  .lightbox-container button
     color: $dark-main-color
 
   .timeline-description a,
   .attribution a,
-  .etc a
+  .etc a,
+  .lightbox-container a
     color: $dark-link-color
 
   div.etc h1
@@ -688,15 +691,18 @@ dt
     color: $dark-timeline-icon-color
 
     img
-      filter: brightness(60%)
+      filter: brightness(80%)
 
   .timeline-icon
     @each $name, $color in $icon-colors
       &.#{$name}
         background-color: darken($color, 20%)
 
-  .grift-counter
-    filter: brightness(60%)
+  .grift-counter, .scroll-to-top
+    filter: brightness(80%)
+
+  .lightbox-container
+    background-color: $dark-lightbox-background
 
   /* Arrows */
   .no-js .timeline-entry .timeline-description::after
