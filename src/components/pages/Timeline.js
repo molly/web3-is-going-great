@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
 import useGA from "../../js/hooks/useGA";
 import useGetIdFromQuery from "../../js/hooks/useGetIdFromQuery";
@@ -7,13 +7,14 @@ import useWindowWidth from "../../js/hooks/useWindowWidth";
 import { getEntries } from "../../js/functions";
 import { EMPTY_FILTERS_STATE } from "../../constants/filters";
 
-import { InView } from "react-intersection-observer";
+import { InView, useInView } from "react-intersection-observer";
 import Header from "../timeline/Header";
 import Filters from "../timeline/Filters";
 import Entry from "../timeline/Entry";
 import Loader from "../shared/Loader";
 import Error from "../shared/Error";
 import Footer from "../shared/Footer";
+import ScrollToTop from "../timeline/ScrollToTop";
 import ScamTotal from "../timeline/ScamTotal";
 
 export default function Timeline() {
@@ -22,6 +23,15 @@ export default function Timeline() {
   const startAtId = useGetIdFromQuery();
 
   const [filters, setFilters] = useState(EMPTY_FILTERS_STATE);
+  const [currentRunningScamTotal, setCurrentRunningScamTotal] = useState(0);
+
+  const [headerInViewRef, headerInView] = useInView();
+  const headerFocusRef = useRef();
+
+  const scrollToTop = useCallback(() => {
+    window.scrollTo(0, 0);
+    headerFocusRef.current.focus();
+  }, [headerFocusRef]);
 
   const getFilteredEntries = useCallback(
     ({ pageParam = null }) => {
@@ -44,8 +54,6 @@ export default function Timeline() {
         return lastPage.entries[lastPage.entries.length - 1]._key;
       },
     });
-
-  const [currentRunningScamTotal, setCurrentRunningScamTotal] = useState(0);
 
   const renderScrollSentinel = () => (
     <InView
@@ -140,12 +148,22 @@ export default function Timeline() {
 
   return (
     <>
-      <Header windowWidth={windowWidth} />
+      <Header
+        windowWidth={windowWidth}
+        ref={{ focusRef: headerFocusRef, inViewRef: headerInViewRef }}
+      />
       {!startAtId && <Filters filters={filters} setFilters={setFilters} />}
-      <div className="timeline-page content-wrapper" aria-busy={isLoading}>
+      <div
+        className="timeline-page content-wrapper"
+        aria-busy={isLoading}
+        aria-live="polite"
+      >
         {renderBody()}
       </div>
-      {!startAtId && <ScamTotal total={currentRunningScamTotal} />}
+      <div className="fix-at-bottom">
+        {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
+        {!startAtId && <ScamTotal total={currentRunningScamTotal} />}
+      </div>
       <Footer />
     </>
   );

@@ -1,10 +1,15 @@
-import React from "react";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import ExternalLink from "../shared/ExternalLink";
 import { STORAGE_URL } from "../../constants/urls";
 
-export default function Header({ windowWidth }) {
+const Header = forwardRef(function Header({ windowWidth }, ref) {
+  const componentRef = useRef();
+  useImperativeHandle(ref.focusRef, () => ({
+    focus: () => componentRef.current.focus(),
+  }));
+
   const renderLinks = () => (
     <ul>
       <li>
@@ -46,21 +51,23 @@ export default function Header({ windowWidth }) {
   );
 
   return (
-    <header className="timeline-page page-header">
+    <header className="timeline-page page-header" ref={ref.inViewRef}>
       <div className="constrain-width">
         {windowWidth !== "sm" && renderImage()}
         <div className="header-content">
           <h1>
-            <a href="https://web3isgoinggreat.com/">Web3 is going just great</a>
+            <a href="https://web3isgoinggreat.com/" ref={componentRef}>
+              Web3 is going just great
+            </a>
           </h1>
           <p>
             ...and is definitely not an enormous grift that's pouring lighter
             fluid on our already-smoldering planet.
           </p>
           <p>
-            2021 timeline by Molly White{" "}
+            <span>2021 timeline by Molly White </span>
             <span style={{ display: "inline-block" }}>
-              (
+              <span aria-hidden={true}>(</span>
               <ExternalLink href="https://twitter.com/molly0xFFF">
                 <i
                   title="Twitter"
@@ -69,7 +76,7 @@ export default function Header({ windowWidth }) {
                 ></i>
                 <span className="sr-only">Twitter</span>
               </ExternalLink>
-              ,{" "}
+              <span aria-hidden={true}>, </span>
               <ExternalLink href="https://www.mollywhite.net/">
                 <i
                   title="Website"
@@ -78,7 +85,7 @@ export default function Header({ windowWidth }) {
                 ></i>
                 <span className="sr-only">Website</span>
               </ExternalLink>
-              )
+              <span aria-hidden={true}>)</span>
             </span>
           </p>
           {windowWidth === "sm" ? renderMobileImageAndLinks() : renderLinks()}
@@ -86,8 +93,10 @@ export default function Header({ windowWidth }) {
       </div>
     </header>
   );
-}
+});
 
 Header.propTypes = {
   windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
 };
+
+export default Header;

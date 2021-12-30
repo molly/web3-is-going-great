@@ -189,7 +189,7 @@ export default function Entry({
           )}
           {tech && (
             <div className="tag-list">
-              <span className="sr-only">Tec tags: </span>
+              <span className="sr-only">Tech tags: </span>
               <span>{tech}</span>
             </div>
           )}
