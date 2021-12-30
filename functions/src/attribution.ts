@@ -2,10 +2,7 @@ import { firestore } from "./config/firebase";
 import * as functions from "firebase-functions";
 import { AttributionEntry } from "./types";
 
-function compare(
-  a: { text: string; href: string },
-  b: { text: string; href: string }
-) {
+function compare(a: AttributionEntry, b: AttributionEntry) {
   const aT = a.text.toLowerCase().replace(/[^a-z0-9]/, "");
   const bT = b.text.toLowerCase().replace(/[^a-z0-9]/, "");
   if (aT < bT) {
