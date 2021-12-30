@@ -55,10 +55,8 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
       <div className="constrain-width">
         {windowWidth !== "sm" && renderImage()}
         <div className="header-content">
-          <h1>
-            <a href="https://web3isgoinggreat.com/" ref={componentRef}>
-              Web3 is going just great
-            </a>
+          <h1 ref={componentRef} tabIndex={-1}>
+            <a href="https://web3isgoinggreat.com/">Web3 is going just great</a>
           </h1>
           <p>
             ...and is definitely not an enormous grift that's pouring lighter
