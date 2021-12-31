@@ -50,6 +50,21 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
     </div>
   );
 
+  const renderDate = () => {
+    if (new Date().getFullYear > 2021) {
+      return (
+        <>
+          {"2021 – "}
+          <span title="that's right! this grift isn't stopping and neither am I">
+            2022
+          </span>
+        </>
+      );
+    } else {
+      return "2021";
+    }
+  };
+
   return (
     <header className="timeline-page page-header" ref={ref.inViewRef}>
       <div className="constrain-width">
@@ -63,7 +78,7 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
             fluid on our already-smoldering planet.
           </p>
           <p>
-            <span>2021 timeline by Molly White </span>
+            <span>{renderDate()} timeline by Molly White </span>
             <span style={{ display: "inline-block" }}>
               <span aria-hidden={true}>(</span>
               <ExternalLink href="https://twitter.com/molly0xFFF">
