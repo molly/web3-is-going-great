@@ -33,7 +33,10 @@ export default function Form() {
     setLinks(links);
   };
 
-  const clear = () => setEntry(EMPTY_ENTRY);
+  const clear = () => {
+    setEntry(EMPTY_ENTRY);
+    setAttribution({ text: "", href: "" });
+  };
 
   const save = () => {
     setIsUploading(true);
