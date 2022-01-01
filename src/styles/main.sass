@@ -24,6 +24,9 @@ body
 *
   box-sizing: border-box
 
+*[title]
+  cursor: pointer
+
 button
   // Resets
   -webkit-appearance: none
@@ -69,7 +72,6 @@ footer.page-footer
     max-width: 1440px
 
   p
-    line-height: 120%
     color: #eee
 
 header.page-header .header-content,
@@ -92,6 +94,8 @@ header.page-header.timeline-page
 
   a.logo-image-link, img.logo
     max-height: 300px
+    display: block
+    border: 0
 
   img.logo
     margin-left: -65px
@@ -604,7 +608,7 @@ dt
     display: none
 
   .timeline-icon
-    widt: 30px
+    width: 30px
     height: 30px
     margin-left: -5px
     border-width: 2px

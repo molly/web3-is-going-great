@@ -11,26 +11,32 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
   }));
 
   const renderLinks = () => (
-    <ul>
-      <li>
-        <Link to="/what">What is web3?</Link>
-      </li>
-      <li>
-        <Link to="/glossary">Glossary</Link>
-      </li>
-      <li>
-        <Link to="/about">About this project</Link>
-      </li>
-      <li>
-        <Link to="/suggest">Suggest a change</Link>
-      </li>
-      <li>
-        <a href="/feed.xml">
-          <i className="fas fa-rss"></i>
-          <span className="sr-only">Subscribe to RSS</span>
-        </a>
-      </li>
-    </ul>
+    <>
+      <ul>
+        <li>
+          <Link to="/what">What is web3?</Link>
+        </li>
+        <li>
+          <Link to="/glossary">Glossary</Link>
+        </li>
+        <li>
+          <Link to="/about">About this project</Link>
+        </li>
+        <li>
+          <Link to="/suggest">Suggest a change</Link>
+        </li>
+      </ul>
+      <p>
+        Follow updates on{" "}
+        <ExternalLink href="https://twitter.com/web3isgreat">
+          Twitter
+        </ExternalLink>{" "}
+        or with{" "}
+        <ExternalLink href="https://web3isgoinggreat.com/feed.xml">
+          RSS <i className="fas fa-rss" />
+        </ExternalLink>
+      </p>
+    </>
   );
 
   const renderImage = () => (
@@ -50,21 +56,6 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
     </div>
   );
 
-  const renderDate = () => {
-    if (new Date().getFullYear() > 2021) {
-      return (
-        <>
-          {"2021 – "}
-          <span title="that's right! this grift isn't stopping and neither am I">
-            2022
-          </span>
-        </>
-      );
-    } else {
-      return "2021";
-    }
-  };
-
   return (
     <header className="timeline-page page-header" ref={ref.inViewRef}>
       <div className="constrain-width">
@@ -73,12 +64,18 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
           <h1 ref={componentRef} tabIndex={-1}>
             <a href="https://web3isgoinggreat.com/">Web3 is going just great</a>
           </h1>
-          <p>
+          <p className="subtitle">
             ...and is definitely not an enormous grift that's pouring lighter
             fluid on our already-smoldering planet.
           </p>
           <p>
-            <span>{renderDate()} timeline by Molly White </span>
+            <span>
+              {"2021 – "}
+              <span title="that's right! this grift isn't stopping and neither am I">
+                2022
+              </span>{" "}
+              timeline by Molly White{" "}
+            </span>
             <span style={{ display: "inline-block" }}>
               <span aria-hidden={true}>(</span>
               <ExternalLink href="https://twitter.com/molly0xFFF">
