@@ -56,14 +56,16 @@ export const serveRss = functions.https.onRequest(async (_, res) => {
     .bucket("web3-334501.appspot.com")
     .file("static/rss.xml");
 
-  if (!file.exists) {
-    res.send(404).send("RSS feed missing");
+  // This is the weirdest response format
+  const fileExists = (await file.exists())[0];
+  if (!fileExists) {
+    res.status(404).send("RSS feed missing");
   } else {
     const stream = file.createReadStream();
 
     res.contentType("application/atom+xml");
     stream.on("error", () => {
-      return res.status(500);
+      return res.status(500).end();
     });
 
     stream.pipe(res);
