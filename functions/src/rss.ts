@@ -52,15 +52,20 @@ export const updateRssOnChange = functions.firestore
   });
 
 export const serveRss = functions.https.onRequest(async (_, res) => {
-  const stream = await storage
+  const file = await storage
     .bucket("web3-334501.appspot.com")
-    .file("static/rss.xml")
-    .createReadStream();
+    .file("static/rss.xml");
 
-  res.contentType("application/atom+xml");
-  stream.on("error", () => {
-    return res.status(500);
-  });
+  if (!file.exists) {
+    res.send(404).send("RSS feed missing");
+  } else {
+    const stream = file.createReadStream();
 
-  stream.pipe(res);
+    res.contentType("application/atom+xml");
+    stream.on("error", () => {
+      return res.status(500);
+    });
+
+    stream.pipe(res);
+  }
 });
