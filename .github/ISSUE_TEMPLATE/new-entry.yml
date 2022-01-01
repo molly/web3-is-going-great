@@ -43,7 +43,7 @@ body:
     id: attribution-name
     attributes:
       label: Attribution name
-      description: Please indicate the name you'd like to be displayed in attribution.
+      description: Please indicate the name you'd like to be displayed in attribution. If left blank, I will use your Github name or username.
       placeholder: "First, First Last, or @handle"
     validations:
       required: false
