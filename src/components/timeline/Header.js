@@ -51,7 +51,7 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
   );
 
   const renderDate = () => {
-    if (new Date().getFullYear > 2021) {
+    if (new Date().getFullYear() > 2021) {
       return (
         <>
           {"2021 – "}
