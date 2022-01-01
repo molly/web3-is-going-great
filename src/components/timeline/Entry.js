@@ -198,6 +198,25 @@ export default function Entry({
     );
   };
 
+  const renderTagsWithSentinel = () => {
+    if (!setCurrentRunningScamTotal) {
+      return renderTags();
+    }
+    return (
+      <InView
+        className="clearfix"
+        threshold={1}
+        onChange={(inView) => {
+          if (inView && runningScamTotal !== currentRunningScamTotal) {
+            setCurrentRunningScamTotal(runningScamTotal);
+          }
+        }}
+      >
+        {renderTags()}
+      </InView>
+    );
+  };
+
   return (
     <div
       className={`timeline-entry ${className}`}
@@ -221,17 +240,7 @@ export default function Entry({
         {renderImage(true)}
         {renderBody()}
         {renderLinks()}
-        <InView
-          className="clearfix"
-          threshold={1}
-          onChange={(inView) => {
-            if (inView && runningScamTotal !== currentRunningScamTotal) {
-              setCurrentRunningScamTotal(runningScamTotal);
-            }
-          }}
-        >
-          {renderTags()}
-        </InView>
+        {renderTagsWithSentinel()}
       </div>
       {renderLightbox()}
     </div>
@@ -243,7 +252,7 @@ Entry.propTypes = {
   entry: EntryPropType,
   windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
   runningScamTotal: PropTypes.number.isRequired,
-  currentRunningScamTotal: PropTypes.number.isRequired,
-  setCurrentRunningScamTotal: PropTypes.func.isRequired,
-  shouldScrollToElement: PropTypes.bool.isRequired,
+  currentRunningScamTotal: PropTypes.number,
+  setCurrentRunningScamTotal: PropTypes.func,
+  shouldScrollToElement: PropTypes.bool,
 };

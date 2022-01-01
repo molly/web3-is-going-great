@@ -28,6 +28,11 @@ export const getEntries = async (filters) => {
   return resp.data;
 };
 
+export const getEntry = async (id) => {
+  const resp = await httpsCallable(functions, "getEntry")(id);
+  return resp.data;
+};
+
 export const getAttribution = async () => {
   const resp = await httpsCallable(functions, "getAttribution")();
   return resp.data;

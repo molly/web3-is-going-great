@@ -13,6 +13,7 @@ import Glossary from "./components/pages/Glossary";
 import WhatIsWeb3 from "./components/pages/WhatIsWeb3";
 import Suggest from "./components/pages/Suggest";
 import Admin from "./components/pages/Admin";
+import SingleEntry from "./components/pages/SingleEntry";
 
 function App() {
   const queryClient = new QueryClient({
@@ -36,6 +37,7 @@ function App() {
           <Route path="/what" element={<WhatIsWeb3 />} />
           <Route path="/suggest" element={<Suggest />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/single/:id" element={<SingleEntry />} />
         </Routes>
       </Router>
     </QueryClientProvider>

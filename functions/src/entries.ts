@@ -57,6 +57,23 @@ export const getEntries = functions.https.onCall(async (data?: EntryQuery) => {
   return { entries, hasMore };
 });
 
+export const getEntry = functions.https.onCall(async (id: string) => {
+  if (!id.match(/\d{4}-\d{2}-\d{2}-\d{1,}/)) {
+    throw new functions.https.HttpsError(
+      "invalid-argument",
+      'Entry IDs must be in the format "YYYY-MM-DD-#"'
+    );
+  }
+  let docRef = await firestore.collection("entries").doc(id).get();
+  if (!docRef.exists) {
+    throw new functions.https.HttpsError(
+      "not-found",
+      `There is no entry with the id "${id}"`
+    );
+  }
+  return docRef.data();
+});
+
 export const moveEntry = functions.https.onRequest(async (req, res) => {
   const collection = await firestore.collection("entries");
   const documentRef = collection.doc(req.body.currentId);

@@ -125,21 +125,21 @@ div.content-wrapper
     display: block
     min-height: calc(100vh - 340px)
 
-.timeline
+.timeline, .single-timeline-wrapper
   position: relative
   width: 90%
   max-width: 1600px
   margin: 0px auto
   padding: 20px 0 100px 0
 
-  &::before
-    content: ''
-    position: absolute
-    top: 0
-    left: calc(50% - 2px) // 50% - 1/2 width
-    height: 100%
-    width: 4px
-    background: $timeline-line-color
+.timeline::before
+  content: ''
+  position: absolute
+  top: 0
+  left: calc(50% - 2px) // 50% - 1/2 width
+  height: 100%
+  width: 4px
+  background: $timeline-line-color
 
 .timeline-entry
   position: relative
@@ -457,6 +457,9 @@ dt
   button
     align-self: flex-end
 
+.timeline-entry.single .timeline-description:after
+  border: none
+
 /* ICON COLORS */
 .timeline-icon
   @each $name, $color in $icon-colors
@@ -480,6 +483,19 @@ dt
         color: $header-footer-body-color
         content: "•" / ""
         padding: 10px
+
+  .timeline-entry.single
+    display: flex
+    justify-content: center
+    margin: 10px auto
+
+    .timeline-icon
+      position: static
+      margin-right: 8px
+
+    .timeline-description
+      max-width: 1000px
+      width: 80%
 
 @media only screen and (max-width: 768px) and (min-width: 415px)
   .timeline-entry.even .timeline-description:after
@@ -538,6 +554,9 @@ dt
   .timeline-entry.odd .timeline-description,
   .timeline-entry.even .timeline-description
     margin-left: 50px
+
+  .timeline-entry.single .timeline-description
+    margin-left: 30px
 
   .timeline-description
     width: 90%

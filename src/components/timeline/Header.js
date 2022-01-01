@@ -6,7 +6,7 @@ import { STORAGE_URL } from "../../constants/urls";
 
 const Header = forwardRef(function Header({ windowWidth }, ref) {
   const componentRef = useRef();
-  useImperativeHandle(ref.focusRef, () => ({
+  useImperativeHandle(ref?.focusRef, () => ({
     focus: () => componentRef.current.focus(),
   }));
 
@@ -57,7 +57,7 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
   );
 
   return (
-    <header className="timeline-page page-header" ref={ref.inViewRef}>
+    <header className="timeline-page page-header" ref={ref?.inViewRef}>
       <div className="constrain-width">
         {windowWidth !== "sm" && renderImage()}
         <div className="header-content">
