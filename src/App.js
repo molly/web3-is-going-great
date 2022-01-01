@@ -12,6 +12,7 @@ import Attribution from "./components/pages/Attribution";
 import Glossary from "./components/pages/Glossary";
 import WhatIsWeb3 from "./components/pages/WhatIsWeb3";
 import Suggest from "./components/pages/Suggest";
+import Admin from "./components/pages/Admin";
 
 function App() {
   const queryClient = new QueryClient({
@@ -34,6 +35,7 @@ function App() {
           <Route path="/glossary" element={<Glossary />} />
           <Route path="/what" element={<WhatIsWeb3 />} />
           <Route path="/suggest" element={<Suggest />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </Router>
     </QueryClientProvider>

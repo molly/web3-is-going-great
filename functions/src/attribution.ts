@@ -23,12 +23,19 @@ export const getAttribution = functions.https.onCall(async () => {
 });
 
 export const addAttribution = functions.https.onCall(
-  async (data: AttributionEntry) => {
+  async (entry: AttributionEntry, context: functions.https.CallableContext) => {
+    if (!context.auth) {
+      throw new functions.https.HttpsError(
+        "failed-precondition",
+        "Authentication required"
+      );
+    }
+
     const docRef = await firestore.collection("attribution").doc("images");
     const attributionEntries = (await docRef.get()).get("entries");
     attributionEntries.push({
-      text: data.text,
-      href: data.href,
+      text: entry.text,
+      href: entry.href,
     });
     attributionEntries.sort(compare);
     await docRef.update("entries", attributionEntries);

@@ -44,3 +44,62 @@ export const EntryPropType = PropTypes.shape({
   links: PropTypes.arrayOf(LinkFieldPropType),
   scamTotal: PropTypes.number,
 });
+
+export const trimEmptyFields = (entry, attribution) => {
+  const newEntry = JSON.parse(JSON.stringify(entry));
+  let newAttribution = null;
+  if (!entry.faicon) {
+    delete newEntry.faicon;
+  }
+  if (!entry.icon) {
+    delete newEntry.icon;
+  }
+  if (!entry.image.src) {
+    delete newEntry.image;
+  } else {
+    newAttribution = attribution;
+    if (!entry.image.link) {
+      delete newEntry.image.link;
+    }
+    if (!entry.image.caption) {
+      delete newEntry.image.caption;
+    }
+  }
+  if (entry.scamTotal === 0) {
+    delete newEntry.scamTotal;
+  }
+  const filteredLinks = entry.links
+    .filter((link) => link.linkText && link.href)
+    .map((link) => {
+      if (link.extraText) {
+        return link;
+      } else {
+        return { linkText: link.linkText, href: link.href };
+      }
+    });
+
+  newEntry.links = filteredLinks;
+  return { entry: newEntry, attribution: newAttribution };
+};
+
+export const isValidEntry = (entry, attribution) => {
+  if (!entry.title || !entry.body || !entry.date) {
+    return false;
+  }
+  if (
+    Object.keys(entry.image).some((key) => !!entry.image[key]) &&
+    (!entry.image.src ||
+      !entry.image.alt ||
+      !attribution.text ||
+      !attribution.href)
+  ) {
+    return false;
+  }
+  if (!entry.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    return false;
+  }
+  if (!entry.faicon && !entry.icon) {
+    return false;
+  }
+  return true;
+};

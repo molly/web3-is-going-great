@@ -1,0 +1,58 @@
+@import _colors
+
+.admin
+  .generic-page
+    width: 90%
+    max-width: 600px
+    padding-top: 50px
+
+  .login-form
+    display: flex
+    flex-direction: column
+    margin-top: 30px
+    max-width: 300px
+
+  button
+    align-self: flex-start
+    padding: 5px
+    margin-top: 10px
+    background-color: $card-background
+    border: 1px solid #000000
+
+    &:not(:first-of-type)
+      margin-left: 10px
+
+    &.save-button
+      i
+        padding-right: 5px
+
+  .entry-form
+    .row, .half, .group
+      display: flex
+      flex: 1
+      box-sizing: content-box
+
+    .row
+      align-items: flex-end
+      margin-bottom: 10px
+
+      &.stretch
+        align-items: stretch
+
+    .half, .group
+      flex-direction: column
+
+    .half
+      width: 50%
+
+      &:not(:first-child)
+        padding-left: 10px
+
+    fieldset
+      display: flex
+      flex-direction: column
+      flex: 1
+      height: 100%
+
+      &:not(:first-child)
+        padding-left: 10px

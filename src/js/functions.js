@@ -1,9 +1,11 @@
 import { initializeApp } from "firebase/app";
+
 import {
   getFunctions,
   httpsCallable,
   connectFunctionsEmulator,
 } from "firebase/functions";
+import "firebase/auth";
 
 // Initialize Firebase
 const app = initializeApp({
@@ -15,6 +17,7 @@ const app = initializeApp({
   messagingSenderId: "645239520683",
   appId: "1:645239520683:web:3e90522f06ea69822ce6ee",
 });
+
 export const functions = getFunctions(app);
 if (process.env.NODE_ENV === "development") {
   connectFunctionsEmulator(functions, "localhost", 5001);
