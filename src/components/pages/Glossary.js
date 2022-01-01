@@ -16,6 +16,18 @@ export default function Glossary() {
       <div className="content-wrapper">
         <article className="generic-page">
           <dl>
+            <dt>airdrop</dt>
+            <dd>
+              a distribution of a cryptocurrency token or coin, usually for
+              free, to numerous wallet addresses. Airdrops are primarily
+              implemented as a way of gaining attention and new followers,
+              resulting in a larger user-base and a wider disbursement of coins.
+              (
+              <ExternalLink href="https://en.wikipedia.org/wiki/Airdrop_(cryptocurrency)">
+                Wikipedia
+              </ExternalLink>
+              )
+            </dd>
             <dt>coin</dt>
             <dd>
               a specific cryptocurrency (e.g. Bitcoin, Ethereum, Dogecoin)
