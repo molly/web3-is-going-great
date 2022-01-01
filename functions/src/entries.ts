@@ -64,7 +64,8 @@ export const getEntry = functions.https.onCall(async (id: string) => {
       'Entry IDs must be in the format "YYYY-MM-DD-#"'
     );
   }
-  let docRef = await firestore.collection("entries").doc(id).get();
+  const docRef = await firestore.collection("entries").doc(id).get();
+
   if (!docRef.exists) {
     throw new functions.https.HttpsError(
       "not-found",

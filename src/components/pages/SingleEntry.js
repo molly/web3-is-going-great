@@ -21,7 +21,16 @@ export default function Timeline() {
     data: entry,
     isLoading,
     isError,
-  } = useQuery("entry", () => getEntry(id));
+    error,
+  } = useQuery("entry", () => getEntry(id), {
+    retry: (_, error) => {
+      // No point in retrying on 4xxs
+      return (
+        error.code !== "functions/not-found" &&
+        error.code !== "functions/invalid-argument"
+      );
+    },
+  });
 
   const renderEntry = () => {
     let runningScamTotal = 0;
@@ -42,7 +51,14 @@ export default function Timeline() {
     if (isLoading) {
       return <Loader />;
     } else if (isError) {
-      return <Error />;
+      let message;
+      if (
+        error.code === "functions/not-found" ||
+        error.code === "functions/invalid-argument"
+      ) {
+        message = "No entry with this ID.";
+      }
+      return <Error customMessage={message} />;
     }
     return renderEntry();
   };
