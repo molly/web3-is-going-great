@@ -8,6 +8,7 @@ import Select from "react-select";
 const ALL_ICONS = {
   poo: { type: "fa", value: "poo", text: FILTERS.theme.badIdea },
   bug: { type: "fa", value: "bug", text: FILTERS.theme.bug },
+  fire: { type: "fa", value: "fire", text: FILTERS.theme.environment },
   "face-frown": {
     type: "fa",
     value: "face-frown",

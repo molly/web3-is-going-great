@@ -3,6 +3,7 @@ const FILTERS = {
     badIdea: "Bad idea",
     bug: "Bug",
     bummer: "Bummer",
+    environment: "Environment",
     fakeNews: "Fake news",
     hack: "Hack or scam",
     hmm: "Hmm",
@@ -10,6 +11,7 @@ const FILTERS = {
     shady: "Shady business",
   },
   tech: {
+    gaming: "blockchain gaming",
     currency: "cryptocurrency",
     dao: "DAO",
     dapps: "dApps",
