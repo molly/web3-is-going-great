@@ -8,9 +8,9 @@ export default function useGetIdFromQuery() {
       return null;
     }
     const id = new URLSearchParams(search).get("id");
-    if (id.match(/\d{4}-\d{2}-\d{2}-?\d{0,2}/)) {
-      return id;
+    if (!id || !id.match(/\d{4}-\d{2}-\d{2}-?\d{0,2}/)) {
+      return null;
     }
-    return null;
+    return id;
   }, [search]);
 }
