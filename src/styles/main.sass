@@ -481,8 +481,12 @@ dt
 
       &:not(:first-child):before
         color: $header-footer-body-color
-        content: "•"
         padding: 10px
+
+        // Avoid screenreaders reading the decorative character where supported
+        // https://github.com/molly/web3-is-going-great/pull/25#issuecomment-1004279568
+        content: "•"
+        content: "•" / ""
 
   .timeline-entry.single
     display: flex
