@@ -6,7 +6,7 @@ export default function useGA() {
   const location = useLocation();
 
   React.useEffect(() => {
-    const currentPath = location.pathname + location.search;
+    const currentPath = location.pathname;
     ReactGA.set({ page: currentPath });
     ReactGA.pageview(currentPath);
   }, [location]);
