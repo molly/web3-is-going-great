@@ -17,8 +17,9 @@ const ALL_ICONS = {
   fakeNews: { type: "img", value: "fakeNews", text: FILTERS.theme.fakeNews },
   hack: { type: "img", value: "hack", text: FILTERS.theme.hack },
   hmm: { type: "img", value: "hmm", text: FILTERS.theme.hmm },
-  rugPull: { type: "img", value: "rugPull", text: FILTERS.theme.rugPull },
+  rug: { type: "img", value: "rugPull", text: FILTERS.theme.rugPull },
   shady: { type: "img", value: "shady", text: FILTERS.theme.shady },
+  "thumbs-up": { type: "fa", value: "thumbs-up", text: FILTERS.theme.goodNews },
 };
 
 export default function IconSelector({ updateEntry, value }) {

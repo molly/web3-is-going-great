@@ -5,6 +5,7 @@ const FILTERS = {
     bummer: "Bummer",
     environment: "Environment",
     fakeNews: "Fake news",
+    goodNews: "Good news",
     hack: "Hack or scam",
     hmm: "Hmm",
     rugPull: "Rug pull",
