@@ -12,7 +12,7 @@ header, footer {
   background-color: #5948a4;
 }
 
-header h1, header p, header a, footer p, footer a {
+header h1, header p, header a, header ul, footer p, footer a {
   color: #ffffff;
 }
 
