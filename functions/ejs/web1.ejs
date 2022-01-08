@@ -136,15 +136,13 @@
                 <div class="tags">
                   <% if (entry.filters.theme && entry.filters.theme.length) { %>
                   <div class="tag-list theme">
-                    <span class="sr-only">Theme tags: </span><%-
-                    entry.filters.theme.join(", ") %>
+                    Themes: <%- entry.filters.theme.join(", ") %>
                   </div>
                   <% } %>
                   <div class="tag-group-right">
                     <% if (entry.filters.blockchain && entry.filters.blockchain.length) { %>
                     <div class="tag-list">
-                      <span class="sr-only">Blockchain tags: </span
-                      ><span
+                      <span
                         >Blockchain: <%- entry.filters.blockchain.join(", ")
                         %></span
                       >
@@ -152,7 +150,7 @@
                     <% } %> <% if (entry.filters.tech &&
                     entry.filters.tech.length) { %>
                     <div class="tag-list">
-                      <span class="sr-only">Tech tags: </span><%-
+                      Tech tags: <%-
                       entry.filters.tech.join(", ") %>
                     </div>
                     <% } %>
