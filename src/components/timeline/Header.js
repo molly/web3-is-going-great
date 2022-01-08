@@ -29,16 +29,6 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
           <Link to="/attribution">License and attribution</Link>
         </li>
       </ul>
-      <p>
-        Follow updates on{" "}
-        <ExternalLink href="https://twitter.com/web3isgreat">
-          Twitter
-        </ExternalLink>{" "}
-        or with{" "}
-        <ExternalLink href="https://web3isgoinggreat.com/feed.xml">
-          RSS <i className="fas fa-rss" />
-        </ExternalLink>
-      </p>
     </>
   );
 
@@ -99,7 +89,15 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
                 <span className="sr-only">Website</span>
               </ExternalLink>
               <span aria-hidden={true}>)</span>
-            </span>
+            </span>{" "}
+            Follow updates on{" "}
+            <ExternalLink href="https://twitter.com/web3isgreat">
+              Twitter
+            </ExternalLink>{" "}
+            or with{" "}
+            <ExternalLink href="https://web3isgoinggreat.com/feed.xml">
+              RSS <i className="fas fa-rss" />
+            </ExternalLink>
           </p>
           {windowWidth === "sm" ? renderMobileImageAndLinks() : renderLinks()}
         </div>
