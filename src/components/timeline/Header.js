@@ -25,6 +25,9 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
         <li>
           <Link to="/suggest">Suggest a change</Link>
         </li>
+        <li>
+          <Link to="/attribution">License and attribution</Link>
+        </li>
       </ul>
       <p>
         Follow updates on{" "}

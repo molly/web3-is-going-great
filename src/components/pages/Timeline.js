@@ -13,7 +13,6 @@ import Filters from "../timeline/Filters";
 import Entry from "../timeline/Entry";
 import Loader from "../shared/Loader";
 import Error from "../shared/Error";
-import Footer from "../shared/Footer";
 import ScrollToTop from "../timeline/ScrollToTop";
 import ScamTotal from "../timeline/ScamTotal";
 
@@ -164,7 +163,6 @@ export default function Timeline() {
         {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
         {!startAtId && <ScamTotal total={currentRunningScamTotal} />}
       </div>
-      <Footer />
     </>
   );
 }

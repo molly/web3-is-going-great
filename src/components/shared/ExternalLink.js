@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function ExternalLink({ children, href }) {
+export default function ExternalLink({ children, href, ...rest }) {
   return (
-    <a target="_blank" rel="noreferrer" href={href}>
+    <a target="_blank" rel="noopener" href={href} {...rest}>
       {children}
     </a>
   );

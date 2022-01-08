@@ -25,6 +25,24 @@ export default function Attribution() {
       <BackBar />
       <div className="content-wrapper">
         <article className="generic-page">
+          <p>
+            Text is licensed under the{" "}
+            <ExternalLink
+              rel="license"
+              href="http://creativecommons.org/licenses/by/3.0/deed.en_US"
+            >
+              Creative Commons Attribution 3.0 Unported License
+            </ExternalLink>
+            . Source code is{" "}
+            <ExternalLink href="https://github.com/molly/web3-is-going-great/blob/main/LICENSE">
+              MIT-licensed
+            </ExternalLink>{" "}
+            and available{" "}
+            <ExternalLink href="https://github.com/molly/web3-is-going-great">
+              on Github
+            </ExternalLink>
+            .
+          </p>
           <p>Most text was written by Molly White.</p>
           <h3>Additional text and entries contributed by</h3>
           <ul>
@@ -54,6 +72,7 @@ export default function Attribution() {
             <ExternalLink href="https://github.com/molly/web3-is-going-great">
               contributed PRs on GitHub
             </ExternalLink>
+            .
           </p>
           <h3>Monkey illustration created from</h3>
           <ul>

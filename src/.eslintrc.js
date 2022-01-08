@@ -13,5 +13,13 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react"],
-  rules: { "react/no-unescaped-entities": 0 },
+  rules: {
+    "react/no-unescaped-entities": 0,
+    "react/jsx-no-target-blank": [
+      "error",
+      {
+        allowReferrer: true,
+      },
+    ],
+  },
 };
