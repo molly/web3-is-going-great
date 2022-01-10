@@ -60,6 +60,13 @@ export default function WhatIsWeb3() {
             have to live on this planet, and I spend enough time engaging with
             the tech industry and online to care about the futures of both.
           </p>
+          <p>
+            If you are interested, I also have{" "}
+            <ExternalLink href="https://blog.mollywhite.net/blockchain/">
+              longer-form, less sarcastic thoughts on web3
+            </ExternalLink>
+            .
+          </p>
         </article>
       </div>
       <Footer />

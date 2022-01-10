@@ -93,6 +93,11 @@ export default function WhatIsWeb3() {
           <h3>Opinion</h3>
           <ul>
             <li>
+              <ExternalLink href="https://blog.mollywhite.net/blockchain/">
+                My own longer-form writing
+              </ExternalLink>
+            </li>
+            <li>
               <ExternalLink href="https://www.stephendiehl.com/blog/web3-bullshit.html">
                 <span>"Web3 is bullshit"</span>
               </ExternalLink>
