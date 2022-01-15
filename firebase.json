@@ -16,6 +16,14 @@
                 "function": "serveRss"
             },
             {
+                "source": "/stagedFeed",
+                "function": "serveStagedRss"
+            },
+            {
+                "source": "/stagedFeed.xml",
+                "function": "serveStagedRss"
+            },
+            {
                 "source": "/web1",
                 "function": "serveWeb1"
             },

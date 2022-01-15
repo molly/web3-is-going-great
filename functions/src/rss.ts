@@ -6,6 +6,7 @@ import * as fs from "fs";
 import * as ejs from "ejs";
 
 import { Entry, RssEntry } from "./types";
+import axios from "axios";
 
 export const updateRssOnChange = functions.firestore
   .document("/entries/{docId}")
@@ -43,18 +44,64 @@ export const updateRssOnChange = functions.firestore
     }
 
     const ejsFile = fs.readFileSync(path.resolve(__dirname, "../ejs/rss.ejs"));
-    const html = ejs.render(ejsFile.toString(), rssData);
+    const xml = ejs.render(ejsFile.toString(), rssData);
 
-    const file = await storage
+    // Record XML to a staging URL so we can validate it with the W3 validator
+    const stagingFile = await storage
       .bucket("web3-334501.appspot.com")
-      .file("static/rss.xml");
-    await file.createWriteStream().end(html);
+      .file("static/stagedRss.xml");
+    await stagingFile.createWriteStream().end(xml);
+
+    try {
+      const resp = await axios.get("http://validator.w3.org/feed/check.cgi", {
+        params: {
+          output: "soap12",
+          url: "https://web3isgoinggreat.com/stagedFeed.xml",
+        },
+      });
+
+      if (
+        resp?.data &&
+        resp.data.search(/<m:validity>\s*true\s*<\/m:validity>/gm) > -1
+      ) {
+        // Valid XML, carry on
+        const file = await storage
+          .bucket("web3-334501.appspot.com")
+          .file("static/rss.xml");
+        await file.createWriteStream().end(xml);
+      } else {
+        throw new Error("Invalid XML");
+      }
+    } catch (err) {
+      throw new Error("Something is wrong with XML validation");
+    }
   });
 
 export const serveRss = functions.https.onRequest(async (_, res) => {
   const file = await storage
     .bucket("web3-334501.appspot.com")
     .file("static/rss.xml");
+
+  // This is the weirdest response format
+  const fileExists = (await file.exists())[0];
+  if (!fileExists) {
+    res.status(404).send("RSS feed missing");
+  } else {
+    const stream = file.createReadStream();
+
+    res.contentType("application/atom+xml");
+    stream.on("error", () => {
+      return res.status(500).end();
+    });
+
+    stream.pipe(res);
+  }
+});
+
+export const serveStagedRss = functions.https.onRequest(async (_, res) => {
+  const file = await storage
+    .bucket("web3-334501.appspot.com")
+    .file("static/stagedRss.xml");
 
   // This is the weirdest response format
   const fileExists = (await file.exists())[0];
