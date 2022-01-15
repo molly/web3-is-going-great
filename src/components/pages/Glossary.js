@@ -32,6 +32,11 @@ export default function Glossary() {
             <dd>
               a specific cryptocurrency (e.g. Bitcoin, Ethereum, Dogecoin)
             </dd>
+            <dt>cold wallet</dt>
+            <dd>
+              a cryptocurrency wallet that is not Internet-connected, in
+              contrast to a "hot wallet"
+            </dd>
             <dt>dApp / decentralized app</dt>
             <dd>
               a computer application that runs on a decentralized computing
@@ -76,6 +81,18 @@ export default function Glossary() {
               </ExternalLink>
               )
             </dd>
+            <dd>hardware wallet</dd>
+            <dt>
+              a type of cold wallet where cryptocurrency is stored on a physical
+              device much like a flash drive (but often with additional
+              features)
+            </dt>
+            <dd>hot wallet</dd>
+            <dt>
+              a cryptocurrency wallet that is connected to the Internet, which
+              allows the currency to be quickly accessed for trading and
+              spending
+            </dt>
             <dt>liquidity pool</dt>
             <dd>
               funds locked in a smart contract, which facilitate trading and
@@ -113,6 +130,13 @@ export default function Glossary() {
               </ExternalLink>
               )
             </dd>
+            <dt>pump</dt>
+            <dd>
+              pumping (and then dumping) involves artificially inflating the
+              price of a token or project with false or misleading information,
+              allowing those behind it to then "dump" the coin—that is, cash out
+              before the price tanks
+            </dd>
             <dt>rug pull</dt>
             <dd>
               when a development team suddenly abandons a project and sells or
@@ -137,6 +161,17 @@ export default function Glossary() {
               cryptocurrencies where the price is designed to be pegged to a
               cryptocurrency, fiat money, or to exchange-traded commodities (
               <ExternalLink href="https://en.wikipedia.org/wiki/Stablecoin">
+                <span>Wikipedia</span>
+              </ExternalLink>
+              )
+            </dd>
+            <dt>tumbler or mixer</dt>
+            <dd>
+              a cryptocurrency tumbler (or cryptocurrency mixing service) is a
+              service offered to mix potentially identifiable or "tainted"
+              cryptocurrency funds with others, so as to obscure the trail back
+              to the fund's original source (
+              <ExternalLink href="https://en.wikipedia.org/wiki/Cryptocurrency_tumbler">
                 <span>Wikipedia</span>
               </ExternalLink>
               )
