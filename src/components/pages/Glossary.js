@@ -81,18 +81,18 @@ export default function Glossary() {
               </ExternalLink>
               )
             </dd>
-            <dd>hardware wallet</dd>
-            <dt>
+            <dt>hardware wallet</dt>
+            <dd>
               a type of cold wallet where cryptocurrency is stored on a physical
               device much like a flash drive (but often with additional
               features)
-            </dt>
-            <dd>hot wallet</dd>
-            <dt>
+            </dd>
+            <dt>hot wallet</dt>
+            <dd>
               a cryptocurrency wallet that is connected to the Internet, which
               allows the currency to be quickly accessed for trading and
               spending
-            </dt>
+            </dd>
             <dt>liquidity pool</dt>
             <dd>
               funds locked in a smart contract, which facilitate trading and
