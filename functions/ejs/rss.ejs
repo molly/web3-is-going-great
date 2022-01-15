@@ -26,7 +26,7 @@
   <updated><%= updated %></updated>
   <% entries.forEach(function(entry){ %>
   <entry>
-    <title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><%- entry.title %></div></title>
+    <title><%= entry.title %></div></title>
     <published><%= entry.createdAt %></published>
     <updated><%= entry.updatedAt %></updated>
     <link href="https://web3isgoinggreat.com/single/<%= entry.id %>"/> 
@@ -36,7 +36,7 @@
         <% if (entry.image){%><img
           src="<%= storageUrlPrefix %>/entryAssets/<%= entry.image.src %>"
           alt="<%= entry.image.alt %>"
-          style="max-width: 300px"
+          width="300px"
         /><% } %>
         <p><%- entry.body %></p>
         <ul><% entry.links.forEach(function (link){ %>

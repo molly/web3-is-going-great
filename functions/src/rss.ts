@@ -33,8 +33,10 @@ export const updateRssOnChange = functions.firestore
       if (lastUpdated === null || lastUpdated < childLastUpdated) {
         lastUpdated = childLastUpdated;
       }
+      const childData = child.data() as Entry;
       rssData.entries.push({
-        ...(child.data() as Entry),
+        ...childData,
+        title: childData.title.replace(/<[^>]+>/gm, ""),
         createdAt: child.createTime.toDate().toISOString(),
         updatedAt: childLastUpdated.toISOString(),
       });
