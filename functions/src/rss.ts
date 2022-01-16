@@ -47,7 +47,7 @@ export const updateRssOnChange = functions.firestore
     }
 
     const ejsFile = fs.readFileSync(path.resolve(__dirname, "../ejs/rss.ejs"));
-    const xml = ejs.render(ejsFile.toString(), rssData).replace("&nbsp;", " ");
+    const xml = ejs.render(ejsFile.toString(), rssData).replace(/&nbsp;/g, " ");
 
     // Record XML to a staging URL so we can validate it with the W3 validator
     const stagingFile = await storage
