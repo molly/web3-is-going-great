@@ -34,9 +34,13 @@ export const updateRssOnChange = functions.firestore
         lastUpdated = childLastUpdated;
       }
       const childData = child.data() as Entry;
+      const title = childData.title
+        .replace(/<[^>]+>/gm, "")
+        .replace("&#39;", "'")
+        .replace("&nbsp;", " ");
       rssData.entries.push({
         ...childData,
-        title: childData.title.replace(/<[^>]+>/gm, ""),
+        title,
         createdAt: child.createTime.toDate().toISOString(),
         updatedAt: childLastUpdated.toISOString(),
       });
@@ -91,7 +95,7 @@ export const serveRss = functions.https.onRequest(async (_, res) => {
   } else {
     const stream = file.createReadStream();
 
-    res.contentType("application/atom+xml");
+    res.contentType("application/atom+xml;charset=UTF-8");
     stream.on("error", () => {
       return res.status(500).end();
     });
@@ -112,7 +116,7 @@ export const serveStagedRss = functions.https.onRequest(async (_, res) => {
   } else {
     const stream = file.createReadStream();
 
-    res.contentType("application/atom+xml");
+    res.contentType("application/atom+xml;charset=UTF-8");
     stream.on("error", () => {
       return res.status(500).end();
     });

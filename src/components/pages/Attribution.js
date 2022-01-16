@@ -71,6 +71,9 @@ export default function Attribution() {
                 <span>Alex Stamos</span>
               </ExternalLink>
             </li>
+            <li>
+              <span>@superquanganh</span>
+            </li>
           </ul>
           <p>
             Thanks also to anyone who{" "}
