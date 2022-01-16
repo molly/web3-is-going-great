@@ -34,10 +34,7 @@ export const updateRssOnChange = functions.firestore
         lastUpdated = childLastUpdated;
       }
       const childData = child.data() as Entry;
-      const title = childData.title
-        .replace(/<[^>]+>/gm, "")
-        .replace("&#39;", "'")
-        .replace("&nbsp;", " ");
+      const title = childData.title.replace(/<[^>]+>/gm, "");
       rssData.entries.push({
         ...childData,
         title,
@@ -50,7 +47,7 @@ export const updateRssOnChange = functions.firestore
     }
 
     const ejsFile = fs.readFileSync(path.resolve(__dirname, "../ejs/rss.ejs"));
-    const xml = ejs.render(ejsFile.toString(), rssData);
+    const xml = ejs.render(ejsFile.toString(), rssData).replace("&nbsp;", " ");
 
     // Record XML to a staging URL so we can validate it with the W3 validator
     const stagingFile = await storage
