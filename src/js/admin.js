@@ -4,7 +4,7 @@ import {
   signOut as fbSignOut,
 } from "firebase/auth";
 import { httpsCallable } from "firebase/functions";
-import { functions } from "./functions";
+import { functions } from "./db/functions";
 import { trimEmptyFields } from "./entry";
 
 export const auth = getAuth();

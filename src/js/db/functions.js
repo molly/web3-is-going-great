@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-
+import { getFirestore } from "firebase/firestore/lite";
 import {
   getFunctions,
   httpsCallable,
@@ -18,6 +18,8 @@ const app = initializeApp({
   appId: "1:645239520683:web:3e90522f06ea69822ce6ee",
 });
 
+export const db = getFirestore(app);
+
 export const functions = getFunctions(app);
 if (process.env.NODE_ENV === "development") {
   connectFunctionsEmulator(functions, "localhost", 5001);
@@ -27,12 +29,6 @@ export const getEntries = async (filters) => {
   const resp = await httpsCallable(functions, "getEntries")(filters);
   return resp.data;
 };
-
-export const getEntry = async (id) => {
-  const resp = await httpsCallable(functions, "getEntry")(id);
-  return resp.data;
-};
-
 export const getAttribution = async () => {
   const resp = await httpsCallable(functions, "getAttribution")();
   return resp.data;

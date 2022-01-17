@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import useGA from "../../js/hooks/useGA";
 
-import { getAttribution } from "../../js/functions";
+import { getAttribution } from "../../js/db/functions";
 
 import BackBar from "../shared/BackBar";
 import ExternalLink from "../shared/ExternalLink";

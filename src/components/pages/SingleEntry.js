@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import useGA from "../../js/hooks/useGA";
 import useWindowWidth from "../../js/hooks/useWindowWidth";
 
-import { getEntry } from "../../js/functions";
+import { getEntry } from "../../js/db/singleEntry";
 
 import Header from "../timeline/Header";
 import BackBar from "../shared/BackBar";
@@ -22,12 +22,13 @@ export default function Timeline() {
     isLoading,
     isError,
     error,
+    // eslint-disable-next-line no-unused-vars
+    ...rest
   } = useQuery("entry", () => getEntry(id), {
     retry: (_, error) => {
       // No point in retrying on 4xxs
       return (
-        error.code !== "functions/not-found" &&
-        error.code !== "functions/invalid-argument"
+        error.message !== "not-found" && error.message !== "invalid-argument"
       );
     },
   });
@@ -53,8 +54,8 @@ export default function Timeline() {
     } else if (isError) {
       let message;
       if (
-        error.code === "functions/not-found" ||
-        error.code === "functions/invalid-argument"
+        error.message === "not-found" ||
+        error.message === "invalid-argument"
       ) {
         message = "No entry with this ID.";
       }
