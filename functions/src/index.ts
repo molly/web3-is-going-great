@@ -1,11 +1,8 @@
-import { getEntries } from "./entries";
 import { addAttribution } from "./attribution";
 import { uploadEntry } from "./admin";
 
 import { updateRssOnChange, serveRss, serveStagedRss } from "./rss";
 import { updateWeb1OnChange, serveWeb1 } from "./web1";
-
-exports.getEntries = getEntries;
 
 exports.updateRssOnChange = updateRssOnChange;
 exports.serveRss = serveRss;
