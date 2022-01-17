@@ -46,8 +46,9 @@ export default function Form() {
         setIsUploading(false);
         setTimeout(() => setIsUploadComplete(false), 2000);
       })
-      .catch(() => {
+      .catch((e) => {
         setIsUploading(false);
+        console.error(e);
       });
   };
 

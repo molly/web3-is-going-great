@@ -17,6 +17,7 @@ export const uploadEntry = async (entry) => {
   } while (docSnapshot.exists());
 
   entry.id = key;
+
   await setDoc(docRef, entry);
 };
 
