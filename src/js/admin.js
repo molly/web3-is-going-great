@@ -3,9 +3,8 @@ import {
   signInWithEmailAndPassword,
   signOut as fbSignOut,
 } from "firebase/auth";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "./functions";
 import { trimEmptyFields } from "./entry";
+import { addAttribution, uploadEntry } from "./db/admin";
 
 export const auth = getAuth();
 export const signIn = (password) =>
@@ -15,9 +14,9 @@ export const signOut = () => fbSignOut(auth);
 
 export const upload = async (rawEntry, rawAttribution) => {
   const { entry, attribution } = trimEmptyFields(rawEntry, rawAttribution);
-  const resp = await httpsCallable(functions, "uploadEntry")(entry);
+  const promises = [uploadEntry(entry)];
   if (attribution) {
-    await httpsCallable(functions, "addAttribution")(attribution);
+    promises.push([addAttribution(attribution)]);
   }
-  return resp;
+  await Promise.all(promises);
 };

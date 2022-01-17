@@ -4,7 +4,7 @@ import useGA from "../../js/hooks/useGA";
 import useGetIdFromQuery from "../../js/hooks/useGetIdFromQuery";
 import useWindowWidth from "../../js/hooks/useWindowWidth";
 
-import { getEntries } from "../../js/functions";
+import { getEntries } from "../../js/db/entries";
 import { EMPTY_FILTERS_STATE } from "../../constants/filters";
 
 import { InView, useInView } from "react-intersection-observer";
