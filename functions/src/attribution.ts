@@ -14,14 +14,6 @@ function compare(a: AttributionEntry, b: AttributionEntry) {
   return 0;
 }
 
-export const getAttribution = functions.https.onCall(async () => {
-  const docSnapshot = await firestore
-    .collection("attribution")
-    .doc("images")
-    .get();
-  return docSnapshot.data();
-});
-
 export const addAttribution = functions.https.onCall(
   async (entry: AttributionEntry, context: functions.https.CallableContext) => {
     if (!context.auth) {

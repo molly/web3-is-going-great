@@ -29,7 +29,3 @@ export const getEntries = async (filters) => {
   const resp = await httpsCallable(functions, "getEntries")(filters);
   return resp.data;
 };
-export const getAttribution = async () => {
-  const resp = await httpsCallable(functions, "getAttribution")();
-  return resp.data;
-};
