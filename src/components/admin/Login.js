@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import Link from "next/link";
 import { signIn } from "../../js/admin";
 
 export default function Admin() {
@@ -20,8 +20,11 @@ export default function Admin() {
     <>
       <span>
         This page is for Molly's use only. If you've found yourself here and
-        you're not Molly, you can go <Link to="/suggest">here</Link> to learn
-        how to suggest a new entry.
+        you're not Molly, you can go{" "}
+        <Link href="/suggest">
+          <a>here</a>
+        </Link>{" "}
+        to learn how to suggest a new entry.
       </span>
       <div className="login-form">
         <label htmlFor="password" type="password">

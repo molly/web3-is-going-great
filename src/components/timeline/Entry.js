@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+/* eslint-disable @next/next/no-img-element */
+import { useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import { STORAGE_URL } from "../../constants/urls";
@@ -6,7 +7,9 @@ import FILTERS from "../../constants/filters";
 import ICONS from "../../constants/icons";
 import { humanizeDate, isWrappedInParagraphTags } from "../../js/utilities";
 import { EntryPropType } from "../../js/entry";
+
 import InView from "react-intersection-observer";
+import Link from "next/link";
 
 export default function Entry({
   entry,
@@ -42,13 +45,15 @@ export default function Entry({
   }, []);
 
   const permalink = (id) => {
-    const perma = window.location.origin + `?id=${id}`;
-    window.history.pushState(null, null, perma);
-    navigator.clipboard.writeText(perma);
-    setShowCopiedPopup(true);
-    setTimeout(() => {
-      setShowCopiedPopup(false);
-    }, 1000);
+    if (typeof window !== "undefined") {
+      const perma = window.location.origin + `?id=${id}`;
+      window.history.pushState(null, null, perma);
+      navigator.clipboard.writeText(perma);
+      setShowCopiedPopup(true);
+      setTimeout(() => {
+        setShowCopiedPopup(false);
+      }, 1000);
+    }
   };
 
   const renderIcon = () => {
@@ -57,11 +62,14 @@ export default function Entry({
     } else if (entry.icon) {
       return (
         <div className="icon-wrapper">
-          <img
-            src={`${STORAGE_URL}/icons/${ICONS[entry.icon]}`}
-            alt="" // Decorative, hidden to screenreaders
-            aria-hidden="true"
-          />
+          <div className="image-wrapper">
+            <img
+              src={`${STORAGE_URL}/icons/${ICONS[entry.icon]}`}
+              alt="" // Decorative, hidden to screenreaders
+              aria-hidden="true"
+              layout="fill"
+            />
+          </div>
         </div>
       );
     }
@@ -77,6 +85,7 @@ export default function Entry({
       <img
         src={`${STORAGE_URL}/entryAssets/${entry.image.src}`}
         alt={entry.image.alt}
+        layout="fill"
         onClick={onClick}
         className={onClick ? "clickable" : null}
       />
@@ -92,7 +101,9 @@ export default function Entry({
             dangerouslySetInnerHTML={{ __html: entry.image.caption }}
           />{" "}
           <span className="attribution-link">
-            <a href="/attribution">(attribution)</a>
+            <Link href="/attribution">
+              <a>(attribution)</a>
+            </Link>
           </span>
         </>
       );

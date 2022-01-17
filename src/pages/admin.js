@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { auth } from "../../js/admin";
+import { auth } from "../js/admin";
 import { onAuthStateChanged } from "firebase/auth";
 
-import BackBar from "../shared/BackBar";
-import Footer from "../shared/Footer";
-import Loader from "../shared/Loader";
-import Login from "../admin/Login";
-import Form from "../admin/Form";
+import BackBar from "../components/BackBar";
+import Footer from "../components/Footer";
+import Loader from "../components/Loader";
+import Login from "../components/admin/Login";
+import Form from "../components/admin/Form";
 
 export default function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);

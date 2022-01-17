@@ -1,8 +1,10 @@
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import ExternalLink from "../shared/ExternalLink";
+
 import { STORAGE_URL } from "../../constants/urls";
+
+import Link from "next/link";
+import ExternalLink from "../ExternalLink";
 
 const Header = forwardRef(function Header({ windowWidth }, ref) {
   const componentRef = useRef();
@@ -14,32 +16,45 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
     <>
       <ul>
         <li>
-          <Link to="/what">What is web3?</Link>
+          <Link href="/what">
+            <a>What is web3?</a>
+          </Link>
         </li>
         <li>
-          <Link to="/glossary">Glossary</Link>
+          <Link href="/glossary">
+            <a>Glossary</a>
+          </Link>
         </li>
         <li>
-          <Link to="/about">About this project</Link>
+          <Link href="/about">
+            <a>About this project</a>
+          </Link>
         </li>
         <li>
-          <Link to="/suggest">Suggest a change</Link>
+          <Link href="/suggest">
+            <a>Suggest a change</a>
+          </Link>
         </li>
         <li>
-          <Link to="/attribution">License and attribution</Link>
+          <Link href="/attribution">
+            <a>License and attribution</a>
+          </Link>
         </li>
       </ul>
     </>
   );
 
   const renderImage = () => (
-    <a href="https://web3isgoinggreat.com/" className="logo-image-link">
-      <img
-        className="logo"
-        src={`${STORAGE_URL}/monkey.png`}
-        alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
-      />
-    </a>
+    <Link href="/">
+      <a className="logo-image-link">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="logo"
+          src={`${STORAGE_URL}/monkey.png`}
+          alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
+        />
+      </a>
+    </Link>
   );
 
   const renderMobileImageAndLinks = () => (
@@ -55,7 +70,9 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
         {windowWidth !== "sm" && renderImage()}
         <div className="header-content">
           <h1 ref={componentRef} tabIndex={-1}>
-            <a href="https://web3isgoinggreat.com/">Web3 is going just great</a>
+            <Link href="/">
+              <a>Web3 is going just great</a>
+            </Link>
           </h1>
           <p className="subtitle">
             ...and is definitely not an enormous grift that's pouring lighter

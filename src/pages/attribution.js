@@ -1,21 +1,22 @@
-import React from "react";
-import { useQuery } from "react-query";
-import useGA from "../../js/hooks/useGA";
+import PropTypes from "prop-types";
+import useGA from "../hooks/useGA";
 
-import { getAttribution } from "../../js/db/attribution";
+import { getAttribution } from "../db/attribution";
 
-import BackBar from "../shared/BackBar";
-import ExternalLink from "../shared/ExternalLink";
-import Loader from "../shared/Loader";
-import Error from "../shared/Error";
-import Footer from "../shared/Footer";
+import BackBar from "../components/BackBar";
+import ExternalLink from "../components/ExternalLink";
+import Footer from "../components/Footer";
 
-export default function Attribution() {
+export async function getServerSideProps() {
+  return {
+    props: {
+      attribution: await getAttribution(),
+    },
+  };
+}
+
+export default function Attribution({ attribution }) {
   useGA();
-  const { data, isLoading, isError, isSuccess } = useQuery(
-    ["attribution"],
-    getAttribution
-  );
 
   return (
     <>
@@ -117,7 +118,6 @@ export default function Attribution() {
               </ExternalLink>
             </li>
           </ul>
-
           <h3>Icons</h3>
           <ul>
             <li>
@@ -166,24 +166,27 @@ export default function Attribution() {
               </ExternalLink>
             </li>
           </ul>
-
           <h3>Images</h3>
-          {isLoading && <Loader />}
-          {isError && <Error />}
-          {isSuccess && (
-            <ul>
-              {data.entries.map(({ text, href }) => (
-                <li key={text}>
-                  <ExternalLink href={href}>
-                    <span>{text}</span>
-                  </ExternalLink>
-                </li>
-              ))}
-            </ul>
-          )}
+          <ul>
+            {attribution.entries.map(({ text, href }) => (
+              <li key={text}>
+                <ExternalLink href={href}>
+                  <span>{text}</span>
+                </ExternalLink>
+              </li>
+            ))}
+          </ul>
         </article>
       </div>
       <Footer />
     </>
   );
 }
+
+Attribution.propTypes = {
+  attribution: PropTypes.shape({
+    entries: PropTypes.arrayOf(
+      PropTypes.shape({ text: PropTypes.string, href: PropTypes.string })
+    ).isRequired,
+  }).isRequired,
+};

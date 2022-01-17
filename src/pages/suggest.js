@@ -1,8 +1,9 @@
 import React from "react";
-import useGA from "../../js/hooks/useGA";
-import BackBar from "../shared/BackBar";
-import ExternalLink from "../shared/ExternalLink";
-import Footer from "../shared/Footer";
+import useGA from "../hooks/useGA";
+
+import BackBar from "../components/BackBar";
+import ExternalLink from "../components/ExternalLink";
+import Footer from "../components/Footer";
 
 export default function Suggest() {
   useGA();

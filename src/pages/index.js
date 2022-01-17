@@ -1,20 +1,20 @@
 import React, { useCallback, useState, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
-import useGA from "../../js/hooks/useGA";
-import useGetIdFromQuery from "../../js/hooks/useGetIdFromQuery";
-import useWindowWidth from "../../js/hooks/useWindowWidth";
+import useGA from "../hooks/useGA";
+import useGetIdFromQuery from "../hooks/useGetIdFromQuery";
+import useWindowWidth from "../hooks/useWindowWidth";
 
-import { getEntries } from "../../js/db/entries";
-import { EMPTY_FILTERS_STATE } from "../../constants/filters";
+import { getEntries } from "../db/entries";
+import { EMPTY_FILTERS_STATE } from "../constants/filters";
 
 import { InView, useInView } from "react-intersection-observer";
-import Header from "../timeline/Header";
-import Filters from "../timeline/Filters";
-import Entry from "../timeline/Entry";
-import Loader from "../shared/Loader";
-import Error from "../shared/Error";
-import ScrollToTop from "../timeline/ScrollToTop";
-import ScamTotal from "../timeline/ScamTotal";
+import Header from "../components/timeline/Header";
+import Filters from "../components/timeline/Filters";
+import Entry from "../components/timeline/Entry";
+import Loader from "../components/Loader";
+import Error from "../components/Error";
+import ScrollToTop from "../components/timeline/ScrollToTop";
+import ScamTotal from "../components/timeline/ScamTotal";
 
 export default function Timeline() {
   useGA();
@@ -41,7 +41,7 @@ export default function Timeline() {
 
   const { data, hasNextPage, fetchNextPage, isFetching, isLoading, isError } =
     useInfiniteQuery(["entries", filters], getFilteredEntries, {
-      getNextPageParam: (lastPage, pages) => {
+      getNextPageParam: (lastPage) => {
         if (!lastPage) {
           // This is the first fetch, so we have no cursor
           return null;

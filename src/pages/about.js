@@ -1,10 +1,10 @@
 import React from "react";
-import useGA from "../../js/hooks/useGA";
-import { Link } from "react-router-dom";
+import useGA from "../hooks/useGA";
+import Link from "next/link";
 
-import BackBar from "../shared/BackBar";
-import ExternalLink from "../shared/ExternalLink";
-import Footer from "../shared/Footer";
+import BackBar from "../components/BackBar";
+import ExternalLink from "../components/ExternalLink";
+import Footer from "../components/Footer";
 
 export default function WhatIsWeb3() {
   useGA();
@@ -21,9 +21,12 @@ export default function WhatIsWeb3() {
             This is a personal project of mine, and reflects my own opinions. If
             you are looking for an unbiased descriptor of web3 and related
             technologies, there are short ones in the{" "}
-            <Link to="/glossary">Glossary</Link>, but that is not the goal of
-            this site. I would recommend Wikipedia for that (and if the pages
-            there are lacking, I would strongly encourage you to{" "}
+            <Link href="/glossary">
+              <a>Glossary</a>
+            </Link>
+            , but that is not the goal of this site. I would recommend Wikipedia
+            for that (and if the pages there are lacking, I would strongly
+            encourage you to{" "}
             <ExternalLink href="https://en.wikipedia.org/wiki/Help:Introduction">
               contribute to them
             </ExternalLink>

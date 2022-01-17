@@ -1,5 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -14,11 +13,17 @@ export default function Footer() {
             Creative Commons Attribution 3.0 Unported License
           </a>
           . All attribution can be found on the{" "}
-          <Link to="/attribution">attribution</Link> page.
+          <Link href="/attribution">
+            <a>attribution</a>
+          </Link>{" "}
+          page.
         </p>
         <p>
           <a href="https://github.com/molly/web3-is-going-great">Source code</a>{" "}
-          | <Link to="/suggest">Suggest a change or addition</Link>
+          |{" "}
+          <Link href="/suggest">
+            <a>Suggest a change or addition</a>
+          </Link>
         </p>
       </div>
     </footer>

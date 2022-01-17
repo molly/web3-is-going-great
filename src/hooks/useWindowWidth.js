@@ -14,11 +14,13 @@ const getWindowWidth = (px) => {
 
 const useWindowWidth = () => {
   const [windowWidth, setWindowWidth] = useState(
-    getWindowWidth(window.innerWidth)
+    typeof window !== "undefined" ? getWindowWidth(window.innerWidth) : null
   );
 
   const handleResize = useCallback(() => {
-    setWindowWidth(getWindowWidth(window.innerWidth));
+    if (typeof window !== "undefined") {
+      setWindowWidth(getWindowWidth(window.innerWidth));
+    }
   }, [setWindowWidth]);
 
   useEffect(() => {
