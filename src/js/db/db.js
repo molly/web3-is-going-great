@@ -1,10 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore/lite";
-import {
-  getFunctions,
-  httpsCallable,
-  connectFunctionsEmulator,
-} from "firebase/functions";
 import "firebase/auth";
 
 // Initialize Firebase
@@ -19,13 +14,3 @@ const app = initializeApp({
 });
 
 export const db = getFirestore(app);
-
-export const functions = getFunctions(app);
-if (process.env.NODE_ENV === "development") {
-  connectFunctionsEmulator(functions, "localhost", 5001);
-}
-
-export const getEntries = async (filters) => {
-  const resp = await httpsCallable(functions, "getEntries")(filters);
-  return resp.data;
-};

@@ -9,7 +9,7 @@ import {
   FieldPath,
   getDocs,
 } from "firebase/firestore/lite";
-import { db } from "./functions";
+import { db } from "./db";
 
 const DEFAULT_LIMIT = 10;
 

@@ -1,5 +1,5 @@
 import { collection, getDoc, doc, setDoc } from "firebase/firestore/lite";
-import { db } from "./functions";
+import { db } from "./db";
 
 export const uploadEntry = async (entry) => {
   const entriesCollection = collection(db, "entries");
