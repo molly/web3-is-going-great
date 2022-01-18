@@ -1,8 +1,9 @@
-import React, { useCallback, useState, useRef } from "react";
+import { Fragment, useCallback, useState, useRef } from "react";
+import PropTypes from "prop-types";
 import { useInfiniteQuery } from "react-query";
 import useGA from "../hooks/useGA";
-import useGetIdFromQuery from "../hooks/useGetIdFromQuery";
 import useWindowWidth from "../hooks/useWindowWidth";
+import useIsBrowserRendering from "../hooks/useIsBrowserRendering";
 
 import { getEntries } from "../db/entries";
 import { EMPTY_FILTERS_STATE } from "../constants/filters";
@@ -16,11 +17,27 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 import ScrollToTop from "../components/timeline/ScrollToTop";
 import ScamTotal from "../components/timeline/ScamTotal";
+import { EntryPropType } from "../js/entry";
 
-export default function Timeline() {
+export async function getServerSideProps(context) {
+  let props = {};
+  if (
+    context.params &&
+    context.params.id &&
+    context.params.id.match(/\d{4}-\d{2}-\d{2}-?\d{0,2}/)
+  ) {
+    props.firstEntries = await getEntries({ startAtId: context.params.id });
+    props.startAtId = context.params.id;
+  } else {
+    props.firstEntries = await getEntries({});
+  }
+  return { props };
+}
+
+export default function Timeline({ firstEntries, startAtId }) {
   useGA();
+  const isBrowserRendering = useIsBrowserRendering();
   const windowWidth = useWindowWidth();
-  const startAtId = useGetIdFromQuery();
 
   const [filters, setFilters] = useState(EMPTY_FILTERS_STATE);
   const [currentRunningScamTotal, setCurrentRunningScamTotal] = useState(0);
@@ -42,6 +59,7 @@ export default function Timeline() {
 
   const { data, hasNextPage, fetchNextPage, isFetching, isLoading, isError } =
     useInfiniteQuery(["entries", filters], getFilteredEntries, {
+      initialData: { pages: [firstEntries], pageParams: [undefined] },
       getNextPageParam: (lastPage) => {
         if (!lastPage) {
           // This is the first fetch, so we have no cursor
@@ -55,32 +73,23 @@ export default function Timeline() {
       },
     });
 
-  const renderScrollSentinel = () => (
-    <InView
-      threshold={0}
-      onChange={(inView) => {
-        if (inView && !isFetching) {
-          fetchNextPage();
-        }
-      }}
-    >
-      <div className="scroll-sentinel"></div>
-    </InView>
-  );
+  const renderScrollSentinel = () => {
+    return (
+      <InView
+        threshold={0}
+        onChange={(inView) => {
+          if (inView && !isFetching) {
+            fetchNextPage();
+          }
+        }}
+      >
+        <div className="scroll-sentinel"></div>
+      </InView>
+    );
+  };
 
   const renderGoToTop = () => {
-    return (
-      <>
-        <div className="load-top">
-          <button
-            onClick={() => (window.location.href = window.location.origin)}
-          >
-            <span>Start from the top</span>
-          </button>
-        </div>
-        <div className="timeline dots" />
-      </>
-    );
+    return null;
   };
 
   const renderEntries = () => {
@@ -92,7 +101,7 @@ export default function Timeline() {
           {data.pages.map((page, pageInd) => {
             const isLastPage = pageInd === data.pages.length - 1;
             return (
-              <React.Fragment key={`page-${pageInd}`}>
+              <Fragment key={`page-${pageInd}`}>
                 {page.entries.map((entry, entryInd) => {
                   const isLastEntry = entryInd === page.entries.length - 1;
                   let className = entryInd % 2 === 0 ? "even" : "odd";
@@ -120,15 +129,15 @@ export default function Timeline() {
                   // the next page when it comes into view.
                   if (isLastPage && isLastEntry) {
                     return (
-                      <React.Fragment key={`${entry.id}-withSentinel`}>
+                      <Fragment key={`${entry.id}-withSentinel`}>
                         {renderScrollSentinel()}
                         {entryElement}
-                      </React.Fragment>
+                      </Fragment>
                     );
                   }
                   return entryElement;
                 })}
-              </React.Fragment>
+              </Fragment>
             );
           })}
           {hasNextPage && <Loader />}
@@ -147,17 +156,15 @@ export default function Timeline() {
   };
 
   const renderNoJs = () => {
-    if (typeof window == "undefined") {
+    if (!isBrowserRendering) {
       return (
-        <>
-          <p id="noscript">
-            No JavaScript? That's cool too! Check out the{" "}
-            <Link href="/web1">
-              <a>Web&nbsp;1.0</a>
-            </Link>{" "}
-            version of this site.
-          </p>
-        </>
+        <p id="noscript">
+          No JavaScript? That's cool too! Check out the{" "}
+          <Link href="/web1">
+            <a>Web&nbsp;1.0</a>
+          </Link>{" "}
+          version of this site.
+        </p>
       );
     }
     return null;
@@ -185,3 +192,11 @@ export default function Timeline() {
     </>
   );
 }
+
+Timeline.propTypes = {
+  firstEntries: PropTypes.shape({
+    entries: PropTypes.arrayOf(EntryPropType).isRequired,
+    hasMore: PropTypes.bool.isRequired,
+  }).isRequired,
+  startAtId: PropTypes.string,
+};

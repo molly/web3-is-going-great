@@ -8,7 +8,7 @@ import ExternalLink from "../ExternalLink";
 
 const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
   const componentRef = useRef();
-  useImperativeHandle(ref?.focusRef, () => ({
+  useImperativeHandle(ref && ref.focusRef ? ref.focusRef : null, () => ({
     focus: () => componentRef.current.focus(),
   }));
 
@@ -77,7 +77,10 @@ const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
   };
 
   return (
-    <header className="timeline-page page-header" ref={ref?.inViewRef}>
+    <header
+      className="timeline-page page-header"
+      ref={ref && ref.inViewRef ? ref.inViewRef : null}
+    >
       <div className="constrain-width">
         {windowWidth !== "sm" && renderImage()}
         <div className="header-content">

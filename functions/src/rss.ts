@@ -64,7 +64,8 @@ export const updateRssOnChange = functions.firestore
       });
 
       if (
-        resp?.data &&
+        resp &&
+        resp.data &&
         resp.data.search(/<m:validity>\s*true\s*<\/m:validity>/gm) > -1
       ) {
         // Valid XML, carry on

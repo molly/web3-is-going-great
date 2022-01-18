@@ -16,7 +16,12 @@ export default function Form() {
   const [isUploadComplete, setIsUploadComplete] = useState(false);
 
   const createFieldSetter = (field) => (val) => {
-    const value = val?.target?.value === undefined ? val : val.target.value;
+    let value;
+    if (val && val.target && val.target.value) {
+      value = val.target.value;
+    } else {
+      value = val;
+    }
     setEntry({ ...entry, [field]: value });
   };
   const updateEntry = (toMerge) => {

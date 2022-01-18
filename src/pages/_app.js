@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 import ReactGA from "react-ga";
 import Head from "next/head";
 import { QueryClient, QueryClientProvider } from "react-query";
+import useIsBrowserRendering from "../hooks/useIsBrowserRendering";
 
 if (typeof window !== "undefined") {
   ReactGA.initialize("UA-215114522-1");
 }
 
 function CustomApp({ Component, pageProps }) {
+  const isBrowserRendering = useIsBrowserRendering();
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -62,10 +64,8 @@ function CustomApp({ Component, pageProps }) {
       Yacht Club NFT monkey looks at a world engulfed in flames. Text next to it
       says 'Web3 is going just great.'"
         />
-        {typeof window == "undefined" && (
-          // eslint-disable-next-line @next/next/no-css-tags
-          <link rel="stylesheet" href="/min.css"></link>
-        )}
+        {/* eslint-disable-next-line @next/next/no-css-tags */}
+        {!isBrowserRendering && <link rel="stylesheet" href="./min.css"></link>}
       </Head>
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />

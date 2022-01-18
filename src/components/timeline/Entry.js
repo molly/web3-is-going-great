@@ -8,7 +8,7 @@ import ICONS from "../../constants/icons";
 import { humanizeDate, isWrappedInParagraphTags } from "../../js/utilities";
 import { EntryPropType } from "../../js/entry";
 
-import InView from "react-intersection-observer";
+import { InView } from "react-intersection-observer";
 import Link from "next/link";
 
 export default function Entry({
@@ -93,7 +93,7 @@ export default function Entry({
   };
 
   const renderImageCaption = () => {
-    if (entry?.image?.caption) {
+    if (entry.image && entry.image.caption) {
       return (
         <>
           <span
@@ -113,7 +113,8 @@ export default function Entry({
 
   const renderImage = () => {
     const isLogo =
-      entry.image?.caption &&
+      entry.image &&
+      entry.image.caption &&
       entry.image.caption.toLowerCase().includes("logo");
 
     if (entry.image && (windowWidth !== "sm" || !isLogo)) {
@@ -173,13 +174,17 @@ export default function Entry({
       .sort()
       .join(", ");
     let blockchain, tech;
-    if (entry.filters?.blockchain?.length) {
+    if (
+      entry.filters &&
+      entry.filters.blockchain &&
+      entry.filters.blockchain.length
+    ) {
       blockchain = `Blockchain: ${entry.filters.blockchain
         .map((bc) => FILTERS.blockchain[bc])
         .sort()
         .join(", ")}`;
     }
-    if (entry.filters?.tech?.length) {
+    if (entry.filters && entry.filters.tech && entry.filters.tech.length) {
       tech = entry.filters.tech
         .map((tech) => FILTERS.tech[tech])
         .sort()
