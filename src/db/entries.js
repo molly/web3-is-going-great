@@ -61,8 +61,18 @@ export const getEntries = async (data) => {
     }
   });
 
-  if (!entries) {
+  return { entries, hasMore };
+};
+
+export const getAllEntries = async () => {
+  const entriesCollection = collection(db, "entries");
+  const snapshot = await getDocs(entriesCollection);
+  const entries = [];
+  snapshot.forEach((child) => {
+    entries.push({ _key: child.id, ...child.data() });
+  });
+  if (!entries.length) {
     throw new Error("internal");
   }
-  return { entries, hasMore };
+  return entries;
 };

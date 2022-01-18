@@ -262,8 +262,12 @@ Entry.propTypes = {
   className: PropTypes.string,
   entry: EntryPropType,
   windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
-  runningScamTotal: PropTypes.number.isRequired,
+  runningScamTotal: PropTypes.number,
   currentRunningScamTotal: PropTypes.number,
   setCurrentRunningScamTotal: PropTypes.func,
   shouldScrollToElement: PropTypes.bool,
+};
+
+Entry.propTypes = {
+  runningScamTotal: 0,
 };

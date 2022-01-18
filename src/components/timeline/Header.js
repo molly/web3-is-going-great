@@ -6,7 +6,7 @@ import { STORAGE_URL } from "../../constants/urls";
 import Link from "next/link";
 import ExternalLink from "../ExternalLink";
 
-const Header = forwardRef(function Header({ windowWidth }, ref) {
+const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
   const componentRef = useRef();
   useImperativeHandle(ref?.focusRef, () => ({
     focus: () => componentRef.current.focus(),
@@ -64,6 +64,18 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
     </div>
   );
 
+  const renderIconLinkContents = (iconClass, iconText) => {
+    if (nojs) {
+      return <span>{iconText}</span>;
+    }
+    return (
+      <>
+        <i title={iconText} className={iconClass} aria-hidden={true}></i>
+        <span className="sr-only">{iconText}</span>
+      </>
+    );
+  };
+
   return (
     <header className="timeline-page page-header" ref={ref?.inViewRef}>
       <div className="constrain-width">
@@ -89,21 +101,11 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
             <span style={{ display: "inline-block" }}>
               <span aria-hidden={true}>(</span>
               <ExternalLink href="https://twitter.com/molly0xFFF">
-                <i
-                  title="Twitter"
-                  className="fa-brands fa-twitter"
-                  aria-hidden={true}
-                ></i>
-                <span className="sr-only">Twitter</span>
+                {renderIconLinkContents("fa-brands fa-twitter", "Twitter")}
               </ExternalLink>
               <span aria-hidden={true}>, </span>
               <ExternalLink href="https://www.mollywhite.net/">
-                <i
-                  title="Website"
-                  className="fas fa-link"
-                  aria-hidden={true}
-                ></i>
-                <span className="sr-only">Website</span>
+                {renderIconLinkContents("fas fa-link", "Website")}
               </ExternalLink>
               <span aria-hidden={true}>)</span>
             </span>{" "}
@@ -113,7 +115,7 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
             </ExternalLink>{" "}
             or with{" "}
             <ExternalLink href="https://web3isgoinggreat.com/feed.xml">
-              RSS <i className="fas fa-rss" />
+              RSS {!nojs && <i className="fas fa-rss" />}
             </ExternalLink>
           </p>
           {windowWidth === "sm" ? renderMobileImageAndLinks() : renderLinks()}
@@ -125,6 +127,11 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
 
 Header.propTypes = {
   windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
+  nojs: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  nojs: false,
 };
 
 export default Header;

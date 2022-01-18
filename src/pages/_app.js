@@ -63,7 +63,7 @@ function CustomApp({ Component, pageProps }) {
       says 'Web3 is going just great.'"
         />
         {typeof window == "undefined" && (
-          <link rel="stylesheet" href="/web1.css"></link>
+          <link rel="stylesheet" href="/min.css"></link>
         )}
       </Head>
       <QueryClientProvider client={queryClient}>

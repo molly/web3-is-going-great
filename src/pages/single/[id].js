@@ -32,7 +32,6 @@ export default function SingleEntry({ entry, error = null }) {
   const windowWidth = useWindowWidth();
 
   const renderEntry = () => {
-    let runningScamTotal = 0;
     return (
       <article className="single-timeline-wrapper">
         <Entry
@@ -40,7 +39,6 @@ export default function SingleEntry({ entry, error = null }) {
           key={entry.id}
           entry={entry}
           windowWidth={windowWidth}
-          runningScamTotal={runningScamTotal}
         />
       </article>
     );
