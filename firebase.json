@@ -1,6 +1,5 @@
 {
     "hosting": {
-        "public": "build",
         "ignore": [
             "firebase.json",
             "**/.*",
@@ -22,14 +21,6 @@
             {
                 "source": "/stagedFeed.xml",
                 "function": "serveStagedRss"
-            },
-            {
-                "source": "/web1",
-                "function": "serveWeb1"
-            },
-            {
-                "source": "**",
-                "destination": "/index.html"
             }
         ]
     },
