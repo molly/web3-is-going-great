@@ -268,6 +268,6 @@ Entry.propTypes = {
   shouldScrollToElement: PropTypes.bool,
 };
 
-Entry.propTypes = {
+Entry.defaultProps = {
   runningScamTotal: 0,
 };
