@@ -10,7 +10,7 @@ import Entry from "../../components/timeline/Entry";
 import Footer from "../../components/Footer";
 import Error from "../../components/Error";
 import { EntryPropType } from "../../js/entry";
-import CustomHead from "../../components/CustomHead";
+import CustomEntryHead from "../../components/CustomEntryHead";
 
 export async function getServerSideProps(context) {
   const props = { entry: null };
@@ -60,7 +60,7 @@ export default function SingleEntry({ entry, error = null }) {
 
   return (
     <>
-      <CustomHead entry={entry} />
+      <CustomEntryHead entry={entry} />
       <Header windowWidth={windowWidth} />
       <BackBar customText="Go to full timeline" />
       <div className="timeline-page content-wrapper">{renderBody()}</div>

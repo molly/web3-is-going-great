@@ -10,7 +10,7 @@ import { EMPTY_FILTERS_STATE } from "../constants/filters";
 
 import Link from "next/link";
 import { InView, useInView } from "react-intersection-observer";
-import CustomHead from "../components/CustomHead";
+import CustomEntryHead from "../components/CustomEntryHead";
 import Header from "../components/timeline/Header";
 import Filters from "../components/timeline/Filters";
 import Entry from "../components/timeline/Entry";
@@ -91,7 +91,18 @@ export default function Timeline({ firstEntries, startAtId }) {
   };
 
   const renderGoToTop = () => {
-    return null;
+    return (
+      <>
+        <div className="load-top">
+          <button
+            onClick={() => (window.location.href = window.location.origin)}
+          >
+            <span>Start from the top</span>
+          </button>
+        </div>
+        <div className="timeline dots" />
+      </>
+    );
   };
 
   const renderEntries = () => {
@@ -99,7 +110,7 @@ export default function Timeline({ firstEntries, startAtId }) {
     return (
       <>
         {startAtId && renderGoToTop()}
-        {startAtId && <CustomHead entry={data.pages[0].entries[0]} />}
+        {startAtId && <CustomEntryHead entry={data.pages[0].entries[0]} />}
         <article className="timeline">
           {data.pages.map((page, pageInd) => {
             const isLastPage = pageInd === data.pages.length - 1;

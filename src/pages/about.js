@@ -2,6 +2,7 @@ import React from "react";
 import useGA from "../hooks/useGA";
 import Link from "next/link";
 
+import CustomHead from "../components/CustomHead";
 import BackBar from "../components/BackBar";
 import ExternalLink from "../components/ExternalLink";
 import Footer from "../components/Footer";
@@ -10,6 +11,11 @@ export default function WhatIsWeb3() {
   useGA();
   return (
     <>
+      <CustomHead
+        title="About – Web3 is going just great"
+        description="About the Web3 is going just great project"
+        urlPath="about"
+      />
       <header className="page-header">
         <h1>About</h1>
       </header>

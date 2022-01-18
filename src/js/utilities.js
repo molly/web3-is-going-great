@@ -20,7 +20,7 @@ export const isWrappedInParagraphTags = function (html) {
 };
 
 export const stripHtml = function (html) {
-  return html.replace(/<[^>]+>/g, "");
+  return html.replace(/<[^>]+>/g, "").replace("&nbsp;", " ");
 };
 
 export const getImageDimensions = (imageSrc) =>

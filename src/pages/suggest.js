@@ -1,6 +1,7 @@
 import React from "react";
 import useGA from "../hooks/useGA";
 
+import CustomHead from "../components/CustomHead";
 import BackBar from "../components/BackBar";
 import ExternalLink from "../components/ExternalLink";
 import Footer from "../components/Footer";
@@ -10,6 +11,11 @@ export default function Suggest() {
 
   return (
     <>
+      <CustomHead
+        title="Suggest – Web3 is going just great"
+        description="Suggest an addition or change"
+        urlPath="suggest"
+      />
       <header className="page-header attribution-header">
         <h1>Suggest an addition or change</h1>
       </header>

@@ -1,6 +1,7 @@
 import React from "react";
 import useGA from "../hooks/useGA";
 
+import CustomHead from "../components/CustomHead";
 import BackBar from "../components/BackBar";
 import ExternalLink from "../components/ExternalLink";
 import Footer from "../components/Footer";
@@ -10,6 +11,11 @@ export default function Glossary() {
 
   return (
     <>
+      <CustomHead
+        title="Glossary – Web3 is going just great"
+        description="Glossary of common terms pertaining to web3"
+        urlPath="glossary"
+      />
       <header className="page-header">
         <h1>Glossary</h1>
       </header>

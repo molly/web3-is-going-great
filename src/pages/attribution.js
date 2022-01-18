@@ -3,6 +3,7 @@ import useGA from "../hooks/useGA";
 
 import { getAttribution } from "../db/attribution";
 
+import CustomHead from "../components/CustomHead";
 import BackBar from "../components/BackBar";
 import ExternalLink from "../components/ExternalLink";
 import Footer from "../components/Footer";
@@ -20,6 +21,11 @@ export default function Attribution({ attribution }) {
 
   return (
     <>
+      <CustomHead
+        title="Attribution – Web3 is going just great"
+        description="Attribution for text, icons, and images used in the Web3 is Going Great project"
+        urlPath="attribution"
+      />
       <header className="page-header attribution-header">
         <h1>Attribution</h1>
       </header>
