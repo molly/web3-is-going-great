@@ -63,6 +63,7 @@ function CustomApp({ Component, pageProps }) {
       says 'Web3 is going just great.'"
         />
         {typeof window == "undefined" && (
+          // eslint-disable-next-line @next/next/no-css-tags
           <link rel="stylesheet" href="/min.css"></link>
         )}
       </Head>

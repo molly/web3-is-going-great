@@ -1,15 +1,19 @@
+import PropTypes from "prop-types";
 import Header from "../components/timeline/Header";
 import Entry from "../components/timeline/Entry";
 import Error from "../components/Error";
 
 import { getAllEntries } from "../db/entries";
+import { EntryPropType } from "../js/entry";
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const props = { entries: null };
   try {
     const entries = await getAllEntries();
     props.entries = entries;
-  } catch (err) {}
+  } catch (err) {
+    // pass and leave entries null
+  }
 
   return { props };
 }
@@ -31,3 +35,7 @@ export default function Web1({ entries }) {
     </>
   );
 }
+
+Web1.propTypes = {
+  entries: PropTypes.arrayOf(EntryPropType),
+};

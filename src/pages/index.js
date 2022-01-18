@@ -7,7 +7,7 @@ import useWindowWidth from "../hooks/useWindowWidth";
 import { getEntries } from "../db/entries";
 import { EMPTY_FILTERS_STATE } from "../constants/filters";
 
-import Head from "next/head";
+import Link from "next/link";
 import { InView, useInView } from "react-intersection-observer";
 import Header from "../components/timeline/Header";
 import Filters from "../components/timeline/Filters";
@@ -152,7 +152,10 @@ export default function Timeline() {
         <>
           <p id="noscript">
             No JavaScript? That's cool too! Check out the{" "}
-            <a href="/web1">Web&nbsp;1.0</a> version of this site.
+            <Link href="/web1">
+              <a>Web&nbsp;1.0</a>
+            </Link>{" "}
+            version of this site.
           </p>
         </>
       );
