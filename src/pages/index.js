@@ -7,6 +7,7 @@ import useWindowWidth from "../hooks/useWindowWidth";
 import { getEntries } from "../db/entries";
 import { EMPTY_FILTERS_STATE } from "../constants/filters";
 
+import Head from "next/head";
 import { InView, useInView } from "react-intersection-observer";
 import Header from "../components/timeline/Header";
 import Filters from "../components/timeline/Filters";
@@ -145,6 +146,20 @@ export default function Timeline() {
     return renderEntries();
   };
 
+  const renderNoJs = () => {
+    if (typeof window == "undefined") {
+      return (
+        <>
+          <p id="noscript">
+            No JavaScript? That's cool too! Check out the{" "}
+            <a href="/web1">Web&nbsp;1.0</a> version of this site.
+          </p>
+        </>
+      );
+    }
+    return null;
+  };
+
   return (
     <>
       <Header
@@ -157,6 +172,7 @@ export default function Timeline() {
         aria-busy={isLoading}
         aria-live="polite"
       >
+        {renderNoJs()}
         {renderBody()}
       </div>
       <div className="fix-at-bottom">

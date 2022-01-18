@@ -62,6 +62,9 @@ function CustomApp({ Component, pageProps }) {
       Yacht Club NFT monkey looks at a world engulfed in flames. Text next to it
       says 'Web3 is going just great.'"
         />
+        {typeof window == "undefined" && (
+          <link rel="stylesheet" href="/web1.css"></link>
+        )}
       </Head>
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
