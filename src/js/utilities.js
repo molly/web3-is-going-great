@@ -18,3 +18,20 @@ export const isWrappedInParagraphTags = function (html) {
   }
   return html.substring(0, 3) === "<p>";
 };
+
+export const stripHtml = function (html) {
+  return html.replace(/<[^>]+>/g, "");
+};
+
+export const getImageDimensions = (imageSrc) =>
+  // eslint-disable-next-line no-undef
+  new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      resolve({ height: img.height, width: img.width });
+    };
+    img.onerror = (err) => {
+      reject(err);
+    };
+    img.src = imageSrc;
+  });

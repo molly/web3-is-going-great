@@ -10,6 +10,7 @@ import { EMPTY_FILTERS_STATE } from "../constants/filters";
 
 import Link from "next/link";
 import { InView, useInView } from "react-intersection-observer";
+import CustomHead from "../components/CustomHead";
 import Header from "../components/timeline/Header";
 import Filters from "../components/timeline/Filters";
 import Entry from "../components/timeline/Entry";
@@ -22,12 +23,12 @@ import { EntryPropType } from "../js/entry";
 export async function getServerSideProps(context) {
   let props = {};
   if (
-    context.params &&
-    context.params.id &&
-    context.params.id.match(/\d{4}-\d{2}-\d{2}-?\d{0,2}/)
+    context.query &&
+    context.query.id &&
+    context.query.id.match(/\d{4}-\d{2}-\d{2}-?\d{0,2}/)
   ) {
-    props.firstEntries = await getEntries({ startAtId: context.params.id });
-    props.startAtId = context.params.id;
+    props.firstEntries = await getEntries({ startAtId: context.query.id });
+    props.startAtId = context.query.id;
   } else {
     props.firstEntries = await getEntries({});
   }
@@ -52,14 +53,15 @@ export default function Timeline({ firstEntries, startAtId }) {
 
   const getFilteredEntries = useCallback(
     ({ pageParam = null }) => {
-      return getEntries({ ...filters, cursor: pageParam, startAtId });
+      return getEntries({ ...filters, cursor: pageParam });
     },
-    [filters, startAtId]
+    [filters]
   );
 
   const { data, hasNextPage, fetchNextPage, isFetching, isLoading, isError } =
     useInfiniteQuery(["entries", filters], getFilteredEntries, {
       initialData: { pages: [firstEntries], pageParams: [undefined] },
+      enabled: false,
       getNextPageParam: (lastPage) => {
         if (!lastPage) {
           // This is the first fetch, so we have no cursor
@@ -97,6 +99,7 @@ export default function Timeline({ firstEntries, startAtId }) {
     return (
       <>
         {startAtId && renderGoToTop()}
+        {startAtId && <CustomHead entry={data.pages[0].entries[0]} />}
         <article className="timeline">
           {data.pages.map((page, pageInd) => {
             const isLastPage = pageInd === data.pages.length - 1;
