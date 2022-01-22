@@ -85,8 +85,10 @@ function CustomApp({ Component, pageProps }) {
           key="twitterimagealt"
           content="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames. Text next to it says 'Web3 is going just great.'"
         />
-        {/* eslint-disable-next-line @next/next/no-css-tags */}
-        {!isBrowserRendering && <link rel="stylesheet" href="./min.css"></link>}
+        {!isBrowserRendering && (
+          // eslint-disable-next-line @next/next/no-css-tags
+          <link rel="stylesheet" href="./web1.css"></link>
+        )}
       </Head>
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />

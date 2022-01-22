@@ -7,6 +7,7 @@ import {
   startAt,
   where,
   FieldPath,
+  getDoc,
   getDocs,
 } from "firebase/firestore/lite";
 import { db } from "./db";
@@ -64,16 +65,59 @@ export const getEntries = async (data) => {
   return { entries, hasMore };
 };
 
-export const getAllEntries = async () => {
+const ALL_ENTRIES_LIMIT = 50;
+export const getAllEntries = async ({ cursor, direction }) => {
+  const resp = {
+    entries: [],
+    hasPrev: false,
+    hasNext: false,
+  };
+
   const entriesCollection = collection(db, "entries");
-  const query = query(entriesCollection, orderBy("id", "desc"));
-  const snapshot = await getDocs(query);
-  const entries = [];
-  snapshot.forEach((child) => {
-    entries.push({ _key: child.id, ...child.data() });
-  });
-  if (!entries.length) {
-    throw new Error("internal");
+
+  let q = query(
+    entriesCollection,
+    orderBy("id", direction === "prev" ? "asc" : "desc")
+  );
+
+  // Get this page of entries
+  if (cursor) {
+    q = query(q, startAfter(cursor));
   }
-  return entries;
+
+  // Check if this is the first entry available
+  if (cursor) {
+    const firstEntrySnapshot = await getDocs(query(q, limit(1)));
+    const firstEntry = firstEntrySnapshot.docs[0];
+    if (firstEntry.get("id") !== cursor) {
+      resp.hasPrev = true;
+    }
+  }
+
+  // Limit query
+  q = query(q, limit(ALL_ENTRIES_LIMIT + 1));
+  const snapshot = await getDocs(q);
+
+  if (direction === "next") {
+    snapshot.forEach((child) => {
+      if (resp.entries.length < ALL_ENTRIES_LIMIT) {
+        resp.entries.push({ _key: child.id, ...child.data() });
+      } else {
+        resp.hasNext = true;
+      }
+    });
+  } else {
+    snapshot.forEach((child) => {
+      resp.entries.push({ _key: child.id, ...child.data() });
+      if (resp.entries.length === ALL_ENTRIES_LIMIT) {
+        resp.hasNext = true;
+      }
+    });
+    resp.entries.reverse();
+    if (resp.entries.length > 50) {
+      resp.entries = resp.entries.slice(1);
+    }
+  }
+
+  return resp;
 };
