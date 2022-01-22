@@ -3,4 +3,6 @@ env: flex
 
 automatic_scaling:
   min_num_instances: 1
-  max_num_instances: 5
+  max_num_instances: 100
+  target_cpu_utilization: 0.7
+  max_concurrent_requests: 80
