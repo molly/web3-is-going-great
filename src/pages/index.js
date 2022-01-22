@@ -61,7 +61,7 @@ export default function Timeline({ firstEntries, startAtId }) {
   const { data, hasNextPage, fetchNextPage, isFetching, isLoading, isError } =
     useInfiniteQuery(["entries", filters], getFilteredEntries, {
       initialData: { pages: [firstEntries], pageParams: [undefined] },
-      enabled: false,
+      refetchOnMount: false,
       getNextPageParam: (lastPage) => {
         if (!lastPage) {
           // This is the first fetch, so we have no cursor

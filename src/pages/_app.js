@@ -96,7 +96,7 @@ function CustomApp({ Component, pageProps }) {
 }
 
 CustomApp.propTypes = {
-  Component: PropTypes.node.isRequired,
+  Component: PropTypes.any.isRequired,
   pageProps: PropTypes.object,
 };
 

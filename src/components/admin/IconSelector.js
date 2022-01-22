@@ -33,6 +33,7 @@ export default function IconSelector({ updateEntry, value }) {
 
   return (
     <Select
+      instanceId="iconSelector"
       options={Object.entries(ALL_ICONS).map(([key, value]) => ({
         value: key,
         label: value.text,

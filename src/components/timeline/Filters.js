@@ -12,6 +12,7 @@ export default function Filters({ filters, setFilters, windowWidth }) {
     return (
       <Select
         key={filter}
+        instanceId={filter}
         className="filter-select"
         options={Object.entries(FILTERS[filter]).map(([key, value]) => ({
           value: key,

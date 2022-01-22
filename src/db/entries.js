@@ -66,7 +66,8 @@ export const getEntries = async (data) => {
 
 export const getAllEntries = async () => {
   const entriesCollection = collection(db, "entries");
-  const snapshot = await getDocs(entriesCollection);
+  const query = query(entriesCollection, orderBy("id", "desc"));
+  const snapshot = await getDocs(query);
   const entries = [];
   snapshot.forEach((child) => {
     entries.push({ _key: child.id, ...child.data() });
