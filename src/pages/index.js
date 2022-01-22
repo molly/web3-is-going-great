@@ -111,7 +111,7 @@ export default function Timeline({ firstEntries, startAtId }) {
       <>
         {startAtId && renderGoToTop()}
         {startAtId && <CustomEntryHead entry={data.pages[0].entries[0]} />}
-        <article className="timeline">
+        <article id="timeline" className="timeline">
           {data.pages.map((page, pageInd) => {
             const isLastPage = pageInd === data.pages.length - 1;
             return (
