@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import { EMPTY_FILTERS_STATE } from "../../constants/filters";
 
-import FILTERS from "../../constants/filters";
+import FILTERS, { EMPTY_FILTERS_STATE } from "../../constants/filters";
 import { sentenceCase } from "../../js/utilities";
 
 export default function Filters({ filters, setFilters, windowWidth }) {
@@ -13,6 +12,7 @@ export default function Filters({ filters, setFilters, windowWidth }) {
     return (
       <Select
         key={filter}
+        instanceId={filter}
         className="filter-select"
         options={Object.entries(FILTERS[filter]).map(([key, value]) => ({
           value: key,

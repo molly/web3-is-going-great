@@ -4,7 +4,7 @@ import {
   signOut as fbSignOut,
 } from "firebase/auth";
 import { trimEmptyFields } from "./entry";
-import { addAttribution, uploadEntry } from "./db/admin";
+import { addAttribution, uploadEntry } from "../db/admin";
 
 export const auth = getAuth();
 export const signIn = (password) =>
@@ -18,5 +18,6 @@ export const upload = async (rawEntry, rawAttribution) => {
   if (attribution) {
     promises.push([addAttribution(attribution)]);
   }
+  // eslint-disable-next-line no-undef
   await Promise.all(promises);
 };

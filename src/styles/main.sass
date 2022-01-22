@@ -373,7 +373,7 @@ dt
 .grift-counter
   box-sizing: content-box
   border-top: 16px solid #0000
-  border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.png);
+  border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.png)
   border-image-slice: 16 0
   border-image-repeat: repeat
   margin-left: 10px
@@ -546,8 +546,9 @@ dt
     img.logo
       max-height: 200px
 
-  .timeline::before,
+  .timeline::before
     left: 0
+
   .timeline-icon
     left: 2px
 
@@ -621,7 +622,7 @@ dt
     .timeline-description
       margin-left: 10px
 
-      img,
+      img
         width: 100%
         max-height: 300px
         max-width: none
@@ -643,6 +644,10 @@ dt
 
   .load-top button
     margin-left: 4px
+
+.flex-between
+  display: flex
+  justify-content: space-between
 
 // DARK MODE
 @media (prefers-color-scheme: dark)

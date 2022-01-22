@@ -1,12 +1,15 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+/* eslint-disable @next/next/no-img-element */
+import { useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
 import ICONS from "../../constants/icons";
-import { humanizeDate, isWrappedInParagraphTags } from "../../js/utilities";
+import { humanizeDate } from "../../js/utilities";
 import { EntryPropType } from "../../js/entry";
-import InView from "react-intersection-observer";
+
+import { InView } from "react-intersection-observer";
+import Link from "next/link";
 
 export default function Entry({
   entry,
@@ -24,7 +27,8 @@ export default function Entry({
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.scrollIntoView();
+      const rect = ref.current.getBoundingClientRect();
+      window.scrollTo(0, rect.y - 70);
     }
   }, [ref]);
 
@@ -57,11 +61,14 @@ export default function Entry({
     } else if (entry.icon) {
       return (
         <div className="icon-wrapper">
-          <img
-            src={`${STORAGE_URL}/icons/${ICONS[entry.icon]}`}
-            alt="" // Decorative, hidden to screenreaders
-            aria-hidden="true"
-          />
+          <div className="image-wrapper">
+            <img
+              src={`${STORAGE_URL}/icons/${ICONS[entry.icon]}`}
+              alt="" // Decorative, hidden to screenreaders
+              aria-hidden="true"
+              layout="fill"
+            />
+          </div>
         </div>
       );
     }
@@ -77,6 +84,7 @@ export default function Entry({
       <img
         src={`${STORAGE_URL}/entryAssets/${entry.image.src}`}
         alt={entry.image.alt}
+        layout="fill"
         onClick={onClick}
         className={onClick ? "clickable" : null}
       />
@@ -84,7 +92,7 @@ export default function Entry({
   };
 
   const renderImageCaption = () => {
-    if (entry?.image?.caption) {
+    if (entry.image && entry.image.caption) {
       return (
         <>
           <span
@@ -92,7 +100,9 @@ export default function Entry({
             dangerouslySetInnerHTML={{ __html: entry.image.caption }}
           />{" "}
           <span className="attribution-link">
-            <a href="/attribution">(attribution)</a>
+            <Link href="/attribution">
+              <a>(attribution)</a>
+            </Link>
           </span>
         </>
       );
@@ -102,7 +112,8 @@ export default function Entry({
 
   const renderImage = () => {
     const isLogo =
-      entry.image?.caption &&
+      entry.image &&
+      entry.image.caption &&
       entry.image.caption.toLowerCase().includes("logo");
 
     if (entry.image && (windowWidth !== "sm" || !isLogo)) {
@@ -131,11 +142,6 @@ export default function Entry({
     }
   };
 
-  const renderBody = () => {
-    const body = <span dangerouslySetInnerHTML={{ __html: entry.body }} />;
-    return isWrappedInParagraphTags(entry.body) ? body : <p>{body}</p>;
-  };
-
   const renderLinks = () => {
     if (entry.links && entry.links.length) {
       return (
@@ -162,13 +168,17 @@ export default function Entry({
       .sort()
       .join(", ");
     let blockchain, tech;
-    if (entry.filters?.blockchain?.length) {
+    if (
+      entry.filters &&
+      entry.filters.blockchain &&
+      entry.filters.blockchain.length
+    ) {
       blockchain = `Blockchain: ${entry.filters.blockchain
         .map((bc) => FILTERS.blockchain[bc])
         .sort()
         .join(", ")}`;
     }
-    if (entry.filters?.tech?.length) {
+    if (entry.filters && entry.filters.tech && entry.filters.tech.length) {
       tech = entry.filters.tech
         .map((tech) => FILTERS.tech[tech])
         .sort()
@@ -238,7 +248,7 @@ export default function Entry({
           </button>
         </h2>
         {renderImage(true)}
-        {renderBody()}
+        <span dangerouslySetInnerHTML={{ __html: entry.body }}></span>
         {renderLinks()}
         {renderTagsWithSentinel()}
       </div>
@@ -251,8 +261,12 @@ Entry.propTypes = {
   className: PropTypes.string,
   entry: EntryPropType,
   windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
-  runningScamTotal: PropTypes.number.isRequired,
+  runningScamTotal: PropTypes.number,
   currentRunningScamTotal: PropTypes.number,
   setCurrentRunningScamTotal: PropTypes.func,
   shouldScrollToElement: PropTypes.bool,
+};
+
+Entry.defaultProps = {
+  runningScamTotal: 0,
 };

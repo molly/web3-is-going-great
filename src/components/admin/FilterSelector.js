@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { sentenceCase } from "../../js/utilities";
 import FILTERS from "../../constants/filters";

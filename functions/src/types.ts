@@ -1,13 +1,3 @@
-export type EntryQuery = {
-  limit?: number;
-  cursor?: string;
-  startAtId?: string;
-  theme: string[];
-  tech?: string[];
-  blockchain?: string[];
-  sort?: string;
-};
-
 type Filter = {
   theme: string[];
   tech?: string[];
@@ -46,8 +36,3 @@ export interface RssEntry extends Entry {
   createdAt: string | null;
   updatedAt: string | null;
 }
-
-export type AttributionEntry = {
-  href: string;
-  text: string;
-};
