@@ -4,7 +4,8 @@ html {
 }
 
 body {
-    margin: 0
+    margin: 0;
+    font-family: "Monaco", "Andalé Mono", "Courier New", "Courier", monospace;
 }
 
 main {
@@ -197,8 +198,18 @@ summary {
 }
 
 .flex-between {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+}
+
+.timeline-body {
+    display: none;
+}
+
+#noscript {
+    margin: 50px auto 0 auto;
+    max-width: 400px;
+    width: 80%
 }
 
 @media only screen and (min-width: 769px) {
@@ -309,7 +320,6 @@ body,html {
 body {
     background-color: #eee;
     color: #000;
-    font-family: "Source Code Pro",sans-serif
 }
 
 * {
@@ -330,7 +340,6 @@ button {
 }
 
 h1,h1 a {
-    font-family: "Press Start 2P",serif;
     margin-top: 0;
     color: #fff
 }
@@ -554,7 +563,6 @@ div.content-wrapper.timeline-page {
 }
 
 .timeline-description h2,.timeline-description h2>button {
-    font-family: "Source Code Pro",serif;
     font-weight: 900;
     line-height: 110%;
     margin: 5px 0;
@@ -587,7 +595,6 @@ div.content-wrapper.timeline-page {
 }
 
 .timeline-description h2 button .permalink-popup {
-    font-family: "Source Code Pro";
     font-size: 12px;
     font-weight: 400;
     color: #888;
