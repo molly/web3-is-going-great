@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
 import ICONS from "../../constants/icons";
-import { humanizeDate, isWrappedInParagraphTags } from "../../js/utilities";
+import { humanizeDate } from "../../js/utilities";
 import { EntryPropType } from "../../js/entry";
 
 import { InView } from "react-intersection-observer";
