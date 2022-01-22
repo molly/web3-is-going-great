@@ -81,6 +81,7 @@ const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
       className="timeline-page page-header"
       ref={ref && ref.inViewRef ? ref.inViewRef : null}
     >
+      <a href="#timeline" className="show-on-focus">Skip to timeline</a>
       <div className="constrain-width">
         {windowWidth !== "sm" && renderImage()}
         <div className="header-content">
