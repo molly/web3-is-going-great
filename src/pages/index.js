@@ -197,7 +197,9 @@ export default function Timeline({ firstEntries, startAtId }) {
         aria-live="polite"
       >
         {renderNoJs()}
-        <div className="timeline-body">{renderBody()}</div>
+        <div style={{ display: isBrowserRendering ? "initial" : "none" }}>
+          {renderBody()}
+        </div>
       </div>
       <div className="fix-at-bottom">
         {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
