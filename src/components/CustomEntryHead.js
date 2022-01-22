@@ -81,7 +81,6 @@ export default function CustomEntryHead({ entry }) {
           />
         </>
       )}
-      <meta name="twitter:card" key="twittercard" content="summary" />
       <meta name="twitter:title" key="twittertitle" content={title} />
       <meta
         name="twitter:description"

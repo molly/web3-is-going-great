@@ -27,7 +27,8 @@ export default function Entry({
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.scrollIntoView();
+      const rect = ref.current.getBoundingClientRect();
+      window.scrollTo(0, rect.y - 70);
     }
   }, [ref]);
 
@@ -45,15 +46,13 @@ export default function Entry({
   }, []);
 
   const permalink = (id) => {
-    if (typeof window !== "undefined") {
-      const perma = window.location.origin + `?id=${id}`;
-      window.history.pushState(null, null, perma);
-      navigator.clipboard.writeText(perma);
-      setShowCopiedPopup(true);
-      setTimeout(() => {
-        setShowCopiedPopup(false);
-      }, 1000);
-    }
+    const perma = window.location.origin + `?id=${id}`;
+    window.history.pushState(null, null, perma);
+    navigator.clipboard.writeText(perma);
+    setShowCopiedPopup(true);
+    setTimeout(() => {
+      setShowCopiedPopup(false);
+    }, 1000);
   };
 
   const renderIcon = () => {
@@ -141,11 +140,6 @@ export default function Entry({
         </div>
       );
     }
-  };
-
-  const renderBody = () => {
-    const body = <span dangerouslySetInnerHTML={{ __html: entry.body }} />;
-    return isWrappedInParagraphTags(entry.body) ? body : <p>{body}</p>;
   };
 
   const renderLinks = () => {
@@ -254,7 +248,7 @@ export default function Entry({
           </button>
         </h2>
         {renderImage(true)}
-        {renderBody()}
+        <span dangerouslySetInnerHTML={{ __html: entry.body }}></span>
         {renderLinks()}
         {renderTagsWithSentinel()}
       </div>
