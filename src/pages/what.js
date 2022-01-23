@@ -112,6 +112,12 @@ export default function WhatIsWeb3() {
               <span> by Stephen Diehl</span>
             </li>
             <li>
+              <ExternalLink href="https://www.youtube.com/watch?v=YQ_xWvX1n9g">
+                <span>"The Problem With NFTs"</span>
+                <span> (video) by Dan Olson</span>
+              </ExternalLink>
+            </li>
+            <li>
               <ExternalLink href="https://www.oreilly.com/radar/why-its-too-early-to-get-excited-about-web3/">
                 <span>"Why it's too early to get excited about Web3"</span>
               </ExternalLink>
