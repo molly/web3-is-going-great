@@ -81,6 +81,11 @@ export default function Attribution({ attribution }) {
             <li>
               <span>@superquanganh</span>
             </li>
+            <li>
+              <ExternalLink href="https://twitter.com/xathon_">
+                <span>@xathon</span>
+              </ExternalLink>
+            </li>
           </ul>
           <p>
             Thanks also to anyone who{" "}
