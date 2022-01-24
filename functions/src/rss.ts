@@ -8,6 +8,9 @@ import * as ejs from "ejs";
 import { Entry, RssEntry } from "./types";
 import axios from "axios";
 
+const STORAGE_URL_PREFIX =
+  "https://storage.googleapis.com/web3-334501.appspot.com";
+
 export const updateRssOnChange = functions.firestore
   .document("/entries/{docId}")
   .onWrite(async () => {
@@ -22,8 +25,7 @@ export const updateRssOnChange = functions.firestore
       storageUrlPrefix: string;
       entries: RssEntry[];
     } = {
-      storageUrlPrefix:
-        "https://storage.googleapis.com/web3-334501.appspot.com",
+      storageUrlPrefix: STORAGE_URL_PREFIX,
       entries: [],
     };
 
@@ -36,7 +38,7 @@ export const updateRssOnChange = functions.firestore
       const childData = child.data() as Entry;
       const title = childData.title
         .replace(/<[^>]+>/gm, "")
-        .replace("&nbsp;", " ");
+        .replace(/&nbsp;/g, " ");
       rssData.entries.push({
         ...childData,
         title,
@@ -55,16 +57,16 @@ export const updateRssOnChange = functions.firestore
     const stagingFile = await storage
       .bucket("web3-334501.appspot.com")
       .file("static/stagedRss.xml");
+    await stagingFile.save(xml);
     await stagingFile.setMetadata({
       contentType: "application/atom+xml;charset=UTF-8",
     });
-    await stagingFile.createWriteStream().end(xml);
 
     try {
       const resp = await axios.get("http://validator.w3.org/feed/check.cgi", {
         params: {
           output: "soap12",
-          url: "https://web3isgoinggreat.com/stagedFeed.xml",
+          url: `${STORAGE_URL_PREFIX}/static/stagedRss.xml`,
         },
       });
 
@@ -77,14 +79,15 @@ export const updateRssOnChange = functions.firestore
         const file = await storage
           .bucket("web3-334501.appspot.com")
           .file("static/rss.xml");
+        await file.save(xml);
         await file.setMetadata({
           contentType: "application/atom+xml;charset=UTF-8",
         });
-        await file.createWriteStream().end(xml);
       } else {
         throw new Error("Invalid XML");
       }
     } catch (err) {
       throw new Error("Something is wrong with XML validation");
+      console.log(err);
     }
   });
