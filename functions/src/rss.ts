@@ -34,7 +34,9 @@ export const updateRssOnChange = functions.firestore
         lastUpdated = childLastUpdated;
       }
       const childData = child.data() as Entry;
-      const title = childData.title.replace(/<[^>]+>/gm, "");
+      const title = childData.title
+        .replace(/<[^>]+>/gm, "")
+        .replace("&nbsp;", " ");
       rssData.entries.push({
         ...childData,
         title,
@@ -53,6 +55,9 @@ export const updateRssOnChange = functions.firestore
     const stagingFile = await storage
       .bucket("web3-334501.appspot.com")
       .file("static/stagedRss.xml");
+    await stagingFile.setMetadata({
+      contentType: "application/atom+xml;charset=UTF-8",
+    });
     await stagingFile.createWriteStream().end(xml);
 
     try {
@@ -72,6 +77,9 @@ export const updateRssOnChange = functions.firestore
         const file = await storage
           .bucket("web3-334501.appspot.com")
           .file("static/rss.xml");
+        await file.setMetadata({
+          contentType: "application/atom+xml;charset=UTF-8",
+        });
         await file.createWriteStream().end(xml);
       } else {
         throw new Error("Invalid XML");
