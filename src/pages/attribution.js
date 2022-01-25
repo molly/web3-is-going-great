@@ -53,42 +53,22 @@ export default function Attribution({ attribution }) {
           <p>Most text was written by Molly White.</p>
           <h3>Additional text and entries contributed by</h3>
           <ul>
-            <li>
-              <ExternalLink href="https://twitter.com/jpscribbles">
-                <span>JP Etcheber</span>
-              </ExternalLink>
-            </li>
-            <li>
-              <ExternalLink href="https://github.com/VerifiedJoseph">
-                <span>Joseph</span>
-              </ExternalLink>
-            </li>
-            <li>
-              <ExternalLink href="https://github.com/SaphireLattice">
-                <span>SaphireLattice</span>
-              </ExternalLink>
-            </li>
-            <li>
-              <ExternalLink href="https://github.com/dasinck">
-                <span>David Sinck</span>
-              </ExternalLink>
-            </li>
-            <li>
-              <ExternalLink href="https://github.com/astamos">
-                <span>Alex Stamos</span>
-              </ExternalLink>
-            </li>
-            <li>
-              <span>@superquanganh</span>
-            </li>
-            <li>
-              <span>Thibaut120094</span>
-            </li>
-            <li>
-              <ExternalLink href="https://twitter.com/xathon_">
-                <span>@xathon</span>
-              </ExternalLink>
-            </li>
+            {attribution.entries.entries.map((entry, ind) => {
+              if (entry.href) {
+                return (
+                  <li key={`${entry.text}-${ind}`}>
+                    <ExternalLink href={entry.href}>
+                      <span>{entry.text}</span>
+                    </ExternalLink>
+                  </li>
+                );
+              }
+              return (
+                <li key={`${entry.text}-${ind}`}>
+                  <span>{entry.text}</span>
+                </li>
+              );
+            })}
           </ul>
           <p>
             Thanks also to anyone who{" "}
@@ -182,7 +162,7 @@ export default function Attribution({ attribution }) {
           </ul>
           <h3>Images</h3>
           <ul>
-            {attribution.entries.map(({ text, href }) => (
+            {attribution.images.entries.map(({ text, href }) => (
               <li key={text}>
                 <ExternalLink href={href}>
                   <span>{text}</span>
@@ -199,8 +179,22 @@ export default function Attribution({ attribution }) {
 
 Attribution.propTypes = {
   attribution: PropTypes.shape({
-    entries: PropTypes.arrayOf(
-      PropTypes.shape({ text: PropTypes.string, href: PropTypes.string })
-    ).isRequired,
+    images: PropTypes.shape({
+      entries: PropTypes.arrayOf(
+        PropTypes.shape({
+          text: PropTypes.string.isRequired,
+          href: PropTypes.string.isRequired,
+        })
+      ).isRequired,
+    }),
+    entries: PropTypes.shape({
+      entries: PropTypes.arrayOf(
+        PropTypes.shape({
+          text: PropTypes.string.isRequired,
+          href: PropTypes.string,
+          sortKey: PropTypes.string,
+        })
+      ).isRequired,
+    }),
   }).isRequired,
 };

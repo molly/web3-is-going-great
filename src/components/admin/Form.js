@@ -10,14 +10,21 @@ import LinkField from "./LinkField.js";
 
 export default function Form() {
   const [entry, setEntry] = useState(EMPTY_ENTRY);
-  const [attribution, setAttribution] = useState({ text: "", href: "" });
+  const [imageAttribution, setImageAttribution] = useState({
+    text: "",
+    href: "",
+  });
+  const [entryAttribution, setEntryAttribution] = useState({
+    text: "",
+    href: "",
+  });
 
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadComplete, setIsUploadComplete] = useState(false);
 
   const createFieldSetter = (field) => (val) => {
     let value;
-    if (val && val.target && val.target.value) {
+    if (val && val.target && "value" in val.target) {
       value = val.target.value;
     } else {
       value = val;
@@ -40,12 +47,13 @@ export default function Form() {
 
   const clear = () => {
     setEntry(EMPTY_ENTRY);
-    setAttribution({ text: "", href: "" });
+    setImageAttribution({ text: "", href: "" });
+    setEntryAttribution({ text: "", href: "" });
   };
 
   const save = () => {
     setIsUploading(true);
-    upload(entry, attribution)
+    upload(entry, imageAttribution, entryAttribution)
       .then(() => {
         setIsUploadComplete(true);
         setIsUploading(false);
@@ -172,30 +180,54 @@ export default function Form() {
       </div>
       <div className="row">
         <div className="half">
-          <label htmlFor="attrText">Attribution text: </label>
+          <label htmlFor="imageAttrText">Image attribution text: </label>
           <input
-            id="attrText"
+            id="imageAttrText"
             onChange={({ target: { value } }) =>
-              setAttribution({ ...attribution, text: value })
+              setImageAttribution({ ...imageAttribution, text: value })
             }
-            value={attribution.text}
+            value={imageAttribution.text}
           ></input>
         </div>
         <div className="half">
-          <label htmlFor="attrHref">Attribution href: </label>
+          <label htmlFor="imageAttrHref">Image attribution href: </label>
           <input
-            id="attrHref"
+            id="imageAttrHref"
             onChange={({ target: { value } }) =>
-              setAttribution({ ...attribution, href: value })
+              setImageAttribution({ ...imageAttribution, href: value })
             }
-            value={attribution.href}
+            value={imageAttribution.href}
+          ></input>
+        </div>
+      </div>
+      <div className="row">
+        <div className="half">
+          <label htmlFor="entryAttrText">Entry attribution text: </label>
+          <input
+            id="entryAttrText"
+            onChange={({ target: { value } }) =>
+              setEntryAttribution({ ...entryAttribution, text: value })
+            }
+            value={entryAttribution.text}
+          ></input>
+        </div>
+        <div className="half">
+          <label htmlFor="entryAttrHref">Entry attribution href: </label>
+          <input
+            id="entryAttrHref"
+            onChange={({ target: { value } }) =>
+              setEntryAttribution({ ...entryAttribution, href: value })
+            }
+            value={entryAttribution.href}
           ></input>
         </div>
       </div>
       <button
         className="save-button"
         disabled={
-          isUploading || isUploadComplete || !isValidEntry(entry, attribution)
+          isUploading ||
+          isUploadComplete ||
+          !isValidEntry(entry, imageAttribution, entryAttribution)
         }
         onClick={save}
       >

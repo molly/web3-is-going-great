@@ -4,7 +4,11 @@ import {
   signOut as fbSignOut,
 } from "firebase/auth";
 import { trimEmptyFields } from "./entry";
-import { addImageAttribution, uploadEntry } from "../db/admin";
+import {
+  addImageAttribution,
+  addEntryAttribution,
+  uploadEntry,
+} from "../db/admin";
 
 export const auth = getAuth();
 export const signIn = (password) =>
@@ -12,11 +16,22 @@ export const signIn = (password) =>
 
 export const signOut = () => fbSignOut(auth);
 
-export const upload = async (rawEntry, rawAttribution) => {
-  const { entry, attribution } = trimEmptyFields(rawEntry, rawAttribution);
+export const upload = async (
+  rawEntry,
+  rawImageAttribution,
+  rawEntryAttribution
+) => {
+  const { entry, imageAttribution, entryAttribution } = trimEmptyFields(
+    rawEntry,
+    rawImageAttribution,
+    rawEntryAttribution
+  );
   const promises = [uploadEntry(entry)];
-  if (attribution) {
-    promises.push(addImageAttribution(attribution));
+  if (imageAttribution) {
+    promises.push(addImageAttribution(imageAttribution));
+  }
+  if (entryAttribution) {
+    promises.push(addEntryAttribution(entryAttribution));
   }
   await Promise.all(promises);
 };

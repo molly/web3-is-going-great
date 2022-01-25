@@ -45,9 +45,11 @@ export const EntryPropType = PropTypes.shape({
   scamTotal: PropTypes.number,
 });
 
-export const trimEmptyFields = (entry, attribution) => {
+export const trimEmptyFields = (entry, imageAttribution, entryAttribution) => {
   const newEntry = JSON.parse(JSON.stringify(entry));
-  let newAttribution = null;
+  let newImageAttribution = null;
+  let newEntryAttribution = null;
+
   if (!entry.faicon) {
     delete newEntry.faicon;
   }
@@ -57,7 +59,7 @@ export const trimEmptyFields = (entry, attribution) => {
   if (!entry.image.src) {
     delete newEntry.image;
   } else {
-    newAttribution = attribution;
+    newImageAttribution = imageAttribution;
     if (!entry.image.link) {
       delete newEntry.image.link;
     }
@@ -67,6 +69,9 @@ export const trimEmptyFields = (entry, attribution) => {
   }
   if (entry.scamTotal === 0) {
     delete newEntry.scamTotal;
+  }
+  if (entryAttribution.text) {
+    newEntryAttribution = entryAttribution;
   }
   const filteredLinks = entry.links
     .filter((link) => link.linkText && link.href)
@@ -79,19 +84,20 @@ export const trimEmptyFields = (entry, attribution) => {
     });
 
   newEntry.links = filteredLinks;
-  return { entry: newEntry, attribution: newAttribution };
+  return {
+    entry: newEntry,
+    imageAttribution: newImageAttribution,
+    entryAttribution: newEntryAttribution,
+  };
 };
 
-export const isValidEntry = (entry, attribution) => {
+export const isValidEntry = (entry, imageAttribution, entryAttribution) => {
   if (!entry.title || !entry.body || !entry.date) {
     return false;
   }
   if (
     Object.keys(entry.image).some((key) => !!entry.image[key]) &&
-    (!entry.image.src ||
-      !entry.image.alt ||
-      !attribution.text ||
-      !attribution.href)
+    (!entry.image.src || !entry.image.alt)
   ) {
     return false;
   }
@@ -99,6 +105,15 @@ export const isValidEntry = (entry, attribution) => {
     return false;
   }
   if (!entry.faicon && !entry.icon) {
+    return false;
+  }
+  if (
+    (imageAttribution.text && !imageAttribution.href) ||
+    (!imageAttribution.text && imageAttribution.href)
+  ) {
+    return false;
+  }
+  if (!entryAttribution.text && entryAttribution.href) {
     return false;
   }
   return true;
