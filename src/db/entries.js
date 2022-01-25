@@ -7,7 +7,6 @@ import {
   startAt,
   where,
   FieldPath,
-  getDoc,
   getDocs,
 } from "firebase/firestore/lite";
 import { db } from "./db";
@@ -15,6 +14,12 @@ import { db } from "./db";
 const DEFAULT_LIMIT = 10;
 
 export const getEntries = async (data) => {
+  const resp = {
+    entries: [],
+    hasPrev: null, // This is only set if there's a cursor
+    hasNext: false,
+  };
+
   const respLimit = data && data.limit ? limit : DEFAULT_LIMIT;
 
   const entriesCollection = collection(db, "entries");
@@ -52,17 +57,26 @@ export const getEntries = async (data) => {
   q = query(q, limit(respLimit + 1));
   const snapshot = await getDocs(q);
 
-  const entries = [];
-  let hasMore = false;
   snapshot.forEach((child) => {
-    if (entries.length < respLimit) {
-      entries.push({ _key: child.id, ...child.data() });
+    if (resp.entries.length < respLimit) {
+      resp.entries.push({ _key: child.id, ...child.data() });
     } else {
-      hasMore = true;
+      resp.hasMore = true;
     }
   });
 
-  return { entries, hasMore };
+  // Check if this is the first entry available
+  if (data && data.cursor) {
+    const firstEntrySnapshot = await getDocs(
+      query(entriesCollection, limit(1))
+    );
+    const firstEntry = firstEntrySnapshot.docs[0];
+    if (firstEntry.get("id") !== data.cursor) {
+      resp.hasPrev = true;
+    }
+  }
+
+  return resp;
 };
 
 const ALL_ENTRIES_LIMIT = 50;
@@ -80,11 +94,6 @@ export const getAllEntries = async ({ cursor, direction }) => {
     orderBy("id", direction === "prev" ? "asc" : "desc")
   );
 
-  // Get this page of entries
-  if (cursor) {
-    q = query(q, startAfter(cursor));
-  }
-
   // Check if this is the first entry available
   if (cursor) {
     const firstEntrySnapshot = await getDocs(query(q, limit(1)));
@@ -92,6 +101,11 @@ export const getAllEntries = async ({ cursor, direction }) => {
     if (firstEntry.get("id") !== cursor) {
       resp.hasPrev = true;
     }
+  }
+
+  // Get this page of entries
+  if (cursor) {
+    q = query(q, startAfter(cursor));
   }
 
   // Limit query

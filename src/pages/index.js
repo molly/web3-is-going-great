@@ -67,7 +67,7 @@ export default function Timeline({ firstEntries, startAtId }) {
           // This is the first fetch, so we have no cursor
           return null;
         }
-        if (!lastPage.hasMore) {
+        if (!lastPage.hasNext) {
           // No entries remain, return undefined to signal this to react-query
           return undefined;
         }
@@ -109,7 +109,7 @@ export default function Timeline({ firstEntries, startAtId }) {
     let runningScamTotal = 0;
     return (
       <>
-        {startAtId && renderGoToTop()}
+        {startAtId && data.pages[0].entries[0].hasPrev && renderGoToTop()}
         {startAtId && <CustomEntryHead entry={data.pages[0].entries[0]} />}
         <article id="timeline" className="timeline">
           {data.pages.map((page, pageInd) => {
@@ -190,7 +190,9 @@ export default function Timeline({ firstEntries, startAtId }) {
         windowWidth={windowWidth}
         ref={{ focusRef: headerFocusRef, inViewRef: headerInViewRef }}
       />
-      {!startAtId && <Filters filters={filters} setFilters={setFilters} />}
+      {(!startAtId || !data.pages[0].entries[0].hasPrev) && (
+        <Filters filters={filters} setFilters={setFilters} />
+      )}
       <div
         className="timeline-page content-wrapper"
         aria-busy={isLoading}
@@ -203,7 +205,9 @@ export default function Timeline({ firstEntries, startAtId }) {
       </div>
       <div className="fix-at-bottom">
         {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
-        {!startAtId && <ScamTotal total={currentRunningScamTotal} />}
+        {(!startAtId || !data.pages[0].entries[0].hasPrev) && (
+          <ScamTotal total={currentRunningScamTotal} />
+        )}
       </div>
     </>
   );
@@ -212,7 +216,8 @@ export default function Timeline({ firstEntries, startAtId }) {
 Timeline.propTypes = {
   firstEntries: PropTypes.shape({
     entries: PropTypes.arrayOf(EntryPropType).isRequired,
-    hasMore: PropTypes.bool.isRequired,
+    hasNext: PropTypes.bool.isRequired,
+    hasPrev: PropTypes.bool,
   }).isRequired,
   startAtId: PropTypes.string,
 };
