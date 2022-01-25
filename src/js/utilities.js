@@ -24,7 +24,6 @@ export const stripHtml = function (html) {
 };
 
 export const getImageDimensions = (imageSrc) =>
-  // eslint-disable-next-line no-undef
   new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => {

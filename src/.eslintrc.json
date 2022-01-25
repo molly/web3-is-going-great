@@ -14,5 +14,8 @@
             }
         ],
         "react/react-in-jsx-scope": 0
+    },
+    "env": {
+        "es6": true
     }
 }

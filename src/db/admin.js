@@ -33,16 +33,18 @@ function compare(a, b) {
   return 0;
 }
 
-export const addAttribution = async (entry) => {
+export const addImageAttribution = async (entry) => {
   const attributionCollection = collection(db, "attribution");
   const docRef = doc(attributionCollection, "images");
   const docSnapshot = await getDoc(docRef);
   const { entries } = docSnapshot.data();
-  entries.push({
-    text: entry.text,
-    href: entry.href,
-  });
-  entries.sort(compare);
+
+  // Find the first item alphabetically after this one
+  const indexToInsertBefore = entries.findIndex(
+    (e) => compare(entry.text, e.text) === 1
+  );
+
+  entries.splice(indexToInsertBefore - 1, 0, entry);
 
   await setDoc(docRef, { entries });
 };
