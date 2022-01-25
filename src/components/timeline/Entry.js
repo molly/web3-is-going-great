@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useRef, useState } from "react";
+import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
 import PropTypes from "prop-types";
 
 import { STORAGE_URL } from "../../constants/urls";
@@ -21,16 +22,17 @@ export default function Entry({
   shouldScrollToElement,
 }) {
   const ref = useRef();
+  const isBrowserRendering = useIsBrowserRendering();
 
   const [showCopiedPopup, setShowCopiedPopup] = useState(false);
   const [showLightbox, setShowLightbox] = useState(false);
 
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && isBrowserRendering) {
       const rect = ref.current.getBoundingClientRect();
       window.scrollTo(0, rect.y - 70);
     }
-  }, [ref]);
+  }, [ref, isBrowserRendering]);
 
   useEffect(() => {
     document.addEventListener("keydown", onEsc);
