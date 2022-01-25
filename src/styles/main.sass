@@ -401,6 +401,27 @@ dt
     border: 0
     padding: 0
 
+.show-on-focus
+    position: absolute
+    width: 1px
+    height: 1px
+    margin: 0
+    overflow: hidden
+    clip: rect(1px, 1px, 1px, 1px)
+
+.show-on-focus:focus
+    z-index: 20
+    width: auto
+    height: auto
+    clip: auto
+    // If show-on-focus gets used in more places, these styling rules can
+    // be broken out into different styles.
+    padding: 16px !important
+    background-color: $accent !important
+    color: $title-color !important
+    top: 0
+    left: 0
+ 
 .timeline.dots
   padding-bottom: 20px
 
