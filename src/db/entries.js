@@ -61,7 +61,7 @@ export const getEntries = async (data) => {
     if (resp.entries.length < respLimit) {
       resp.entries.push({ _key: child.id, ...child.data() });
     } else {
-      resp.hasMore = true;
+      resp.hasNext = true;
     }
   });
 
