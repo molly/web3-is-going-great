@@ -190,9 +190,10 @@ export default function Timeline({ firstEntries, startAtId }) {
         windowWidth={windowWidth}
         ref={{ focusRef: headerFocusRef, inViewRef: headerInViewRef }}
       />
-      {(!startAtId || !data.pages[0].entries[0].hasPrev) && (
-        <Filters filters={filters} setFilters={setFilters} />
-      )}
+      {isBrowserRendering &&
+        (!startAtId || !data.pages[0].entries[0].hasPrev) && (
+          <Filters filters={filters} setFilters={setFilters} />
+        )}
       <div
         className="timeline-page content-wrapper"
         aria-busy={isLoading}
@@ -203,12 +204,14 @@ export default function Timeline({ firstEntries, startAtId }) {
           {renderBody()}
         </div>
       </div>
-      <div className="fix-at-bottom">
-        {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
-        {(!startAtId || !data.pages[0].entries[0].hasPrev) && (
-          <ScamTotal total={currentRunningScamTotal} />
-        )}
-      </div>
+      {isBrowserRendering && (
+        <div className="fix-at-bottom">
+          {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
+          {(!startAtId || !data.pages[0].entries[0].hasPrev) && (
+            <ScamTotal total={currentRunningScamTotal} />
+          )}
+        </div>
+      )}
     </>
   );
 }

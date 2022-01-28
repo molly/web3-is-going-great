@@ -94,15 +94,6 @@ export const getAllEntries = async ({ cursor, direction }) => {
     orderBy("id", direction === "prev" ? "asc" : "desc")
   );
 
-  // Check if this is the first entry available
-  if (cursor) {
-    const firstEntrySnapshot = await getDocs(query(q, limit(1)));
-    const firstEntry = firstEntrySnapshot.docs[0];
-    if (firstEntry.get("id") !== cursor) {
-      resp.hasPrev = true;
-    }
-  }
-
   // Get this page of entries
   if (cursor) {
     q = query(q, startAfter(cursor));
@@ -130,6 +121,18 @@ export const getAllEntries = async ({ cursor, direction }) => {
     resp.entries.reverse();
     if (resp.entries.length > 50) {
       resp.entries = resp.entries.slice(1);
+    }
+  }
+
+  // Check if the first entry in this group is also the first document in the
+  // collection or if there are newer entries that could be fetched
+  if (cursor) {
+    const firstEntrySnapshot = await getDocs(
+      query(query(entriesCollection, orderBy("id", "desc")), limit(1))
+    );
+    const firstEntry = firstEntrySnapshot.docs[0];
+    if (resp.entries[0].id !== firstEntry.id) {
+      resp.hasPrev = true;
     }
   }
 
