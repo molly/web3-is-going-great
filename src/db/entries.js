@@ -13,6 +13,14 @@ import { db } from "./db";
 
 const DEFAULT_LIMIT = 10;
 
+const getFirstEntryId = async (collection) => {
+  const firstEntrySnapshot = await getDocs(
+    query(query(collection, orderBy("id", "desc")), limit(1))
+  );
+  const firstEntry = firstEntrySnapshot.docs[0];
+  return firstEntry.id;
+};
+
 export const getEntries = async (data) => {
   const resp = {
     entries: [],
@@ -66,14 +74,10 @@ export const getEntries = async (data) => {
   });
 
   // Check if this is the first entry available
-  if (data && data.cursor) {
-    const firstEntrySnapshot = await getDocs(
-      query(entriesCollection, limit(1))
-    );
-    const firstEntry = firstEntrySnapshot.docs[0];
-    if (firstEntry.get("id") !== data.cursor) {
-      resp.hasPrev = true;
-    }
+  if (data && (data.cursor || data.startAtId)) {
+    const firstId = data.cursor || data.startAtId;
+    const firstEntryId = await getFirstEntryId(entriesCollection);
+    resp.hasPrev = firstEntryId !== firstId;
   }
 
   return resp;
@@ -127,11 +131,8 @@ export const getAllEntries = async ({ cursor, direction }) => {
   // Check if the first entry in this group is also the first document in the
   // collection or if there are newer entries that could be fetched
   if (cursor) {
-    const firstEntrySnapshot = await getDocs(
-      query(query(entriesCollection, orderBy("id", "desc")), limit(1))
-    );
-    const firstEntry = firstEntrySnapshot.docs[0];
-    if (resp.entries[0].id !== firstEntry.id) {
+    const firstEntryId = await getFirstEntryId(entriesCollection);
+    if (resp.entries[0].id !== firstEntryId) {
       resp.hasPrev = true;
     }
   }

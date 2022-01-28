@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useState, useRef } from "react";
+import { Fragment, useCallback, useState, useRef, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useInfiniteQuery } from "react-query";
 import useGA from "../hooks/useGA";
@@ -58,22 +58,33 @@ export default function Timeline({ firstEntries, startAtId }) {
     [filters]
   );
 
-  const { data, hasNextPage, fetchNextPage, isFetching, isLoading, isError } =
-    useInfiniteQuery(["entries", filters], getFilteredEntries, {
-      initialData: { pages: [firstEntries], pageParams: [undefined] },
-      refetchOnMount: false,
-      getNextPageParam: (lastPage) => {
-        if (!lastPage) {
-          // This is the first fetch, so we have no cursor
-          return null;
-        }
-        if (!lastPage.hasNext) {
-          // No entries remain, return undefined to signal this to react-query
-          return undefined;
-        }
-        return lastPage.entries[lastPage.entries.length - 1]._key;
-      },
-    });
+  const {
+    data,
+    hasNextPage,
+    fetchNextPage,
+    isFetching,
+    isLoading,
+    isError,
+    isSuccess,
+  } = useInfiniteQuery(["entries", filters], getFilteredEntries, {
+    initialData: { pages: [firstEntries], pageParams: [undefined] },
+    refetchOnMount: false,
+    getNextPageParam: (lastPage) => {
+      if (!lastPage) {
+        // This is the first fetch, so we have no cursor
+        return null;
+      }
+      if (!lastPage.hasNext) {
+        // No entries remain, return undefined to signal this to react-query
+        return undefined;
+      }
+      return lastPage.entries[lastPage.entries.length - 1]._key;
+    },
+  });
+
+  const hasPreviousEntries = useMemo(() => {
+    return isSuccess && data.pages[0].hasPrev;
+  }, [data.pages, isSuccess]);
 
   const renderScrollSentinel = () => {
     return (
@@ -109,7 +120,7 @@ export default function Timeline({ firstEntries, startAtId }) {
     let runningScamTotal = 0;
     return (
       <>
-        {startAtId && data.pages[0].entries[0].hasPrev && renderGoToTop()}
+        {startAtId && hasPreviousEntries && renderGoToTop()}
         {startAtId && <CustomEntryHead entry={data.pages[0].entries[0]} />}
         <article id="timeline" className="timeline">
           {data.pages.map((page, pageInd) => {
@@ -190,10 +201,9 @@ export default function Timeline({ firstEntries, startAtId }) {
         windowWidth={windowWidth}
         ref={{ focusRef: headerFocusRef, inViewRef: headerInViewRef }}
       />
-      {isBrowserRendering &&
-        (!startAtId || !data.pages[0].entries[0].hasPrev) && (
-          <Filters filters={filters} setFilters={setFilters} />
-        )}
+      {isBrowserRendering && (!startAtId || !hasPreviousEntries) && (
+        <Filters filters={filters} setFilters={setFilters} />
+      )}
       <div
         className="timeline-page content-wrapper"
         aria-busy={isLoading}
@@ -207,7 +217,7 @@ export default function Timeline({ firstEntries, startAtId }) {
       {isBrowserRendering && (
         <div className="fix-at-bottom">
           {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
-          {(!startAtId || !data.pages[0].entries[0].hasPrev) && (
+          {(!startAtId || !hasPreviousEntries) && (
             <ScamTotal total={currentRunningScamTotal} />
           )}
         </div>
