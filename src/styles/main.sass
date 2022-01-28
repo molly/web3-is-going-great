@@ -170,7 +170,6 @@ div.content-wrapper
   i
     color: $timeline-icon-color
     font-size: 20px
-    line-height: 150%
 
   .icon-wrapper
     display: flex
@@ -180,8 +179,8 @@ div.content-wrapper
     justify-content: center
 
   img
-    width: 20px
-    height: 20px
+    max-width: 20px
+    max-height: 20px
     object-fit: contain
 
 .timeline-description
@@ -664,7 +663,10 @@ dt
 
     i
       font-size: 15px
-      line-height: 30px
+
+    img
+      max-width: 15px
+      max-height: 15px
 
   .load-top button
     margin-left: 4px

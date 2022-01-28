@@ -59,18 +59,20 @@ export default function Entry({
 
   const renderIcon = () => {
     if (entry.faicon) {
-      return <i className={`fas fa-${entry.faicon}`} aria-hidden="true"></i>;
+      return (
+        <div className="icon-wrapper">
+          <i className={`fas fa-${entry.faicon}`} aria-hidden="true"></i>
+        </div>
+      );
     } else if (entry.icon) {
       return (
         <div className="icon-wrapper">
-          <div className="image-wrapper">
-            <img
-              src={`${STORAGE_URL}/icons/${ICONS[entry.icon]}`}
-              alt="" // Decorative, hidden to screenreaders
-              aria-hidden="true"
-              layout="fill"
-            />
-          </div>
+          <img
+            src={`${STORAGE_URL}/icons/${ICONS[entry.icon]}`}
+            alt="" // Decorative, hidden to screenreaders
+            aria-hidden="true"
+            layout="fill"
+          />
         </div>
       );
     }
