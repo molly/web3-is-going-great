@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import useGA from "../hooks/useGA";
 
-import { getAllGlossaryEntries } from "../db/glossary";
+import { getSortedGlossaryEntries } from "../db/glossary";
 
 import CustomHead from "../components/CustomHead";
 import BackBar from "../components/BackBar";
@@ -11,7 +11,7 @@ import Footer from "../components/Footer";
 export async function getServerSideProps() {
   return {
     props: {
-      glossary: await getAllGlossaryEntries(),
+      glossary: await getSortedGlossaryEntries(),
     },
   };
 }

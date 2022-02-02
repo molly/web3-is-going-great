@@ -11,11 +11,13 @@ import { EntryPropType } from "../../js/entry";
 
 import { InView } from "react-intersection-observer";
 import Link from "next/link";
+import EnrichedBody from "./EnrichedBody";
 
 export default function Entry({
   entry,
   className,
   windowWidth,
+  glossary,
   runningScamTotal,
   currentRunningScamTotal,
   setCurrentRunningScamTotal,
@@ -34,18 +36,18 @@ export default function Entry({
     }
   }, [ref, isBrowserRendering]);
 
-  useEffect(() => {
-    document.addEventListener("keydown", onEsc);
-    return () => {
-      document.removeEventListener("keydown", onEsc);
-    };
-  });
-
   const onEsc = useCallback((event) => {
     if (event.keyCode === 27) {
       setShowLightbox(false);
     }
   }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", onEsc);
+    return () => {
+      document.removeEventListener("keydown", onEsc);
+    };
+  }, [onEsc]);
 
   const permalink = (id) => {
     const perma = window.location.origin + `?id=${id}`;
@@ -252,7 +254,7 @@ export default function Entry({
           </button>
         </h2>
         {renderImage(true)}
-        <span dangerouslySetInnerHTML={{ __html: entry.body }}></span>
+        <EnrichedBody glossary={glossary}>{entry.body}</EnrichedBody>
         {renderLinks()}
         {renderTagsWithSentinel()}
       </div>
@@ -265,6 +267,7 @@ Entry.propTypes = {
   className: PropTypes.string,
   entry: EntryPropType,
   windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
+  glossary: PropTypes.object.isRequired,
   runningScamTotal: PropTypes.number,
   currentRunningScamTotal: PropTypes.number,
   setCurrentRunningScamTotal: PropTypes.func,
