@@ -76,6 +76,14 @@ export default function WhatIsWeb3() {
             </ExternalLink>
             .
           </p>
+          <h3>What's the number in the corner with the flames?</h3>
+          <p>
+            That's the Grift Counter (™™™)! A running total of the amount of
+            money lost so far to grifts and scams. It doesn't update with every
+            single post that mentions a monetary loss (for example, if someone
+            transfers money to a dead-end wallet by mistake)—just the money lost
+            to intentional thefts and scams.
+          </p>
         </article>
       </div>
       <Footer />

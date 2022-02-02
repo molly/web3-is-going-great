@@ -29,7 +29,7 @@ export default function ScamTotal({ total }) {
             </span>
           </i>
         </button>
-        <span>${getDisplayNumber()}</span>
+        <span title="W3IGG Grift Counter™">${getDisplayNumber()}</span>
       </div>
     </div>
   );
