@@ -166,6 +166,12 @@ export default function WhatIsWeb3() {
               </ExternalLink>
               <span> on Twitter</span>
             </li>
+            <li>
+              <span>A list of </span>
+              <ExternalLink href="https://github.com/rufuspollock/awesome-crypto-critique">
+                awesome crypto critique
+              </ExternalLink>
+            </li>
           </ul>
         </article>
       </div>
