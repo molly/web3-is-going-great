@@ -185,14 +185,13 @@ div.content-wrapper
     object-fit: contain
 
 .timeline-description
-  box-sizing: border-box
   position: relative
+  box-sizing: border-box
   width: 45%
   background-color: $card-background
   padding: 20px
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1)
   display: inline-block
-  z-index: 1
 
   .tags
     display: flex
@@ -341,6 +340,10 @@ dt
 
 .clearfix
   clear: both
+
+.space-between
+  display: flex
+  justify-content: space-between
 
 .error-wrapper
   display: flex
@@ -628,7 +631,6 @@ dt
     height: 30px
     margin-left: -5px
     border-width: 2px
-    z-index: 2
 
     i
       font-size: 15px

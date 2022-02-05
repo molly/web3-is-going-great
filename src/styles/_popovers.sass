@@ -45,3 +45,39 @@
   width: 90%
   border: 1px solid rgba(0, 0, 0, 0.2)
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4)
+
+  .arrow,
+  .arrow::before
+    position: absolute
+    width: 12px
+    height: 12px
+    background: inherit
+
+  .arrow
+    visibility: hidden
+
+    &::before
+      visibility: visible
+      content: ''
+      transform: rotate(45deg)
+      border-style: solid
+      border-color: rgba(0, 0, 0, 0.2)
+      border-width: 0
+
+  &[data-popper-placement^='top'] > .arrow
+    bottom: -7px
+
+    &::before
+      border-width: 0 1px 1px 0
+
+  &[data-popper-placement^='bottom'] > .arrow
+    top: -7px
+
+    &::before
+      border-width: 1px 0 0 1px
+
+  &[data-popper-placement^='left'] > .arrow
+    right: -7px
+
+  &definition-popover[data-popper-placement^='right'] > .arrow
+    left: -7px

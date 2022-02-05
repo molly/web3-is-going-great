@@ -11,7 +11,7 @@ import { EntryPropType } from "../../js/entry";
 
 import { InView } from "react-intersection-observer";
 import Link from "next/link";
-import EnrichedBody from "./EnrichedBody";
+import TimelineEntryContent from "./TimelineEntryContent";
 
 export default function Entry({
   entry,
@@ -254,7 +254,9 @@ export default function Entry({
           </button>
         </h2>
         {renderImage(true)}
-        <EnrichedBody glossary={glossary}>{entry.body}</EnrichedBody>
+        <TimelineEntryContent glossary={glossary}>
+          {entry.body}
+        </TimelineEntryContent>
         {renderLinks()}
         {renderTagsWithSentinel()}
       </div>

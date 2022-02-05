@@ -1,27 +1,38 @@
-import { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { usePopper } from "react-popper";
 
-export default function EnrichedBody({ children, glossary }) {
+export default function TimelineEntryContent({ children, glossary }) {
   const [activeTarget, setActiveTarget] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
-  const { styles, attributes } = usePopper(activeTarget, popperElement);
+  const [arrowElement, setArrowElement] = useState(null);
+  const { styles, attributes } = usePopper(activeTarget, popperElement, {
+    modifiers: [
+      { name: "arrow", options: { element: arrowElement } },
+      {
+        name: "preventOverflow",
+        options: {
+          padding: 10,
+        },
+      },
+    ],
+  });
 
-  const clickOff = useCallback((event) => {
+  const close = useCallback((event) => {
     if (!event.target.classList.contains("define-target")) {
-      document.removeEventListener("click", clickOff);
+      document.removeEventListener("click", close);
       setActiveTarget(null);
     }
   }, []);
 
   useEffect(() => {
-    return () => document.removeEventListener("click", clickOff);
-  }, [clickOff]);
+    return () => document.removeEventListener("click", close);
+  }, [close]);
 
-  const callback = (event) => {
+  const onEntryClick = (event) => {
     if (event.target.classList.contains("define-target")) {
       setActiveTarget(event.target);
-      document.addEventListener("click", clickOff);
+      document.addEventListener("click", close);
     }
   };
 
@@ -42,8 +53,12 @@ export default function EnrichedBody({ children, glossary }) {
     }
     return (
       <div>
-        <div>
+        <div className="space-between">
           <b>{term}</b>
+          <button onClick={() => close}>
+            <i className="fas fa-xmark"></i>
+            <span className="sr-only">Close definition</span>
+          </button>
         </div>
         <span dangerouslySetInnerHTML={{ __html: definition }} />
       </div>
@@ -51,7 +66,7 @@ export default function EnrichedBody({ children, glossary }) {
   };
 
   return (
-    <>
+    <div className="timeline-body-text-wrapper">
       {activeTarget && (
         <div
           ref={setPopperElement}
@@ -60,19 +75,19 @@ export default function EnrichedBody({ children, glossary }) {
           className="definition-popover"
         >
           {renderPopoverContents()}
+          <div ref={setArrowElement} style={styles.arrow} className="arrow" />
         </div>
       )}
 
       <span
-        id="bodyContainer"
         dangerouslySetInnerHTML={{ __html: children }}
-        onClick={callback}
+        onClick={onEntryClick}
       />
-    </>
+    </div>
   );
 }
 
-EnrichedBody.propTypes = {
+TimelineEntryContent.propTypes = {
   children: PropTypes.string.isRequired,
   glossary: PropTypes.object.isRequired,
 };
