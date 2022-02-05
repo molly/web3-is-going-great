@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import { usePopper } from "react-popper";
-import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
 
 export default function TimelineEntryContent({ children, glossary }) {
   const entrySpanRef = useRef(null);
-  const isBrowserRendering = useIsBrowserRendering();
+  const contentRef = useRef(null);
 
   const [activeTarget, setActiveTarget] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
@@ -67,6 +66,12 @@ export default function TimelineEntryContent({ children, glossary }) {
     setHydratedBody(el.innerHTML);
   }, [children]);
 
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.focus();
+    }
+  });
+
   const onEntryClick = (event) => {
     if (event.target.classList.contains("define-target")) {
       if (activeTarget) {
@@ -95,7 +100,7 @@ export default function TimelineEntryContent({ children, glossary }) {
       return null;
     }
     return (
-      <div>
+      <div ref={contentRef} tabIndex={0}>
         <div className="space-between">
           <b>{term}</b>
           <button onClick={() => close}>
