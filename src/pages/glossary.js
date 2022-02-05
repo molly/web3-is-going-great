@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import useGA from "../hooks/useGA";
 
@@ -19,6 +19,13 @@ export async function getServerSideProps() {
 export default function Glossary({ glossary }) {
   useGA();
 
+  const [highlightedEntry, setHighlightedEntry] = useState();
+  useEffect(() => {
+    if (window.location.hash) {
+      setHighlightedEntry(window.location.hash.slice(1));
+    }
+  }, [setHighlightedEntry]);
+
   return (
     <>
       <CustomHead
@@ -34,14 +41,20 @@ export default function Glossary({ glossary }) {
         <article className="generic-page">
           <dl>
             {glossary.entries.map((entry) => (
-              <Fragment key={entry.id}>
-                <dt>{entry.term}</dt>
+              <div
+                key={entry.id}
+                className={
+                  "glossary-entry" +
+                  (entry.id === highlightedEntry ? " highlighted" : "")
+                }
+              >
+                <dt id={entry.id}>{entry.term}</dt>
                 <dd>
                   <span
                     dangerouslySetInnerHTML={{ __html: entry.definition }}
                   />
                 </dd>
-              </Fragment>
+              </div>
             ))}
           </dl>
         </article>

@@ -167,6 +167,7 @@ div.content-wrapper
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4)
   text-align: center
   vertical-align: middle
+  z-index: 1
 
   i
     color: $timeline-icon-color
@@ -316,10 +317,6 @@ div.content-wrapper
   padding-bottom: 20px
   line-height: 130%
 
-dt
-  font-weight: bold
-  margin-top: 20px
-
 .navigation-bar
   background-color: $filterbar-background
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
@@ -453,6 +450,17 @@ dt
 
 .timeline-entry.single .timeline-description:after
   border: none
+
+// Glossary
+.glossary-entry
+  margin-top: 20px
+
+  dt
+    font-weight: bold
+
+  &.highlighted
+    background-color: $highlight-background
+    padding: 5px
 
 /* ICON COLORS */
 .timeline-icon
