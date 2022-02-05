@@ -2,13 +2,11 @@
 @import "@fortawesome/fontawesome-free/css/all"
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:ital,wght@0,400;0,900;1,400;1,900&display=swap")
 @import _admin
-@import _colors
+@import _tokens
 @import _filters
+@import _fixed-at-bottom
 @import _loading
 @import _popovers
-
-$display-font: 'Press Start 2P'
-$body-font: 'Source Code Pro'
 
 html
   width: 100%
@@ -362,48 +360,6 @@ div.content-wrapper
   display: flex
   align-items: flex-end
 
-.grift-counter, .scroll-to-top
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4)
-
-.scroll-to-top
-  background-color: $accent
-  color: $title-color
-  padding: 5px 10px
-  height: 29px
-
-.grift-counter
-  box-sizing: content-box
-  border-top: 16px solid #0000
-  border-bottom: 0
-  border-right: 0
-  border-image-source: url(https://user-images.githubusercontent.com/38474413/152428576-93e74099-f217-491f-820a-8a792be857f8.gif)
-  border-image-slice: 16 0
-  border-image-repeat: repeat
-  margin-left: 10px
-
-  > div
-    background-color: $accent
-    font-family: $display-font
-    color: $title-color
-    padding: 5px 10px
-
-  &.collapsed
-    border: none
-
-    span
-      display: none
-
-  span
-    margin-left: 10px
-    vertical-align: bottom
-
-  button
-    cursor: pointer
-    background-color: transparent
-    color: $title-color
-    border: 0
-    padding: 0
-
 .show-on-focus
   position: absolute
   width: 1px
@@ -722,9 +678,6 @@ div.content-wrapper
     @each $name, $color in $icon-colors
       &.#{$name}
         background-color: darken($color, 20%)
-
-  .grift-counter, .scroll-to-top
-    filter: brightness(80%)
 
   /* Arrows */
   .no-js .timeline-entry .timeline-description::after

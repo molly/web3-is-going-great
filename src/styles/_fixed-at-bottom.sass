@@ -1,0 +1,68 @@
+@import _tokens
+
+.fix-at-bottom
+  position: fixed
+  bottom: 10px
+  right: 0
+  z-index: 5
+  display: flex
+  align-items: flex-end
+
+.grift-counter, .scroll-to-top
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4)
+
+.scroll-to-top
+  background-color: $accent
+  color: $title-color
+  padding: 5px 10px
+  height: 29px
+
+.grift-counter
+  box-sizing: content-box
+  border-top: 16px solid #0000
+  border-bottom: 0
+  border-right: 0
+  border-image-source: url(https://user-images.githubusercontent.com/38474413/152428576-93e74099-f217-491f-820a-8a792be857f8.gif)
+  border-image-slice: 16 0
+  border-image-repeat: repeat
+  margin-left: 10px
+
+  &.no-animate
+    border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.png)
+
+  > div
+    background-color: $accent
+    font-family: $display-font
+    color: $title-color
+    padding: 5px 10px
+
+  a
+    color: $title-color
+
+  &.collapsed
+    border: none
+
+    span, .pause-button
+      display: none
+
+  span
+    margin-left: 10px
+    vertical-align: bottom
+
+  button
+    cursor: pointer
+    background-color: transparent
+    color: $title-color
+    border: 0
+    padding: 0
+
+    &.pause-button
+      margin-left: 5px
+
+@media (prefers-color-scheme: dark)
+  .grift-counter, .scroll-to-top
+    filter: brightness(80%)
+
+@media (prefers-reduced-motion: reduce)
+  .grift-counter
+    border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.png)
