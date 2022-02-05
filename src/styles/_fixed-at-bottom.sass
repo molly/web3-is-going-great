@@ -13,7 +13,7 @@
 
 .scroll-to-top
   background-color: $accent
-  color: $title-color
+  color: transparentize($title-color, 0.25)
   padding: 5px 10px
   height: 29px
 
@@ -55,12 +55,14 @@
   button
     cursor: pointer
     background-color: transparent
-    color: $title-color
+    color: transparentize($title-color, 0.25)
     border: 0
     padding: 0
 
     &.pause-button
       margin-left: 5px
+      padding-right: 10px
+      border-right: 1px solid transparentize($title-color, 0.5)
 
 @media (prefers-color-scheme: dark)
   .grift-counter, .scroll-to-top
