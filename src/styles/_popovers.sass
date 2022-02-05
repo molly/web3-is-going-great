@@ -33,8 +33,8 @@
     align-self: flex-end
 
 .define-target
+  color: $main-text-color
   border-bottom: 1px dashed rgba($main-text-color, .25)
-  display: inline-block
 
 .definition-popover
   background-color: $card-background
@@ -62,22 +62,54 @@
       transform: rotate(45deg)
       border-style: solid
       border-color: rgba(0, 0, 0, 0.2)
-      border-width: 0
+      border-width: 1px
 
   &[data-popper-placement^='top'] > .arrow
     bottom: -7px
 
     &::before
-      border-width: 0 1px 1px 0
+      border-left-width: 0
+      border-top-width: 0
 
   &[data-popper-placement^='bottom'] > .arrow
     top: -7px
 
     &::before
-      border-width: 1px 0 0 1px
+      border-right-width: 0
+      border-bottom-width: 0
 
   &[data-popper-placement^='left'] > .arrow
     right: -7px
 
-  &definition-popover[data-popper-placement^='right'] > .arrow
+    &::before
+      border-left-width: 0
+      border-bottom-width: 0
+
+  &[data-popper-placement^='right'] > .arrow
     left: -7px
+
+    &::before
+      border-right-width: 0
+      border-top-width: 0
+
+@media (prefers-color-scheme: dark)
+  .definition-popover,
+  .lightbox-container
+    background-color: $dark-lightbox-background
+    color: $dark-main-color
+
+    button
+      color: $dark-main-color
+
+    a
+      color: $dark-link-color
+
+  .definition-popover
+    border-color: $timestamp-color
+
+    .arrow::before
+      border-color: $timestamp-color
+
+  .define-target
+    color: $dark-main-color
+    border-bottom: 1px dashed rgba($dark-main-color, .5)

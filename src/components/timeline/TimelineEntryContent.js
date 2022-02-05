@@ -10,6 +10,12 @@ export default function TimelineEntryContent({ children, glossary }) {
     modifiers: [
       { name: "arrow", options: { element: arrowElement } },
       {
+        name: "offset",
+        options: {
+          offset: [0, 10],
+        },
+      },
+      {
         name: "preventOverflow",
         options: {
           padding: 10,
