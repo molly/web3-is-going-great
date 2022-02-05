@@ -76,7 +76,7 @@ export default function WhatIsWeb3() {
             </ExternalLink>
             .
           </p>
-          <h3>What's the number in the corner with the flames?</h3>
+          <h3 name="grift-question">What's the number in the corner with the flames?</h3>
           <p>
             That's the Grift Counter (™™™)! A running total of the amount of
             money lost so far to grifts and scams. It doesn't update with every
