@@ -20,7 +20,7 @@ import Entry from "../components/timeline/Entry";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import ScrollToTop from "../components/timeline/ScrollToTop";
-import ScamTotal from "../components/timeline/ScamTotal";
+import GriftCounter from "../components/timeline/GriftCounter";
 
 export async function getServerSideProps(context) {
   let props = {};
@@ -222,7 +222,7 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
         <div className="fix-at-bottom">
           {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
           {(!startAtId || !hasPreviousEntries) && (
-            <ScamTotal total={currentRunningScamTotal} />
+            <GriftCounter total={currentRunningScamTotal} />
           )}
         </div>
       )}
