@@ -138,7 +138,7 @@ export default function Entry({
       return (
         <div className="lightbox-container">
           <button onClick={() => setShowLightbox(false)}>
-            <i className="fas fa-xmark"></i>
+            <i className="fas fa-xmark" aria-hidden={true}></i>
             <span className="sr-only">Close lightbox</span>
           </button>
           <div className="image-wrapper">{renderImageElement()}</div>

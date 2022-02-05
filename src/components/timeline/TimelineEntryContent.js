@@ -99,7 +99,7 @@ export default function TimelineEntryContent({ children, glossary }) {
         <div className="space-between">
           <b>{term}</b>
           <button onClick={() => close}>
-            <i className="fas fa-xmark"></i>
+            <i className="fas fa-xmark" aria-hidden={true}></i>
             <span className="sr-only">Close definition</span>
           </button>
         </div>
