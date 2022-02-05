@@ -1,11 +1,14 @@
 import { Fragment, useCallback, useState, useRef, useMemo } from "react";
 import PropTypes from "prop-types";
+import { EntryPropType } from "../js/entry";
+
 import { useInfiniteQuery } from "react-query";
 import useGA from "../hooks/useGA";
 import useWindowWidth from "../hooks/useWindowWidth";
 import useIsBrowserRendering from "../hooks/useIsBrowserRendering";
 
 import { getEntries } from "../db/entries";
+import { getGlossaryEntries } from "../db/glossary";
 import { EMPTY_FILTERS_STATE } from "../constants/filters";
 
 import Link from "next/link";
@@ -18,7 +21,6 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 import ScrollToTop from "../components/timeline/ScrollToTop";
 import ScamTotal from "../components/timeline/ScamTotal";
-import { EntryPropType } from "../js/entry";
 
 export async function getServerSideProps(context) {
   let props = {};
@@ -32,10 +34,11 @@ export async function getServerSideProps(context) {
   } else {
     props.firstEntries = await getEntries({});
   }
+  props.glossary = await getGlossaryEntries();
   return { props };
 }
 
-export default function Timeline({ firstEntries, startAtId }) {
+export default function Timeline({ firstEntries, startAtId, glossary }) {
   useGA();
   const isBrowserRendering = useIsBrowserRendering();
   const windowWidth = useWindowWidth();
@@ -147,6 +150,7 @@ export default function Timeline({ firstEntries, startAtId }) {
                       currentRunningScamTotal={currentRunningScamTotal}
                       setCurrentRunningScamTotal={setCurrentRunningScamTotal}
                       shouldScrollToElement={entry.id === startAtId}
+                      glossary={glossary}
                     />
                   );
 
@@ -232,5 +236,6 @@ Timeline.propTypes = {
     hasNext: PropTypes.bool.isRequired,
     hasPrev: PropTypes.bool,
   }).isRequired,
+  glossary: PropTypes.object.isRequired,
   startAtId: PropTypes.string,
 };

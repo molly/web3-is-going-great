@@ -5,6 +5,7 @@
 @import _colors
 @import _filters
 @import _loading
+@import _popovers
 
 $display-font: 'Press Start 2P'
 $body-font: 'Source Code Pro'
@@ -166,6 +167,7 @@ div.content-wrapper
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4)
   text-align: center
   vertical-align: middle
+  z-index: 1
 
   i
     color: $timeline-icon-color
@@ -184,14 +186,13 @@ div.content-wrapper
     object-fit: contain
 
 .timeline-description
-  box-sizing: border-box
   position: relative
+  box-sizing: border-box
   width: 45%
   background-color: $card-background
   padding: 20px
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1)
   display: inline-block
-  z-index: 1
 
   .tags
     display: flex
@@ -316,10 +317,6 @@ div.content-wrapper
   padding-bottom: 20px
   line-height: 130%
 
-dt
-  font-weight: bold
-  margin-top: 20px
-
 .navigation-bar
   background-color: $filterbar-background
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
@@ -340,6 +337,10 @@ dt
 
 .clearfix
   clear: both
+
+.space-between
+  display: flex
+  justify-content: space-between
 
 .error-wrapper
   display: flex
@@ -447,40 +448,19 @@ dt
     &:active, &:hover
       box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4)
 
-.lightbox-container
-  position: fixed
-  top: 5%
-  left: 50%
-  transform: translateX(-50%)
-  z-index: 6
-  padding: 5px 20px 20px 20px
-  max-width: 90%
-  max-height: 90%
-  margin: 0 auto
-  background-color: $card-background
-  display: flex
-  flex-direction: column
-  align-items: center
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4)
-
-  img
-    display: block
-    max-width: 100%
-    max-height: 100%
-
-  .image-wrapper
-    flex: 1
-    height: 100px
-
-  .caption-wrapper
-    flex: 1
-    text-align: center
-
-  button
-    align-self: flex-end
-
 .timeline-entry.single .timeline-description:after
   border: none
+
+// Glossary
+.glossary-entry
+  margin-top: 20px
+
+  dt
+    font-weight: bold
+
+  &.highlighted
+    background-color: $highlight-background
+    padding: 5px
 
 /* ICON COLORS */
 .timeline-icon
@@ -659,7 +639,6 @@ dt
     height: 30px
     margin-left: -5px
     border-width: 2px
-    z-index: 2
 
     i
       font-size: 15px
@@ -710,15 +689,12 @@ dt
   h2 button,
   .timeline-filter,
   .timeline-icon i,
-  .attribution,
-  .lightbox-container,
-  .lightbox-container button
+  .attribution
     color: $dark-main-color
 
   a,
   .timeline-description a,
-  .attribution a,
-  .lightbox-container a
+  .attribution a
     color: $dark-link-color
 
   .navigation-bar
@@ -748,9 +724,6 @@ dt
 
   .grift-counter, .scroll-to-top
     filter: brightness(80%)
-
-  .lightbox-container
-    background-color: $dark-lightbox-background
 
   /* Arrows */
   .no-js .timeline-entry .timeline-description::after
