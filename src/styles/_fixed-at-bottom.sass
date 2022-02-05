@@ -30,6 +30,9 @@
   &.no-animate
     border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.png)
 
+  &.animate
+    border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.gif)
+
   > div
     background-color: $accent
     font-family: $display-font
@@ -65,4 +68,6 @@
 
 @media (prefers-reduced-motion: reduce)
   .grift-counter
+    // People with prefers-reduced-motion set can still opt in to the animation, in which case
+    // .animate will also be set, and this will be overriden by the more specific selector above
     border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.png)

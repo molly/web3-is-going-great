@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import PropTypes from "prop-types";
+import clsx from "clsx";
 import {
   getLocalStorage,
   LOCALSTORAGE_KEYS,
@@ -7,11 +8,18 @@ import {
 } from "../../js/localStorage";
 
 export default function GriftCounter({ total }) {
+  const prefersReducedMotion = useMemo(() => {
+    const result = window.matchMedia("(prefers-reduced-motion: reduce)");
+    return result && result.matches;
+  }, []);
+
   const [isExpanded, setIsExpanded] = useState(
     getLocalStorage(LOCALSTORAGE_KEYS.griftCounterExpanded, true)
   );
   const [isPaused, setIsPaused] = useState(
-    getLocalStorage(LOCALSTORAGE_KEYS.flamesAnimationPaused, false)
+    getLocalStorage(LOCALSTORAGE_KEYS.flamesAnimationPaused, null) ||
+      prefersReducedMotion ||
+      null
   );
 
   const toggleFlamesAnimation = () => {
@@ -56,10 +64,16 @@ export default function GriftCounter({ total }) {
           className={`fas fa-${isExpanded ? "eye-slash" : "fire"}`}
           aria-hidden={true}
         >
-          <span className="sr-only">${isExpanded ? "Collapse" : "Expand"}</span>
+          <span className="sr-only">
+            ${isExpanded ? "Collapse" : "Expand"} counter
+          </span>
         </i>
       </button>
-      <button onClick={toggleFlamesAnimation} className="pause-button">
+      <button
+        onClick={toggleFlamesAnimation}
+        className="pause-button"
+        title={isPaused ? "Animate flames" : "Stop flames animation"}
+      >
         <i
           className={`fas fa-${isPaused ? "play" : "fire-extinguisher"}`}
           aria-hidden={true}
@@ -74,9 +88,10 @@ export default function GriftCounter({ total }) {
 
   return (
     <div
-      className={`grift-counter ${!isExpanded ? "collapsed" : ""} ${
-        isPaused ? "no-animate" : ""
-      }`}
+      className={clsx("grift-counter", !isExpanded && "collapsed", {
+        "no-animate": isPaused === true,
+        animate: isPaused === false,
+      })}
     >
       <div>
         {renderButtons()}
