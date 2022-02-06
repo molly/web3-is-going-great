@@ -47,7 +47,7 @@ jobs:
 
       - name: Install packages
         run: npm ci
-        working-directory: functions
+        working-directory: src
 
       - name: Lint
         run: npm run lint
