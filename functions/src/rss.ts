@@ -36,12 +36,14 @@ export const updateRssOnChange = functions.firestore
         lastUpdated = childLastUpdated;
       }
       const childData = child.data() as Entry;
+      const body = childData.body.replace(/<button.*?>(.*?)<\/button>/g, "$1");
       const title = childData.title
         .replace(/<[^>]+>/gm, "")
         .replace(/&nbsp;/g, " ");
       rssData.entries.push({
         ...childData,
         title,
+        body,
         createdAt: child.createTime.toDate().toISOString(),
         updatedAt: childLastUpdated.toISOString(),
       });
