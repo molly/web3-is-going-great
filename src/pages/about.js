@@ -62,19 +62,38 @@ export default function WhatIsWeb3() {
             .
           </p>
           <p>
-            For full disclosure, I own no cryptocurrencies or NFTs. I was not
-            paid to make this site, nor do I make any money from it. I have no
+            If you are interested, I also have{" "}
+            <ExternalLink href="https://blog.mollywhite.net/blockchain/">
+              longer-form, less sarcastic thoughts on web3
+            </ExternalLink>
+            .
+          </p>
+          <h3>Privacy and money</h3>
+          <p>
+            For full disclosure, I own no cryptocurrencies or NFTs. I have no
             particular financial interest in whether web3 takes off or not,
             though I have plenty of non-financial interests; after all, I do
             have to live on this planet, and I spend enough time engaging with
             the tech industry and online to care about the futures of both.
           </p>
           <p>
-            If you are interested, I also have{" "}
-            <ExternalLink href="https://blog.mollywhite.net/blockchain/">
-              longer-form, less sarcastic thoughts on web3
-            </ExternalLink>
-            .
+            I was not paid to make this site. I don't post sponsored content on
+            this website or its associated Twitter account (or anywhere else for
+            that matter). A few generous people have sent money to me via
+            Twitter tips; I have earmarked that money for cloud hosting costs,
+            which I otherwise pay out of pocket. I don't run ads or otherwise
+            make money off the website in any way.
+          </p>
+          <p>
+            The site does use Google Analytics, mostly for my own curiosity. All
+            IP data is anonymized, no advertising features are enabled, and data
+            retention is set to the minimum value (14 months). If you would
+            rather not be tracked by Google Analytics, there are great
+            extensions like{" "}
+            <a href="https://en.wikipedia.org/wiki/Privacy_Badger">
+              Privacy Badger
+            </a>
+            , or you can disable JavaScript for this site.
           </p>
           <h3 id="grift-question">
             What's the number in the corner with the flames?
