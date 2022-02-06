@@ -206,7 +206,11 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
         ref={{ focusRef: headerFocusRef, inViewRef: headerInViewRef }}
       />
       {isBrowserRendering && (!startAtId || !hasPreviousEntries) && (
-        <Filters filters={filters} setFilters={setFilters} />
+        <Filters
+          filters={filters}
+          setFilters={setFilters}
+          windowWidth={windowWidth}
+        />
       )}
       <div
         className="timeline-page content-wrapper"

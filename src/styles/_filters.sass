@@ -5,84 +5,136 @@
   background-color: $filterbar-background
   color: $filter-text
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
+  padding: 5px 0
+  min-height: 50px
 
 .timeline-filter
   display: flex
   max-width: 1600px
-  padding: 0 10px
+  margin: 0 10px
 
-  h2
-    font-size: 1em
-    margin: 0
+.filters-group,
+.search-group,
+.search-with-button
+  display: flex
 
-  .expand-filters-button,
-  .sort-button
-    display: flex
-    align-items: center
-    background-color: transparent
-    border: 0
+h2
+  font-size: 1em
+  margin: 0
 
-  .expand-filters-button
+.expand-filters-button,
+.sort-button
+  display: flex
+  align-items: center
+  background-color: transparent
+  border: 0
+
+.expand-filters-button
+  color: $filter-text
+
+  &:disabled
     color: $filter-text
 
-    &:disabled
-      color: $filter-text
+.sort-button
+  color: $filter-text
+  margin-left: 10px
+  min-height: 38px
 
-  .sort-button
-    color: $filter-text
+  i
+    margin-right: 5px
 
-    i
-      margin-right: 5px
+.filters-expandable
+  justify-content: space-between
 
-  .filter-and-button, .filters-expandable
-    display: flex
-    align-items: center
+.filter-and-button, .filters-expandable
+  display: flex
+  align-items: center
 
-  .filter-select div[class*="-menu"]
-    z-index: 5
+.filter-select div[class*="-menu"]
+  z-index: 5
 
-@media only screen and (min-width: 769px)
-  .timeline-filter-wrapper
-    padding: 5px 0
-    min-height: 50px
+.search-group
+  input[type="text"]
+    min-height: 38px // Match select height
+    border: 1px solid $filterbar-border
+    border-radius: 4px
+    padding-left: 10px
 
+  button.search
+    color: $filterbar-icon
+    padding: 0 15px
+
+// All screens > LG
+@media only screen and (min-width: #{$lg-breakpoint + 1}px)
   .timeline-filter
     width: 90%
     margin: 0 auto
 
     .expand-filters-button
+      margin-right: 20px
+
       .fa-caret-down
         display: none
 
-    .filters-expandable
-      flex-grow: 1
+  .filters-expandable
+    flex-grow: 1
 
-      >*
-        margin-left: 20px
-
-@media only screen and (max-width: 768px)
-  .timeline-filter
+// All screens < LG
+@media only screen and (max-width: #{$lg-breakpoint}px)
+  .timeline-filter, .filters-expandable
     width: 100%
     flex-direction: column
 
-    .expand-filters-button
-      height: 30px
+  .filters-expandable
+    display: none
+    border-top: 1px solid $timeline-line-color
+
+    &.expanded
+      display: flex
+
+    .filter-select
       flex-grow: 1
-      justify-content: space-between
+      margin-top: 10px
 
-    .filters-expandable
-      display: none
-      flex-direction: column
-      border-top: 1px solid $timeline-line-color
-      margin-bottom: 10px
+  .expand-filters-button
+    height: 30px
+    flex-grow: 1
+    justify-content: space-between
 
-      &.expanded
-        display: flex
+  .filters-group
+    margin-bottom: 5px
 
-      .filter-select
-        width: 90%
-        margin-top: 10px
+  .search-with-button, .search-group input
+    flex-grow: 1
 
+// All screens > MD
+@media only screen and (min-width: #{$md-breakpoint + 1}px)
+  .filters-group .filter-select:not(:last-child)
+    margin-right: 20px
+
+// MD screens
+@media only screen and (min-width: #{$md-breakpoint + 1}px) and (max-width: #{$lg-breakpoint}px)
+  .filters-expandable
+    align-items: start
+
+  .filters-group, .search-group
+    width: 100%
+
+// All screens < MD
+@media only screen and (max-width: #{$md-breakpoint}px)
+  .filters-group, .search-group
+    width: 100%
+    flex-direction: column
+    align-items: center
+
+  .filter-select, .search-with-button, .sort-button
+    width: 90%
+
+  .sort-button
+    margin-left: 0
+    justify-content: center
+
+// Dark mode
 @media (prefers-color-scheme: dark)
   .timeline-filter-wrapper
     background-color: $dark-filterbar-background

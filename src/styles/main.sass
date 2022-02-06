@@ -439,7 +439,7 @@ div.content-wrapper
       background-color: $color
 
 /* RESPONSIVENESS */
-@media only screen and (min-width: 769px)
+@media only screen and (min-width: #{$md-breakpoint + 1}px)
   .timeline-entry.even .timeline-description:after
     left: 100%
     border-left-color: $card-background
@@ -473,7 +473,7 @@ div.content-wrapper
       max-width: 1000px
       width: 80%
 
-@media only screen and (max-width: 768px) and (min-width: 415px)
+@media only screen and (max-width: #{$md-breakpoint}px) and (min-width: #{$sm-breakpoint + 1}px)
   .timeline-entry.even .timeline-description:after
     right: 100%
     border-right-color: $card-background
@@ -481,7 +481,7 @@ div.content-wrapper
   header.page-header.timeline-page .header-content
     padding-bottom: 20px
 
-@media only screen and (min-width: 415px)
+@media only screen and (min-width: #{$sm-breakpoint + 1}px)
   .timeline-description:after
     top: 20px
     border: solid transparent
@@ -500,7 +500,7 @@ div.content-wrapper
     float: right
     padding: 10px 0 20px 20px
 
-@media only screen and (max-width: 768px)
+@media only screen and (max-width: #{$md-breakpoint}px)
   header.page-header
     h1
       font-size: 1.5em
@@ -546,7 +546,7 @@ div.content-wrapper
   .lightbox-container
     width: 90%
 
-@media only screen and (max-width: 414px)
+@media only screen and (max-width: #{$sm-breakpoint}px)
   body
     font-size: 14px
 
@@ -695,15 +695,15 @@ div.content-wrapper
   .no-js .timeline-entry .timeline-description::after
     border-right-color: $dark-card-background
 
-  @media only screen and (min-width: 769px)
+  @media only screen and (min-width: #{$md-breakpoint + 1}px)
     .timeline-entry.even .timeline-description::after
       border-left-color: $dark-card-background
 
-  @media only screen and (max-width: 768px) and (min-width: 415px)
+  @media only screen and (max-width: #{$md-breakpoint}px) and (min-width: #{$sm-breakpoint + 1}px)
     .timeline-entry.even .timeline-description::after
       border-right-color: $dark-card-background
 
-  @media only screen and (min-width: 415px)
+  @media only screen and (min-width: #{$sm-breakpoint}px)
     .timeline-entry.odd .timeline-description::after
       border-right-color: $dark-card-background
 

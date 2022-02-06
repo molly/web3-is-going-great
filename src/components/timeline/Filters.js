@@ -1,12 +1,21 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import Select from "react-select";
+import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 
 import FILTERS, { EMPTY_FILTERS_STATE } from "../../constants/filters";
 import { sentenceCase } from "../../js/utilities";
 
+import Select from "react-select";
+
 export default function Filters({ filters, setFilters, windowWidth }) {
   const [isFilterGroupExpanded, setIsFilterGroupExpanded] = useState(false);
+
+  const renderLabel = () => {
+    if (windowWidth === "xl") {
+      return "Filter:";
+    }
+    return "Filter and search";
+  };
 
   const renderFilterGroup = (filter) => {
     return (
@@ -38,17 +47,47 @@ export default function Filters({ filters, setFilters, windowWidth }) {
     );
   };
 
+  const renderSortButton = () => (
+    <button
+      className="sort-button"
+      onClick={() =>
+        setFilters({
+          ...filters,
+          sort: filters.sort === "Ascending" ? "Descending" : "Ascending",
+        })
+      }
+    >
+      <i
+        className={`fas fa-caret-${
+          filters.sort === "Ascending" ? "up" : "down"
+        }`}
+        aria-hidden={true}
+      ></i>{" "}
+      {filters.sort}
+    </button>
+  );
+
+  const renderSearch = () => (
+    <div className="search-with-button">
+      <input type="text" placeholder="Search" />
+      <button className="search">
+        <i className="fa-solid fa-magnifying-glass" aria-hidden={true}></i>
+        <span className="sr-only">Search</span>
+      </button>
+    </div>
+  );
+
   return (
     <div className="timeline-filter-wrapper">
       <section className="timeline-filter">
         <button
           className="expand-filters-button"
           aria-controls="filters-expandable"
-          aria-expanded={windowWidth === "lg" ? null : isFilterGroupExpanded}
-          disabled={windowWidth === "lg"}
+          aria-expanded={windowWidth === "xl" ? null : isFilterGroupExpanded}
+          disabled={windowWidth === "xl"}
           onClick={() => setIsFilterGroupExpanded(!isFilterGroupExpanded)}
         >
-          <h2>Filter{windowWidth !== "sm" && ":"}</h2>
+          <h2>{renderLabel()}</h2>
           <i className="fas fa-caret-down"></i>
         </button>
         <div
@@ -57,24 +96,13 @@ export default function Filters({ filters, setFilters, windowWidth }) {
             isFilterGroupExpanded && "expanded"
           }`}
         >
-          {Object.keys(FILTERS).map(renderFilterGroup)}
-          <button
-            className="sort-button"
-            onClick={() =>
-              setFilters({
-                ...filters,
-                sort: filters.sort === "Ascending" ? "Descending" : "Ascending",
-              })
-            }
-          >
-            <i
-              className={`fas fa-caret-${
-                filters.sort === "Ascending" ? "up" : "down"
-              }`}
-              aria-hidden={true}
-            ></i>{" "}
-            {filters.sort}
-          </button>
+          <div className="filters-group">
+            {Object.keys(FILTERS).map(renderFilterGroup)}
+          </div>
+          <div className="search-group">
+            {renderSearch()}
+            {renderSortButton()}
+          </div>
         </div>
       </section>
     </div>
@@ -93,5 +121,5 @@ Filters.propTypes = {
     sort: PropTypes.string.isRequired,
   }).isRequired,
   setFilters: PropTypes.func.isRequired,
-  windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
+  windowWidth: WindowWidthPropType,
 };

@@ -1,5 +1,6 @@
 import { forwardRef, useImperativeHandle, useRef } from "react";
 import PropTypes from "prop-types";
+import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 
 import { STORAGE_URL } from "../../constants/urls";
 
@@ -81,7 +82,9 @@ const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
       className="timeline-page page-header"
       ref={ref && ref.inViewRef ? ref.inViewRef : null}
     >
-      <a href="#timeline" className="show-on-focus">Skip to timeline</a>
+      <a href="#timeline" className="show-on-focus">
+        Skip to timeline
+      </a>
       <div className="constrain-width">
         {windowWidth !== "sm" && renderImage()}
         <div className="header-content">
@@ -130,7 +133,7 @@ const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
 });
 
 Header.propTypes = {
-  windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
+  windowWidth: WindowWidthPropType,
   nojs: PropTypes.bool,
 };
 
