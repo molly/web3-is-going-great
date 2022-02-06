@@ -1,0 +1,58 @@
+name: PR Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  functions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          cache: "npm"
+          cache-dependency-path: functions/package-lock.json
+
+      - name: Install packages
+        run: npm ci
+        working-directory: functions
+
+      - name: Lint
+        run: npm run lint
+        working-directory: functions
+
+      - name: Build
+        run: npm run build
+        working-directory: functions
+
+  src:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          cache: "npm"
+          cache-dependency-path: src/package-lock.json
+
+      - name: Install packages
+        run: npm ci
+        working-directory: functions
+
+      - name: Lint
+        run: npm run lint
+        working-directory: src
+
+      - name: Build
+        run: npm run build
+        working-directory: src
