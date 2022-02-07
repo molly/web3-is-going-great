@@ -29,7 +29,7 @@ const FILTERS = {
     litecoin: "Litecoin",
     polygon: "Polygon",
     solana: "Solana",
-    stablecoins: "stablecoins",
+    stablecoins: "Stablecoins",
     wax: "WAX",
   },
 };
