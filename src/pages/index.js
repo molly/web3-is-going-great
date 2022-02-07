@@ -72,6 +72,7 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
     hasNextPage,
     fetchNextPage,
     isFetching,
+    isRefetching,
     isLoading,
     isError,
     isSuccess,
@@ -197,7 +198,8 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
   };
 
   const renderBody = () => {
-    if (isLoading) {
+    if (isLoading || isRefetching) {
+      // isRefetching check to avoid showing stale data as search query loads
       return <Loader />;
     } else if (isError) {
       return <Error />;

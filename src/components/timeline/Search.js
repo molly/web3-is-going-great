@@ -35,6 +35,9 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
     },
     onSelectedItemChange: ({ selectedItem }) => {
       setSelectedEntryFromSearch(selectedItem.id);
+      // Write the URL so people can permalink easily
+      const perma = window.location.origin + `?id=${selectedItem.id}`;
+      window.history.pushState(null, null, perma);
       closeMenu();
     },
   });
