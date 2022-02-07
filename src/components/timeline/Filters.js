@@ -6,8 +6,14 @@ import FILTERS, { EMPTY_FILTERS_STATE } from "../../constants/filters";
 import { sentenceCase } from "../../js/utilities";
 
 import Select from "react-select";
+import Search from "./Search";
 
-export default function Filters({ filters, setFilters, windowWidth }) {
+export default function Filters({
+  filters,
+  setFilters,
+  setSelectedEntryFromSearch,
+  windowWidth,
+}) {
   const [isFilterGroupExpanded, setIsFilterGroupExpanded] = useState(false);
 
   const renderLabel = () => {
@@ -67,16 +73,6 @@ export default function Filters({ filters, setFilters, windowWidth }) {
     </button>
   );
 
-  const renderSearch = () => (
-    <div className="search-with-button">
-      <input type="text" placeholder="Search" />
-      <button className="search">
-        <i className="fa-solid fa-magnifying-glass" aria-hidden={true}></i>
-        <span className="sr-only">Search</span>
-      </button>
-    </div>
-  );
-
   return (
     <div className="timeline-filter-wrapper">
       <section className="timeline-filter">
@@ -100,7 +96,10 @@ export default function Filters({ filters, setFilters, windowWidth }) {
             {Object.keys(FILTERS).map(renderFilterGroup)}
           </div>
           <div className="search-group">
-            {renderSearch()}
+            <Search
+              filters={filters}
+              setSelectedEntryFromSearch={setSelectedEntryFromSearch}
+            />
             {renderSortButton()}
           </div>
         </div>
@@ -121,5 +120,6 @@ Filters.propTypes = {
     sort: PropTypes.string.isRequired,
   }).isRequired,
   setFilters: PropTypes.func.isRequired,
+  setSelectedEntryFromSearch: PropTypes.func.isRequired,
   windowWidth: WindowWidthPropType,
 };

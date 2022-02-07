@@ -54,15 +54,63 @@ h2
   z-index: 5
 
 .search-group
-  input[type="text"]
+  .search-input
     min-height: 38px // Match select height
     border: 1px solid $filterbar-border
     border-radius: 4px
     padding-left: 10px
 
-  button.search
-    color: $filterbar-icon
-    padding: 0 15px
+.search-results-menu
+  display: none
+  position: absolute
+  margin: 0 10px 0 0
+  padding: 0
+  background-color: $card-background
+  min-width: 300px
+  max-width: 600px
+  max-height: 50%
+  overflow: scroll
+  border: 1px solid $filterbar-border
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2)
+  z-index: 3
+
+  li
+    list-style: none
+
+  &.is-open
+    display: block
+
+  .search-help
+    color: $timestamp-color
+    font-style: italic
+    padding: 10px
+
+  .search-result
+    margin: 0
+    padding: 10px
+    cursor: pointer
+    font-size: 0.9em
+    border-bottom: 1px solid #eee
+
+    &.highlighted
+      background-color: $filter-highlight
+
+    em
+      font-style: normal
+      font-weight: bold
+
+    .result-title
+      margin-bottom: 5px
+
+    .timestamp, .result-body
+      font-size: 0.85em
+
+    .result-body
+      overflow: hidden
+      text-overflow: ellipsis
+      display: -webkit-box
+      -webkit-line-clamp: 2
+      -webkit-box-orient: vertical
 
 // All screens > LG
 @media only screen and (min-width: #{$lg-breakpoint + 1}px)
@@ -104,8 +152,14 @@ h2
   .filters-group
     margin-bottom: 5px
 
-  .search-with-button, .search-group input
+  .search-and-results
+    width: 100%
+
+  .search-container, .search-input
     flex-grow: 1
+
+  .search-container
+    display: flex
 
 // All screens > MD
 @media only screen and (min-width: #{$md-breakpoint + 1}px)
@@ -117,18 +171,22 @@ h2
   .filters-expandable
     align-items: start
 
-  .filters-group, .search-group
+  .filters-group, .search-group, .search-container
     width: 100%
 
 // All screens < MD
 @media only screen and (max-width: #{$md-breakpoint}px)
-  .filters-group, .search-group
+  .filters-group, .search-group, .search-container
     width: 100%
     flex-direction: column
     align-items: center
 
-  .filter-select, .search-with-button, .sort-button
+  .filter-select, .search-input, .sort-button, .search-results-menu
     width: 90%
+
+  .search-results-menu
+    left: calc(5% + 10px)
+    max-width: none
 
   .sort-button
     margin-left: 0
