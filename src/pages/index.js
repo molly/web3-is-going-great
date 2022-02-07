@@ -1,6 +1,7 @@
 import { Fragment, useCallback, useState, useRef, useMemo } from "react";
 import PropTypes from "prop-types";
 import { EntryPropType } from "../js/entry";
+import clsx from "clsx";
 
 import { useInfiniteQuery } from "react-query";
 import useGA from "../hooks/useGA";
@@ -94,9 +95,15 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
     }
   );
 
-  const hasPreviousEntries = useMemo(() => {
-    return isSuccess && data.pages[0].hasPrev;
-  }, [data.pages, isSuccess]);
+  const hasPreviousEntries = useMemo(
+    () => isSuccess && data.pages[0].hasPrev,
+    [data.pages, isSuccess]
+  );
+
+  const shouldRenderGoToTop = useMemo(
+    () => (!!startAtId && hasPreviousEntries) || !!selectedEntryFromSearch,
+    [startAtId, hasPreviousEntries, selectedEntryFromSearch]
+  );
 
   const renderScrollSentinel = () => {
     return (
@@ -132,10 +139,14 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
     let runningScamTotal = 0;
     return (
       <>
-        {((startAtId && hasPreviousEntries) || selectedEntryFromSearch) &&
-          renderGoToTop()}
+        {shouldRenderGoToTop && renderGoToTop()}
         {startAtId && <CustomEntryHead entry={data.pages[0].entries[0]} />}
-        <article id="timeline" className="timeline">
+        <article
+          id="timeline"
+          className={clsx("timeline", {
+            "small-top-margin": shouldRenderGoToTop,
+          })}
+        >
           {data.pages.map((page, pageInd) => {
             const isLastPage = pageInd === data.pages.length - 1;
             return (

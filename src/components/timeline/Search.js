@@ -26,6 +26,7 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
     highlightedIndex,
     getItemProps,
     openMenu,
+    closeMenu,
   } = useCombobox({
     items: items,
     itemToString: (item) => item.id,
@@ -34,6 +35,7 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
     },
     onSelectedItemChange: ({ selectedItem }) => {
       setSelectedEntryFromSearch(selectedItem.id);
+      closeMenu();
     },
   });
 

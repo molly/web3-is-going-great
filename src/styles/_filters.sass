@@ -8,6 +8,10 @@
   padding: 5px 0
   min-height: 50px
 
+  h2
+    font-size: 1em
+    margin: 0
+
 .timeline-filter
   display: flex
   max-width: 1600px
@@ -17,10 +21,6 @@
 .search-group,
 .search-with-button
   display: flex
-
-h2
-  font-size: 1em
-  margin: 0
 
 .expand-filters-button,
 .sort-button
@@ -63,7 +63,7 @@ h2
 .search-results-menu
   display: none
   position: absolute
-  margin: 0 10px 0 0
+  margin: 3px 10px 0 0
   padding: 0
   background-color: $card-background
   min-width: 300px
@@ -90,7 +90,9 @@ h2
     padding: 10px
     cursor: pointer
     font-size: 0.9em
-    border-bottom: 1px solid #eee
+
+    &:not(:last-child)
+      border-bottom: 1px solid #eee
 
     &.highlighted
       background-color: $filter-highlight
@@ -211,7 +213,7 @@ h2
 
   .filter-select
     >div
-      background-color: $dark-card-background
+      background-color: $dark-lightbox-background
       border-color: $dark-timeline-line-color
 
     div[class*="-control"]
@@ -225,8 +227,31 @@ h2
       color: #666666
 
     div[class*="-menu"] div[class*="option"]
-      background-color: $dark-card-background
+      background-color: $dark-lightbox-background
+      cursor: pointer
 
       &:hover, &:active
-        background-color: $dark-main-color
-        color: $dark-card-background
+        background-color: $dark-card-background
+
+  .search-group
+    .search-input
+      background-color: $dark-lightbox-background
+      color: $dark-filter-text
+      border-color: $dark-timeline-line-color
+
+      &::placeholder
+        color: $dark-filter-text
+
+      &:focus-visible
+        outline-style: solid
+
+    .search-results-menu
+      background-color: $dark-lightbox-background
+      border: 1px solid $dark-filterbar-border
+
+    .search-result
+      &:not(:last-child)
+        border-bottom-color: $dark-filterbar-border
+
+      &.highlighted
+        background-color: $dark-card-background
