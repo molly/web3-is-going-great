@@ -72,7 +72,6 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
     hasNextPage,
     fetchNextPage,
     isFetching,
-    isRefetching,
     isLoading,
     isError,
     isSuccess,
@@ -80,7 +79,6 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
     ["entries", filters, selectedEntryFromSearch],
     getFilteredEntries,
     {
-      initialData: { pages: [firstEntries], pageParams: [undefined] },
       refetchOnMount: false,
       getNextPageParam: (lastPage) => {
         if (!lastPage) {
@@ -93,12 +91,23 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
         }
         return lastPage.entries[lastPage.entries.length - 1]._key;
       },
+      ...(!selectedEntryFromSearch && {
+        initialData: {
+          pages: [firstEntries],
+          pageParams: [undefined],
+        },
+      }),
     }
   );
 
   const hasPreviousEntries = useMemo(
-    () => isSuccess && data.pages[0].hasPrev,
-    [data.pages, isSuccess]
+    () =>
+      isSuccess &&
+      data &&
+      data.pages &&
+      data.pages.length &&
+      data.pages[0].hasPrev,
+    [data, isSuccess]
   );
 
   const shouldRenderGoToTop = useMemo(
@@ -198,8 +207,7 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
   };
 
   const renderBody = () => {
-    if (isLoading || isRefetching) {
-      // isRefetching check to avoid showing stale data as search query loads
+    if (isLoading) {
       return <Loader />;
     } else if (isError) {
       return <Error />;
