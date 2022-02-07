@@ -135,6 +135,9 @@ div.content-wrapper
   margin: 0px auto
   padding: 20px 0 100px 0
 
+.timeline.small-top-margin
+  padding-top: 5px
+
 .timeline::before
   content: ''
   position: absolute
@@ -150,7 +153,7 @@ div.content-wrapper
   pointer-events: none
 
   &.first
-    margin-top: 10px
+    margin-top: 0px
 
   &.short
     margin-top: -50px
@@ -227,13 +230,6 @@ div.content-wrapper
       min-width: 0
       padding-left: 20px
 
-  .timestamp
-    font-style: italic
-    font-size: 80%
-
-    .note
-      color: $timestamp-color
-
   h2, h2 > button
     font-family: $body-font, serif
     font-weight: 900
@@ -292,6 +288,13 @@ div.content-wrapper
   .landscape
     img
       max-width: 200px
+
+.timestamp
+  font-style: italic
+  font-size: 80%
+
+  .note
+    color: $timestamp-color
 
 .captioned-image
   max-width: 150px
@@ -387,7 +390,7 @@ div.content-wrapper
   left: 0
 
 .timeline.dots
-  padding-bottom: 20px
+  padding-bottom: 10px
 
   &::before
     background: linear-gradient(180deg, $timeline-line-color 25%, $main-background 25%, $main-background 50%, $timeline-line-color 50%, $timeline-line-color 75%, $main-background 75%, $main-background 100%)
@@ -398,11 +401,10 @@ div.content-wrapper
   justify-content: center
 
   button
-    margin: 20px 0
+    margin: 10px 0
     background-color: $accent
-    font-family: $display-font
     color: $title-color
-    padding: 10px
+    padding: 5px 10px
     border: 0
     box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.4)
     cursor: pointer
@@ -439,7 +441,7 @@ div.content-wrapper
       background-color: $color
 
 /* RESPONSIVENESS */
-@media only screen and (min-width: 769px)
+@media only screen and (min-width: #{$md-breakpoint + 1}px)
   .timeline-entry.even .timeline-description:after
     left: 100%
     border-left-color: $card-background
@@ -473,7 +475,7 @@ div.content-wrapper
       max-width: 1000px
       width: 80%
 
-@media only screen and (max-width: 768px) and (min-width: 415px)
+@media only screen and (max-width: #{$md-breakpoint}px) and (min-width: #{$sm-breakpoint + 1}px)
   .timeline-entry.even .timeline-description:after
     right: 100%
     border-right-color: $card-background
@@ -481,7 +483,7 @@ div.content-wrapper
   header.page-header.timeline-page .header-content
     padding-bottom: 20px
 
-@media only screen and (min-width: 415px)
+@media only screen and (min-width: #{$sm-breakpoint + 1}px)
   .timeline-description:after
     top: 20px
     border: solid transparent
@@ -500,7 +502,7 @@ div.content-wrapper
     float: right
     padding: 10px 0 20px 20px
 
-@media only screen and (max-width: 768px)
+@media only screen and (max-width: #{$md-breakpoint}px)
   header.page-header
     h1
       font-size: 1.5em
@@ -546,7 +548,7 @@ div.content-wrapper
   .lightbox-container
     width: 90%
 
-@media only screen and (max-width: 414px)
+@media only screen and (max-width: #{$sm-breakpoint}px)
   body
     font-size: 14px
 
@@ -676,6 +678,10 @@ div.content-wrapper
     .tags
       border-top: 1px solid $dark-timeline-line-color
 
+    h2 button .permalink-popup
+      color: $dark-main-color
+      background-color: transparentize($dark-main-background, 0.3)
+
   .timeline::before
     background-color: $dark-timeline-line-color
 
@@ -691,19 +697,26 @@ div.content-wrapper
       &.#{$name}
         background-color: darken($color, 20%)
 
+  .load-top button
+    color: $dark-timeline-icon-color
+    background-color: darken($accent, 20%)
+
+  .timeline.dots::before
+    background: linear-gradient(180deg, $dark-timeline-line-color 25%, $dark-main-background 25%, $dark-main-background 50%, $dark-timeline-line-color 50%, $dark-timeline-line-color 75%, $dark-main-background 75%, $dark-main-background 100%)
+
   /* Arrows */
   .no-js .timeline-entry .timeline-description::after
     border-right-color: $dark-card-background
 
-  @media only screen and (min-width: 769px)
+  @media only screen and (min-width: #{$md-breakpoint + 1}px)
     .timeline-entry.even .timeline-description::after
       border-left-color: $dark-card-background
 
-  @media only screen and (max-width: 768px) and (min-width: 415px)
+  @media only screen and (max-width: #{$md-breakpoint}px) and (min-width: #{$sm-breakpoint + 1}px)
     .timeline-entry.even .timeline-description::after
       border-right-color: $dark-card-background
 
-  @media only screen and (min-width: 415px)
+  @media only screen and (min-width: #{$sm-breakpoint}px)
     .timeline-entry.odd .timeline-description::after
       border-right-color: $dark-card-background
 

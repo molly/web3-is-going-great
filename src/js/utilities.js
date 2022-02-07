@@ -34,3 +34,25 @@ export const getImageDimensions = (imageSrc) =>
     };
     img.src = imageSrc;
   });
+
+export function truncateToNearestWord(str, length, startPosition = 0) {
+  if (typeof str !== "string" || (startPosition === 0 && str.length < length)) {
+    return str;
+  }
+
+  let toTrim;
+  if (startPosition) {
+    const startIndex = str.indexOf(" ", startPosition);
+    toTrim = str.slice(startIndex + 1); // +1 trims off the space too
+  } else {
+    // Slice anyway to copy (to avoid mutations)
+    toTrim = str.slice();
+  }
+
+  if (toTrim.length < length) {
+    return toTrim;
+  }
+
+  const endIndex = toTrim.lastIndexOf(" ", length);
+  return toTrim.slice(0, endIndex);
+}

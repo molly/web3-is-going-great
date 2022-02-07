@@ -12,6 +12,7 @@ import { EntryPropType } from "../../js/entry";
 import { InView } from "react-intersection-observer";
 import Link from "next/link";
 import TimelineEntryContent from "./TimelineEntryContent";
+import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 
 export default function Entry({
   entry,
@@ -268,7 +269,7 @@ export default function Entry({
 Entry.propTypes = {
   className: PropTypes.string,
   entry: EntryPropType,
-  windowWidth: PropTypes.oneOf(["sm", "md", "lg"]),
+  windowWidth: WindowWidthPropType,
   glossary: PropTypes.object.isRequired,
   runningScamTotal: PropTypes.number,
   currentRunningScamTotal: PropTypes.number,

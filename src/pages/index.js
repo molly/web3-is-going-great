@@ -1,6 +1,7 @@
 import { Fragment, useCallback, useState, useRef, useMemo } from "react";
 import PropTypes from "prop-types";
 import { EntryPropType } from "../js/entry";
+import clsx from "clsx";
 
 import { useInfiniteQuery } from "react-query";
 import useGA from "../hooks/useGA";
@@ -45,6 +46,7 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
 
   const [filters, setFilters] = useState(EMPTY_FILTERS_STATE);
   const [currentRunningScamTotal, setCurrentRunningScamTotal] = useState(0);
+  const [selectedEntryFromSearch, setSelectedEntryFromSearch] = useState(null);
 
   const [headerInViewRef, headerInView] = useInView();
   const headerFocusRef = useRef();
@@ -56,9 +58,13 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
 
   const getFilteredEntries = useCallback(
     ({ pageParam = null }) => {
-      return getEntries({ ...filters, cursor: pageParam });
+      if (selectedEntryFromSearch) {
+        return getEntries({ ...filters, startAtId: selectedEntryFromSearch });
+      } else {
+        return getEntries({ ...filters, cursor: pageParam });
+      }
     },
-    [filters]
+    [filters, selectedEntryFromSearch]
   );
 
   const {
@@ -66,28 +72,39 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
     hasNextPage,
     fetchNextPage,
     isFetching,
+    isRefetching,
     isLoading,
     isError,
     isSuccess,
-  } = useInfiniteQuery(["entries", filters], getFilteredEntries, {
-    initialData: { pages: [firstEntries], pageParams: [undefined] },
-    refetchOnMount: false,
-    getNextPageParam: (lastPage) => {
-      if (!lastPage) {
-        // This is the first fetch, so we have no cursor
-        return null;
-      }
-      if (!lastPage.hasNext) {
-        // No entries remain, return undefined to signal this to react-query
-        return undefined;
-      }
-      return lastPage.entries[lastPage.entries.length - 1]._key;
-    },
-  });
+  } = useInfiniteQuery(
+    ["entries", filters, selectedEntryFromSearch],
+    getFilteredEntries,
+    {
+      initialData: { pages: [firstEntries], pageParams: [undefined] },
+      refetchOnMount: false,
+      getNextPageParam: (lastPage) => {
+        if (!lastPage) {
+          // This is the first fetch, so we have no cursor
+          return null;
+        }
+        if (!lastPage.hasNext) {
+          // No entries remain, return undefined to signal this to react-query
+          return undefined;
+        }
+        return lastPage.entries[lastPage.entries.length - 1]._key;
+      },
+    }
+  );
 
-  const hasPreviousEntries = useMemo(() => {
-    return isSuccess && data.pages[0].hasPrev;
-  }, [data.pages, isSuccess]);
+  const hasPreviousEntries = useMemo(
+    () => isSuccess && data.pages[0].hasPrev,
+    [data.pages, isSuccess]
+  );
+
+  const shouldRenderGoToTop = useMemo(
+    () => (!!startAtId && hasPreviousEntries) || !!selectedEntryFromSearch,
+    [startAtId, hasPreviousEntries, selectedEntryFromSearch]
+  );
 
   const renderScrollSentinel = () => {
     return (
@@ -123,9 +140,14 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
     let runningScamTotal = 0;
     return (
       <>
-        {startAtId && hasPreviousEntries && renderGoToTop()}
+        {shouldRenderGoToTop && renderGoToTop()}
         {startAtId && <CustomEntryHead entry={data.pages[0].entries[0]} />}
-        <article id="timeline" className="timeline">
+        <article
+          id="timeline"
+          className={clsx("timeline", {
+            "small-top-margin": shouldRenderGoToTop,
+          })}
+        >
           {data.pages.map((page, pageInd) => {
             const isLastPage = pageInd === data.pages.length - 1;
             return (
@@ -176,7 +198,8 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
   };
 
   const renderBody = () => {
-    if (isLoading) {
+    if (isLoading || isRefetching) {
+      // isRefetching check to avoid showing stale data as search query loads
       return <Loader />;
     } else if (isError) {
       return <Error />;
@@ -206,7 +229,12 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
         ref={{ focusRef: headerFocusRef, inViewRef: headerInViewRef }}
       />
       {isBrowserRendering && (!startAtId || !hasPreviousEntries) && (
-        <Filters filters={filters} setFilters={setFilters} />
+        <Filters
+          filters={filters}
+          setFilters={setFilters}
+          setSelectedEntryFromSearch={setSelectedEntryFromSearch}
+          windowWidth={windowWidth}
+        />
       )}
       <div
         className="timeline-page content-wrapper"
