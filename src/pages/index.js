@@ -1,11 +1,4 @@
-import {
-  Fragment,
-  useCallback,
-  useState,
-  useRef,
-  useMemo,
-  useEffect,
-} from "react";
+import { Fragment, useCallback, useState, useRef, useMemo } from "react";
 import PropTypes from "prop-types";
 import { EntryPropType } from "../js/entry";
 
@@ -65,7 +58,7 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
   const getFilteredEntries = useCallback(
     ({ pageParam = null }) => {
       if (selectedEntryFromSearch) {
-        return getEntries({ ...filters, cursor: selectedEntryFromSearch });
+        return getEntries({ ...filters, startAtId: selectedEntryFromSearch });
       } else {
         return getEntries({ ...filters, cursor: pageParam });
       }
@@ -139,7 +132,8 @@ export default function Timeline({ firstEntries, startAtId, glossary }) {
     let runningScamTotal = 0;
     return (
       <>
-        {startAtId && hasPreviousEntries && renderGoToTop()}
+        {((startAtId && hasPreviousEntries) || selectedEntryFromSearch) &&
+          renderGoToTop()}
         {startAtId && <CustomEntryHead entry={data.pages[0].entries[0]} />}
         <article id="timeline" className="timeline">
           {data.pages.map((page, pageInd) => {

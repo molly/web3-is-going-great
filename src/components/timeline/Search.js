@@ -25,10 +25,15 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
     getComboboxProps,
     highlightedIndex,
     getItemProps,
+    openMenu,
   } = useCombobox({
     items: items,
+    itemToString: (item) => item.id,
     onInputValueChange: ({ inputValue }) => {
       setSearchTerm(inputValue);
+    },
+    onSelectedItemChange: ({ selectedItem }) => {
+      setSelectedEntryFromSearch(selectedItem.id);
     },
   });
 
@@ -116,7 +121,13 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
     <div className="search-and-results">
       <div {...getComboboxProps()} className="search-container">
         <input
-          {...getInputProps()}
+          {...getInputProps({
+            onFocus: () => {
+              if (searchTerm !== "") {
+                openMenu();
+              }
+            },
+          })}
           className="search-input"
           placeholder="Search"
         />
