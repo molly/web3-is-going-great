@@ -12,6 +12,22 @@ import FILTERS from "../../constants/filters";
 const MINIMUM_SEARCH_LENGTH = 3;
 const BODY_SNIPPET_LENGTH = 200;
 
+function stateReducer(state, actionAndChanges) {
+  const { type, changes } = actionAndChanges;
+  switch (type) {
+    case useCombobox.stateChangeTypes.InputKeyDownEnter:
+    case useCombobox.stateChangeTypes.ItemClick:
+      // Don't change the input value on selection so people can
+      // return to the same query without retyping it. Also close the menu.
+      return {
+        ...changes,
+        inputValue: state.inputValue,
+      };
+    default:
+      return changes;
+  }
+}
+
 export default function Search({ filters, setSelectedEntryFromSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [items, setItems] = useState([]);
@@ -26,10 +42,10 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
     highlightedIndex,
     getItemProps,
     openMenu,
-    closeMenu,
   } = useCombobox({
+    stateReducer,
     items: items,
-    itemToString: (item) => item.id,
+    itemToString: (item) => (item ? item.title : null),
     onInputValueChange: ({ inputValue }) => {
       setSearchTerm(inputValue);
     },
@@ -38,7 +54,6 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
       // Write the URL so people can permalink easily
       const perma = window.location.origin + `?id=${selectedItem.id}`;
       window.history.pushState(null, null, perma);
-      closeMenu();
     },
   });
 
@@ -127,8 +142,8 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
       <div {...getComboboxProps()} className="search-container">
         <input
           {...getInputProps({
-            onFocus: () => {
-              if (searchTerm !== "") {
+            onClick: () => {
+              if (searchTerm !== "" && !isOpen) {
                 openMenu();
               }
             },
