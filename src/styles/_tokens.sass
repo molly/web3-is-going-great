@@ -1,6 +1,10 @@
 $display-font: 'Press Start 2P'
 $body-font: 'Source Code Pro'
 
+$lg-breakpoint: 1024
+$md-breakpoint: 768
+$sm-breakpoint: 414
+
 $icon-colors: ("green": #59bf51, "red": #bf413e, "grey":#999999, "purple": #5948a4)
 
 $accent: #5948a4
@@ -9,14 +13,14 @@ $accent: #5948a4
 $header-footer-background: $accent
 $main-background: #eeeeee
 $card-background: #ffffff
-$filterbar-background: #ffffff
 $highlight-background: #cccccc
 
 $dark-header-footer-background: darken($accent, 30%)
 $dark-main-background: #222222
 $dark-card-background: #333333
-$dark-filterbar-background: #161616
+$dark-filterbar-background: #333333
 $dark-lightbox-background: #444444
+$dark-filterbar-border: #555555
 
 /* Text colors ---------------------------------*/
 // Header and footer
@@ -35,6 +39,10 @@ $dark-main-color: #cccccc
 $dark-link-color: lighten($accent, 30%)
 
 // Filter
+$filterbar-background: #ffffff
+$filterbar-border: #cccccc
+$filterbar-icon: #333333
+$filter-highlight: lighten($accent, 40%)
 $filter-text: #000000
 $dark-filter-text: $dark-main-color
 
