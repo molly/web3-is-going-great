@@ -21,12 +21,13 @@
     "moment": "^2.29.1"
   },
   "devDependencies": {
+    "@firebase/app-compat": "^0.1.17",
     "@types/ejs": "^3.1.0",
-    "@typescript-eslint/eslint-plugin": "^5.6.0",
-    "@typescript-eslint/parser": "^5.6.0",
-    "eslint": "^7.6.0",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "eslint": "^8.8.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.25.4",
     "typescript": "^4.5.5"
   },
   "private": true
