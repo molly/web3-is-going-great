@@ -60,6 +60,20 @@ export default function Entry({
     }, 1000);
   };
 
+  const getTagString = (category) => {
+    if (
+      entry.filters &&
+      entry.filters[category] &&
+      entry.filters[category].length
+    ) {
+      return entry.filters[category]
+        .map((key) => FILTERS[category][key])
+        .sort()
+        .join(", ");
+    }
+    return null;
+  };
+
   const renderIcon = () => {
     if (entry.faicon) {
       return (
@@ -170,27 +184,12 @@ export default function Entry({
   };
 
   const renderTags = () => {
-    const theme = entry.filters.theme
-      .map((theme) => FILTERS.theme[theme])
-      .sort()
-      .join(", ");
-    let blockchain, tech;
-    if (
-      entry.filters &&
-      entry.filters.blockchain &&
-      entry.filters.blockchain.length
-    ) {
-      blockchain = `Blockchain: ${entry.filters.blockchain
-        .map((bc) => FILTERS.blockchain[bc])
-        .sort()
-        .join(", ")}`;
-    }
-    if (entry.filters && entry.filters.tech && entry.filters.tech.length) {
-      tech = entry.filters.tech
-        .map((tech) => FILTERS.tech[tech])
-        .sort()
-        .join(", ");
-    }
+    const theme = getTagString("theme");
+    const blockchainTagString = getTagString("blockchain");
+    const blockchain = blockchainTagString
+      ? `Blockchain: ${blockchainTagString}`
+      : null;
+    const tech = getTagString("tech");
     return (
       <div className="tags">
         <div className="tag-list theme">
