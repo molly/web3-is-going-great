@@ -110,10 +110,13 @@ export default function Entry({
         </h2>
       );
     } else {
+      const linkSuffix = router.route.startsWith("/web1")
+        ? `#{entry.id}`
+        : `?id=${entry.id}`;
       return (
         <h2>
-          <Link href={`${router.route}?id=${entry.id}`}>
-            <a>
+          <Link href={`${router.route}${linkSuffix}`}>
+            <a id={entry.id}>
               <span dangerouslySetInnerHTML={{ __html: entry.title }} />
             </a>
           </Link>
