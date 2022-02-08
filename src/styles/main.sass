@@ -239,15 +239,10 @@ div.content-wrapper
     -webkit-margin-after: 5px
 
     a
-      text-decoration: inherit
-      color: inherit
-      float: right
-      visibility: hidden
+      color: $main-text-color
 
-    &:hover
-      a
-        visibility: visible
-        opacity: 0.5
+      &:hover
+        text-decoration: none
 
   h2 button
     .fa-link
@@ -678,9 +673,13 @@ div.content-wrapper
     .tags
       border-top: 1px solid $dark-timeline-line-color
 
-    h2 button .permalink-popup
-      color: $dark-main-color
-      background-color: transparentize($dark-main-background, 0.3)
+    h2
+      button .permalink-popup
+        color: $dark-main-color
+        background-color: transparentize($dark-main-background, 0.3)
+
+      a
+        color: $dark-main-color
 
   .timeline::before
     background-color: $dark-timeline-line-color
