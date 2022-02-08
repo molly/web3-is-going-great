@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useRef, useState } from "react";
 import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
+import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 
 import { STORAGE_URL } from "../../constants/urls";
@@ -25,6 +26,7 @@ export default function Entry({
   shouldScrollToElement,
 }) {
   const ref = useRef();
+  const router = useRouter();
   const isBrowserRendering = useIsBrowserRendering();
 
   const [showCopiedPopup, setShowCopiedPopup] = useState(false);
@@ -94,6 +96,30 @@ export default function Entry({
       );
     }
     return null;
+  };
+
+  const renderTitle = () => {
+    if (isBrowserRendering) {
+      return (
+        <h2>
+          <button onClick={() => permalink(entry.id)}>
+            <span dangerouslySetInnerHTML={{ __html: entry.title }} />
+            <i className="fas fa-link" aria-hidden={true} />
+            {showCopiedPopup && <div className="permalink-popup">Copied</div>}
+          </button>
+        </h2>
+      );
+    } else {
+      return (
+        <h2>
+          <Link href={`${router.route}?id=${entry.id}`}>
+            <a>
+              <span dangerouslySetInnerHTML={{ __html: entry.title }} />
+            </a>
+          </Link>
+        </h2>
+      );
+    }
   };
 
   const renderImageElement = (onClick = null) => {
@@ -246,13 +272,7 @@ export default function Entry({
         <span className="timestamp">
           <time dateTime={entry.date}>{humanizeDate(entry.date)}</time>
         </span>
-        <h2>
-          <button onClick={() => permalink(entry.id)}>
-            <span dangerouslySetInnerHTML={{ __html: entry.title }} />
-            <i className="fas fa-link" aria-hidden={true} />
-            {showCopiedPopup && <div className="permalink-popup">Copied</div>}
-          </button>
-        </h2>
+        {renderTitle()}
         {renderImage(true)}
         <TimelineEntryContent glossary={glossary}>
           {entry.body}
