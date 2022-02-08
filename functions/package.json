@@ -27,7 +27,7 @@
     "eslint": "^7.6.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.22.0",
-    "typescript": "^3.8.0"
+    "typescript": "^4.5.5"
   },
   "private": true
 }
