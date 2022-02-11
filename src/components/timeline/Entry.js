@@ -111,7 +111,7 @@ export default function Entry({
       );
     } else {
       const linkSuffix = router.route.startsWith("/web1")
-        ? `#{entry.id}`
+        ? `#${entry.id}`
         : `?id=${entry.id}`;
       return (
         <h2>

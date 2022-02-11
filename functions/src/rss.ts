@@ -56,40 +56,41 @@ export const updateRssOnChange = functions.firestore
     const xml = ejs.render(ejsFile.toString(), rssData).replace(/&nbsp;/g, " ");
 
     // Record XML to a staging URL so we can validate it with the W3 validator
-    const stagingFile = await storage
-      .bucket("web3-334501.appspot.com")
-      .file("static/stagedRss.xml");
-    await stagingFile.save(xml);
-    await stagingFile.setMetadata({
-      contentType: "application/atom+xml;charset=UTF-8",
-    });
-
+    let resp;
     try {
-      const resp = await axios.get("http://validator.w3.org/feed/check.cgi", {
-        params: {
-          output: "soap12",
-          url: `${STORAGE_URL_PREFIX}/static/stagedRss.xml`,
-        },
+      const stagingFile = await storage
+        .bucket("web3-334501.appspot.com")
+        .file("static/stagedRss.xml");
+      await stagingFile.save(xml);
+      await stagingFile.setMetadata({
+        contentType: "application/atom+xml;charset=UTF-8",
       });
 
-      if (
-        resp &&
-        resp.data &&
-        resp.data.search(/<m:validity>\s*true\s*<\/m:validity>/gm) > -1
-      ) {
-        // Valid XML, carry on
-        const file = await storage
-          .bucket("web3-334501.appspot.com")
-          .file("static/rss.xml");
-        await file.save(xml);
-        await file.setMetadata({
-          contentType: "application/atom+xml;charset=UTF-8",
-        });
-      } else {
-        throw new Error("Invalid XML");
-      }
+      resp = await axios.get("http://validator.w3.org/feed/check.cgi", {
+        params: {
+          output: "soap12",
+          url: `${STORAGE_URL_PREFIX}/static/stagedRss.xml?refresh=${Date.now()}`,
+        },
+      });
     } catch (err) {
-      throw new Error("Something is wrong with XML validation");
       console.log(err);
+      throw new Error("Something is wrong with XML validation");
+    }
+
+    if (
+      resp &&
+      resp.data &&
+      resp.data.search(/<m:validity>\s*true\s*<\/m:validity>/gm) > -1
+    ) {
+      // Valid XML, carry on
+      const file = await storage
+        .bucket("web3-334501.appspot.com")
+        .file("static/rss.xml");
+      await file.save(xml);
+      await file.setMetadata({
+        contentType: "application/atom+xml;charset=UTF-8",
+      });
+    } else {
+      throw new Error("Invalid XML");
     }
   });

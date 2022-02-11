@@ -10,6 +10,7 @@ const FILTERS = {
     hmm: "Hmm",
     rugPull: "Rug pull",
     shady: "Shady business",
+    yikes: "Yikes",
   },
   tech: {
     gaming: "blockchain gaming",
@@ -27,8 +28,10 @@ const FILTERS = {
     ethereum: "Ethereum",
     flow: "Flow",
     litecoin: "Litecoin",
+    monero: "Monero",
     polygon: "Polygon",
     solana: "Solana",
+    tezos: "Tezos",
     stablecoins: "stablecoins",
     wax: "WAX",
   },

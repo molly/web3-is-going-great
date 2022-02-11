@@ -19,6 +19,11 @@ const ALL_ICONS = {
   rug: { type: "img", value: "rug", text: FILTERS.theme.rugPull },
   shady: { type: "img", value: "shady", text: FILTERS.theme.shady },
   "thumbs-up": { type: "fa", value: "thumbs-up", text: FILTERS.theme.goodNews },
+  "face-grimace": {
+    type: "fa",
+    value: "face-grimace",
+    text: FILTERS.theme.yikes,
+  },
 };
 
 export default function IconSelector({ updateEntry, value }) {
