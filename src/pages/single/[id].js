@@ -3,6 +3,7 @@ import useGA from "../../hooks/useGA";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 import { getEntry } from "../../db/singleEntry";
+import { getGlossaryEntries } from "../../db/glossary";
 
 import Header from "../../components/timeline/Header";
 import BackBar from "../../components/BackBar";
@@ -23,11 +24,12 @@ export async function getServerSideProps(context) {
       props.error = 500;
     }
   }
+  props.glossary = await getGlossaryEntries();
 
   return { props };
 }
 
-export default function SingleEntry({ entry, error = null }) {
+export default function SingleEntry({ entry, glossary, error = null }) {
   useGA();
 
   const windowWidth = useWindowWidth();
@@ -40,6 +42,7 @@ export default function SingleEntry({ entry, error = null }) {
           key={entry.id}
           entry={entry}
           windowWidth={windowWidth}
+          glossary={glossary}
         />
       </article>
     );
@@ -72,4 +75,5 @@ export default function SingleEntry({ entry, error = null }) {
 SingleEntry.propTypes = {
   entry: EntryPropType,
   error: PropTypes.oneOf([404, 500]),
+  glossary: PropTypes.object.isRequired,
 };
