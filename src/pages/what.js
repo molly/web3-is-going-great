@@ -124,6 +124,12 @@ export default function WhatIsWeb3() {
               <span> by Tim O'Reilly</span>
             </li>
             <li>
+              Slides and transcript of{" "}
+              <ExternalLink href="https://blog.dshr.org/2022/02/ee380-talk.html">
+                Dan Rosenthal's talk to Standford EE Computer Systems students
+              </ExternalLink>
+            </li>
+            <li>
               <ExternalLink href="https://society.robinsloan.com/archive/notes-on-web3/">
                 "Notes on Web3"
               </ExternalLink>
