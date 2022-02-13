@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const FILTERS = {
   theme: {
     badIdea: "Bad idea",
@@ -43,5 +45,16 @@ export const EMPTY_FILTERS_STATE = {
   blockchain: [],
   sort: "Descending",
 };
+
+const ThemePropType = PropTypes.oneOf(Object.values(FILTERS.theme));
+const TechPropType = PropTypes.oneOf(Object.values(FILTERS.tech));
+const BlockchainPropType = PropTypes.oneOf(Object.values(FILTERS.blockchain));
+
+export const FiltersPropType = PropTypes.shape({
+  theme: PropTypes.arrayOf(ThemePropType).isRequired,
+  tech: PropTypes.arrayOf(TechPropType).isRequired,
+  blockchain: PropTypes.arrayOf(BlockchainPropType).isRequired,
+  sort: PropTypes.oneOf(["Descending", "Ascending"]).isRequired,
+});
 
 export default FILTERS;
