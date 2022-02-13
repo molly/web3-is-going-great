@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 
-import useDebounce from "../../hooks/useDebounce";
+import { useDebounce } from "use-debounce";
 import { useCombobox } from "downshift";
 
 import { search as searchEntries } from "../../db/searchEntries";
@@ -32,7 +32,7 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [items, setItems] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
 
   const {
     isOpen,

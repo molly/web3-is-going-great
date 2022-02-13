@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useThrottledCallback } from "use-debounce";
 
 const SMALL_BREAKPOINT = 414;
 const MID_BREAKPOINT = 768;
@@ -20,11 +21,14 @@ const getWindowWidth = (px) => {
 
 const useWindowWidth = () => {
   const [windowWidth, setWindowWidth] = useState(null);
+
+  // Get initial width
   useEffect(() => setWindowWidth(getWindowWidth(window.innerWidth)), []);
 
-  const handleResize = useCallback(() => {
+  // Update width on window resize
+  const handleResize = useThrottledCallback(() => {
     setWindowWidth(getWindowWidth(window.innerWidth));
-  }, [setWindowWidth]);
+  }, 500);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
