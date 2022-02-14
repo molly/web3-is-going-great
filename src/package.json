@@ -7,6 +7,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@popperjs/core": "^2.11.2",
     "algoliasearch": "^4.12.1",
