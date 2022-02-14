@@ -11,7 +11,8 @@ export const getServerSideProps = async ({ res }) => {
     res.write(bytes);
     res.end();
   } catch (e) {
-    res.send(500);
+    res.status = 500;
+    res.end();
   }
   return { props: {} };
 };
