@@ -56,6 +56,7 @@ export default function Timeline({
       data &&
       data.pages &&
       data.pages.length &&
+      data.pages[0] &&
       data.pages[0].hasPrev,
     [data, isSuccess]
   );

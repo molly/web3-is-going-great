@@ -6,7 +6,11 @@ import { useDebounce } from "use-debounce";
 import { useCombobox } from "downshift";
 
 import { search as searchEntries } from "../../db/searchEntries";
-import { humanizeDate, truncateToNearestWord } from "../../js/utilities";
+import {
+  humanizeDate,
+  truncateToNearestWord,
+  updateUrlWithQueryParam,
+} from "../../js/utilities";
 import FILTERS from "../../constants/filters";
 
 const MINIMUM_SEARCH_LENGTH = 3;
@@ -52,8 +56,7 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
     onSelectedItemChange: ({ selectedItem }) => {
       setSelectedEntryFromSearch(selectedItem.id);
       // Write the URL so people can permalink easily
-      const perma = window.location.origin + `?id=${selectedItem.id}`;
-      window.history.pushState(null, null, perma);
+      updateUrlWithQueryParam("id", selectedItem.id);
     },
   });
 
