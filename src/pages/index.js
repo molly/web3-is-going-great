@@ -68,7 +68,9 @@ export default function IndexPage({
         query.set(category, filters[category].join(","));
       }
     }
-    const newUrl = `${window.location.pathname}?${query.toString()}`;
+    const queryString = query.toString();
+    const baseUrl = `${window.location.origin}${window.location.pathname}`;
+    const newUrl = queryString ? `${baseUrl}?${queryString}` : baseUrl;
     window.history.pushState(null, null, newUrl);
     setFilterState(filters);
   };
