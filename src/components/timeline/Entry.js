@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
 import ICONS from "../../constants/icons";
-import { humanizeDate } from "../../js/utilities";
+import { humanizeDate, updateUrlWithQueryParam } from "../../js/utilities";
 import { EntryPropType } from "../../js/entry";
 
 import { InView } from "react-intersection-observer";
@@ -53,8 +53,7 @@ export default function Entry({
   }, [onEsc]);
 
   const permalink = (id) => {
-    const perma = window.location.origin + `?id=${id}`;
-    window.history.pushState(null, null, perma);
+    const perma = updateUrlWithQueryParam("id", id);
     navigator.clipboard.writeText(perma);
     setShowCopiedPopup(true);
     setTimeout(() => {

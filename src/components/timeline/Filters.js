@@ -2,7 +2,10 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 
-import FILTERS, { EMPTY_FILTERS_STATE } from "../../constants/filters";
+import FILTERS, {
+  FILTER_CATEGORIES,
+  EMPTY_FILTERS_STATE,
+} from "../../constants/filters";
 import { sentenceCase } from "../../js/utilities";
 
 import Select from "react-select";
@@ -14,7 +17,10 @@ export default function Filters({
   setSelectedEntryFromSearch,
   windowWidth,
 }) {
-  const [isFilterGroupExpanded, setIsFilterGroupExpanded] = useState(false);
+  // Expand by default if there are initial filters defined
+  const [isFilterGroupExpanded, setIsFilterGroupExpanded] = useState(
+    FILTER_CATEGORIES.some((filter) => filters[filter].length > 0)
+  );
 
   const renderLabel = () => {
     if (windowWidth === "xl") {

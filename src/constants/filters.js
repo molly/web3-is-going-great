@@ -46,9 +46,11 @@ export const EMPTY_FILTERS_STATE = {
   sort: "Descending",
 };
 
-const ThemePropType = PropTypes.oneOf(Object.values(FILTERS.theme));
-const TechPropType = PropTypes.oneOf(Object.values(FILTERS.tech));
-const BlockchainPropType = PropTypes.oneOf(Object.values(FILTERS.blockchain));
+export const FILTER_CATEGORIES = ["theme", "tech", "blockchain"];
+
+const ThemePropType = PropTypes.oneOf(Object.keys(FILTERS.theme));
+const TechPropType = PropTypes.oneOf(Object.keys(FILTERS.tech));
+const BlockchainPropType = PropTypes.oneOf(Object.keys(FILTERS.blockchain));
 
 export const FiltersPropType = PropTypes.shape({
   theme: PropTypes.arrayOf(ThemePropType).isRequired,

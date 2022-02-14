@@ -53,9 +53,8 @@ export default function Timeline({
   const hasPreviousEntries = useMemo(
     () =>
       isSuccess &&
-      data &&
-      data.pages &&
-      data.pages.length &&
+      data?.pages?.length &&
+      data.pages[0] &&
       data.pages[0].hasPrev,
     [data, isSuccess]
   );
