@@ -13,10 +13,9 @@ import CustomEntryHead from "../CustomEntryHead";
 import Header from "./Header";
 import Filters from "./Filters";
 import Entry from "./Entry";
+import FixedAtBottom from "./FixedAtBottom";
 import Loader from "../Loader";
 import Error from "../Error";
-import ScrollToTop from "./ScrollToTop";
-import GriftCounter from "./GriftCounter";
 
 export default function Timeline({
   queryResult,
@@ -205,14 +204,12 @@ export default function Timeline({
           {renderBody()}
         </div>
       </div>
-      {isBrowserRendering && (
-        <div className="fix-at-bottom">
-          {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
-          {(!startAtId || !hasPreviousEntries) && (
-            <GriftCounter total={currentRunningScamTotal} />
-          )}
-        </div>
-      )}
+      <FixedAtBottom
+        headerInView={headerInView}
+        shouldRenderGriftCounter={!startAtId || !hasPreviousEntries}
+        scrollToTop={scrollToTop}
+        currentRunningScamTotal={currentRunningScamTotal}
+      />
     </>
   );
 }
