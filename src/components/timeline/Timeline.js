@@ -21,6 +21,7 @@ export default function Timeline({
   queryResult,
   filters,
   glossary,
+  griftTotal,
   selectedEntryFromSearch,
   startAtId,
   setFilters,
@@ -208,7 +209,8 @@ export default function Timeline({
         headerInView={headerInView}
         shouldRenderGriftCounter={!startAtId || !hasPreviousEntries}
         scrollToTop={scrollToTop}
-        currentRunningScamTotal={currentRunningScamTotal}
+        runningGriftTotal={currentRunningScamTotal}
+        griftTotal={griftTotal}
       />
     </>
   );
@@ -226,6 +228,7 @@ Timeline.propTypes = {
   }),
   filters: FiltersPropType.isRequired,
   glossary: PropTypes.object.isRequired,
+  griftTotal: PropTypes.number.isRequired,
   selectedEntryFromSearch: PropTypes.string,
   startAtId: PropTypes.string,
   setFilters: PropTypes.func.isRequired,

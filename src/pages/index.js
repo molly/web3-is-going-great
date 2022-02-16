@@ -13,6 +13,7 @@ import { copy } from "../js/utilities";
 
 import { getEntries } from "../db/entries";
 import { getGlossaryEntries } from "../db/glossary";
+import { getMetadata } from "../db/metadata";
 
 import Timeline from "../components/timeline/Timeline";
 
@@ -39,13 +40,25 @@ export async function getServerSideProps(context) {
       props.startAtId = context.query.id;
     }
   }
-  props.firstEntries = await getEntries({
-    ...props.initialFilters,
-    ...(props.startAtId && { startAtId: props.startAtId }),
-  });
 
-  props.glossary = await getGlossaryEntries();
-  return { props };
+  const promises = [
+    getEntries({
+      ...props.initialFilters,
+      ...(props.startAtId && { startAtId: props.startAtId }),
+    }),
+    getGlossaryEntries(),
+    getMetadata(),
+  ];
+
+  const [firstEntries, glossary, metadata] = await Promise.all(promises);
+  return {
+    props: {
+      ...props,
+      firstEntries,
+      glossary,
+      griftTotal: metadata.griftTotal,
+    },
+  };
 }
 
 export default function IndexPage({
@@ -53,6 +66,7 @@ export default function IndexPage({
   startAtId,
   initialFilters,
   glossary,
+  griftTotal,
 }) {
   useGA();
 
@@ -116,6 +130,7 @@ export default function IndexPage({
       queryResult={queryResult}
       filters={filters}
       glossary={glossary}
+      griftTotal={griftTotal}
       selectedEntryFromSearch={selectedEntryFromSearch}
       startAtId={startAtId}
       setFilters={setFilters}
@@ -133,4 +148,5 @@ IndexPage.propTypes = {
   initialFilters: FiltersPropType.isRequired,
   glossary: PropTypes.object.isRequired,
   startAtId: PropTypes.string,
+  griftTotal: PropTypes.number.isRequired,
 };
