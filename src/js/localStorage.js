@@ -1,6 +1,7 @@
 export const LOCALSTORAGE_KEYS = {
   flamesAnimationPaused: "flames-animation-paused",
   griftCounterExpanded: "grift-counter-expanded",
+  griftCounterCountUp: "grift-counter-count-up",
 };
 
 export const getLocalStorage = (key, returnValueIfNotSet = null) => {

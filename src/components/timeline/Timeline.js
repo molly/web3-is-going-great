@@ -13,15 +13,15 @@ import CustomEntryHead from "../CustomEntryHead";
 import Header from "./Header";
 import Filters from "./Filters";
 import Entry from "./Entry";
+import FixedAtBottom from "./FixedAtBottom";
 import Loader from "../Loader";
 import Error from "../Error";
-import ScrollToTop from "./ScrollToTop";
-import GriftCounter from "./GriftCounter";
 
 export default function Timeline({
   queryResult,
   filters,
   glossary,
+  griftTotal,
   selectedEntryFromSearch,
   startAtId,
   setFilters,
@@ -205,14 +205,13 @@ export default function Timeline({
           {renderBody()}
         </div>
       </div>
-      {isBrowserRendering && (
-        <div className="fix-at-bottom">
-          {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
-          {(!startAtId || !hasPreviousEntries) && (
-            <GriftCounter total={currentRunningScamTotal} />
-          )}
-        </div>
-      )}
+      <FixedAtBottom
+        headerInView={headerInView}
+        shouldRenderGriftCounter={!startAtId || !hasPreviousEntries}
+        scrollToTop={scrollToTop}
+        runningGriftTotal={currentRunningScamTotal}
+        griftTotal={griftTotal}
+      />
     </>
   );
 }
@@ -229,6 +228,7 @@ Timeline.propTypes = {
   }),
   filters: FiltersPropType.isRequired,
   glossary: PropTypes.object.isRequired,
+  griftTotal: PropTypes.number.isRequired,
   selectedEntryFromSearch: PropTypes.string,
   startAtId: PropTypes.string,
   setFilters: PropTypes.func.isRequired,
