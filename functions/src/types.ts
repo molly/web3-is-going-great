@@ -36,3 +36,7 @@ export interface RssEntry extends Entry {
   createdAt: string | null;
   updatedAt: string | null;
 }
+
+export interface AlgoliaEntry extends Entry {
+  objectID: string;
+}

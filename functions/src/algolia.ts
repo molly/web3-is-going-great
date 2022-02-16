@@ -1,8 +1,9 @@
 import * as functions from "firebase-functions";
+import { AlgoliaEntry } from "./types";
 
 export const transformEntryForSearch = functions
   .region("us-central1")
-  .https.onCall(async (data) => {
+  .https.onCall(async (data: AlgoliaEntry) => {
     return {
       objectID: data.objectID, // Required for Algolia
       id: data.id,
