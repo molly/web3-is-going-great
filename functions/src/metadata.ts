@@ -1,6 +1,9 @@
 import { firestore } from "./config/firebase";
 import * as functions from "firebase-functions";
 
+const hasScamTotal = (obj: { scamTotal?: any }) =>
+  "scamTotal" in obj && typeof obj.scamTotal === "number";
+
 export const updateGriftTotal = functions.firestore
   .document("/entries/{docId}")
   .onWrite(async (change) => {
@@ -12,10 +15,19 @@ export const updateGriftTotal = functions.firestore
         ? change.before.data()
         : null;
       if (beforeChangeData) {
-        // There was an existing entry, so remove the before scamTotal and add the new one to pick up any changes
-        griftChange = afterChangeData.scamTotal - beforeChangeData.scamTotal;
-      } else {
-        // New entry
+        if (hasScamTotal(beforeChangeData) && hasScamTotal(afterChangeData)) {
+          // There was an existing entry with a scamTotal, so remove the before scamTotal
+          // and add the new one to pick up any changes
+          griftChange = afterChangeData.scamTotal - beforeChangeData.scamTotal;
+        } else if (hasScamTotal(beforeChangeData)) {
+          // The existing entry had a scamTotal but it was deleted
+          griftChange -= beforeChangeData.scamTotal;
+        } else if (hasScamTotal(afterChangeData)) {
+          // There was an existing entry without a scamTotal, but a value was added
+          griftChange = afterChangeData.scamTotal;
+        }
+      } else if (hasScamTotal(afterChangeData)) {
+        // New entry with scamTotal
         griftChange = afterChangeData.scamTotal;
       }
     } else {
@@ -23,11 +35,7 @@ export const updateGriftTotal = functions.firestore
       const beforeChangeData = change.before.exists
         ? change.before.data()
         : null;
-      if (
-        beforeChangeData &&
-        "scamTotal" in beforeChangeData &&
-        beforeChangeData.scamTotal !== 0
-      ) {
+      if (beforeChangeData && hasScamTotal(beforeChangeData)) {
         griftChange -= beforeChangeData.scamTotal;
       }
     }
