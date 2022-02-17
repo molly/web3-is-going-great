@@ -104,7 +104,14 @@ export default function WhatIsWeb3() {
             scroll through the page. It doesn't update with every single post
             that mentions a monetary loss (for example, if someone transfers
             money to a dead-end wallet by mistake)—just the money lost to
-            intentional thefts and scams.
+            intentional thefts and scams. If it makes more sense to you to start
+            with the total amount of money lost to grifts and scams, and have it
+            decrement as you scroll back in time, that's an option too! Just
+            click the <i className="fas fa-gear" aria-hidden={true} />
+            <span className="sr-only">settings panel icon</span> and pick "Start
+            at total amount scammed and subtract as you scroll". You can also
+            show and hide the counter or stop the animation of the flames from
+            this panel.
           </p>
         </article>
       </div>
