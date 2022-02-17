@@ -59,24 +59,36 @@ export default function FixedAtBottom({
     []
   );
 
-  const toggleShowSettingsPanel = makeToggleFunction(
-    isSettingsPanelShown,
-    setIsSettingsPanelShown
+  const toggleShowSettingsPanel = useMemo(
+    () => makeToggleFunction(isSettingsPanelShown, setIsSettingsPanelShown),
+    [makeToggleFunction, isSettingsPanelShown]
   );
-  const toggleShowGriftCounter = makeToggleFunction(
-    isGriftCounterExpanded,
-    setIsGriftCounterExpanded,
-    LOCALSTORAGE_KEYS.griftCounterExpanded
+  const toggleShowGriftCounter = useMemo(
+    () =>
+      makeToggleFunction(
+        isGriftCounterExpanded,
+        setIsGriftCounterExpanded,
+        LOCALSTORAGE_KEYS.griftCounterExpanded
+      ),
+    [makeToggleFunction, isGriftCounterExpanded]
   );
-  const toggleIsGriftCounterCountingUp = makeToggleFunction(
-    isGriftCounterCountingUp,
-    setIsGriftCounterCountingUp,
-    LOCALSTORAGE_KEYS.griftCounterCountUp
+  const toggleIsGriftCounterCountingUp = useMemo(
+    () =>
+      makeToggleFunction(
+        isGriftCounterCountingUp,
+        setIsGriftCounterCountingUp,
+        LOCALSTORAGE_KEYS.griftCounterCountUp
+      ),
+    [makeToggleFunction, isGriftCounterCountingUp]
   );
-  const toggleFlamesAnimation = makeToggleFunction(
-    isAnimationPaused,
-    setIsAnimationPaused,
-    LOCALSTORAGE_KEYS.flamesAnimationPaused
+  const toggleFlamesAnimation = useMemo(
+    () =>
+      makeToggleFunction(
+        isAnimationPaused,
+        setIsAnimationPaused,
+        LOCALSTORAGE_KEYS.flamesAnimationPaused
+      ),
+    [makeToggleFunction, isAnimationPaused]
   );
 
   if (!isBrowserRendering) {
