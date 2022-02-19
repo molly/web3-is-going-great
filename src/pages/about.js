@@ -70,19 +70,13 @@ export default function WhatIsWeb3() {
           </p>
           <h3>Privacy and money</h3>
           <p>
-            For full disclosure, I own no cryptocurrencies or NFTs. I have no
-            particular financial interest in whether web3 takes off or not,
-            though I have plenty of non-financial interests; after all, I do
-            have to live on this planet, and I spend enough time engaging with
-            the tech industry and online to care about the futures of both.
-          </p>
-          <p>
-            I was not paid to make this site. I don't post sponsored content on
-            this website or its associated Twitter account (or anywhere else for
-            that matter). A few generous people have sent money to me via
-            Twitter tips; I have earmarked that money for cloud hosting costs,
-            which I otherwise pay out of pocket. I don't run ads or otherwise
-            make money off the website in any way.
+            I have a{" "}
+            <a href="https://www.mollywhite.net/crypto-disclosures">
+              disclosure statement
+            </a>
+            . The TL;DR is that I hold no cryptocurrencies or NFTs, make no
+            money off this website, and am also not trying to make money off of
+            crypto markets doing poorly.
           </p>
           <p>
             The site does use Google Analytics, mostly for my own curiosity. All
