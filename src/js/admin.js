@@ -21,17 +21,20 @@ export const upload = async (
   rawImageAttribution,
   rawEntryAttribution
 ) => {
-  const { entry, imageAttribution, entryAttribution } = trimEmptyFields(
+  const trimmed = trimEmptyFields(
     rawEntry,
     rawImageAttribution,
     rawEntryAttribution
   );
-  const promises = [uploadEntry(entry)];
-  if (imageAttribution) {
-    promises.push(addImageAttribution(imageAttribution));
+  const promises = [];
+  if ("entry" in trimmed) {
+    promises.push(uploadEntry(trimmed.entry));
   }
-  if (entryAttribution) {
-    promises.push(addEntryAttribution(entryAttribution));
+  if ("imageAttribution" in trimmed) {
+    promises.push(addImageAttribution(trimmed.imageAttribution));
+  }
+  if ("entryAttribution" in trimmed) {
+    promises.push(addEntryAttribution(trimmed.entryAttribution));
   }
   await Promise.all(promises);
 };

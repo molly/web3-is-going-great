@@ -45,67 +45,73 @@ export const EntryPropType = PropTypes.shape({
   scamTotal: PropTypes.number,
 });
 
-export const trimEmptyFields = (entry, imageAttribution, entryAttribution) => {
-  const newEntry = JSON.parse(JSON.stringify(entry));
-  let newImageAttribution = null;
-  let newEntryAttribution = null;
+const isEntryEmpty = (entry) =>
+  JSON.stringify(entry) === JSON.stringify(EMPTY_ENTRY);
 
-  if (!entry.faicon) {
-    delete newEntry.faicon;
-  }
-  if (!entry.icon) {
-    delete newEntry.icon;
-  }
-  if (!entry.image.src) {
-    delete newEntry.image;
-  } else {
-    newImageAttribution = imageAttribution;
-    if (!entry.image.link) {
-      delete newEntry.image.link;
+export const trimEmptyFields = (entry, imageAttribution, entryAttribution) => {
+  const trimmed = {};
+  if (!isEntryEmpty(entry)) {
+    const newEntry = JSON.parse(JSON.stringify(entry));
+
+    if (!entry.faicon) {
+      delete newEntry.faicon;
     }
-    if (!entry.image.caption) {
-      delete newEntry.image.caption;
+    if (!entry.icon) {
+      delete newEntry.icon;
     }
+    if (!entry.image.src) {
+      delete newEntry.image;
+    } else {
+      if (!entry.image.link) {
+        delete newEntry.image.link;
+      }
+      if (!entry.image.caption) {
+        delete newEntry.image.caption;
+      }
+    }
+    if (entry.scamTotal === 0) {
+      delete newEntry.scamTotal;
+    }
+    const filteredLinks = entry.links
+      .filter((link) => link.linkText && link.href)
+      .map((link) => {
+        if (link.extraText) {
+          return link;
+        } else {
+          return { linkText: link.linkText, href: link.href };
+        }
+      });
+
+    newEntry.links = filteredLinks;
+    trimmed.entry = newEntry;
   }
-  if (entry.scamTotal === 0) {
-    delete newEntry.scamTotal;
+  if (imageAttribution.text && imageAttribution.href) {
+    trimmed.imageAttribution = imageAttribution;
   }
   if (entryAttribution.text) {
-    newEntryAttribution = entryAttribution;
+    trimmed.entryAttribution = entryAttribution;
   }
-  const filteredLinks = entry.links
-    .filter((link) => link.linkText && link.href)
-    .map((link) => {
-      if (link.extraText) {
-        return link;
-      } else {
-        return { linkText: link.linkText, href: link.href };
-      }
-    });
-
-  newEntry.links = filteredLinks;
-  return {
-    entry: newEntry,
-    imageAttribution: newImageAttribution,
-    entryAttribution: newEntryAttribution,
-  };
+  return trimmed;
 };
 
 export const isValidEntry = (entry, imageAttribution, entryAttribution) => {
-  if (!entry.title || !entry.body || !entry.date) {
-    return false;
-  }
-  if (
-    Object.keys(entry.image).some((key) => !!entry.image[key]) &&
-    (!entry.image.src || !entry.image.alt)
-  ) {
-    return false;
-  }
-  if (!entry.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-    return false;
-  }
-  if (!entry.faicon && !entry.icon) {
-    return false;
+  if (!isEntryEmpty(entry)) {
+    // Entry is defined, so validate everything necessary is there
+    if (!entry.title || !entry.body || !entry.date) {
+      return false;
+    }
+    if (
+      Object.keys(entry.image).some((key) => !!entry.image[key]) &&
+      (!entry.image.src || !entry.image.alt)
+    ) {
+      return false;
+    }
+    if (entry.date && !entry.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      return false;
+    }
+    if (!entry.faicon && !entry.icon) {
+      return false;
+    }
   }
   if (
     (imageAttribution.text && !imageAttribution.href) ||
