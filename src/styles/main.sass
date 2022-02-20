@@ -277,12 +277,23 @@ div.content-wrapper
     max-width: 150px
     display: block
 
-    &.clickable
-      cursor: pointer
-
   .landscape
     img
       max-width: 200px
+
+img
+  &.clickable
+    cursor: pointer
+
+  &.on-dark
+    // For images that show poorly on light mode -- adds dark bg
+    padding: 5px
+    background-color: $dark-card-background
+
+  &.on-light
+    // For images that show poorly on dark mode -- adds light bg
+    padding: 5px
+    background-color: $card-background
 
 .timestamp
   font-style: italic

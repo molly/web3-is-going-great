@@ -38,6 +38,16 @@ export default function Form() {
   const setImage = createFieldSetter("image");
   const setScamTotal = createFieldSetter("scamTotal");
 
+  const toggleImageClass =
+    (className) =>
+    ({ target: { checked } }) => {
+      if (checked) {
+        delete entry.image.class;
+      } else {
+        entry.image.class = className;
+      }
+    };
+
   const addLink = () => {
     const newLink = { ...EMPTY_ENTRY.links[0] };
     const links = JSON.parse(JSON.stringify(entry.links));
@@ -180,6 +190,30 @@ export default function Form() {
       </div>
       <div className="row">
         <div className="half">
+          <div className="inline-checkbox">
+            <input
+              id="needs-dark"
+              type="checkbox"
+              checked={entry.image.class && entry.image.class == "on-dark"}
+              onChange={toggleImageClass("on-dark")}
+            />
+            <label htmlFor="needs-dark">Needs dark background</label>
+          </div>
+        </div>
+        <div className="half">
+          <div className="inline-checkbox">
+            <input
+              id="needs-light"
+              type="checkbox"
+              checked={entry.image.class && entry.image.class == "on-light"}
+              onChange={toggleImageClass("on-light")}
+            />
+            <label htmlFor="needs-light">Needs light background</label>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="half">
           <label htmlFor="imageAttrText">Image attribution text: </label>
           <input
             id="imageAttrText"
@@ -200,6 +234,7 @@ export default function Form() {
           ></input>
         </div>
       </div>
+      <hr />
       <div className="row">
         <div className="half">
           <label htmlFor="entryAttrText">Entry attribution text: </label>

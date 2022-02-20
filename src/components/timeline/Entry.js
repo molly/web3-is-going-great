@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
+import clsx from "clsx";
 
 import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
@@ -135,7 +136,7 @@ export default function Entry({
         alt={entry.image.alt}
         layout="fill"
         onClick={onClick}
-        className={onClick ? "clickable" : null}
+        className={clsx([{ clickable: !!onClick }, entry.image.class])}
       />
     );
   };

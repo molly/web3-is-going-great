@@ -9,6 +9,7 @@ type Image = {
   src: string;
   alt: string;
   caption?: string;
+  class?: string;
 };
 
 type Link = {

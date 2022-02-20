@@ -39,6 +39,7 @@ export const EntryPropType = PropTypes.shape({
     alt: PropTypes.string.isRequired,
     link: PropTypes.string,
     caption: PropTypes.string,
+    class: PropTypes.string,
   }),
   body: PropTypes.string.isRequired,
   links: PropTypes.arrayOf(LinkFieldPropType),

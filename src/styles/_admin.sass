@@ -40,6 +40,7 @@
         align-items: stretch
 
     .half, .group
+      display: flex
       flex-direction: column
 
     .half
@@ -47,6 +48,10 @@
 
       &:not(:first-child)
         padding-left: 10px
+
+    .inline-checkbox
+      input[type="checkbox"]
+        margin-right: 5px
 
     fieldset
       display: flex
@@ -56,3 +61,6 @@
 
       &:not(:first-child)
         padding-left: 10px
+
+hr
+  margin: 20px 0
