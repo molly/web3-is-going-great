@@ -2,19 +2,27 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
 import { useRouter } from "next/router";
+
 import PropTypes from "prop-types";
+import { EntryPropType } from "../../js/entry";
+import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 import clsx from "clsx";
 
 import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
 import ICONS from "../../constants/icons";
-import { getPermalink, humanizeDate } from "../../js/utilities";
-import { EntryPropType } from "../../js/entry";
+import COLLECTIONS from "../../constants/collections";
+
+import {
+  humanizeDate,
+  humanizeList,
+  sentenceCase,
+  getPermalink,
+} from "../../js/utilities";
 
 import { InView } from "react-intersection-observer";
 import Link from "next/link";
 import TimelineEntryContent from "./TimelineEntryContent";
-import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 
 export default function Entry({
   entry,
@@ -294,6 +302,66 @@ export default function Entry({
     );
   };
 
+  const renderCollection = () => {
+    if ("collection" in entry) {
+      return (
+        <span>
+          Other entries related to{" "}
+          {humanizeList(
+            entry.collection.map((coll) => (
+              <Link key={coll} href={`/?collection=${coll}`}>
+                <a>
+                  {coll in COLLECTIONS
+                    ? COLLECTIONS[coll]
+                    : sentenceCase(coll.replace("-", " "))}
+                </a>
+              </Link>
+            )),
+            { exclusive: true }
+          )}
+        </span>
+      );
+    }
+    return <span />;
+  };
+
+  const renderFooterLinks = () => {
+    if ("tweetId" in entry) {
+      return (
+        <a href={`https://twitter.com/web3isgreat/status/${entry.tweetId}`}>
+          <i
+            title="Tweet link"
+            className="fa-brands fa-twitter"
+            aria-hidden={true}
+          ></i>
+          <span className="sr-only">Tweet link</span>
+        </a>
+      );
+    }
+    return null;
+  };
+
+  const renderCollectionAndLinks = () => {
+    if ("collection" in entry || "tweetId" in entry) {
+      return (
+        <div className="collection-row">
+          {renderCollection()}
+          {renderFooterLinks()}
+        </div>
+      );
+    }
+    return null;
+  };
+
+  const renderFooterContent = () => {
+    return (
+      <div className="entry-footer">
+        {renderCollectionAndLinks()}
+        {renderTagsWithSentinel()}
+      </div>
+    );
+  };
+
   return (
     <div
       className={`timeline-entry ${className}`}
@@ -304,14 +372,16 @@ export default function Entry({
       </div>
 
       <div className="timeline-description">
-        {renderTimestampAndLinkIcons()}
-        {renderTitle()}
-        {renderImage(true)}
-        <TimelineEntryContent glossary={glossary}>
-          {entry.body}
-        </TimelineEntryContent>
-        {renderLinks()}
-        {renderTagsWithSentinel()}
+        <div className="entry-wrapper">
+          {renderTimestampAndLinkIcons()}
+          {renderTitle()}
+          {renderImage(true)}
+          <TimelineEntryContent glossary={glossary}>
+            {entry.body}
+          </TimelineEntryContent>
+          {renderLinks()}
+        </div>
+        {renderFooterContent()}
       </div>
       {renderLightbox()}
     </div>

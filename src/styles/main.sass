@@ -202,10 +202,11 @@ div.content-wrapper
   box-sizing: border-box
   width: 45%
   background-color: $card-background
-  padding: 20px
+  padding-top: 20px
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1)
   display: inline-block
   pointer-events: auto
+  border: 1px solid $timeline-line-color
 
   a
     text-decoration: underline
@@ -214,9 +215,36 @@ div.content-wrapper
     display: flex
     margin-top: 20px
     padding-top: 10px
+
+  .entry-wrapper
+    margin-left: 20px
+    margin-right: 20px
+
+  .entry-footer
+    margin-top: 15px
     border-top: 1px solid $timeline-line-color
+    background-color: $card-footer-background
+
+  .collection-row, .tags
+    display: flex
+    padding-top: 5px
     font-style: italic
     font-size: 70%
+
+    a
+      cursor: pointer
+
+  .collection-row
+    display: flex
+    justify-content: space-between
+    padding: 5px
+    border-bottom: 1px solid transparentize($timeline-line-color, 0.5)
+
+    a > i.fa-twitter
+      color: $main-text-color
+
+  .tags
+    padding: 5px
 
     .tag-list
       white-space: nowrap
@@ -462,8 +490,9 @@ img
 /* RESPONSIVENESS */
 @media only screen and (min-width: #{$md-breakpoint + 1}px)
   .timeline-entry.even .timeline-description:after
-    left: 100%
-    border-left-color: $card-background
+    right: -8px
+    border-top-width: 1px
+    border-right-width: 1px
 
   header.page-header.timeline-page
     min-height: 300px
@@ -496,26 +525,31 @@ img
 
 @media only screen and (max-width: #{$md-breakpoint}px) and (min-width: #{$sm-breakpoint + 1}px)
   .timeline-entry.even .timeline-description:after
-    right: 100%
-    border-right-color: $card-background
+    left: -8px
+    border-bottom-width: 1px
+    border-left-width: 1px
 
   header.page-header.timeline-page .header-content
     padding-bottom: 20px
 
 @media only screen and (min-width: #{$sm-breakpoint + 1}px)
   .timeline-description:after
-    top: 20px
-    border: solid transparent
-    content: ' '
-    height: 0
-    width: 0
+    top: 14px
+    content: ''
+    transform: rotate(45deg)
+    height: 14px
+    width: 14px
     position: absolute
-    border-width: 10px
-    margin-top: -10px
+    background-color: $card-background
+    border-color: $timeline-line-color
+    border-width: 0
+    border-style: solid
+    box-sizing: border-box
 
   .timeline-entry.odd .timeline-description:after
-    right: 100%
-    border-right-color: $card-background
+    left: -8px
+    border-bottom-width: 1px
+    border-left-width: 1px
 
   .image-right
     float: right
@@ -739,19 +773,8 @@ img
 
   /* Arrows */
   .no-js .timeline-entry .timeline-description::after
-    border-right-color: $dark-card-background
-
-  @media only screen and (min-width: #{$md-breakpoint + 1}px)
-    .timeline-entry.even .timeline-description::after
-      border-left-color: $dark-card-background
-
-  @media only screen and (max-width: #{$md-breakpoint}px) and (min-width: #{$sm-breakpoint + 1}px)
-    .timeline-entry.even .timeline-description::after
-      border-right-color: $dark-card-background
-
-  @media only screen and (min-width: #{$sm-breakpoint}px)
-    .timeline-entry.odd .timeline-description::after
-      border-right-color: $dark-card-background
+    background-color: $dark-card-background
+    border-color: $dark-timeline-line-color
 
 .use-dark
   background-color: $dark-main-background

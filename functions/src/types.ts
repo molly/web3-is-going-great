@@ -32,6 +32,7 @@ export type Entry = {
   scamTotal?: number;
   dateString?: string;
   tweetId?: string;
+  collection?: string[];
 };
 
 export interface RssEntry extends Entry {

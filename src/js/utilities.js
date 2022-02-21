@@ -12,6 +12,25 @@ export const humanizeDate = function (date) {
   return m.format("LL");
 };
 
+export const humanizeList = function (list, { exclusive }) {
+  if (list.length > 1) {
+    const result = [];
+    const finalConnector = exclusive ? "or" : "and";
+    for (let i = 0; i < list.length; i++) {
+      result.push(list[i]);
+      if (i < list.length - 2) {
+        result.push(<span>, </span>);
+      } else if (i === list.length - 2) {
+        result.push(
+          <span>{`${list.length === 2 ? "" : ","} ${finalConnector} `}</span>
+        );
+      }
+    }
+    return result;
+  }
+  return list;
+};
+
 export const isWrappedInParagraphTags = function (html) {
   if (typeof html !== "string") {
     return false;
