@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 
 const FILTERS = {
   theme: {
+    artTheft: "Art theft",
     badIdea: "Bad idea",
     bug: "Bug",
     bummer: "Bummer",
