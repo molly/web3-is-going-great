@@ -98,14 +98,44 @@ export default function Entry({
     return null;
   };
 
+  const renderTimestampAndLinkIcons = () => {
+    return (
+      <div className="timestamp-and-link-icons">
+        <span className="timestamp">
+          <time dateTime={entry.date}>{humanizeDate(entry.date)}</time>
+        </span>
+        <ul className="entry-link-icons">
+          <li>
+            {showCopiedPopup && <div className="permalink-popup">Copied</div>}
+            <button onClick={() => permalink(entry.id)}>
+              <i className="fas fa-link" aria-hidden={true} />
+              <span className="sr-only">Permalink</span>
+            </button>
+          </li>
+          {"tweetId" in entry && (
+            <li>
+              <a
+                href={`https://twitter.com/web3isgreat/status/${entry.tweetId}`}
+                target="_blank"
+                rel="noopener"
+                title="Tweet link"
+              >
+                <i className="fa-brands fa-twitter" aria-hidden={true} />
+                <span className="sr-only">Tweet link</span>
+              </a>
+            </li>
+          )}
+        </ul>
+      </div>
+    );
+  };
+
   const renderTitle = () => {
     if (isBrowserRendering) {
       return (
         <h2>
           <button onClick={() => permalink(entry.id)}>
             <span dangerouslySetInnerHTML={{ __html: entry.title }} />
-            <i className="fas fa-link" aria-hidden={true} />
-            {showCopiedPopup && <div className="permalink-popup">Copied</div>}
           </button>
         </h2>
       );
@@ -272,9 +302,7 @@ export default function Entry({
       </div>
 
       <div className="timeline-description">
-        <span className="timestamp">
-          <time dateTime={entry.date}>{humanizeDate(entry.date)}</time>
-        </span>
+        {renderTimestampAndLinkIcons()}
         {renderTitle()}
         {renderImage(true)}
         <TimelineEntryContent glossary={glossary}>
