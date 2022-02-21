@@ -13,17 +13,19 @@ const ALL_ICONS = {
     value: "face-frown",
     text: FILTERS.theme.bummer,
   },
-  fakeNews: { type: "img", value: "fakeNews", text: FILTERS.theme.fakeNews },
-  hack: { type: "img", value: "hack", text: FILTERS.theme.hack },
-  hmm: { type: "img", value: "hmm", text: FILTERS.theme.hmm },
-  rug: { type: "img", value: "rug", text: FILTERS.theme.rugPull },
-  shady: { type: "img", value: "shady", text: FILTERS.theme.shady },
+  gavel: { type: "fa", value: "gavel", text: FILTERS.theme.law },
+  newspaper: { type: "fa", value: "newspaper", text: FILTERS.theme.reporting },
   "thumbs-up": { type: "fa", value: "thumbs-up", text: FILTERS.theme.goodNews },
   "face-grimace": {
     type: "fa",
     value: "face-grimace",
     text: FILTERS.theme.yikes,
   },
+
+  hack: { type: "img", value: "hack", text: FILTERS.theme.hack },
+  hmm: { type: "img", value: "hmm", text: FILTERS.theme.hmm },
+  rug: { type: "img", value: "rug", text: FILTERS.theme.rugPull },
+  shady: { type: "img", value: "shady", text: FILTERS.theme.shady },
 };
 
 export default function IconSelector({ updateEntry, value }) {
