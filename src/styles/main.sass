@@ -86,6 +86,9 @@ footer.page-footer
       border-bottom-style: solid
       text-decoration: none
 
+  i.fa-rss
+    padding-left: 10px
+
 header.page-header.timeline-page
   padding-bottom: 0
 
@@ -200,6 +203,9 @@ div.content-wrapper
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1)
   display: inline-block
   pointer-events: auto
+
+  a
+    text-decoration: underline
 
   .tags
     display: flex
@@ -557,7 +563,7 @@ img
 
 @media only screen and (max-width: #{$sm-breakpoint}px)
   body
-    font-size: 18px
+    font-size: 16px
 
   header.page-header
     height: auto
@@ -597,9 +603,13 @@ img
     width: auto
     margin-left: 5px
 
+  .timestamp-and-link-icons
+    margin-left: 15px
+
   .timeline-entry.even,
   .timeline-entry.odd
     .timeline-description
+      padding: 10px
       margin-left: 10px
       width: calc( 100vw - 20px )
 

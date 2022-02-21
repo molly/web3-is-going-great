@@ -24,6 +24,12 @@ export default function WhatIsWeb3() {
         <article className="generic-page">
           <h3>What is this?</h3>
           <p>
+            Web3 Is Going Great is a project to track some examples of how web3
+            isn't actually going as well as its proponents might like you to
+            believe. The timeline tracks events in cryptocurrency and
+            blockchain-based technologies, dating back to the beginning of 2021.
+          </p>
+          <p>
             This is a personal project of mine, and reflects my own opinions. If
             you are looking for an unbiased descriptor of web3 and related
             technologies, there are short ones in the{" "}

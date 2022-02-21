@@ -98,13 +98,17 @@ const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
             fluid on our already-smoldering planet.
           </p>
           <p>
-            <span>
-              {"2021 – "}
-              <span title="that's right! this grift isn't stopping and neither am I">
-                2022
-              </span>{" "}
-              timeline by Molly White{" "}
-            </span>
+            Follow updates on{" "}
+            <ExternalLink href="https://twitter.com/web3isgreat">
+              Twitter
+            </ExternalLink>{" "}
+            or with{" "}
+            <ExternalLink href="https://web3isgoinggreat.com/feed.xml">
+              RSS
+            </ExternalLink>
+            <i className="fas fa-rss" aria-hidden={true} />
+            <br />
+            <span>Created by Molly White </span>
             <span style={{ display: "inline-block" }}>
               <span aria-hidden={true}>(</span>
               <ExternalLink href="https://twitter.com/molly0xFFF">
@@ -116,14 +120,6 @@ const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
               </ExternalLink>
               <span aria-hidden={true}>)</span>
             </span>{" "}
-            Follow updates on{" "}
-            <ExternalLink href="https://twitter.com/web3isgreat">
-              Twitter
-            </ExternalLink>{" "}
-            or with{" "}
-            <ExternalLink href="https://web3isgoinggreat.com/feed.xml">
-              RSS {!nojs && <i className="fas fa-rss" />}
-            </ExternalLink>
           </p>
           {windowWidth === "sm" ? renderMobileImageAndLinks() : renderLinks()}
         </div>
