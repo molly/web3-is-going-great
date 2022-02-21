@@ -44,6 +44,7 @@ export const EntryPropType = PropTypes.shape({
   body: PropTypes.string.isRequired,
   links: PropTypes.arrayOf(LinkFieldPropType),
   scamTotal: PropTypes.number,
+  tweetId: PropTypes.string,
 });
 
 const isEntryEmpty = (entry) =>

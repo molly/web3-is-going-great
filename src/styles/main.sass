@@ -245,27 +245,6 @@ div.content-wrapper
         text-decoration: none
 
   h2 button
-    .fa-link
-      position: absolute
-      visibility: hidden
-      color: $timestamp-color
-      font-size: 60%
-      margin: 5px 0 0 5px
-
-    &:hover .fa-link
-      visibility: visible
-
-    .permalink-popup
-      font-family: $body-font
-      font-size: 12px
-      font-weight: normal
-      color: $timestamp-color
-      display: inline-block
-      white-space: nowrap
-      position: absolute
-      padding: 0px 5px
-      margin-left: 25px
-      background-color: transparentize($card-background, 0.3)
 
   p, ul
     margin: 5px 0 10px 0
@@ -295,12 +274,36 @@ img
     padding: 5px
     background-color: $card-background
 
-.timestamp
-  font-style: italic
+.timestamp-and-link-icons
+  display: flex
+  justify-content: space-between
+  align-items: center
   font-size: 80%
+  color: $timestamp-color
 
-  .note
+  i
     color: $timestamp-color
+
+  ul
+    display: flex
+    padding: 0
+    margin: 0
+
+    li
+      list-style: none
+
+      &:not(:first-child)
+        padding-left: 5px
+
+  .timestamp
+    font-style: italic
+
+.permalink-popup
+  display: inline
+  margin-right: 5px
+  font-family: $body-font
+  color: $timestamp-color
+  background-color: transparentize($card-background, 0.3)
 
 .captioned-image
   max-width: 150px
