@@ -372,10 +372,33 @@ img
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
 
   .contents
+    display: flex
+    align-items: center
     width: 90%
     max-width: 1600px
     padding: 10px 0
     margin: 0 auto
+    justify-content: space-between
+
+    button.back-bar-item
+      color: $accent
+      cursor: pointer
+
+    .back-bar-item
+      flex: 1
+
+      &:hover
+        text-decoration: underline
+
+      i.link-icon
+        margin-right: 5px
+
+      &.title-text
+        flex: 3
+        text-align: center
+
+    h3
+      margin: 0
 
 .sr-only
   position: absolute

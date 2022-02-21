@@ -1,4 +1,5 @@
 import moment from "moment";
+import COLLECTIONS from "../constants/collections";
 
 export const sentenceCase = function (str) {
   if (typeof str !== "string" || !str.length) {
@@ -19,10 +20,12 @@ export const humanizeList = function (list, { exclusive }) {
     for (let i = 0; i < list.length; i++) {
       result.push(list[i]);
       if (i < list.length - 2) {
-        result.push(<span>, </span>);
+        result.push(<span key={`joiner-${i}`}>, </span>);
       } else if (i === list.length - 2) {
         result.push(
-          <span>{`${list.length === 2 ? "" : ","} ${finalConnector} `}</span>
+          <span key={`joiner-${i}`}>{`${
+            list.length === 2 ? "" : ","
+          } ${finalConnector} `}</span>
         );
       }
     }
@@ -84,4 +87,15 @@ export const getPermalink = (params) => {
   return permalink;
 };
 
+export const removeQueryParamsFromUrl = () => {
+  const permalink = `${window.location.origin}${window.location.pathname}`;
+  window.history.pushState(null, null, permalink);
+  return permalink;
+};
+
 export const copy = (obj) => JSON.parse(JSON.stringify(obj));
+
+export const getCollectionName = (coll) =>
+  coll in COLLECTIONS
+    ? COLLECTIONS[coll]
+    : sentenceCase(coll.replace("-", " "));

@@ -11,12 +11,11 @@ import clsx from "clsx";
 import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
 import ICONS from "../../constants/icons";
-import COLLECTIONS from "../../constants/collections";
 
 import {
+  getCollectionName,
   humanizeDate,
   humanizeList,
-  sentenceCase,
   getPermalink,
 } from "../../js/utilities";
 
@@ -32,6 +31,7 @@ export default function Entry({
   runningScamTotal,
   currentRunningScamTotal,
   setCurrentRunningScamTotal,
+  setCollection,
   shouldScrollToElement,
 }) {
   const ref = useRef();
@@ -309,13 +309,9 @@ export default function Entry({
           Other entries related to{" "}
           {humanizeList(
             entry.collection.map((coll) => (
-              <Link key={coll} href={`/?collection=${coll}`}>
-                <a>
-                  {coll in COLLECTIONS
-                    ? COLLECTIONS[coll]
-                    : sentenceCase(coll.replace("-", " "))}
-                </a>
-              </Link>
+              <button key={coll} onClick={() => setCollection(coll)}>
+                <a>{getCollectionName(coll)}</a>
+              </button>
             )),
             { exclusive: true }
           )}
@@ -397,6 +393,7 @@ Entry.propTypes = {
   currentRunningScamTotal: PropTypes.number,
   setCurrentRunningScamTotal: PropTypes.func,
   shouldScrollToElement: PropTypes.bool,
+  setCollection: PropTypes.func.isRequired,
 };
 
 Entry.defaultProps = {
