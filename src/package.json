@@ -23,7 +23,7 @@
     "react-ga": "^3.3.0",
     "react-intersection-observer": "^8.33.1",
     "react-popper": "^2.2.5",
-    "react-query": "^3.34.8",
+    "react-query": "^3.34.16",
     "react-select": "^5.2.2",
     "use-debounce": "^7.0.1"
   },
