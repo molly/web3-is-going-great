@@ -13,6 +13,7 @@ const FILTERS = {
     reporting: "Reporting",
     rugPull: "Rug pull",
     shady: "Shady business",
+    washTrade: "Wash trade",
     yikes: "Yikes",
   },
   tech: {

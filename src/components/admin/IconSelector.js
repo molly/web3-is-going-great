@@ -15,6 +15,7 @@ const ALL_ICONS = {
   },
   gavel: { type: "fa", value: "gavel", text: FILTERS.theme.law },
   newspaper: { type: "fa", value: "newspaper", text: FILTERS.theme.reporting },
+  repeat: { type: "fa", value: "repeat", text: FILTERS.theme.washTrade },
   "thumbs-up": { type: "fa", value: "thumbs-up", text: FILTERS.theme.goodNews },
   "face-grimace": {
     type: "fa",
