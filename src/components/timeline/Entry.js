@@ -321,30 +321,9 @@ export default function Entry({
     return <span />;
   };
 
-  const renderFooterLinks = () => {
-    if ("tweetId" in entry) {
-      return (
-        <a href={`https://twitter.com/web3isgreat/status/${entry.tweetId}`}>
-          <i
-            title="Tweet link"
-            className="fa-brands fa-twitter"
-            aria-hidden={true}
-          ></i>
-          <span className="sr-only">Tweet link</span>
-        </a>
-      );
-    }
-    return null;
-  };
-
   const renderCollectionAndLinks = () => {
-    if ("collection" in entry || "tweetId" in entry) {
-      return (
-        <div className="collection-row">
-          {renderCollection()}
-          {renderFooterLinks()}
-        </div>
-      );
+    if ("collection" in entry) {
+      return <div className="collection-row">{renderCollection()}</div>;
     }
     return null;
   };
