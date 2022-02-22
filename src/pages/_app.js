@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import ReactGA from "react-ga";
 import Head from "next/head";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Layout from "../components/Layout";
+import { AppProvider } from "../context/AppContext";
 
 if (typeof window !== "undefined") {
   ReactGA.initialize("UA-215114522-1");
@@ -85,7 +87,11 @@ function CustomApp({ Component, pageProps }) {
         />
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
+        <AppProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </AppProvider>
       </QueryClientProvider>
     </>
   );

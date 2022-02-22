@@ -1,4 +1,9 @@
 export const LOCALSTORAGE_KEYS = {
+  // General appearance
+  colorModeOverride: "color-mode-override",
+  useSansSerif: "use-sans-serif",
+
+  // Grift counter
   flamesAnimationPaused: "flames-animation-paused",
   griftCounterExpanded: "grift-counter-expanded",
   griftCounterCountUp: "grift-counter-count-up",

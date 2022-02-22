@@ -1,6 +1,6 @@
 @import "normalize.css/normalize"
 @import "@fortawesome/fontawesome-free/css/all"
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:ital,wght@0,400;0,900;1,400;1,900&display=swap")
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:ital,wght@0,400;0,900;1,400;1,900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap")
 @import _admin
 @import _tokens
 @import _filters
@@ -18,7 +18,10 @@ body
   height: 100%
   background-color: $main-background
   color: $main-text-color
-  font-family: $body-font, sans-serif
+  font-family: $body-font, monospace
+
+main.use-sans-serif
+  font-family: $sans-serif-body-font, sans-serif
 
 *
   box-sizing: border-box
@@ -237,7 +240,6 @@ div.content-wrapper
       padding-left: 20px
 
   h2, h2 > button
-    font-family: $body-font, serif
     font-weight: 900
     line-height: 110%
     margin: 5px 0
@@ -361,6 +363,10 @@ img
 .space-between
   display: flex
   justify-content: space-between
+
+.help-text
+  font-size: 90%
+  font-style: italic
 
 .error-wrapper
   display: flex
@@ -651,9 +657,13 @@ img
   width: 80%
   text-align: center
 
+@media (prefers-reduced-motion: reduce)
+  html
+    scroll-behavior: auto
+
 // DARK MODE
-@media (prefers-color-scheme: dark)
-  body
+@mixin mainDarkMode()
+  main
     background-color: $dark-main-background
 
   header.page-header,
@@ -743,6 +753,9 @@ img
     .timeline-entry.odd .timeline-description::after
       border-right-color: $dark-card-background
 
-@media (prefers-reduced-motion: reduce)
-  html
-    scroll-behavior: auto
+.use-dark
+  background-color: $dark-main-background
+  @include mainDarkMode()
+
+@media (prefers-color-scheme: dark)
+  @include mainDarkMode()

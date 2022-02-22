@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 import { useState, useMemo, useCallback } from "react";
 import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
 
@@ -126,6 +127,7 @@ export default function FixedAtBottom({
       )}
       {shouldRenderGriftCounter && isGriftCounterExpanded && (
         <GriftCounter
+          onClick={toggleShowSettingsPanel}
           runningGriftTotal={runningGriftTotal}
           griftTotal={griftTotal}
           isGriftCounterCountingUp={isGriftCounterCountingUp}
