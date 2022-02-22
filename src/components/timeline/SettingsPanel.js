@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 import { useAppState } from "../../context/AppContext";
-import { COLOR_MODE_MAP, COLOR_MODES } from "../../constants/colorModes";
 import SettingsCheckbox from "./SettingsCheckbox";
-import Select from "react-select";
 
 export default function SettingsPanel({
   setIsSettingsPanelShown,
@@ -13,12 +11,8 @@ export default function SettingsPanel({
   isGriftCounterCountingUp,
   toggleIsGriftCounterCountingUp,
 }) {
-  const {
-    colorModeOverride,
-    useSansSerif,
-    toggleUseSansSerif,
-    setColorModeOverride,
-  } = useAppState();
+  const { useDarkMode, useSansSerif, toggleUseSansSerif, toggleDarkMode } =
+    useAppState();
 
   return (
     <div className="settings-panel">
@@ -38,17 +32,13 @@ export default function SettingsPanel({
         >
           Use sans-serif font
         </SettingsCheckbox>
-        <label htmlFor="color-mode-override">Mode</label>
-        <Select
-          instanceId="color-mode-override"
-          options={COLOR_MODES}
-          onChange={({ value }) => setColorModeOverride(value)}
-          value={
-            colorModeOverride
-              ? COLOR_MODE_MAP[colorModeOverride]
-              : COLOR_MODE_MAP.default
-          }
-        />
+        <SettingsCheckbox
+          id="use-dark-mode"
+          checked={useDarkMode}
+          toggleCheckbox={toggleDarkMode}
+        >
+          Force dark mode
+        </SettingsCheckbox>
       </div>
       <h3>Grift counter</h3>
       <div className="settings-section">

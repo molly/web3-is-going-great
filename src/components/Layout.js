@@ -3,13 +3,12 @@ import clsx from "clsx";
 import { useAppState } from "../context/AppContext";
 
 export default function Layout({ children }) {
-  const { colorModeOverride, useSansSerif } = useAppState();
+  const { useDarkMode, useSansSerif } = useAppState();
 
   return (
     <main
       className={clsx([
-        colorModeOverride ? `use-${colorModeOverride}` : null,
-        { "use-sans-serif": useSansSerif },
+        { "use-sans-serif": useSansSerif, "use-dark": useDarkMode },
       ])}
     >
       {children}

@@ -756,6 +756,12 @@ img
 .use-dark
   background-color: $dark-main-background
   @include mainDarkMode()
+  @include filtersDarkMode()
+  @include fixedDarkMode()
+  @include popoversDarkMode()
 
 @media (prefers-color-scheme: dark)
   @include mainDarkMode()
+  @include filtersDarkMode()
+  @include fixedDarkMode()
+  @include popoversDarkMode()

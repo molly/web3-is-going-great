@@ -16,30 +16,30 @@ import {
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
-  const [colorModeOverride, setColorModeOverrideState] = useState(null);
+  const [useDarkMode, setUseDarkMode] = useState(null);
   const [useSansSerif, setUseSansSerif] = useState(null);
 
   const toggleUseSansSerif = useCallback(() => {
-    setUseSansSerif(!useSansSerif);
     setLocalStorage(LOCALSTORAGE_KEYS.useSansSerif, !useSansSerif);
+    setUseSansSerif(!useSansSerif);
   }, [useSansSerif]);
 
-  const setColorModeOverride = useCallback((mode) => {
-    setColorModeOverrideState(mode);
-    setLocalStorage(LOCALSTORAGE_KEYS.colorModeOverride, mode);
-  }, []);
+  const toggleDarkMode = useCallback(() => {
+    setLocalStorage(LOCALSTORAGE_KEYS.useDarkMode, !useDarkMode);
+    setUseDarkMode(!useDarkMode);
+  }, [useDarkMode]);
 
   useEffect(() => {
     // Localstorage can't be accessed during SSR
     setUseSansSerif(getLocalStorage(LOCALSTORAGE_KEYS.useSansSerif));
-    setColorModeOverride(getLocalStorage(LOCALSTORAGE_KEYS.colorModeOverride));
-  }, [setUseSansSerif, setColorModeOverride]);
+    setUseDarkMode(getLocalStorage(LOCALSTORAGE_KEYS.useDarkMode));
+  }, [setUseSansSerif, setUseDarkMode]);
 
   const state = {
-    colorModeOverride,
+    useDarkMode,
     useSansSerif,
     toggleUseSansSerif,
-    setColorModeOverride,
+    toggleDarkMode,
   };
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;

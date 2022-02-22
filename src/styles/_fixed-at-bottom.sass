@@ -86,12 +86,18 @@
       align-items: baseline
 
   .settings-section
-    margin: 10px 0 10px 10px
+    margin: 10px 0 10px 15px
 
 .use-sans-serif .grift-counter > div
   font-family: $sans-serif-body-font
 
-@media (prefers-color-scheme: dark)
+@media (prefers-reduced-motion: reduce)
+  .grift-counter
+    // People with prefers-reduced-motion set can still opt in to the animation, in which case
+    // .animate will also be set, and this will be overriden by the more specific selector above
+    border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.png)
+
+@mixin fixedDarkMode()
   .grift-counter, .fixed-at-bottom-button
     filter: brightness(80%)
 
@@ -101,9 +107,3 @@
 
     button
       color: $dark-main-color
-
-@media (prefers-reduced-motion: reduce)
-  .grift-counter
-    // People with prefers-reduced-motion set can still opt in to the animation, in which case
-    // .animate will also be set, and this will be overriden by the more specific selector above
-    border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.png)
