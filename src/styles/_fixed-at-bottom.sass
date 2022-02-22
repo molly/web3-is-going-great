@@ -24,6 +24,7 @@
 .grift-counter
   box-sizing: content-box
   border-top: 16px solid #0000
+  height: 28px
   border-bottom: 0
   border-right: 0
   border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.gif)
@@ -42,33 +43,8 @@
     color: $title-color
     padding: 5px 10px
 
-  a
-    color: $title-color
-
-    &:hover
-      text-decoration: none
-
-  &.collapsed
-    border: none
-
-    span, .pause-button
-      display: none
-
-  span
-    margin-left: 10px
-    vertical-align: bottom
-
   button
-    cursor: pointer
-    background-color: transparent
-    color: transparentize($title-color, 0.25)
-    border: 0
-    padding: 0
-
-    &.pause-button
-      margin-left: 5px
-      padding-right: 10px
-      border-right: 1px solid transparentize($title-color, 0.5)
+    color: $title-color
 
 .settings-panel
   position: fixed
@@ -91,7 +67,7 @@
     align-items: center
     margin-bottom: 10px
 
-  h3
+  h2, h3, h4, h5
     margin: 0
 
   input
@@ -109,12 +85,19 @@
     .input-group
       align-items: baseline
 
-@media only screen and (max-width: #{$md-breakpoint}px)
-  .fixed-at-bottom-button
-    height: 26px
-    width: 26px
+  .settings-section
+    margin: 10px 0 10px 15px
 
-@media (prefers-color-scheme: dark)
+.use-sans-serif .grift-counter > div
+  font-family: $sans-serif-body-font
+
+@media (prefers-reduced-motion: reduce)
+  .grift-counter
+    // People with prefers-reduced-motion set can still opt in to the animation, in which case
+    // .animate will also be set, and this will be overriden by the more specific selector above
+    border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.png)
+
+@mixin fixedDarkMode()
   .grift-counter, .fixed-at-bottom-button
     filter: brightness(80%)
 
@@ -124,9 +107,3 @@
 
     button
       color: $dark-main-color
-
-@media (prefers-reduced-motion: reduce)
-  .grift-counter
-    // People with prefers-reduced-motion set can still opt in to the animation, in which case
-    // .animate will also be set, and this will be overriden by the more specific selector above
-    border-image-source: url(https://storage.googleapis.com/web3-334501.appspot.com/flames.png)

@@ -18,6 +18,7 @@ export default function GriftCounter({
   griftTotal,
   isAnimationPaused,
   isGriftCounterCountingUp,
+  onClick,
 }) {
   const numberToShow = isGriftCounterCountingUp
     ? runningGriftTotal
@@ -31,11 +32,11 @@ export default function GriftCounter({
       })}
     >
       <div>
-        <a href="/about#grift-question" target="_blank">
+        <button onClick={onClick}>
           <span title="W3IGG Grift Counter™">
             ${getDisplayNumber(numberToShow)}
           </span>
-        </a>
+        </button>
       </div>
     </div>
   );
@@ -46,4 +47,5 @@ GriftCounter.propTypes = {
   griftTotal: PropTypes.number.isRequired,
   isAnimationPaused: PropTypes.bool,
   isGriftCounterCountingUp: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
 };

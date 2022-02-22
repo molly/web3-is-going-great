@@ -195,7 +195,7 @@
     justify-content: center
 
 // Dark mode
-@media (prefers-color-scheme: dark)
+@mixin filtersDarkMode()
   .timeline-filter-wrapper
     background-color: $dark-filterbar-background
     color: $dark-filter-text
@@ -212,6 +212,7 @@
       border-color: $dark-timeline-line-color
 
   .filter-select
+
     >div
       background-color: $dark-lightbox-background
       border-color: $dark-timeline-line-color
@@ -220,7 +221,7 @@
       border-color: $dark-card-background !important
       box-shadow: $dark-card-background !important
 
-    div[class*="-placeholder"]
+    div[class*="-placeholder"],  div[class*="-singleValue"]
       color: $dark-filter-text
 
     div[class*="-indicatorContainer"]:hover
