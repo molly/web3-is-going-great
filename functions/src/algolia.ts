@@ -12,6 +12,7 @@ export const transformEntryForSearch = functions
       date: data.date,
       blockchain: data.filters.blockchain,
       tech: data.filters.tech,
+      collection: data.collection,
       theme: data.filters.theme,
     };
   });

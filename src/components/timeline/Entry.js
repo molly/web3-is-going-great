@@ -272,6 +272,7 @@ export default function Entry({
       <div className="tags">
         <div className="tag-list theme">
           <span className="sr-only">Theme tags: </span>
+          <i className="fas fa-hashtag" aria-hidden={true}></i>
           {theme}
         </div>
         <div className="tag-group-right">
