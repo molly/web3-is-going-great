@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { EntryPropType } from "../js/entry";
 
@@ -16,6 +16,7 @@ import { getGlossaryEntries } from "../db/glossary";
 import { getMetadata } from "../db/metadata";
 
 import Timeline from "../components/timeline/Timeline";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps(context) {
   let props = { initialFilters: copy(EMPTY_FILTERS_STATE) };
@@ -69,23 +70,40 @@ export default function IndexPage({
   griftTotal,
 }) {
   useGA();
+  const router = useRouter();
 
   const [filters, setFilterState] = useState(initialFilters);
   const [selectedEntryFromSearch, setSelectedEntryFromSearch] = useState(null);
 
+  useEffect(() => {
+    // Restore state when someone hits the back button
+    router.beforePopState(({ url }) => {
+      const startOfQueryParams = url.indexOf("?");
+      if (startOfQueryParams) {
+        const params = new URLSearchParams(url.slice(startOfQueryParams));
+        const restoredFilters = copy(EMPTY_FILTERS_STATE);
+        for (let category of FILTER_CATEGORIES) {
+          if (params.has(category)) {
+            restoredFilters[category] = params.get(category).split(",");
+          }
+        }
+        setFilterState(restoredFilters);
+        if (params.has("id")) {
+          setSelectedEntryFromSearch(params.get("id"));
+        }
+      }
+    });
+  }, [router]);
+
   const setFilters = (filters) => {
-    const query = new URLSearchParams(window.location.search);
+    const query = {};
     for (let category of FILTER_CATEGORIES) {
-      // Deletes any stale filters
-      query.delete(category);
-      if (filters[category].length) {
-        query.set(category, filters[category].join(","));
+      // Avoid setting a bunch of query params without values
+      if (filters[category].length > 0) {
+        query[category] = filters[category].join(",");
       }
     }
-    const queryString = query.toString();
-    const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    const newUrl = queryString ? `${baseUrl}?${queryString}` : baseUrl;
-    window.history.pushState(null, null, newUrl);
+    router.push({ query }, null, { shallow: true });
     setFilterState(filters);
   };
 

@@ -5,7 +5,7 @@
         "plugin:react/recommended"
     ],
     "rules": {
-        "no-unused-vars": 1,
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
         "react/no-unescaped-entities": 0,
         "react/jsx-no-target-blank": [
             "error",
