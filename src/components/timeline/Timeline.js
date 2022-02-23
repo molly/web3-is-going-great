@@ -218,8 +218,8 @@ export default function Timeline({
 
 Timeline.propTypes = {
   queryResult: PropTypes.shape({
-    data: PropTypes.object.isRequired,
-    hasNextPage: PropTypes.bool.isRequired,
+    data: PropTypes.object,
+    hasNextPage: PropTypes.bool,
     fetchNextPage: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,

@@ -57,16 +57,11 @@ export function truncateToNearestWord(str, length, startPosition = 0) {
   return toTrim.slice(0, endIndex);
 }
 
-// Set key/value on URL query params without losing existing ones.
-// If the key already exists in the params it will be overwritten.
-// Returns URL for convenience
-export const updateUrlWithQueryParam = (key, value) => {
-  const query = new URLSearchParams(window.location.search);
-  query.set(key, value);
+export const getPermalink = (params) => {
+  const query = new URLSearchParams(params);
   const permalink = `${window.location.origin}${
     window.location.pathname
   }?${query.toString()}`;
-  window.history.pushState(null, null, permalink);
   return permalink;
 };
 

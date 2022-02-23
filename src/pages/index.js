@@ -2,21 +2,22 @@ import { useCallback, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { EntryPropType } from "../js/entry";
 
+import { useRouter } from "next/router";
+import { useInfiniteQuery } from "react-query";
+import useGA from "../hooks/useGA";
+
+import { copy } from "../js/utilities";
 import {
   EMPTY_FILTERS_STATE,
   FiltersPropType,
   FILTER_CATEGORIES,
 } from "../constants/filters";
-import { useInfiniteQuery } from "react-query";
-import useGA from "../hooks/useGA";
-import { copy } from "../js/utilities";
 
 import { getEntries } from "../db/entries";
 import { getGlossaryEntries } from "../db/glossary";
 import { getMetadata } from "../db/metadata";
 
 import Timeline from "../components/timeline/Timeline";
-import { useRouter } from "next/router";
 
 export async function getServerSideProps(context) {
   let props = { initialFilters: copy(EMPTY_FILTERS_STATE) };
@@ -90,6 +91,8 @@ export default function IndexPage({
         setFilterState(restoredFilters);
         if (params.has("id")) {
           setSelectedEntryFromSearch(params.get("id"));
+        } else {
+          setSelectedEntryFromSearch(null);
         }
       }
     });

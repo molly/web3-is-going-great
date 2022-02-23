@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 
+import { useRouter } from "next/router";
 import { useDebounce } from "use-debounce";
 import { useCombobox } from "downshift";
 
 import { search as searchEntries } from "../../db/searchEntries";
-import {
-  humanizeDate,
-  truncateToNearestWord,
-  updateUrlWithQueryParam,
-} from "../../js/utilities";
+import { humanizeDate, truncateToNearestWord } from "../../js/utilities";
 import FILTERS from "../../constants/filters";
 
 const MINIMUM_SEARCH_LENGTH = 3;
@@ -33,6 +30,8 @@ function stateReducer(state, actionAndChanges) {
 }
 
 export default function Search({ filters, setSelectedEntryFromSearch }) {
+  const router = useRouter();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [items, setItems] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -56,7 +55,9 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
     onSelectedItemChange: ({ selectedItem }) => {
       setSelectedEntryFromSearch(selectedItem.id);
       // Write the URL so people can permalink easily
-      updateUrlWithQueryParam("id", selectedItem.id);
+      router.push({ query: { ...router.query, id: selectedItem.id } }, null, {
+        shallow: true,
+      });
     },
   });
 

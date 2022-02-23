@@ -8,7 +8,7 @@ import clsx from "clsx";
 import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
 import ICONS from "../../constants/icons";
-import { humanizeDate, updateUrlWithQueryParam } from "../../js/utilities";
+import { getPermalink, humanizeDate } from "../../js/utilities";
 import { EntryPropType } from "../../js/entry";
 
 import { InView } from "react-intersection-observer";
@@ -54,7 +54,9 @@ export default function Entry({
   }, [onEsc]);
 
   const permalink = (id) => {
-    const perma = updateUrlWithQueryParam("id", id);
+    const newParams = { ...router.query, id };
+    router.push({ query: newParams }, null, { shallow: true });
+    const perma = getPermalink(newParams);
     navigator.clipboard.writeText(perma);
     setShowCopiedPopup(true);
     setTimeout(() => {
