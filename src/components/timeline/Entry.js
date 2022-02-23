@@ -117,6 +117,26 @@ export default function Entry({
     return null;
   };
 
+  const renderLinkIcon = () => {
+    if (isBrowserRendering) {
+      <li>
+        {showCopiedPopup && <div className="permalink-popup">Copied</div>}
+        <button onClick={() => permalink(entry.id)}>
+          <i className="fas fa-link" aria-hidden={true} />
+          <span className="sr-only">Permalink</span>
+        </button>
+      </li>;
+    } else {
+      // No JS
+      <Link href={getPermalink({ id: entry.id })}>
+        <a id={entry.id}>
+          <i className="fas fa-link" aria-hidden={true} />
+          <span className="sr-only">Permalink</span>
+        </a>
+      </Link>;
+    }
+  };
+
   const renderTimestampAndLinkIcons = () => {
     return (
       <div className="timestamp-and-link-icons">
@@ -124,13 +144,7 @@ export default function Entry({
           <time dateTime={entry.date}>{humanizeDate(entry.date)}</time>
         </span>
         <ul className="entry-link-icons">
-          <li>
-            {showCopiedPopup && <div className="permalink-popup">Copied</div>}
-            <button onClick={() => permalink(entry.id)}>
-              <i className="fas fa-link" aria-hidden={true} />
-              <span className="sr-only">Permalink</span>
-            </button>
-          </li>
+          {renderLinkIcon()}
           {"tweetId" in entry && (
             <li>
               <a
@@ -159,12 +173,10 @@ export default function Entry({
         </h2>
       );
     } else {
-      const linkSuffix = router.route.startsWith("/web1")
-        ? `#${entry.id}`
-        : `?id=${entry.id}`;
+      // No JS
       return (
         <h2>
-          <Link href={`${router.route}${linkSuffix}`}>
+          <Link href={getPermalink({ id: entry.id })}>
             <a id={entry.id}>
               <span dangerouslySetInnerHTML={{ __html: entry.title }} />
             </a>
