@@ -95,6 +95,12 @@ export default function Entry({
     return null;
   }, [entry, collection]);
 
+  const noJsPermalink = useMemo(
+    () =>
+      router.route.startsWith("/web1") ? `#${entry.id}` : `?id=${entry.id}`,
+    [entry.id, router.route]
+  );
+
   const renderIcon = () => {
     if (entry.faicon) {
       return (
@@ -128,8 +134,8 @@ export default function Entry({
       </li>;
     } else {
       // No JS
-      <Link href={getPermalink({ id: entry.id })}>
-        <a id={entry.id}>
+      <Link href={noJsPermalink}>
+        <a>
           <i className="fas fa-link" aria-hidden={true} />
           <span className="sr-only">Permalink</span>
         </a>
@@ -176,7 +182,7 @@ export default function Entry({
       // No JS
       return (
         <h2>
-          <Link href={getPermalink({ id: entry.id })}>
+          <Link href={noJsPermalink}>
             <a id={entry.id}>
               <span dangerouslySetInnerHTML={{ __html: entry.title }} />
             </a>
