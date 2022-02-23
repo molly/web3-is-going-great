@@ -19,9 +19,11 @@ body
   background-color: $main-background
   color: $main-text-color
   font-family: $body-font, monospace
+  line-height: 1.2
 
 main.use-sans-serif
   font-family: $sans-serif-body-font, sans-serif
+  font-size: 18px
 
 *
   box-sizing: border-box
@@ -738,6 +740,9 @@ img
       border-bottom: 1px dashed lighten($header-footer-background, 20%)
       color: $dark-header-footer-link-color
 
+    h1 a
+      border-bottom: none
+
   header.page-header.timeline-page li:not(:first-child):before
     color: $dark-header-footer-body-color
 
@@ -757,6 +762,9 @@ img
   .navigation-bar
     background-color: $dark-filterbar-background
     color: $dark-filter-text
+
+    .contents button.back-bar-item
+      color: $dark-link-color
 
   .timeline-description
     background-color: $dark-card-background
