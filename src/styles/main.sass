@@ -208,6 +208,10 @@ div.content-wrapper
   pointer-events: auto
   border: 1px solid $timeline-line-color
 
+  &::after
+    background-color: $card-background
+    border-color: $timeline-line-color
+
   a
     text-decoration: underline
 
@@ -559,8 +563,6 @@ img
     height: 14px
     width: 14px
     position: absolute
-    background-color: $card-background
-    border-color: $timeline-line-color
     border-width: 0
     border-style: solid
     box-sizing: border-box
@@ -757,9 +759,7 @@ img
 
   .timeline-description
     background-color: $dark-card-background
-
-    .tags
-      border-top: 1px solid $dark-timeline-line-color
+    border-color: $dark-timeline-line-color
 
     h2
       button .permalink-popup
@@ -767,6 +767,10 @@ img
 
       a
         color: $dark-main-color
+
+    .entry-footer
+      border-color: $dark-timeline-line-color
+      background-color: $dark-card-footer-background
 
   .timeline::before
     background-color: $dark-timeline-line-color
@@ -790,8 +794,7 @@ img
   .timeline.dots::before
     background: linear-gradient(180deg, $dark-timeline-line-color 25%, $dark-main-background 25%, $dark-main-background 50%, $dark-timeline-line-color 50%, $dark-timeline-line-color 75%, $dark-main-background 75%, $dark-main-background 100%)
 
-  /* Arrows */
-  .no-js .timeline-entry .timeline-description::after
+  .timeline-description:after
     background-color: $dark-card-background
     border-color: $dark-timeline-line-color
 
