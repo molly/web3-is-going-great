@@ -78,6 +78,18 @@ export default function Timeline({
     [startAtId, hasPreviousEntries, selectedEntryFromSearch]
   );
 
+  const renderHead = () => {
+    if (startAtId || collection) {
+      return (
+        <CustomEntryHead
+          entry={data.pages[0].entries[0]}
+          collection={collection}
+        />
+      );
+    }
+    return null;
+  };
+
   const renderScrollSentinel = () => {
     return (
       <InView
@@ -113,7 +125,7 @@ export default function Timeline({
     return (
       <>
         {shouldRenderGoToTop && renderGoToTop()}
-        {startAtId && <CustomEntryHead entry={data.pages[0].entries[0]} />}
+        {renderHead()}
         <article
           id="timeline"
           className={clsx("timeline", {

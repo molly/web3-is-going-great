@@ -6,11 +6,7 @@ import { useRouter } from "next/router";
 import { useInfiniteQuery } from "react-query";
 import useGA from "../hooks/useGA";
 
-import {
-  copy,
-  removeQueryParamsFromUrl,
-  updateUrlWithQueryParam,
-} from "../js/utilities";
+import { copy } from "../js/utilities";
 import {
   EMPTY_FILTERS_STATE,
   FiltersPropType,
@@ -126,9 +122,11 @@ export default function IndexPage({
   const setCollection = (coll) => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     if (coll) {
-      updateUrlWithQueryParam("collection", coll);
+      router.push({ query: { ...router.query, collection: coll } }, null, {
+        shallow: true,
+      });
     } else {
-      removeQueryParamsFromUrl();
+      router.push({ query: {} }, null, { shallow: true });
     }
     setCollectionState(coll);
   };
