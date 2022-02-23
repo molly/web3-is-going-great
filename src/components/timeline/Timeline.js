@@ -157,6 +157,7 @@ export default function Timeline({
                       setCurrentRunningScamTotal={setCurrentRunningScamTotal}
                       shouldScrollToElement={entry.id === startAtId}
                       glossary={glossary}
+                      collection={collection}
                       setCollection={setCollection}
                     />
                   );

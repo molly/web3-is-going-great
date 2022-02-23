@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
 import { useRouter } from "next/router";
 
@@ -31,6 +31,7 @@ export default function Entry({
   runningScamTotal,
   currentRunningScamTotal,
   setCurrentRunningScamTotal,
+  collection,
   setCollection,
   shouldScrollToElement,
 }) {
@@ -85,6 +86,14 @@ export default function Entry({
     }
     return null;
   };
+
+  // If a user is viewing a collection, don't render that tag for all the entries again
+  const collectionsToRender = useMemo(() => {
+    if ("collection" in entry && Array.isArray(entry.collection)) {
+      return entry.collection.filter((coll) => coll !== collection);
+    }
+    return null;
+  }, [entry, collection]);
 
   const renderIcon = () => {
     if (entry.faicon) {
@@ -289,7 +298,6 @@ export default function Entry({
     }
     return (
       <InView
-        className="clearfix"
         threshold={1}
         onChange={(inView) => {
           if (inView && runningScamTotal !== currentRunningScamTotal) {
@@ -303,26 +311,23 @@ export default function Entry({
   };
 
   const renderCollection = () => {
-    if ("collection" in entry) {
-      return (
-        <span>
-          Other entries related to{" "}
-          {humanizeList(
-            entry.collection.map((coll) => (
-              <button key={coll} onClick={() => setCollection(coll)}>
-                <a>{getCollectionName(coll)}</a>
-              </button>
-            )),
-            { exclusive: true }
-          )}
-        </span>
-      );
-    }
-    return <span />;
+    return (
+      <span>
+        Other entries related to{" "}
+        {humanizeList(
+          collectionsToRender.map((coll) => (
+            <button key={coll} onClick={() => setCollection(coll)}>
+              {getCollectionName(coll)}
+            </button>
+          )),
+          { exclusive: true }
+        )}
+      </span>
+    );
   };
 
   const renderCollectionAndLinks = () => {
-    if ("collection" in entry) {
+    if (collectionsToRender && collectionsToRender.length > 0) {
       return <div className="collection-row">{renderCollection()}</div>;
     }
     return null;
@@ -372,6 +377,7 @@ Entry.propTypes = {
   currentRunningScamTotal: PropTypes.number,
   setCurrentRunningScamTotal: PropTypes.func,
   shouldScrollToElement: PropTypes.bool,
+  collection: PropTypes.string,
   setCollection: PropTypes.func.isRequired,
 };
 

@@ -211,11 +211,6 @@ div.content-wrapper
   a
     text-decoration: underline
 
-  .tags
-    display: flex
-    margin-top: 20px
-    padding-top: 10px
-
   .entry-wrapper
     margin-left: 20px
     margin-right: 20px
@@ -231,8 +226,9 @@ div.content-wrapper
     font-style: italic
     font-size: 70%
 
-    a
-      cursor: pointer
+    button
+      font-style: italic
+      color: $main-link-color
 
   .collection-row
     display: flex
@@ -387,15 +383,15 @@ img
     .back-bar-item
       flex: 1
 
-      &:hover
-        text-decoration: underline
-
       i.link-icon
         margin-right: 5px
 
       &.title-text
         flex: 3
         text-align: center
+
+    button.back-bar-item:hover
+      text-decoration: underline
 
     h3
       margin: 0
