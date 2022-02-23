@@ -90,6 +90,7 @@ export default function IndexPage({
     router.beforePopState(({ url }) => {
       const startOfQueryParams = url.indexOf("?");
       if (startOfQueryParams) {
+        // Filters
         const params = new URLSearchParams(url.slice(startOfQueryParams));
         const restoredFilters = copy(EMPTY_FILTERS_STATE);
         for (let category of FILTER_CATEGORIES) {
@@ -98,10 +99,19 @@ export default function IndexPage({
           }
         }
         setFilterState(restoredFilters);
+
+        // Start at ID
         if (params.has("id")) {
           setSelectedEntryFromSearch(params.get("id"));
         } else {
           setSelectedEntryFromSearch(null);
+        }
+
+        // Collection
+        if (params.has("collection")) {
+          setCollectionState(params.get("collection"));
+        } else {
+          setCollectionState(null);
         }
       }
     });
