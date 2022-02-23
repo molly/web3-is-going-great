@@ -350,7 +350,11 @@ export default function Entry({
   };
 
   const renderCollectionAndLinks = () => {
-    if (collectionsToRender && collectionsToRender.length > 0) {
+    if (
+      isBrowserRendering &&
+      collectionsToRender &&
+      collectionsToRender.length > 0
+    ) {
       return <div className="collection-row">{renderCollection()}</div>;
     }
     return null;
