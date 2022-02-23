@@ -399,13 +399,13 @@ Entry.propTypes = {
   className: PropTypes.string,
   entry: EntryPropType,
   windowWidth: WindowWidthPropType,
-  glossary: PropTypes.object.isRequired,
+  glossary: PropTypes.object, // Not defined in web1
   runningScamTotal: PropTypes.number,
   currentRunningScamTotal: PropTypes.number,
   setCurrentRunningScamTotal: PropTypes.func,
   shouldScrollToElement: PropTypes.bool,
   collection: PropTypes.string,
-  setCollection: PropTypes.func.isRequired,
+  setCollection: PropTypes.func, // Not defined in web1
 };
 
 Entry.defaultProps = {

@@ -85,7 +85,7 @@ export default function TimelineEntryContent({ children, glossary }) {
   };
 
   const safelyGetGlossaryField = (field) => {
-    if (activeTarget && activeTarget.id) {
+    if (activeTarget && activeTarget.id && glossary) {
       if (glossary.entries[activeTarget.id]) {
         return glossary.entries[activeTarget.id][field];
       }
@@ -141,5 +141,5 @@ export default function TimelineEntryContent({ children, glossary }) {
 
 TimelineEntryContent.propTypes = {
   children: PropTypes.string.isRequired,
-  glossary: PropTypes.object.isRequired,
+  glossary: PropTypes.object,
 };
