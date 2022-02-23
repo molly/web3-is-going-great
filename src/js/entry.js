@@ -30,6 +30,7 @@ export const EntryPropType = PropTypes.shape({
     blockchain: PropTypes.arrayOf(PropTypes.string),
   }),
   color: PropTypes.string,
+  collection: PropTypes.array,
   faicon: PropTypes.string,
   icon: PropTypes.string,
   date: PropTypes.string,

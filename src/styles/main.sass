@@ -19,9 +19,11 @@ body
   background-color: $main-background
   color: $main-text-color
   font-family: $body-font, monospace
+  line-height: 1.2
 
 main.use-sans-serif
   font-family: $sans-serif-body-font, sans-serif
+  font-size: 18px
 
 *
   box-sizing: border-box
@@ -202,21 +204,55 @@ div.content-wrapper
   box-sizing: border-box
   width: 45%
   background-color: $card-background
-  padding: 20px
+  padding-top: 20px
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1)
   display: inline-block
   pointer-events: auto
+  border: 1px solid $timeline-line-color
+
+  &::after
+    background-color: $card-background
+    border-color: $timeline-line-color
 
   a
     text-decoration: underline
 
-  .tags
-    display: flex
-    margin-top: 20px
-    padding-top: 10px
+  .entry-wrapper
+    margin-left: 20px
+    margin-right: 20px
+
+  .entry-footer
+    clear: both
+    margin-top: 15px
     border-top: 1px solid $timeline-line-color
+    background-color: $card-footer-background
+
+  .collection-row, .tags
+    display: flex
+    padding-top: 5px
     font-style: italic
     font-size: 70%
+
+    button
+      font-style: italic
+      color: $main-link-color
+
+  .collection-row
+    display: flex
+    justify-content: space-between
+    padding: 5px
+    border-bottom: 1px solid transparentize($timeline-line-color, 0.5)
+
+    a > i.fa-twitter
+      color: $main-text-color
+
+  .tags
+    padding: 5px
+
+    .fa-hashtag
+      color: $timestamp-color
+      font-size: 80%
+      margin-right: 5px
 
     .tag-list
       white-space: nowrap
@@ -344,10 +380,33 @@ img
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
 
   .contents
+    display: flex
+    align-items: center
     width: 90%
     max-width: 1600px
     padding: 10px 0
     margin: 0 auto
+    justify-content: space-between
+
+    button.back-bar-item
+      color: $accent
+      cursor: pointer
+
+    .back-bar-item
+      flex: 1
+
+      i.link-icon
+        margin-right: 5px
+
+      &.title-text
+        flex: 3
+        text-align: center
+
+    button.back-bar-item:hover
+      text-decoration: underline
+
+    h3
+      margin: 0
 
 .sr-only
   position: absolute
@@ -462,8 +521,9 @@ img
 /* RESPONSIVENESS */
 @media only screen and (min-width: #{$md-breakpoint + 1}px)
   .timeline-entry.even .timeline-description:after
-    left: 100%
-    border-left-color: $card-background
+    right: -8px
+    border-top-width: 1px
+    border-right-width: 1px
 
   header.page-header.timeline-page
     min-height: 300px
@@ -496,26 +556,29 @@ img
 
 @media only screen and (max-width: #{$md-breakpoint}px) and (min-width: #{$sm-breakpoint + 1}px)
   .timeline-entry.even .timeline-description:after
-    right: 100%
-    border-right-color: $card-background
+    left: -8px
+    border-bottom-width: 1px
+    border-left-width: 1px
 
   header.page-header.timeline-page .header-content
     padding-bottom: 20px
 
 @media only screen and (min-width: #{$sm-breakpoint + 1}px)
   .timeline-description:after
-    top: 20px
-    border: solid transparent
-    content: ' '
-    height: 0
-    width: 0
+    top: 14px
+    content: ''
+    transform: rotate(45deg)
+    height: 14px
+    width: 14px
     position: absolute
-    border-width: 10px
-    margin-top: -10px
+    border-width: 0
+    border-style: solid
+    box-sizing: border-box
 
   .timeline-entry.odd .timeline-description:after
-    right: 100%
-    border-right-color: $card-background
+    left: -8px
+    border-bottom-width: 1px
+    border-left-width: 1px
 
   .image-right
     float: right
@@ -682,6 +745,9 @@ img
       border-bottom: 1px dashed lighten($header-footer-background, 20%)
       color: $dark-header-footer-link-color
 
+    h1 a
+      border-bottom: none
+
   header.page-header.timeline-page li:not(:first-child):before
     color: $dark-header-footer-body-color
 
@@ -702,11 +768,12 @@ img
     background-color: $dark-filterbar-background
     color: $dark-filter-text
 
+    .contents button.back-bar-item
+      color: $dark-link-color
+
   .timeline-description
     background-color: $dark-card-background
-
-    .tags
-      border-top: 1px solid $dark-timeline-line-color
+    border-color: $dark-timeline-line-color
 
     h2
       button .permalink-popup
@@ -714,6 +781,16 @@ img
 
       a
         color: $dark-main-color
+
+    .entry-footer
+      border-color: $dark-timeline-line-color
+      background-color: $dark-card-footer-background
+
+      button
+        color: $dark-link-color
+
+      .collection-row
+        border-bottom-color: $dark-timeline-line-color
 
   .timeline::before
     background-color: $dark-timeline-line-color
@@ -737,21 +814,9 @@ img
   .timeline.dots::before
     background: linear-gradient(180deg, $dark-timeline-line-color 25%, $dark-main-background 25%, $dark-main-background 50%, $dark-timeline-line-color 50%, $dark-timeline-line-color 75%, $dark-main-background 75%, $dark-main-background 100%)
 
-  /* Arrows */
-  .no-js .timeline-entry .timeline-description::after
-    border-right-color: $dark-card-background
-
-  @media only screen and (min-width: #{$md-breakpoint + 1}px)
-    .timeline-entry.even .timeline-description::after
-      border-left-color: $dark-card-background
-
-  @media only screen and (max-width: #{$md-breakpoint}px) and (min-width: #{$sm-breakpoint + 1}px)
-    .timeline-entry.even .timeline-description::after
-      border-right-color: $dark-card-background
-
-  @media only screen and (min-width: #{$sm-breakpoint}px)
-    .timeline-entry.odd .timeline-description::after
-      border-right-color: $dark-card-background
+  .timeline-description:after
+    background-color: $dark-card-background
+    border-color: $dark-timeline-line-color
 
 .use-dark
   background-color: $dark-main-background

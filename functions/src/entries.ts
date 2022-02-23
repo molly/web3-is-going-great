@@ -23,9 +23,8 @@ export const migrate = functions.https.onRequest(async (req, res) => {
   const entriesSnapshot = await collection.get();
   entriesSnapshot.forEach(async (entry) => {
     const data = entry.data();
-    if (data.faIcon === "newspaper") {
-      data.faicon = "newspaper";
-      delete data.faIcon;
+    if ("collection" in data && data.collection.length === 0) {
+      delete data.collection;
       await collection.doc(entry.id).set(data);
     }
   });

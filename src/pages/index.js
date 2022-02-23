@@ -22,7 +22,10 @@ import Timeline from "../components/timeline/Timeline";
 export async function getServerSideProps(context) {
   let props = { initialFilters: copy(EMPTY_FILTERS_STATE) };
   if (context.query) {
-    if (FILTER_CATEGORIES.some((filter) => filter in context.query)) {
+    if (context.query.collection) {
+      // Filters and collections are mutually exclusive
+      props.initialFilters.collection = context.query.collection;
+    } else if (FILTER_CATEGORIES.some((filter) => filter in context.query)) {
       let hasFilterCategory = false;
       FILTER_CATEGORIES.forEach((filter) => {
         // Only one filter category can be active at a time, so if someone tries
@@ -35,6 +38,7 @@ export async function getServerSideProps(context) {
         }
       });
     }
+
     if (
       context.query.id &&
       context.query.id.match(/\d{4}-\d{2}-\d{2}-?\d{0,2}/)
@@ -59,6 +63,9 @@ export async function getServerSideProps(context) {
       firstEntries,
       glossary,
       griftTotal: metadata.griftTotal,
+      ...(context.query.collection && {
+        initialCollection: context.query.collection,
+      }),
     },
   };
 }
@@ -69,10 +76,12 @@ export default function IndexPage({
   initialFilters,
   glossary,
   griftTotal,
+  initialCollection,
 }) {
   useGA();
   const router = useRouter();
 
+  const [collection, setCollectionState] = useState(initialCollection);
   const [filters, setFilterState] = useState(initialFilters);
   const [selectedEntryFromSearch, setSelectedEntryFromSearch] = useState(null);
 
@@ -81,6 +90,7 @@ export default function IndexPage({
     router.beforePopState(({ url }) => {
       const startOfQueryParams = url.indexOf("?");
       if (startOfQueryParams) {
+        // Filters
         const params = new URLSearchParams(url.slice(startOfQueryParams));
         const restoredFilters = copy(EMPTY_FILTERS_STATE);
         for (let category of FILTER_CATEGORIES) {
@@ -89,10 +99,19 @@ export default function IndexPage({
           }
         }
         setFilterState(restoredFilters);
+
+        // Start at ID
         if (params.has("id")) {
           setSelectedEntryFromSearch(params.get("id"));
         } else {
           setSelectedEntryFromSearch(null);
+        }
+
+        // Collection
+        if (params.has("collection")) {
+          setCollectionState(params.get("collection"));
+        } else {
+          setCollectionState(null);
         }
       }
     });
@@ -110,19 +129,35 @@ export default function IndexPage({
     setFilterState(filters);
   };
 
+  const setCollection = (coll) => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    if (coll) {
+      router.push({ query: { ...router.query, collection: coll } }, null, {
+        shallow: true,
+      });
+    } else {
+      router.push({ query: {} }, null, { shallow: true });
+    }
+    setCollectionState(coll);
+  };
+
   const getFilteredEntries = useCallback(
     ({ pageParam = null }) => {
       if (selectedEntryFromSearch) {
-        return getEntries({ ...filters, startAtId: selectedEntryFromSearch });
+        return getEntries({
+          ...filters,
+          collection,
+          startAtId: selectedEntryFromSearch,
+        });
       } else {
-        return getEntries({ ...filters, cursor: pageParam });
+        return getEntries({ ...filters, collection, cursor: pageParam });
       }
     },
-    [filters, selectedEntryFromSearch]
+    [collection, filters, selectedEntryFromSearch]
   );
 
   const queryResult = useInfiniteQuery(
-    ["entries", filters, selectedEntryFromSearch],
+    ["entries", filters, selectedEntryFromSearch, collection],
     getFilteredEntries,
     {
       refetchOnMount: false,
@@ -149,11 +184,13 @@ export default function IndexPage({
   return (
     <Timeline
       queryResult={queryResult}
+      collection={collection}
       filters={filters}
       glossary={glossary}
       griftTotal={griftTotal}
       selectedEntryFromSearch={selectedEntryFromSearch}
       startAtId={startAtId}
+      setCollection={setCollection}
       setFilters={setFilters}
       setSelectedEntryFromSearch={setSelectedEntryFromSearch}
     />
@@ -167,6 +204,7 @@ IndexPage.propTypes = {
     hasPrev: PropTypes.bool,
   }).isRequired,
   initialFilters: FiltersPropType.isRequired,
+  initialCollection: PropTypes.string,
   glossary: PropTypes.object.isRequired,
   startAtId: PropTypes.string,
   griftTotal: PropTypes.number.isRequired,

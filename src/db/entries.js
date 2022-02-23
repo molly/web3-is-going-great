@@ -13,54 +13,65 @@ import { db } from "./db";
 
 const DEFAULT_LIMIT = 10;
 
-const getFirstEntryId = async (collection) => {
+const getFirstEntryId = async (dbCollection) => {
   const firstEntrySnapshot = await getDocs(
-    query(query(collection, orderBy("id", "desc")), limit(1))
+    query(query(dbCollection, orderBy("id", "desc")), limit(1))
   );
   const firstEntry = firstEntrySnapshot.docs[0];
   return firstEntry.id;
 };
 
-export const getEntries = async (data) => {
+export const getEntries = async ({
+  limit: entriesLimit,
+  sort,
+  theme,
+  tech,
+  blockchain,
+  collection: entriesCollection,
+  cursor,
+  startAtId,
+} = {}) => {
   const resp = {
     entries: [],
     hasPrev: null, // This is only set if there's a cursor
     hasNext: false,
   };
 
-  const respLimit = data && data.limit ? limit : DEFAULT_LIMIT;
+  const respLimit = entriesLimit ? entriesLimit : DEFAULT_LIMIT;
 
-  const entriesCollection = collection(db, "entries");
+  const dbCollection = collection(db, "entries");
   let q = query(
-    entriesCollection,
-    orderBy("id", data && data.sort === "Ascending" ? "asc" : "desc")
+    dbCollection,
+    orderBy("id", !!sort && sort === "Ascending" ? "asc" : "desc")
   );
 
-  if (data && data.theme && data.theme.length) {
+  if (entriesCollection) {
+    q = query(q, where("collection", "array-contains", entriesCollection));
+  } else if (theme && theme.length) {
     q = query(
       q,
-      where(new FieldPath("filters", "theme"), "array-contains-any", data.theme)
+      where(new FieldPath("filters", "theme"), "array-contains-any", theme)
     );
-  } else if (data && data.tech && data.tech.length) {
+  } else if (tech && tech.length) {
     q = query(
       q,
-      where(new FieldPath("filters", "tech"), "array-contains-any", data.tech)
+      where(new FieldPath("filters", "tech"), "array-contains-any", tech)
     );
-  } else if (data && data.blockchain && data.blockchain.length) {
+  } else if (blockchain && blockchain.length) {
     q = query(
       q,
       where(
         new FieldPath("filters", "blockchain"),
         "array-contains-any",
-        data.blockchain
+        blockchain
       )
     );
   }
 
-  if (data && data.cursor) {
-    q = query(q, startAfter(data.cursor));
-  } else if (data && data.startAtId) {
-    q = query(q, startAt(data.startAtId));
+  if (cursor) {
+    q = query(q, startAfter(cursor));
+  } else if (startAtId) {
+    q = query(q, startAt(startAtId));
   }
   q = query(q, limit(respLimit + 1));
   const snapshot = await getDocs(q);
@@ -74,9 +85,9 @@ export const getEntries = async (data) => {
   });
 
   // Check if this is the first entry available
-  if (data && (data.cursor || data.startAtId)) {
-    const firstId = data.cursor || data.startAtId;
-    const firstEntryId = await getFirstEntryId(entriesCollection);
+  if (cursor || startAtId) {
+    const firstId = cursor || startAtId;
+    const firstEntryId = await getFirstEntryId(dbCollection);
     resp.hasPrev = firstEntryId !== firstId;
   }
 
@@ -91,10 +102,10 @@ export const getAllEntries = async ({ cursor, direction }) => {
     hasNext: false,
   };
 
-  const entriesCollection = collection(db, "entries");
+  const dbCollection = collection(db, "entries");
 
   let q = query(
-    entriesCollection,
+    dbCollection,
     orderBy("id", direction === "prev" ? "asc" : "desc")
   );
 
@@ -131,7 +142,7 @@ export const getAllEntries = async ({ cursor, direction }) => {
   // Check if the first entry in this group is also the first document in the
   // collection or if there are newer entries that could be fetched
   if (cursor) {
-    const firstEntryId = await getFirstEntryId(entriesCollection);
+    const firstEntryId = await getFirstEntryId(dbCollection);
     if (resp.entries[0].id !== firstEntryId) {
       resp.hasPrev = true;
     }

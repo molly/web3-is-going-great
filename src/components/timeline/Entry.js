@@ -1,20 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
 import { useRouter } from "next/router";
+
 import PropTypes from "prop-types";
+import { EntryPropType } from "../../js/entry";
+import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 import clsx from "clsx";
 
 import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
 import ICONS from "../../constants/icons";
-import { getPermalink, humanizeDate } from "../../js/utilities";
-import { EntryPropType } from "../../js/entry";
+
+import {
+  getCollectionName,
+  humanizeDate,
+  humanizeList,
+  getPermalink,
+} from "../../js/utilities";
 
 import { InView } from "react-intersection-observer";
 import Link from "next/link";
 import TimelineEntryContent from "./TimelineEntryContent";
-import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 
 export default function Entry({
   entry,
@@ -24,6 +31,8 @@ export default function Entry({
   runningScamTotal,
   currentRunningScamTotal,
   setCurrentRunningScamTotal,
+  collection,
+  setCollection,
   shouldScrollToElement,
 }) {
   const ref = useRef();
@@ -77,6 +86,14 @@ export default function Entry({
     }
     return null;
   };
+
+  // If a user is viewing a collection, don't render that tag for all the entries again
+  const collectionsToRender = useMemo(() => {
+    if ("collection" in entry && Array.isArray(entry.collection)) {
+      return entry.collection.filter((coll) => coll !== collection);
+    }
+    return null;
+  }, [entry, collection]);
 
   const renderIcon = () => {
     if (entry.faicon) {
@@ -255,6 +272,7 @@ export default function Entry({
       <div className="tags">
         <div className="tag-list theme">
           <span className="sr-only">Theme tags: </span>
+          <i className="fas fa-hashtag" aria-hidden={true}></i>
           {theme}
         </div>
         <div className="tag-group-right">
@@ -281,7 +299,6 @@ export default function Entry({
     }
     return (
       <InView
-        className="clearfix"
         threshold={1}
         onChange={(inView) => {
           if (inView && runningScamTotal !== currentRunningScamTotal) {
@@ -291,6 +308,38 @@ export default function Entry({
       >
         {renderTags()}
       </InView>
+    );
+  };
+
+  const renderCollection = () => {
+    return (
+      <span>
+        Other entries related to{" "}
+        {humanizeList(
+          collectionsToRender.map((coll) => (
+            <button key={coll} onClick={() => setCollection(coll)}>
+              {getCollectionName(coll)}
+            </button>
+          )),
+          { exclusive: true }
+        )}
+      </span>
+    );
+  };
+
+  const renderCollectionAndLinks = () => {
+    if (collectionsToRender && collectionsToRender.length > 0) {
+      return <div className="collection-row">{renderCollection()}</div>;
+    }
+    return null;
+  };
+
+  const renderFooterContent = () => {
+    return (
+      <div className="entry-footer">
+        {renderCollectionAndLinks()}
+        {renderTagsWithSentinel()}
+      </div>
     );
   };
 
@@ -304,14 +353,16 @@ export default function Entry({
       </div>
 
       <div className="timeline-description">
-        {renderTimestampAndLinkIcons()}
-        {renderTitle()}
-        {renderImage(true)}
-        <TimelineEntryContent glossary={glossary}>
-          {entry.body}
-        </TimelineEntryContent>
-        {renderLinks()}
-        {renderTagsWithSentinel()}
+        <div className="entry-wrapper">
+          {renderTimestampAndLinkIcons()}
+          {renderTitle()}
+          {renderImage(true)}
+          <TimelineEntryContent glossary={glossary}>
+            {entry.body}
+          </TimelineEntryContent>
+          {renderLinks()}
+        </div>
+        {renderFooterContent()}
       </div>
       {renderLightbox()}
     </div>
@@ -327,6 +378,8 @@ Entry.propTypes = {
   currentRunningScamTotal: PropTypes.number,
   setCurrentRunningScamTotal: PropTypes.func,
   shouldScrollToElement: PropTypes.bool,
+  collection: PropTypes.string,
+  setCollection: PropTypes.func.isRequired,
 };
 
 Entry.defaultProps = {

@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
+import PropTypes from "prop-types";
+import { EntryPropType } from "../js/entry";
 
 import { STORAGE_URL } from "../constants/urls";
 
-import { stripHtml, getImageDimensions } from "../js/utilities";
-import { EntryPropType } from "../js/entry";
+import {
+  stripHtml,
+  getImageDimensions,
+  getCollectionName,
+} from "../js/utilities";
 
-export default function CustomEntryHead({ entry }) {
+export default function CustomEntryHead({ entry, collection }) {
   const [isWaitingForImageDimensions, setIsWaitingForImageDimensions] =
     useState(true);
   const [imageDimensions, setImageDimensions] = useState({
@@ -38,12 +43,15 @@ export default function CustomEntryHead({ entry }) {
     return null;
   }
 
-  const title = stripHtml(entry.title);
-  const description = stripHtml(entry.body);
+  const collectionDescription = collection
+    ? `Entries related to ${getCollectionName(collection)}`
+    : null;
+  const title = collectionDescription || stripHtml(entry.title);
+  const description = collectionDescription || stripHtml(entry.body);
 
   return (
     <Head>
-      <title key="title">{title}</title>
+      <title key="title">{`${title} – Web3 Is Going Just Great`}</title>
       <meta name="description" content={description} key="description" />
       <meta
         property="og:url"
@@ -93,4 +101,5 @@ export default function CustomEntryHead({ entry }) {
 
 CustomEntryHead.propTypes = {
   entry: EntryPropType,
+  collection: PropTypes.string,
 };

@@ -6,12 +6,17 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
 
 import { FiltersPropType } from "../../constants/filters";
+import {
+  getCollectionName,
+  removeQueryParamsFromUrl,
+} from "../../js/utilities";
 
 import Link from "next/link";
 import { InView, useInView } from "react-intersection-observer";
 import CustomEntryHead from "../CustomEntryHead";
 import Header from "./Header";
 import Filters from "./Filters";
+import BackBar from "../BackBar";
 import Entry from "./Entry";
 import FixedAtBottom from "./FixedAtBottom";
 import Loader from "../Loader";
@@ -19,11 +24,13 @@ import Error from "../Error";
 
 export default function Timeline({
   queryResult,
+  collection,
   filters,
   glossary,
   griftTotal,
   selectedEntryFromSearch,
   startAtId,
+  setCollection,
   setFilters,
   setSelectedEntryFromSearch,
 }) {
@@ -61,10 +68,27 @@ export default function Timeline({
     [data, isSuccess]
   );
 
+  const shouldRenderFilterBarAndGriftCounter = useMemo(
+    () => !collection && (!startAtId || !hasPreviousEntries),
+    [collection, hasPreviousEntries, startAtId]
+  );
+
   const shouldRenderGoToTop = useMemo(
     () => (!!startAtId && hasPreviousEntries) || !!selectedEntryFromSearch,
     [startAtId, hasPreviousEntries, selectedEntryFromSearch]
   );
+
+  const renderHead = () => {
+    if (startAtId || collection) {
+      return (
+        <CustomEntryHead
+          entry={data.pages[0].entries[0]}
+          collection={collection}
+        />
+      );
+    }
+    return null;
+  };
 
   const renderScrollSentinel = () => {
     return (
@@ -101,7 +125,7 @@ export default function Timeline({
     return (
       <>
         {shouldRenderGoToTop && renderGoToTop()}
-        {startAtId && <CustomEntryHead entry={data.pages[0].entries[0]} />}
+        {renderHead()}
         <article
           id="timeline"
           className={clsx("timeline", {
@@ -133,6 +157,8 @@ export default function Timeline({
                       setCurrentRunningScamTotal={setCurrentRunningScamTotal}
                       shouldScrollToElement={entry.id === startAtId}
                       glossary={glossary}
+                      collection={collection}
+                      setCollection={setCollection}
                     />
                   );
 
@@ -187,7 +213,17 @@ export default function Timeline({
         windowWidth={windowWidth}
         ref={{ focusRef: headerFocusRef, inViewRef: headerInViewRef }}
       />
-      {isBrowserRendering && (!startAtId || !hasPreviousEntries) && (
+      {isBrowserRendering && collection && (
+        <BackBar
+          customText="All entries"
+          backFunction={() => {
+            setCollection(null);
+            removeQueryParamsFromUrl();
+          }}
+          titleText={`Entries related to ${getCollectionName(collection)}`}
+        />
+      )}
+      {isBrowserRendering && shouldRenderFilterBarAndGriftCounter && (
         <Filters
           filters={filters}
           setFilters={setFilters}
@@ -207,7 +243,7 @@ export default function Timeline({
       </div>
       <FixedAtBottom
         headerInView={headerInView}
-        shouldRenderGriftCounter={!startAtId || !hasPreviousEntries}
+        shouldRenderGriftCounter={shouldRenderFilterBarAndGriftCounter}
         scrollToTop={scrollToTop}
         runningGriftTotal={currentRunningScamTotal}
         griftTotal={griftTotal}
@@ -227,10 +263,12 @@ Timeline.propTypes = {
     isSuccess: PropTypes.bool.isRequired,
   }),
   filters: FiltersPropType.isRequired,
+  collection: PropTypes.string,
   glossary: PropTypes.object.isRequired,
   griftTotal: PropTypes.number.isRequired,
   selectedEntryFromSearch: PropTypes.string,
   startAtId: PropTypes.string,
+  setCollection: PropTypes.func.isRequired,
   setFilters: PropTypes.func.isRequired,
   setSelectedEntryFromSearch: PropTypes.func.isRequired,
 };
