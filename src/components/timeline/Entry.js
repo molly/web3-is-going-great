@@ -125,21 +125,25 @@ export default function Entry({
 
   const renderLinkIcon = () => {
     if (isBrowserRendering) {
-      <li>
-        {showCopiedPopup && <div className="permalink-popup">Copied</div>}
-        <button onClick={() => permalink(entry.id)}>
-          <i className="fas fa-link" aria-hidden={true} />
-          <span className="sr-only">Permalink</span>
-        </button>
-      </li>;
+      return (
+        <li>
+          {showCopiedPopup && <div className="permalink-popup">Copied</div>}
+          <button onClick={() => permalink(entry.id)}>
+            <i className="fas fa-link" aria-hidden={true} />
+            <span className="sr-only">Permalink</span>
+          </button>
+        </li>
+      );
     } else {
       // No JS
-      <Link href={noJsPermalink}>
-        <a>
-          <i className="fas fa-link" aria-hidden={true} />
-          <span className="sr-only">Permalink</span>
-        </a>
-      </Link>;
+      return (
+        <Link href={noJsPermalink}>
+          <a>
+            <i className="fas fa-link" aria-hidden={true} />
+            <span className="sr-only">Permalink</span>
+          </a>
+        </Link>
+      );
     }
   };
 

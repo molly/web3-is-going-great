@@ -619,8 +619,20 @@ img
   .timeline-entry.single .timeline-description
     margin-left: 30px
 
+  .timestamp-and-link-icons ul li:not(:first-child)
+    font-size: 120%
+    padding-left: 10px
+
   .timeline-description
     width: 90%
+
+  .use-sans-serif
+    .timeline-body-text-wrapper
+      font-size: 20px
+      line-height: 1.3
+
+  .timeline-body-text-wrapper
+    font-size: 18px
 
   .load-top
     justify-content: start
@@ -632,9 +644,6 @@ img
     width: 90%
 
 @media only screen and (max-width: #{$sm-breakpoint}px)
-  body
-    font-size: 16px
-
   header.page-header
     height: auto
     padding-top: 20px
@@ -679,9 +688,13 @@ img
   .timeline-entry.even,
   .timeline-entry.odd
     .timeline-description
-      padding: 10px
       margin-left: 10px
+      padding-top: 10px
       width: calc( 100vw - 20px )
+
+      .entry-wrapper
+        margin-left: 10px
+        margin-right: 10px
 
       img
         max-height: 300px
