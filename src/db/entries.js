@@ -36,69 +36,61 @@ export const getEntries = async ({
     hasPrev: null, // This is only set if there's a cursor
     hasNext: false,
   };
-  try {
-    const respLimit = entriesLimit ? entriesLimit : DEFAULT_LIMIT;
+  const respLimit = entriesLimit ? entriesLimit : DEFAULT_LIMIT;
 
-    const dbCollection = collection(db, "entries");
-    let q = query(
-      dbCollection,
-      orderBy("id", !!sort && sort === "Ascending" ? "asc" : "desc")
+  const dbCollection = collection(db, "entries");
+  let q = query(
+    dbCollection,
+    orderBy("id", !!sort && sort === "Ascending" ? "asc" : "desc")
+  );
+
+  if (entriesCollection) {
+    q = query(q, where("collection", "array-contains", entriesCollection));
+  } else if (theme && theme.length) {
+    q = query(
+      q,
+      where(new FieldPath("filters", "theme"), "array-contains-any", theme)
     );
-
-    if (entriesCollection) {
-      q = query(q, where("collection", "array-contains", entriesCollection));
-    } else if (theme && theme.length) {
-      q = query(
-        q,
-        where(new FieldPath("filters", "theme"), "array-contains-any", theme)
-      );
-    } else if (tech && tech.length) {
-      q = query(
-        q,
-        where(new FieldPath("filters", "tech"), "array-contains-any", tech)
-      );
-    } else if (blockchain && blockchain.length) {
-      q = query(
-        q,
-        where(
-          new FieldPath("filters", "blockchain"),
-          "array-contains-any",
-          blockchain
-        )
-      );
-    }
-
-    if (cursor) {
-      q = query(q, startAfter(cursor));
-    } else if (startAtId) {
-      q = query(q, startAt(startAtId));
-    }
-    q = query(q, limit(respLimit + 1));
-    const snapshot = await getDocs(q);
-
-    snapshot.forEach((child) => {
-      if (resp.entries.length < respLimit) {
-        resp.entries.push({ _key: child.id, ...child.data() });
-      } else {
-        resp.hasNext = true;
-      }
-    });
-
-    // Check if this is the first entry available
-    if (cursor || startAtId) {
-      const firstId = cursor || startAtId;
-      const firstEntryId = await getFirstEntryId(dbCollection);
-      resp.hasPrev = firstEntryId !== firstId;
-    }
-
-    return resp;
-  } catch (err) {
-    console.error(err);
-    if (err.code === "not-found") {
-      return resp;
-    }
-    throw err;
+  } else if (tech && tech.length) {
+    q = query(
+      q,
+      where(new FieldPath("filters", "tech"), "array-contains-any", tech)
+    );
+  } else if (blockchain && blockchain.length) {
+    q = query(
+      q,
+      where(
+        new FieldPath("filters", "blockchain"),
+        "array-contains-any",
+        blockchain
+      )
+    );
   }
+
+  if (cursor) {
+    q = query(q, startAfter(cursor));
+  } else if (startAtId) {
+    q = query(q, startAt(startAtId));
+  }
+  q = query(q, limit(respLimit + 1));
+  const snapshot = await getDocs(q);
+
+  snapshot.forEach((child) => {
+    if (resp.entries.length < respLimit) {
+      resp.entries.push({ _key: child.id, ...child.data() });
+    } else {
+      resp.hasNext = true;
+    }
+  });
+
+  // Check if this is the first entry available
+  if (cursor || startAtId) {
+    const firstId = cursor || startAtId;
+    const firstEntryId = await getFirstEntryId(dbCollection);
+    resp.hasPrev = firstEntryId !== firstId;
+  }
+
+  return resp;
 };
 
 const ALL_ENTRIES_LIMIT = 50;
