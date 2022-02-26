@@ -5,7 +5,7 @@ const Document = () => {
     <Html>
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/logo192.png" />
+        <link rel="apple-touch-icon" href="/android-chrome-192x192.png" />
         <link
           rel="icon"
           type="image/png"
