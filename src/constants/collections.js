@@ -1,8 +1,10 @@
 const COLLECTIONS = {
+  "associated-press": "the Associated Press",
   "baller-ape-club": "the people behind Baller Ape Club",
   bayc: "Bored Ape Yacht Club",
   binance: "Binance",
   "canada-convoy": "the Canada convoy protest",
+  "celebrity-rugpull": "celebrity rug pulls",
   "class-action": "class action lawsuits",
   coinbase: "Coinbase",
   cream: "C.R.E.A.M. Finance",
