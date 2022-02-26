@@ -3,4 +3,13 @@ module.exports = {
   images: {
     domains: ["storage.googleapis.com"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/feed",
+        destination: "/feed.xml",
+        permanent: true,
+      },
+    ];
+  },
 };
