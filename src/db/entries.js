@@ -36,7 +36,6 @@ export const getEntries = async ({
     hasPrev: null, // This is only set if there's a cursor
     hasNext: false,
   };
-
   const respLimit = entriesLimit ? entriesLimit : DEFAULT_LIMIT;
 
   const dbCollection = collection(db, "entries");
