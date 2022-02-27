@@ -21,7 +21,7 @@
     "moment": "^2.29.1"
   },
   "devDependencies": {
-    "@firebase/app-compat": "^0.1.17",
+    "@firebase/app-compat": "^0.1.18",
     "@types/ejs": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
