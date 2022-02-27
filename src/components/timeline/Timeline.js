@@ -122,10 +122,11 @@ export default function Timeline({
 
   const renderNoJs = () => {
     if (!isBrowserRendering) {
+      const cursor = data.pages[0].entries[data.pages[0].entries.length - 1].id;
       return (
         <p id="noscript">
           No JavaScript? That's cool too! Check out the{" "}
-          <Link href="/web1">
+          <Link href={`/web1?cursor=${cursor}&direction=next`}>
             <a>Web&nbsp;1.0</a>
           </Link>{" "}
           version of the site to see more entries.
