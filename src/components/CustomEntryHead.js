@@ -21,7 +21,9 @@ export default function CustomEntryHead({ entry, collection }) {
 
   const imageSrc =
     entry && entry.image && entry.image.src
-      ? `${STORAGE_URL}/entryAssets/${entry.image.src}`
+      ? `${STORAGE_URL}/entryImages/resized/${entry.image.src.split(
+          "."[0]
+        )}_500x625.webp`
       : null;
 
   useEffect(() => {
