@@ -10,6 +10,7 @@ import {
   getImageDimensions,
   getCollectionName,
 } from "../js/utilities";
+import { stripExtension } from "../js/images";
 
 export default function CustomEntryHead({ entry, collection }) {
   const [isWaitingForImageDimensions, setIsWaitingForImageDimensions] =
@@ -21,7 +22,9 @@ export default function CustomEntryHead({ entry, collection }) {
 
   const imageSrc =
     entry && entry.image && entry.image.src
-      ? `${STORAGE_URL}/entryAssets/${entry.image.src}`
+      ? `${STORAGE_URL}/entryImages/resized/${stripExtension(
+          entry.image.src
+        )}_500x625.webp`
       : null;
 
   useEffect(() => {

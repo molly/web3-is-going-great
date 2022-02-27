@@ -89,7 +89,6 @@ export const getEntries = async ({
     const firstEntryId = await getFirstEntryId(dbCollection);
     resp.hasPrev = firstEntryId !== firstId;
   }
-
   return resp;
 };
 
