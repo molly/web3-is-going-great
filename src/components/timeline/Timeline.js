@@ -193,9 +193,9 @@ export default function Timeline({
               </Fragment>
             );
           })}
-          {renderNoJs()}
           {hasNextPage && isBrowserRendering && <Loader />}
         </article>
+        {renderNoJs()}
       </>
     );
   };
