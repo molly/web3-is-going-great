@@ -120,6 +120,21 @@ export default function Timeline({
     );
   };
 
+  const renderNoJs = () => {
+    if (!isBrowserRendering) {
+      return (
+        <p id="noscript">
+          No JavaScript? That's cool too! Check out the{" "}
+          <Link href="/web1">
+            <a>Web&nbsp;1.0</a>
+          </Link>{" "}
+          version of the site to see more entries.
+        </p>
+      );
+    }
+    return null;
+  };
+
   const renderEntries = () => {
     let runningScamTotal = 0;
     return (
@@ -177,7 +192,8 @@ export default function Timeline({
               </Fragment>
             );
           })}
-          {hasNextPage && <Loader />}
+          {renderNoJs()}
+          {hasNextPage && isBrowserRendering && <Loader />}
         </article>
       </>
     );
@@ -190,21 +206,6 @@ export default function Timeline({
       return <Error />;
     }
     return renderEntries();
-  };
-
-  const renderNoJs = () => {
-    if (!isBrowserRendering) {
-      return (
-        <p id="noscript">
-          No JavaScript? That's cool too! Check out the{" "}
-          <Link href="/web1">
-            <a>Web&nbsp;1.0</a>
-          </Link>{" "}
-          version of this site.
-        </p>
-      );
-    }
-    return null;
   };
 
   return (
@@ -236,10 +237,7 @@ export default function Timeline({
         aria-busy={isLoading}
         aria-live="polite"
       >
-        {renderNoJs()}
-        <div style={{ display: isBrowserRendering ? "initial" : "none" }}>
-          {renderBody()}
-        </div>
+        {renderBody()}
       </div>
       <FixedAtBottom
         headerInView={headerInView}

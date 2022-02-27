@@ -70,17 +70,12 @@ const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
     </div>
   );
 
-  const renderIconLinkContents = (iconClass, iconText) => {
-    if (nojs) {
-      return <span>{iconText}</span>;
-    }
-    return (
-      <>
-        <i title={iconText} className={iconClass} aria-hidden={true}></i>
-        <span className="sr-only">{iconText}</span>
-      </>
-    );
-  };
+  const renderIconLinkContents = (iconClass, iconText) => (
+    <>
+      <i title={iconText} className={iconClass} aria-hidden={true}></i>
+      <span className="sr-only">{iconText}</span>
+    </>
+  );
 
   return (
     <header
