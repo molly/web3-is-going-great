@@ -23,7 +23,7 @@
   "devDependencies": {
     "@firebase/app-compat": "^0.1.18",
     "@types/ejs": "^3.1.0",
-    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.11.0",
     "eslint": "^8.9.0",
     "eslint-config-google": "^0.14.0",
