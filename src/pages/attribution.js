@@ -58,7 +58,7 @@ export default function Attribution({ attribution }) {
                 return (
                   <li key={`${entry.text}-${ind}`}>
                     <ExternalLink href={entry.href}>
-                      <span dangerouslySetInnerHTML={{ _html: entry.text }} />
+                      <span dangerouslySetInnerHTML={{ __html: entry.text }} />
                     </ExternalLink>
                   </li>
                 );
@@ -165,7 +165,7 @@ export default function Attribution({ attribution }) {
             {attribution.images.entries.map(({ text, href }) => (
               <li key={text}>
                 <ExternalLink href={href}>
-                  <span>{text}</span>
+                  <span dangerouslySetInnerHTML={{ __html: text }} />
                 </ExternalLink>
               </li>
             ))}
