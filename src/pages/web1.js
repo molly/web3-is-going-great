@@ -55,7 +55,7 @@ export default function Web1({ entries, hasPrev, hasNext }) {
 
   return (
     <>
-      <Header nojs={true} />
+      <Header />
       {renderNavigation()}
       <div className="timeline-page content-wrapper">
         <article className="single-timeline-wrapper">

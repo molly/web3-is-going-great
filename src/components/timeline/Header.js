@@ -8,7 +8,7 @@ import Link from "next/link";
 import ExternalLink from "../ExternalLink";
 import { IMAGE_SIZES } from "../../js/images";
 
-const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
+const Header = forwardRef(function Header({ windowWidth }, ref) {
   const componentRef = useRef();
   useImperativeHandle(ref && ref.focusRef ? ref.focusRef : null, () => ({
     focus: () => componentRef.current.focus(),
