@@ -6,6 +6,7 @@ import { STORAGE_URL } from "../../constants/urls";
 
 import Link from "next/link";
 import ExternalLink from "../ExternalLink";
+import { IMAGE_SIZES } from "../../js/images";
 
 const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
   const componentRef = useRef();
@@ -45,18 +46,22 @@ const Header = forwardRef(function Header({ windowWidth, nojs }, ref) {
     </>
   );
 
-  const renderImage = () => (
-    <Link href="/">
-      <a className="logo-image-link">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="logo"
-          src={`${STORAGE_URL}/monkey.png`}
-          alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
-        />
-      </a>
-    </Link>
-  );
+  const renderImage = () => {
+    const imageSize =
+      windowWidth === "xl" ? IMAGE_SIZES["500"] : IMAGE_SIZES["300"];
+    return (
+      <Link href="/">
+        <a className="logo-image-link">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="logo"
+            src={`${STORAGE_URL}/monkey_${imageSize.width}x${imageSize.height}.webp`}
+            alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
+          />
+        </a>
+      </Link>
+    );
+  };
 
   const renderMobileImageAndLinks = () => (
     <div className="mobile-image-and-links">
