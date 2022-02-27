@@ -15,7 +15,7 @@
     "algoliasearch": "^4.12.1",
     "clsx": "^1.1.1",
     "downshift": "^6.1.7",
-    "firebase": "^9.6.3",
+    "firebase": "^9.6.7",
     "@fortawesome/fontawesome-free": "^6.0.0-beta3",
     "moment": "^2.29.1",
     "next": "12.1.0",
