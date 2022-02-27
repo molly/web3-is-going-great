@@ -6,7 +6,7 @@
   left: 50%
   transform: translateX(-50%)
   z-index: 6
-  padding: 5px 20px 20px 20px
+  padding: 10px 20px
   max-width: 90%
   max-height: 90%
   margin: 0 auto
@@ -18,17 +18,19 @@
   pointer-events: auto
 
   img
-    display: block
     max-width: 100%
     max-height: 100%
+    object-fit: contain
 
   .image-wrapper
+    display: flex
     flex: 1
-    height: 100px
+    min-height: 100px
 
   .caption-wrapper
     flex: 1
     text-align: center
+    margin-top: 10px
 
   button
     align-self: flex-end
