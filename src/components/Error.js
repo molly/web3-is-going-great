@@ -24,6 +24,5 @@ Error.propTypes = {
 };
 
 Error.defaultProps = {
-  customMessage:
-    "Something went wrong. Molly would greatly appreciate it if you made sure she knows.",
+  customMessage: "Site maintenance, hopefully back soon!",
 };

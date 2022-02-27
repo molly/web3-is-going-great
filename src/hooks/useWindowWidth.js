@@ -2,16 +2,18 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useThrottledCallback } from "use-debounce";
 
-const SMALL_BREAKPOINT = 414;
-const MID_BREAKPOINT = 768;
-const LG_BREAKPOINT = 1024;
+import {
+  SM_BREAKPOINT,
+  MD_BREAKPOINT,
+  LG_BREAKPOINT,
+} from "../constants/breakpoints";
 
 export const WindowWidthPropType = PropTypes.oneOf(["sm", "md", "lg", "xl"]);
 
 const getWindowWidth = (px) => {
-  if (px < SMALL_BREAKPOINT) {
+  if (px < SM_BREAKPOINT) {
     return "sm";
-  } else if (px < MID_BREAKPOINT) {
+  } else if (px < MD_BREAKPOINT) {
     return "md";
   } else if (px < LG_BREAKPOINT) {
     return "lg";

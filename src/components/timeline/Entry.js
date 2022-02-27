@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import PropTypes from "prop-types";
 import { EntryPropType } from "../../js/entry";
+import { getEntryImageProps, getLightboxImageProps } from "../../js/images";
 import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 import clsx from "clsx";
 
@@ -196,16 +197,18 @@ export default function Entry({
     }
   };
 
-  const renderImageElement = (onClick = null) => {
+  const renderImageElement = ({ onClick, isLightbox } = {}) => {
     if (!entry.image) {
       return null;
     }
 
+    const imageProps = isLightbox
+      ? getLightboxImageProps(entry.image.src)
+      : getEntryImageProps(entry.image.src);
     return (
       <img
-        src={`${STORAGE_URL}/entryAssets/${entry.image.src}`}
+        {...imageProps}
         alt={entry.image.alt}
-        layout="fill"
         onClick={onClick}
         className={clsx([{ clickable: !!onClick }, entry.image.class])}
       />
@@ -240,7 +243,7 @@ export default function Entry({
     if (entry.image && (windowWidth !== "sm" || !isLogo)) {
       return (
         <div className="captioned-image image-right">
-          {renderImageElement(() => setShowLightbox(true))}
+          {renderImageElement({ onClick: () => setShowLightbox(true) })}
           {renderImageCaption()}
         </div>
       );
@@ -256,7 +259,9 @@ export default function Entry({
             <i className="fas fa-xmark" aria-hidden={true}></i>
             <span className="sr-only">Close lightbox</span>
           </button>
-          <div className="image-wrapper">{renderImageElement()}</div>
+          <div className="image-wrapper">
+            {renderImageElement({ isLightbox: true })}
+          </div>
           <div className="caption-wrapper">{renderImageCaption()}</div>
         </div>
       );
