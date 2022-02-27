@@ -58,7 +58,7 @@ export default function Attribution({ attribution }) {
                 return (
                   <li key={`${entry.text}-${ind}`}>
                     <ExternalLink href={entry.href}>
-                      <span>{entry.text}</span>
+                      <span dangerouslySetInnerHTML={{ _html: entry.text }} />
                     </ExternalLink>
                   </li>
                 );
