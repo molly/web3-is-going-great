@@ -30,13 +30,5 @@ export const migrate = functions.https.onRequest(async (req, res) => {
       imageNames.push(childData.image.src);
     }
   });
-
-  const bucket = await storage.bucket("primary-web3");
-  const [files] = await bucket.getFiles({ prefix: "entryImages/logos" });
-  files.forEach(async (file) => {
-    if (file.name.endsWith("_150.webp") || file.name.endsWith("_500.webp")) {
-      await file.delete();
-    }
-  });
-  res.json({ imageNames });
+  res.status(200).send();
 });
