@@ -74,7 +74,7 @@ const resizeImage = async ({
     try {
       // Clean up tmp files if possible
       if (targetImage) {
-        fs.unlinkSync(targetImagePath);
+        fs.unlinkSync(targetImage);
       }
     } catch (err) {
       functions.logger.warn(
