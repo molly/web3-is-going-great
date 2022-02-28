@@ -72,8 +72,12 @@ export const updateRssOnChange = functions.firestore
         },
       });
     } catch (err) {
-      console.log(err);
-      throw new Error("Something is wrong with XML validation");
+      // validator.w3.org has been going offline once in a while lately, which shouldn't
+      // also take down the RSS feed for this site
+      functions.logger.warn(
+        "Something went wrong with XML validation; proceeding to write feed.",
+        err
+      );
     }
 
     if (
@@ -88,6 +92,9 @@ export const updateRssOnChange = functions.firestore
         contentType: "application/atom+xml;charset=UTF-8",
       });
     } else {
+      functions.logger.error("Invalid HTML");
+
+      // Throw to be picked up by alerting in GCP
       throw new Error("Invalid XML");
     }
   });

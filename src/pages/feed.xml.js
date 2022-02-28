@@ -11,6 +11,7 @@ export const getServerSideProps = async ({ res }) => {
     res.write(bytes);
     res.end();
   } catch (e) {
+    console.log(e);
     res.status = 500;
     res.end("Something went wrong.");
   }
