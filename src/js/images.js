@@ -1,48 +1,29 @@
-import { SM_BREAKPOINT } from "../constants/breakpoints";
 import { STORAGE_URL } from "../constants/urls";
 
-export const IMAGE_SIZES = {
-  150: { width: 150, height: 150 },
-  300: { width: 300, height: 300 },
-  500: { width: 500, height: 625 },
+export const IMAGE_SIZES = [300, 500, 1000];
+
+export const getImageUrl = (image, size) => {
+  const prefix = `${STORAGE_URL}/entryImages/${image.isLogo ? "logos/" : ""}`;
+  return `${prefix}resized/${image.src}_${size}.webp`;
 };
 
-export const stripExtension = (src) => src.split(".")[0];
-
-const getClosestSize = (targetWidth) => {
-  for (let sizeOption of Object.values(IMAGE_SIZES)) {
-    if (sizeOption.width > targetWidth) {
-      return sizeOption;
-    }
+export const getEntryImageProps = (image) => {
+  const smImageUrl = getImageUrl(image, 300);
+  const mdImageUrl = getImageUrl(image, 500);
+  const lgImageUrl = getImageUrl(image, 500);
+  if (image.isLogo) {
+    return { src: smImageUrl };
   }
-  return IMAGE_SIZES["500"];
-};
-
-export const bucketImageLoader = ({ src, width }) => {
-  const closestSize = getClosestSize(width);
-  return `${STORAGE_URL}/${stripExtension(src)}_${closestSize.width}x${
-    closestSize.height
-  }.webp`;
-};
-
-export const getImageUrl = (src, size) => {
-  return `${STORAGE_URL}/entryImages/resized/${stripExtension(src)}_${
-    size.width
-  }x${size.height}.webp`;
-};
-
-export const getEntryImageProps = (src) => {
-  // This looks backwards, but entry images display larger by default on mobile
-  const midScreenImageUrl = getImageUrl(src, IMAGE_SIZES["150"]);
-  const mobileImageUrl = getImageUrl(src, IMAGE_SIZES["300"]);
-
   return {
-    src: mobileImageUrl,
-    srcSet: `${midScreenImageUrl} 150w, ${mobileImageUrl} 300w`,
-    sizes: `(max-width: ${SM_BREAKPOINT}px) 300px, 150px`,
+    src: smImageUrl,
+    srcSet: `${smImageUrl} 1x, ${mdImageUrl} 1.5x, ${lgImageUrl} 2x`,
   };
 };
 
-export const getLightboxImageProps = (src) => ({
-  src: getImageUrl(src, IMAGE_SIZES["500"]),
-});
+export const getLightboxImageProps = (image) => {
+  const md = getImageUrl(image, 500);
+  return {
+    src: md,
+    srcSet: `${md} 1x, ${getImageUrl(image, 1000)} 2x`,
+  };
+};

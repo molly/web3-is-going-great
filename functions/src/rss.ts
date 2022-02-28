@@ -8,8 +8,7 @@ import * as ejs from "ejs";
 import { Entry, RssEntry } from "./types";
 import axios from "axios";
 
-const STORAGE_URL_PREFIX =
-  "https://storage.googleapis.com/web3-334501.appspot.com";
+const STORAGE_URL_PREFIX = "https://storage.googleapis.com/primary-web3";
 
 export const updateRssOnChange = functions.firestore
   .document("/entries/{docId}")
@@ -59,7 +58,7 @@ export const updateRssOnChange = functions.firestore
     let resp;
     try {
       const stagingFile = await storage
-        .bucket("web3-334501.appspot.com")
+        .bucket("primary-web3")
         .file("static/stagedRss.xml");
       await stagingFile.save(xml);
       await stagingFile.setMetadata({
@@ -83,9 +82,7 @@ export const updateRssOnChange = functions.firestore
       resp.data.search(/<m:validity>\s*true\s*<\/m:validity>/gm) > -1
     ) {
       // Valid XML, carry on
-      const file = await storage
-        .bucket("web3-334501.appspot.com")
-        .file("static/rss.xml");
+      const file = await storage.bucket("primary-web3").file("static/rss.xml");
       await file.save(xml);
       await file.setMetadata({
         contentType: "application/atom+xml;charset=UTF-8",

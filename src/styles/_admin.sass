@@ -39,13 +39,17 @@
       &.stretch
         align-items: stretch
 
-    .half, .group
+    .half, .group, .third
       display: flex
       flex-direction: column
 
     .half
       width: 50%
 
+    .third
+      width: 33%
+
+    .half, .third
       &:not(:first-child)
         padding-left: 10px
 

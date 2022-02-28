@@ -202,27 +202,37 @@ export default function Entry({
       return null;
     }
 
+    const { alt, isLogo } = entry.image;
     const imageProps = isLightbox
-      ? getLightboxImageProps(entry.image.src)
-      : getEntryImageProps(entry.image.src);
+      ? getLightboxImageProps(entry.image)
+      : getEntryImageProps(entry.image);
     return (
       <img
         {...imageProps}
-        alt={entry.image.alt}
-        onClick={onClick}
-        className={clsx([{ clickable: !!onClick }, entry.image.class])}
+        alt={alt}
+        onClick={!isLogo && onClick ? onClick : null}
+        className={clsx([
+          {
+            clickable: !isLogo && !!onClick,
+          },
+          entry.image.class,
+        ])}
       />
     );
   };
 
   const renderImageCaption = () => {
-    if (entry.image && entry.image.caption) {
+    if (entry.image) {
       return (
         <>
-          <span
-            className="caption"
-            dangerouslySetInnerHTML={{ __html: entry.image.caption }}
-          />{" "}
+          {!entry.image.isLogo && entry.image.caption && (
+            <>
+              <span
+                className="caption"
+                dangerouslySetInnerHTML={{ __html: entry.image.caption }}
+              />{" "}
+            </>
+          )}
           <span className="attribution-link">
             <Link href="/attribution">
               <a>(attribution)</a>
@@ -235,14 +245,15 @@ export default function Entry({
   };
 
   const renderImage = () => {
-    const isLogo =
-      entry.image &&
-      entry.image.caption &&
-      entry.image.caption.toLowerCase().includes("logo");
-
-    if (entry.image && (windowWidth !== "sm" || !isLogo)) {
+    if (entry.image && (windowWidth !== "sm" || !entry.image.isLogo)) {
       return (
-        <div className="captioned-image image-right">
+        <div
+          className={clsx(
+            "captioned-image",
+            "image-right",
+            entry.image.isLogo && "is-logo"
+          )}
+        >
           {renderImageElement({ onClick: () => setShowLightbox(true) })}
           {renderImageCaption()}
         </div>
