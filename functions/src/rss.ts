@@ -10,6 +10,14 @@ import axios from "axios";
 
 const STORAGE_URL_PREFIX = "https://storage.googleapis.com/primary-web3";
 
+const writeFeed = async (xml: string): Promise<void> => {
+  const file = await storage.bucket("primary-web3").file("static/rss.xml");
+  await file.save(xml);
+  await file.setMetadata({
+    contentType: "application/atom+xml;charset=UTF-8",
+  });
+};
+
 export const updateRssOnChange = functions.firestore
   .document("/entries/{docId}")
   .onWrite(async () => {
@@ -78,23 +86,17 @@ export const updateRssOnChange = functions.firestore
         "Something went wrong with XML validation; proceeding to write feed.",
         err
       );
+      writeFeed(xml);
     }
 
-    if (
-      resp &&
-      resp.data &&
-      resp.data.search(/<m:validity>\s*true\s*<\/m:validity>/gm) > -1
-    ) {
-      // Valid XML, carry on
-      const file = await storage.bucket("primary-web3").file("static/rss.xml");
-      await file.save(xml);
-      await file.setMetadata({
-        contentType: "application/atom+xml;charset=UTF-8",
-      });
-    } else {
-      functions.logger.error("Invalid HTML");
+    if (resp)
+      if (resp?.data?.search(/<m:validity>\s*true\s*<\/m:validity>/gm) > -1) {
+        // Valid XML, carry on
+        writeFeed(xml);
+      } else {
+        functions.logger.error("Invalid HTML");
 
-      // Throw to be picked up by alerting in GCP
-      throw new Error("Invalid XML");
-    }
+        // Throw to be picked up by alerting in GCP
+        throw new Error("Invalid XML");
+      }
   });
