@@ -189,7 +189,7 @@ export default function Form() {
         </div>
       </div>
       <div className="row">
-        <div className="half">
+        <div className="third">
           <div className="inline-checkbox">
             <input
               id="needs-dark"
@@ -197,10 +197,10 @@ export default function Form() {
               checked={entry.image.class && entry.image.class == "on-dark"}
               onChange={toggleImageClass("on-dark")}
             />
-            <label htmlFor="needs-dark">Needs dark background</label>
+            <label htmlFor="needs-dark">Needs dark bg</label>
           </div>
         </div>
-        <div className="half">
+        <div className="third">
           <div className="inline-checkbox">
             <input
               id="needs-light"
@@ -208,7 +208,20 @@ export default function Form() {
               checked={entry.image.class && entry.image.class == "on-light"}
               onChange={toggleImageClass("on-light")}
             />
-            <label htmlFor="needs-light">Needs light background</label>
+            <label htmlFor="needs-light">Needs light bg</label>
+          </div>
+        </div>
+        <div className="third">
+          <div className="inline-checkbox">
+            <input
+              id="is-logo"
+              type="checkbox"
+              checked={entry.image.isLogo}
+              onChange={({ target: { checked } }) => {
+                setImage({ ...entry.image, isLogo: checked });
+              }}
+            />
+            <label htmlFor="is-logo">Logo?</label>
           </div>
         </div>
       </div>
@@ -232,6 +245,18 @@ export default function Form() {
             }
             value={imageAttribution.href}
           ></input>
+        </div>
+      </div>
+      <div className="row">
+        <div className="group">
+          <label htmlFor="caption">Source link: </label>
+          <input
+            id="source-link"
+            value={entry.image.link || ""}
+            onChange={({ target: { value } }) => {
+              setImage({ ...entry.image, link: value });
+            }}
+          />
         </div>
       </div>
       <hr />

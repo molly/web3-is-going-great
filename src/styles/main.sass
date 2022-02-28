@@ -297,15 +297,6 @@ div.content-wrapper
     -webkit-margin-before: 5px
     -webkit-margin-after: 10px
 
-  img
-    width: 100%
-    max-width: 150px
-    display: block
-
-  .landscape
-    img
-      max-width: 200px
-
 img
   &.clickable
     cursor: pointer
@@ -352,7 +343,6 @@ img
   background-color: transparentize($card-background, 0.3)
 
 .captioned-image
-  max-width: 150px
   clear: both
 
   .caption
@@ -365,8 +355,16 @@ img
   .attribution-link
     font-size: 70%
 
+  img
+    width: 100%
+    display: block
+
   &.landscape
     max-width: 200px
+
+  &.is-logo
+    width: clamp(100px, 25%, 150px)
+    text-align: center
 
 .sub-entry
   clear: both
@@ -587,8 +585,9 @@ img
     border-left-width: 1px
 
   .image-right
+    width: clamp(150px, 40%, 400px)
     float: right
-    padding: 10px 0 20px 20px
+    padding: 10px 0 5px 10px
 
 @media only screen and (max-width: #{$md-breakpoint}px)
   header.page-header
@@ -673,7 +672,9 @@ img
   .captioned-image
     margin: 20px auto
     text-align: center
-    max-width: unset
+
+    img
+      max-height: 400px
 
   .timeline
     width: auto
@@ -692,12 +693,6 @@ img
       .entry-wrapper
         margin-left: 10px
         margin-right: 10px
-
-      img
-        max-height: 300px
-        max-width: 100%
-        width: auto
-        margin: 0 auto
 
   .timeline:after
     display: none

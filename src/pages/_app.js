@@ -54,7 +54,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           property="og:image"
           key="ogimage"
-          content="https://storage.googleapis.com/web3-334501.appspot.com/monkey-og.png"
+          content="https://storage.googleapis.com/primary-web3/monkey-og.png"
         />
         <meta property="og:image:width" key="ogwidth" content="1200" />
         <meta property="og:image:height" key="ogheight" content="630" />
@@ -78,7 +78,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           name="twitter:image"
           key="twitterimage"
-          content="https://storage.googleapis.com/web3-334501.appspot.com/monkey-twitter.png"
+          content="https://storage.googleapis.com/primary-web3/monkey-twitter.png"
         />
         <meta
           name="twitter:image:alt"

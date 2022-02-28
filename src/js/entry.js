@@ -12,7 +12,7 @@ export const EMPTY_ENTRY = {
   },
   links: [{ linkText: "", href: "", extraText: "" }],
   title: "",
-  image: { src: "", alt: "", caption: "" },
+  image: { src: "", alt: "", caption: "", isLogo: false },
   scamTotal: 0,
 };
 
@@ -64,13 +64,8 @@ export const trimEmptyFields = (entry, imageAttribution, entryAttribution) => {
     }
     if (!entry.image.src) {
       delete newEntry.image;
-    } else {
-      if (!entry.image.link) {
-        delete newEntry.image.link;
-      }
-      if (!entry.image.caption) {
-        delete newEntry.image.caption;
-      }
+    } else if (!entry.image.caption) {
+      delete newEntry.image.caption;
     }
     if (entry.scamTotal === 0) {
       delete newEntry.scamTotal;

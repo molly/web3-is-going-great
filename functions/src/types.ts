@@ -9,7 +9,9 @@ type Image = {
   src: string;
   alt: string;
   caption?: string;
+  link?: string;
   class?: string;
+  isLogo: boolean;
 };
 
 type Link = {
@@ -43,3 +45,8 @@ export interface RssEntry extends Entry {
 export interface AlgoliaEntry extends Entry {
   objectID: string;
 }
+
+export type ResizeResult = {
+  size: number;
+  success: boolean;
+};

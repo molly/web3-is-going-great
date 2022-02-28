@@ -1,6 +1,7 @@
 import { collection, getDoc, doc, setDoc } from "firebase/firestore/lite";
 import { db } from "./db";
 import { compareCaseInsensitive } from "./utils";
+import { stripHtml } from "../js/utilities";
 
 export const uploadEntry = async (entry) => {
   const entriesCollection = collection(db, "entries");
@@ -32,8 +33,8 @@ export const addAttribution = (field) => async (entry) => {
   const indexToInsertBefore = entries.findIndex(
     (e) =>
       compareCaseInsensitive(
-        entry.sortKey || entry.text,
-        e.sortKey || e.text
+        entry.sortKey || stripHtml(entry.text),
+        e.sortKey || stripHtml(e.text)
       ) === -1
   );
 

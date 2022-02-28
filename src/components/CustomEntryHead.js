@@ -3,14 +3,12 @@ import Head from "next/head";
 import PropTypes from "prop-types";
 import { EntryPropType } from "../js/entry";
 
-import { STORAGE_URL } from "../constants/urls";
-
 import {
   stripHtml,
   getImageDimensions,
   getCollectionName,
 } from "../js/utilities";
-import { stripExtension } from "../js/images";
+import { getImageUrl } from "../js/images";
 
 export default function CustomEntryHead({ entry, collection }) {
   const [isWaitingForImageDimensions, setIsWaitingForImageDimensions] =
@@ -21,11 +19,7 @@ export default function CustomEntryHead({ entry, collection }) {
   });
 
   const imageSrc =
-    entry && entry.image && entry.image.src
-      ? `${STORAGE_URL}/entryImages/resized/${stripExtension(
-          entry.image.src
-        )}_500x625.webp`
-      : null;
+    entry && entry.image && entry.image.src ? getImageUrl(entry.image) : null;
 
   useEffect(() => {
     if (entry && entry.image && entry.image.src) {

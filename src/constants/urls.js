@@ -1,2 +1,1 @@
-export const STORAGE_URL =
-  "https://storage.googleapis.com/web3-334501.appspot.com";
+export const STORAGE_URL = "https://storage.googleapis.com/primary-web3";
