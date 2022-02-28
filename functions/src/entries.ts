@@ -1,4 +1,4 @@
-import { FieldPath, firestore, storage } from "./config/firebase";
+import { FieldPath, firestore } from "./config/firebase";
 import * as functions from "firebase-functions";
 import { Entry } from "./types";
 
