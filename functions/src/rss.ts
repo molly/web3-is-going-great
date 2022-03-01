@@ -86,13 +86,13 @@ export const updateRssOnChange = functions.firestore
         "Something went wrong with XML validation; proceeding to write feed.",
         err
       );
-      writeFeed(xml);
+      await writeFeed(xml);
     }
 
     if (resp)
       if (resp?.data?.search(/<m:validity>\s*true\s*<\/m:validity>/gm) > -1) {
         // Valid XML, carry on
-        writeFeed(xml);
+        await writeFeed(xml);
       } else {
         functions.logger.error("Invalid HTML");
 

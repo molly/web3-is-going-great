@@ -19,6 +19,7 @@ const COLLECTIONS = {
   metamask: "MetaMask",
   opensea: "OpenSea",
   qubit: "Qubit Finance",
+  "ru-ua": "the Russo-Ukrainian War",
   tether: "Tether",
   twitter: "Twitter",
   ubisoft: "Ubisoft",
