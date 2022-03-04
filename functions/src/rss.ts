@@ -12,10 +12,10 @@ const STORAGE_URL_PREFIX = "https://storage.googleapis.com/primary-web3";
 
 const writeFeed = async (xml: string): Promise<void> => {
   const file = await storage.bucket("primary-web3").file("static/rss.xml");
-  await file.save(xml);
   await file.setMetadata({
     contentType: "application/atom+xml;charset=UTF-8",
   });
+  return file.save(xml);
 };
 
 export const updateRssOnChange = functions.firestore
@@ -78,6 +78,7 @@ export const updateRssOnChange = functions.firestore
           output: "soap12",
           url: `${STORAGE_URL_PREFIX}/static/stagedRss.xml?refresh=${Date.now()}`,
         },
+        timeout: 40000,
       });
     } catch (err) {
       // validator.w3.org has been going offline once in a while lately, which shouldn't
@@ -87,16 +88,20 @@ export const updateRssOnChange = functions.firestore
         err
       );
       await writeFeed(xml);
+      return;
     }
 
-    if (resp)
-      if (resp?.data?.search(/<m:validity>\s*true\s*<\/m:validity>/gm) > -1) {
-        // Valid XML, carry on
-        await writeFeed(xml);
-      } else {
-        functions.logger.error("Invalid HTML");
-
-        // Throw to be picked up by alerting in GCP
-        throw new Error("Invalid XML");
-      }
+    if (
+      resp &&
+      resp.data &&
+      resp.data.search(/<m:validity>\s*true\s*<\/m:validity>/gm) > -1
+    ) {
+      // Valid XML, carry on
+      functions.logger.debug("Writing feed...");
+      await writeFeed(xml);
+    } else {
+      functions.logger.error("Invalid XML");
+      // Throw to be picked up by alerting in GCP
+      throw new Error("Invalid XML");
+    }
   });
