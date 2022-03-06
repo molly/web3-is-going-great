@@ -31,7 +31,7 @@
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <% if (entry.image){%><img
-          src="<%= storageUrlPrefix %>/entryImages/resized/<%= entry.image.isLogo ? 'logos/' : '' %><%= entry.image.src.split('.')[0] %>_<%= entry.image.isLogo ? '300' : '500' %>.webp"
+          src="<%= storageUrlPrefix %>/entryImages/<%= entry.image.isLogo ? 'logos/' : '' %>resized/<%= entry.image.src.split('.')[0] %>_<%= entry.image.isLogo ? '300' : '500' %>.webp"
           alt="<%= entry.image.alt %>"
           width="300px"
         /><% } %>
