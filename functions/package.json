@@ -31,7 +31,7 @@
     "@types/ejs": "^3.1.0",
     "@types/mkdirp": "^1.0.2",
     "@types/sharp": "^0.29.5",
-    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.12.1",
     "eslint": "^8.9.0",
     "eslint-config-google": "^0.14.0",
