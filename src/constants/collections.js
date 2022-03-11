@@ -1,4 +1,5 @@
 const COLLECTIONS = {
+  animoca: "Animoca Brands",
   "associated-press": "the Associated Press",
   "baller-ape-club": "the people behind Baller Ape Club",
   bayc: "Bored Ape Yacht Club",
