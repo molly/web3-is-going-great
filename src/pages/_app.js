@@ -56,6 +56,11 @@ function CustomApp({ Component, pageProps }) {
           key="ogimage"
           content="https://storage.googleapis.com/primary-web3/monkey-og.png"
         />
+        <meta
+          property="og:image:alt"
+          key="ogimagealt"
+          content="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames. Text next to it says 'Web3 is going just great.'"
+        />
         <meta property="og:image:width" key="ogwidth" content="1200" />
         <meta property="og:image:height" key="ogheight" content="630" />
         <meta
@@ -64,7 +69,9 @@ function CustomApp({ Component, pageProps }) {
           content="summary_large_image"
         />
         <meta name="twitter:creator" content="@molly0xfff" />
+        <meta name="twitter:creator:id" content="545445165" />
         <meta name="twitter:site" content="@web3isgreat" />
+        <meta name="twitter:site:id" content="1477342011875381251" />
         <meta
           name="twitter:title"
           key="twittertitle"

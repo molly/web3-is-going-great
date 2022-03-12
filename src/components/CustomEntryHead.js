@@ -14,8 +14,7 @@ export default function CustomEntryHead({ entry, collectionDescription }) {
     width: 1200,
   });
 
-  const imageSrc =
-    entry && entry.image && entry.image.src ? getImageUrl(entry.image) : null;
+  const imageSrc = entry?.image?.src ? getImageUrl(entry.image) : null;
 
   useEffect(() => {
     if (entry && entry.image && entry.image.src) {
@@ -41,7 +40,7 @@ export default function CustomEntryHead({ entry, collectionDescription }) {
 
   return (
     <Head>
-      <title key="title">{`${title} – Web3 Is Going Just Great`}</title>
+      <title key="title">{title}</title>
       <meta name="description" content={description} key="description" />
       <meta
         property="og:url"
@@ -63,6 +62,11 @@ export default function CustomEntryHead({ entry, collectionDescription }) {
         <>
           <meta property="og:image" key="ogimage" content={imageSrc} />
           <meta name="twitter:image" key="twitterimage" content={imageSrc} />
+          <meta
+            property="og:image:alt"
+            key="ogimagealt"
+            content={entry.image.alt || "Image"}
+          />
           <meta
             name="twitter:image:alt"
             key="twitterimagealt"
