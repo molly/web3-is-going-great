@@ -26,6 +26,7 @@ export default function CustomEntryHead({ title, description, urlPath }) {
         key="twitterdescription"
         content={description}
       />
+      <meta name="og:site_name" key="ogsitename" content="Web3 Is Going Just Great" />
     </Head>
   );
 }
