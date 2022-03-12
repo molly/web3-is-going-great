@@ -72,7 +72,7 @@ export default function Contribute({ money }) {
         <a href="https://girlswhocode.com/" target="_blank" rel="noopener">
           Girls Who Code
         </a>
-        ,{" "}
+        *,{" "}
         <a
           href="https://www.blackgirlscode.com/"
           target="_blank"
@@ -80,7 +80,7 @@ export default function Contribute({ money }) {
         >
           Black Girls Code
         </a>
-        ,{" "}
+        *,{" "}
         <a href="https://www.underdogdevs.org/" target="_blank" rel="noopener">
           Underdog Devs
         </a>
@@ -188,8 +188,16 @@ export default function Contribute({ money }) {
           />
           {renderDonationLinkSection()}
           <p className="help-text">
-            Cloud services costs begin in February because those services were
-            covered by intro credits until then.
+            * Both Girls Who Code and Black Girls Code have partnered with
+            crypto projects in the past. While I don't support that decision, I
+            do think they are doing enormously good work towards helping the
+            demographics they focus on. To my knowledge, neither UnderdogDevs
+            nor CloudStack have crypto entanglements, if you are more
+            comfortable donating to them.
+          </p>
+          <p className="help-text">
+            ** Cloud services costs begin in February because those services
+            were covered by intro credits until then.
           </p>
         </article>
       </div>
