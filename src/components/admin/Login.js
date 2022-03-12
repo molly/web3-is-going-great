@@ -21,7 +21,7 @@ export default function Admin() {
       <span>
         This page is for Molly's use only. If you've found yourself here and
         you're not Molly, you can go{" "}
-        <Link href="/suggest">
+        <Link href="/contribute">
           <a>here</a>
         </Link>{" "}
         to learn how to suggest a new entry.
