@@ -351,31 +351,27 @@ export default function Entry({
   };
 
   const renderCollection = () => {
-    if (allCollections) {
-      return (
-        <span>
-          Other entries related to{" "}
-          {humanizeList(
-            collectionsToRender.map((coll) => (
-              <button key={coll} onClick={() => setCollection(coll)}>
-                {getCollectionName(coll, allCollections)}
-              </button>
-            )),
-            { exclusive: true }
-          )}
-        </span>
-      );
-    }
-    return null;
-  };
-
-  const renderCollectionAndLinks = () => {
     if (
       isBrowserRendering &&
       collectionsToRender &&
-      collectionsToRender.length > 0
+      collectionsToRender.length > 0 &&
+      allCollections
     ) {
-      return <div className="collection-row">{renderCollection()}</div>;
+      return (
+        <div className="collection-row">
+          <span>
+            Other entries related to{" "}
+            {humanizeList(
+              collectionsToRender.map((coll) => (
+                <button key={coll} onClick={() => setCollection(coll)}>
+                  {getCollectionName(coll, allCollections)}
+                </button>
+              )),
+              { exclusive: true }
+            )}
+          </span>
+        </div>
+      );
     }
     return null;
   };
@@ -383,7 +379,7 @@ export default function Entry({
   const renderFooterContent = () => {
     return (
       <div className="entry-footer">
-        {renderCollectionAndLinks()}
+        {renderCollection()}
         {renderTagsWithSentinel()}
       </div>
     );

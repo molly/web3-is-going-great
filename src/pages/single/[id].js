@@ -12,6 +12,7 @@ import Footer from "../../components/Footer";
 import Error from "../../components/Error";
 import { EntryPropType } from "../../js/entry";
 import CustomEntryHead from "../../components/CustomEntryHead";
+import { getMetadata } from "../../db/metadata";
 
 export async function getServerSideProps(context) {
   const props = { entry: null };
@@ -25,11 +26,17 @@ export async function getServerSideProps(context) {
     }
   }
   props.glossary = await getGlossaryEntries();
-
+  const metadata = await getMetadata();
+  props.allCollections = metadata.collections;
   return { props };
 }
 
-export default function SingleEntry({ entry, glossary, error = null }) {
+export default function SingleEntry({
+  entry,
+  allCollections,
+  glossary,
+  error = null,
+}) {
   useGA();
 
   const windowWidth = useWindowWidth();
@@ -42,6 +49,7 @@ export default function SingleEntry({ entry, glossary, error = null }) {
           key={entry.id}
           entry={entry}
           windowWidth={windowWidth}
+          allCollections={allCollections}
           glossary={glossary}
         />
       </article>
@@ -75,5 +83,6 @@ export default function SingleEntry({ entry, glossary, error = null }) {
 SingleEntry.propTypes = {
   entry: EntryPropType,
   error: PropTypes.oneOf([404, 500]),
+  allCollections: PropTypes.object.isRequired,
   glossary: PropTypes.object.isRequired,
 };
