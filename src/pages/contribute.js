@@ -32,7 +32,6 @@ export default function Contribute({ money }) {
   const nextMonth = useMemo(() => {
     let lastMonthOfExpenses = moment();
     for (let i = money.expenses.length - 1; i >= 0; i--) {
-      console.log(money.expenses[i]);
       if (money.expenses[i].label === "Cloud services") {
         lastMonthOfExpenses = money.expenses[i].date;
         break;
@@ -190,7 +189,7 @@ export default function Contribute({ money }) {
             donations={money.donations}
             totalExpenses={totalExpenses}
           />
-          <p>{renderDonationLinkSection()}</p>
+          {renderDonationLinkSection()}
           <p className="help-text">
             Cloud services costs begin in February because those services were
             covered by intro credits until then.
