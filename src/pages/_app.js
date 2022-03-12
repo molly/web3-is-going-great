@@ -43,7 +43,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           property="og:title"
           key="ogtitle"
-          content="Web3 is going just great"
+          content="Web3 Is Going Just Great"
         />
         <meta property="og:type" key="ogtype" content="website" />
         <meta

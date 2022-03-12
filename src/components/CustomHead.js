@@ -14,6 +14,11 @@ export default function CustomEntryHead({ title, description, urlPath }) {
         />
       )}
       <meta property="og:title" key="ogtitle" content={title} />
+      <meta
+        property="og:site_name"
+        key="ogsitename"
+        content="Web3 Is Going Just Great"
+      />
       <meta property="og:type" key="ogtype" content="article" />
       <meta
         property="og:description"
@@ -26,7 +31,6 @@ export default function CustomEntryHead({ title, description, urlPath }) {
         key="twitterdescription"
         content={description}
       />
-      <meta name="og:site_name" key="ogsitename" content="Web3 Is Going Just Great" />
     </Head>
   );
 }
