@@ -3,14 +3,10 @@ import Head from "next/head";
 import PropTypes from "prop-types";
 import { EntryPropType } from "../js/entry";
 
-import {
-  stripHtml,
-  getImageDimensions,
-  getCollectionName,
-} from "../js/utilities";
+import { stripHtml, getImageDimensions } from "../js/utilities";
 import { getImageUrl } from "../js/images";
 
-export default function CustomEntryHead({ entry, collection }) {
+export default function CustomEntryHead({ entry, collectionDescription }) {
   const [isWaitingForImageDimensions, setIsWaitingForImageDimensions] =
     useState(true);
   const [imageDimensions, setImageDimensions] = useState({
@@ -40,9 +36,6 @@ export default function CustomEntryHead({ entry, collection }) {
     return null;
   }
 
-  const collectionDescription = collection
-    ? `Entries related to ${getCollectionName(collection)}`
-    : null;
   const title = collectionDescription || stripHtml(entry.title);
   const description = collectionDescription || stripHtml(entry.body);
 
@@ -103,5 +96,5 @@ export default function CustomEntryHead({ entry, collection }) {
 
 CustomEntryHead.propTypes = {
   entry: EntryPropType,
-  collection: PropTypes.string,
+  collectionDescription: PropTypes.string,
 };

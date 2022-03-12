@@ -63,6 +63,7 @@ export async function getServerSideProps(context) {
       firstEntries,
       glossary,
       griftTotal: metadata.griftTotal,
+      collections: metadata.collections,
       ...(context.query.collection && {
         initialCollection: context.query.collection,
       }),
@@ -76,6 +77,7 @@ export default function IndexPage({
   initialFilters,
   glossary,
   griftTotal,
+  collections,
   initialCollection,
 }) {
   useGA();
@@ -185,6 +187,7 @@ export default function IndexPage({
     <Timeline
       queryResult={queryResult}
       collection={collection}
+      allCollections={collections}
       filters={filters}
       glossary={glossary}
       griftTotal={griftTotal}
@@ -208,4 +211,5 @@ IndexPage.propTypes = {
   glossary: PropTypes.object.isRequired,
   startAtId: PropTypes.string,
   griftTotal: PropTypes.number.isRequired,
+  collections: PropTypes.object.isRequired,
 };

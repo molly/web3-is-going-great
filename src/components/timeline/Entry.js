@@ -33,6 +33,7 @@ export default function Entry({
   currentRunningScamTotal,
   setCurrentRunningScamTotal,
   collection,
+  allCollections,
   setCollection,
   shouldScrollToElement,
 }) {
@@ -350,19 +351,22 @@ export default function Entry({
   };
 
   const renderCollection = () => {
-    return (
-      <span>
-        Other entries related to{" "}
-        {humanizeList(
-          collectionsToRender.map((coll) => (
-            <button key={coll} onClick={() => setCollection(coll)}>
-              {getCollectionName(coll)}
-            </button>
-          )),
-          { exclusive: true }
-        )}
-      </span>
-    );
+    if (allCollections) {
+      return (
+        <span>
+          Other entries related to{" "}
+          {humanizeList(
+            collectionsToRender.map((coll) => (
+              <button key={coll} onClick={() => setCollection(coll)}>
+                {getCollectionName(coll, allCollections)}
+              </button>
+            )),
+            { exclusive: true }
+          )}
+        </span>
+      );
+    }
+    return null;
   };
 
   const renderCollectionAndLinks = () => {
@@ -415,12 +419,14 @@ Entry.propTypes = {
   className: PropTypes.string,
   entry: EntryPropType,
   windowWidth: WindowWidthPropType,
-  glossary: PropTypes.object, // Not defined in web1
   runningScamTotal: PropTypes.number,
   currentRunningScamTotal: PropTypes.number,
   setCurrentRunningScamTotal: PropTypes.func,
   shouldScrollToElement: PropTypes.bool,
   collection: PropTypes.string,
+
+  glossary: PropTypes.object, // Not defined in web1
+  allCollections: PropTypes.object.isRequired, // Not defined in web1
   setCollection: PropTypes.func, // Not defined in web1
 };
 

@@ -1,5 +1,4 @@
 import moment from "moment";
-import COLLECTIONS from "../constants/collections";
 
 export const sentenceCase = function (str) {
   if (typeof str !== "string" || !str.length) {
@@ -95,7 +94,7 @@ export const removeQueryParamsFromUrl = () => {
 
 export const copy = (obj) => JSON.parse(JSON.stringify(obj));
 
-export const getCollectionName = (coll) =>
-  coll in COLLECTIONS
-    ? COLLECTIONS[coll]
+export const getCollectionName = (coll, allCollections) =>
+  coll in allCollections
+    ? allCollections[coll]
     : sentenceCase(coll.replace("-", " "));

@@ -28,6 +28,7 @@ export default function Timeline({
   filters,
   glossary,
   griftTotal,
+  allCollections,
   selectedEntryFromSearch,
   startAtId,
   setCollection,
@@ -78,12 +79,18 @@ export default function Timeline({
     [startAtId, hasPreviousEntries, selectedEntryFromSearch]
   );
 
+  const collectionDescription = useMemo(() => {
+    collection
+      ? `Entries related to ${getCollectionName(collection, allCollections)}`
+      : null;
+  }, [collection, allCollections]);
+
   const renderHead = () => {
     if (startAtId || collection) {
       return (
         <CustomEntryHead
           entry={data.pages[0].entries[0]}
-          collection={collection}
+          collectionDescription={collectionDescription}
         />
       );
     }
@@ -174,6 +181,7 @@ export default function Timeline({
                       shouldScrollToElement={entry.id === startAtId}
                       glossary={glossary}
                       collection={collection}
+                      allCollections={allCollections}
                       setCollection={setCollection}
                     />
                   );
@@ -222,7 +230,7 @@ export default function Timeline({
             setCollection(null);
             removeQueryParamsFromUrl();
           }}
-          titleText={`Entries related to ${getCollectionName(collection)}`}
+          titleText={collectionDescription}
         />
       )}
       {isBrowserRendering && shouldRenderFilterBarAndGriftCounter && (
@@ -265,6 +273,7 @@ Timeline.propTypes = {
   collection: PropTypes.string,
   glossary: PropTypes.object.isRequired,
   griftTotal: PropTypes.number.isRequired,
+  allCollections: PropTypes.object.isRequired,
   selectedEntryFromSearch: PropTypes.string,
   startAtId: PropTypes.string,
   setCollection: PropTypes.func.isRequired,
