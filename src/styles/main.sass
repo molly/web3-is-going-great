@@ -375,7 +375,7 @@ img
 
 .generic-page
   width: 90%
-  max-width: 1600px
+  max-width: 1000px
   margin: 0 auto
   padding-bottom: 20px
   line-height: 130%
@@ -429,6 +429,10 @@ img
 .space-between
   display: flex
   justify-content: space-between
+
+.centered
+  margin-left: auto
+  margin-right: auto
 
 .help-text
   font-size: 90%
@@ -521,6 +525,60 @@ img
   &.highlighted
     background-color: $highlight-background
     padding: 5px
+
+// Contribute
+table.expenses
+  border: 1px solid $timeline-line-color
+  border-collapse: collapse
+
+  th, td
+    border: 1px solid $timeline-line-color
+    padding: 5px
+
+  td.number
+    text-align: right
+
+  .estimate
+    color: $timestamp-color
+
+.donations-bar-wrapper
+  margin-top: 20px
+  margin-bottom: 20px
+  overflow: hidden
+  font-size: 70%
+  white-space: nowrap
+  text-align: right
+
+  .donations-bar, .text-bar
+    width: 100%
+    max-width: 800px
+    margin-left: auto
+    margin-right: auto
+
+    *
+      float: left
+
+  .donations-bar
+
+    *
+      height: 30px
+      line-height: 30px
+      padding-right: 5px
+
+    .paid
+      background-color: #009369
+
+    .extra-donations
+      background-color: #09BC8A
+
+    .remainder
+      background-color: $timeline-line-color
+
+  .text-bar
+    *
+      height: 20px
+      padding-right: 5px
+      border-right: 1px solid $timeline-line-color
 
 /* ICON COLORS */
 .timeline-icon
@@ -835,6 +893,15 @@ img
   .timeline-description:after
     background-color: $dark-card-background
     border-color: $dark-timeline-line-color
+
+  table.expenses
+    border-color: $dark-timeline-line-color
+
+    th, td
+      border-color: $timeline-line-color
+
+  .donations-bar
+    color: $main-text-color
 
 .use-dark
   background-color: $dark-main-background

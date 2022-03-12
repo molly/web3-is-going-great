@@ -10,6 +10,7 @@ module.exports = {
         destination: "/feed.xml",
         permanent: true,
       },
+      { source: "/suggest", destination: "/contribute", permanent: true },
     ];
   },
 };

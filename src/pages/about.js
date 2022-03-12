@@ -82,7 +82,12 @@ export default function WhatIsWeb3() {
             </a>
             . The TL;DR is that I hold no cryptocurrencies or NFTs, make no
             money off this website, and am also not trying to make money off of
-            crypto markets doing poorly.
+            crypto markets doing poorly. I do accept{" "}
+            <Link href="/contribute">
+              <a>donations</a>
+            </Link>{" "}
+            for the website, but only up to the amount it costs me to keep the
+            site online—I don't make money from this.
           </p>
           <p>
             The site does use Google Analytics, mostly for my own curiosity. All
