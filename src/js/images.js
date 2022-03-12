@@ -2,9 +2,13 @@ import { STORAGE_URL } from "../constants/urls";
 
 export const IMAGE_SIZES = [300, 500, 1000];
 
-export const getImageUrl = (image, size) => {
-  const prefix = `${STORAGE_URL}/entryImages/${image.isLogo ? "logos/" : ""}`;
-  return `${prefix}resized/${image.src}_${size}.webp`;
+export const getImageUrl = (image, size = null) => {
+  const { isLogo, src } = image;
+  if (!size) {
+    size = isLogo ? 300 : 500;
+  }
+  const prefix = `${STORAGE_URL}/entryImages/${isLogo ? "logos/" : ""}`;
+  return `${prefix}resized/${src}_${size}.webp`;
 };
 
 export const getEntryImageProps = (image) => {

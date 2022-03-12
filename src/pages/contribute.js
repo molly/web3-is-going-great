@@ -126,26 +126,23 @@ export default function Contribute({ money }) {
             <ExternalLink href="https://twitter.com/web3isgreat">
               @web3isgreat
             </ExternalLink>{" "}
-            account, though I do my best!) You can also send tips or suggestions
-            to me{" "}
-            <ExternalLink href="https://www.mollywhite.net/contact">
-              via my various other contact methods
-            </ExternalLink>
-            . Make sure to send me a link to reporting about any event you're
-            hoping to see on the timeline!
+            account, though I do my best!) Make sure to send me a link to
+            reporting about any event you're hoping to see on the timeline!
           </p>
           <h2>Donate</h2>
           <p>
-            If you were hoping to donate to help keep this site online, please
-            consider donating to causes that need it more than me, like{" "}
-            {renderOtherDonationLinks()}.
+            If you were hoping to donate, please consider donating to causes
+            that need it more than me, like {renderOtherDonationLinks()}.
           </p>
           <p>
             While I accept donations to cover what I pay to keep the site
-            online, I don't want to make money from the site. For that reason
-            I've included how much this site has actually cost me to run below,
-            and if the amount I've received in donations surpasses the amount
-            I've paid to date (plus the projected costs for the following
+            online, I created the project with the expectation that I would pay
+            for it out-of-pocket, so this isn't a scenario where the site will
+            come offline if hosting costs aren't covered by donations. I don't
+            want to make money from the site—for that reason I've included
+            details on exactly how much this site has actually cost me to run
+            below, and if the amount I've received in donations surpasses the
+            amount I've paid to date (plus the projected costs for the following
             month), the donation links will be removed.
           </p>
           <table className="expenses centered">
