@@ -69,10 +69,18 @@ export default function Contribute({ money }) {
   const renderOtherDonationLinks = () => {
     return (
       <>
+        <a href="https://www.colorstack.org/" target="_blank" rel="noopener">
+          ColorStack
+        </a>
+        ,{" "}
+        <a href="https://www.underdogdevs.org/" target="_blank" rel="noopener">
+          Underdog Devs
+        </a>
+        ,{" "}
         <a href="https://girlswhocode.com/" target="_blank" rel="noopener">
           Girls Who Code
         </a>
-        *,{" "}
+        *, or{" "}
         <a
           href="https://www.blackgirlscode.com/"
           target="_blank"
@@ -80,14 +88,7 @@ export default function Contribute({ money }) {
         >
           Black Girls Code
         </a>
-        *,{" "}
-        <a href="https://www.underdogdevs.org/" target="_blank" rel="noopener">
-          Underdog Devs
-        </a>
-        , or{" "}
-        <a href="https://www.colorstack.org/" target="_blank" rel="noopener">
-          ColorStack
-        </a>
+        *
       </>
     );
   };
