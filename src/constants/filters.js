@@ -32,6 +32,7 @@ const FILTERS = {
     bsc: "BSC",
     cosmos: "Cosmos",
     ethereum: "Ethereum",
+    fantom: "Fantom",
     flow: "Flow",
     litecoin: "Litecoin",
     monero: "Monero",
