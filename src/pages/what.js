@@ -157,6 +157,15 @@ export default function WhatIsWeb3() {
           <h3>Other resources</h3>
           <ul>
             <li>
+              <ExternalLink href="https://web3.lifeitself.us/guide">
+                Making Sense of Crypto and Web3 Guide
+              </ExternalLink>{" "}
+              and its{" "}
+              <ExternalLink href="https://www.zotero.org/groups/4600269/web3/library">
+                enormous reading list
+              </ExternalLink>
+            </li>
+            <li>
               <ExternalLink href="https://davidgerard.co.uk/blockchain/">
                 "Attack of the 50 Foot Blockchain"
               </ExternalLink>
@@ -166,6 +175,12 @@ export default function WhatIsWeb3() {
               <ExternalLink href="https://rekt.news/">Rekt.news</ExternalLink>
             </li>
             <li>
+              <span>A list of </span>
+              <ExternalLink href="https://github.com/rufuspollock/awesome-crypto-critique">
+                awesome crypto critique
+              </ExternalLink>
+            </li>
+            <li>
               <span>A list of some really thoughtful </span>
               <ExternalLink href="https://twitter.com/i/lists/1473337241594388495">
                 Web3 and crypto skeptics
@@ -173,9 +188,9 @@ export default function WhatIsWeb3() {
               <span> on Twitter</span>
             </li>
             <li>
-              <span>A list of </span>
-              <ExternalLink href="https://github.com/rufuspollock/awesome-crypto-critique">
-                awesome crypto critique
+              My{" "}
+              <ExternalLink href="https://www.mollywhite.net/reading/blockchain">
+                blockchain reading list
               </ExternalLink>
             </li>
           </ul>
