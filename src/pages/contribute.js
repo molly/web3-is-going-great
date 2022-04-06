@@ -45,7 +45,7 @@ export default function Contribute({ money }) {
   }, [money]);
 
   const renderDonationLinkSection = () => {
-    if (money.donations > totalExpenses) {
+    if (money.donations >= totalExpenses) {
       return (
         <p>
           Donations are closed for now. Consider making a donation to{" "}
