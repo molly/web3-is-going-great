@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.4",
-    "algoliasearch": "^4.12.2",
+    "algoliasearch": "^4.13.0",
     "clsx": "^1.1.1",
     "downshift": "^6.1.7",
     "firebase": "^9.6.8",
