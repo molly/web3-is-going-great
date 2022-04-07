@@ -32,7 +32,7 @@
     "@types/mkdirp": "^1.0.2",
     "@types/sharp": "^0.30.0",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
-    "@typescript-eslint/parser": "^5.14.0",
+    "@typescript-eslint/parser": "^5.18.0",
     "eslint": "^8.12.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.25.4",
