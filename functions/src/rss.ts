@@ -12,10 +12,10 @@ const STORAGE_URL_PREFIX = "https://storage.googleapis.com/primary-web3";
 
 const writeFeed = async (xml: string): Promise<void> => {
   const file = await storage.bucket("primary-web3").file("static/rss.xml");
+  await file.save(xml);
   await file.setMetadata({
     contentType: "application/atom+xml;charset=UTF-8",
   });
-  return file.save(xml);
 };
 
 export const updateRssOnChange = functions.firestore
