@@ -8,10 +8,10 @@ import * as ejs from "ejs";
 import { Entry, RssEntry } from "./types";
 import axios from "axios";
 
-const STORAGE_URL_PREFIX = "https://storage.googleapis.com/primary-web3";
+const STATIC_STORAGE_URL_PREFIX = "https://storage.googleapis.com/static-web3";
 
 const writeFeed = async (xml: string): Promise<void> => {
-  const file = await storage.bucket("primary-web3").file("static/rss.xml");
+  const file = await storage.bucket("static-web3").file("rss.xml");
   await file.save(xml);
   await file.setMetadata({
     contentType: "application/atom+xml;charset=UTF-8",
@@ -32,7 +32,7 @@ export const updateRssOnChange = functions.firestore
       storageUrlPrefix: string;
       entries: RssEntry[];
     } = {
-      storageUrlPrefix: STORAGE_URL_PREFIX,
+      storageUrlPrefix: STATIC_STORAGE_URL_PREFIX,
       entries: [],
     };
 
@@ -66,8 +66,8 @@ export const updateRssOnChange = functions.firestore
     let resp;
     try {
       const stagingFile = await storage
-        .bucket("primary-web3")
-        .file("static/stagedRss.xml");
+        .bucket("static-web3")
+        .file("stagedRss.xml");
       await stagingFile.save(xml);
       await stagingFile.setMetadata({
         contentType: "application/atom+xml;charset=UTF-8",
@@ -76,7 +76,7 @@ export const updateRssOnChange = functions.firestore
       resp = await axios.get("http://validator.w3.org/feed/check.cgi", {
         params: {
           output: "soap12",
-          url: `${STORAGE_URL_PREFIX}/static/stagedRss.xml?refresh=${Date.now()}`,
+          url: `${STATIC_STORAGE_URL_PREFIX}/stagedRss.xml?refresh=${Date.now()}`,
         },
         timeout: 40000,
       });
