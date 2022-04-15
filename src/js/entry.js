@@ -75,6 +75,13 @@ export const trimEmptyFields = (entry, imageAttribution, entryAttribution) => {
     }
     if (!entry.collection.length) {
       delete newEntry.collection;
+    } else {
+      newEntry.collection = entry.collection.filter(
+        (entry) => entry.length > 0
+      );
+      if (!newEntry.collection.length) {
+        delete newEntry.collection;
+      }
     }
     const filteredLinks = entry.links
       .filter((link) => link.linkText && link.href)

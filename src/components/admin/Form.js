@@ -22,7 +22,8 @@ export default function Form() {
   const generatedReadableId = useMemo(
     () =>
       entry.title
-        .replace(/(<[^>]+>|&nbsp;)/gm, "")
+        .replace(/(<[^>]+>)/gm, "")
+        .replace(/&nbsp;/g, " ")
         .replace(/[^a-zA-Z0-9\- ]/g, "")
         .toLowerCase()
         .replace(/^(an?|the) /m, "")
@@ -53,9 +54,9 @@ export default function Form() {
     (className) =>
     ({ target: { checked } }) => {
       if (checked) {
-        delete entry.image.class;
-      } else {
         entry.image.class = className;
+      } else {
+        delete entry.image.class;
       }
     };
 
