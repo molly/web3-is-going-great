@@ -3,7 +3,7 @@
 .admin
   .generic-page
     width: 90%
-    max-width: 600px
+    max-width: 1800px
     padding-top: 50px
 
   .login-form
@@ -12,19 +12,28 @@
     margin-top: 30px
     max-width: 300px
 
-  button
-    align-self: flex-start
-    padding: 5px
-    margin-top: 10px
-    background-color: $card-background
-    border: 1px solid #000000
+  .entry-form
+    button
+      align-self: flex-start
+      padding: 5px
+      margin-top: 10px
+      background-color: $card-background
+      border: 1px solid #000000
 
-    &:not(:first-of-type)
-      margin-left: 10px
+      &:not(:first-of-type)
+        margin-left: 10px
 
-    &.save-button
-      i
-        padding-right: 5px
+      &.save-button
+        i
+          padding-right: 5px
+
+  .form-wrapper
+    display: flex
+    flex-wrap: nowrap
+    margin: 0 auto
+
+  .entry-form, .entry
+    flex: 1
 
   .entry-form
     .row, .half, .group
@@ -65,6 +74,24 @@
 
       &:not(:first-child)
         padding-left: 10px
+
+  .entry
+    margin: 20px 0 0 50px
+
+    .timeline-entry
+      position: static
+      margin: 0
+
+      .timeline-description
+        width: 100%
+        max-width: 700px
+        min-width: 400px
+
+        &::after
+          display: none
+
+      .timeline-icon
+        display: none
 
 hr
   margin: 20px 0
