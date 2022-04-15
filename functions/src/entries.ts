@@ -1,6 +1,5 @@
 import { firestore } from "./config/firebase";
 import * as functions from "firebase-functions";
-import { Entry } from "./types";
 
 export const moveEntry = functions.https.onRequest(async (req, res) => {
   const collection = await firestore.collection("entries");
