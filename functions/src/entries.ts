@@ -1,4 +1,4 @@
-import { FieldPath, firestore } from "./config/firebase";
+import { firestore } from "./config/firebase";
 import * as functions from "firebase-functions";
 import { Entry } from "./types";
 
@@ -21,13 +21,20 @@ export const moveEntry = functions.https.onRequest(async (req, res) => {
 
 export const migrate = functions.https.onRequest(async (req, res) => {
   const collection = await firestore.collection("entries");
-  const query = collection.where(new FieldPath("image", "isLogo"), "==", true);
-  const querySnapshot = await query.get();
-  const imageNames: string[] = [];
+  const querySnapshot = await collection.get();
   querySnapshot.forEach((child) => {
     const childData = child.data() as Entry;
-    if (childData.image?.src) {
-      imageNames.push(childData.image.src);
+    if (!childData.readableId) {
+      const strippedTitle = childData.title
+        .replace(/<[^>]+>/gm, "")
+        .replace(/&nbsp;/g, " ")
+        .replace(/\./g, "-")
+        .replace(/[^a-zA-Z0-9\- ]/g, "")
+        .toLowerCase()
+        .replace(/^(an?|the) /m, "");
+
+      const readableId = encodeURIComponent(strippedTitle.replace(/ /g, "-"));
+      child.ref.update({ readableId });
     }
   });
   res.status(200).send();

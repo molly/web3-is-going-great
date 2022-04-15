@@ -53,11 +53,15 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
       setSearchTerm(inputValue);
     },
     onSelectedItemChange: ({ selectedItem }) => {
-      setSelectedEntryFromSearch(selectedItem.id);
+      setSelectedEntryFromSearch(selectedItem.readableId);
       // Write the URL so people can permalink easily
-      router.push({ query: { ...router.query, id: selectedItem.id } }, null, {
-        shallow: true,
-      });
+      router.push(
+        { query: { ...router.query, id: selectedItem.readableId } },
+        null,
+        {
+          shallow: true,
+        }
+      );
     },
   });
 

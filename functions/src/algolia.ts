@@ -7,6 +7,7 @@ export const transformEntryForSearch = functions
     return {
       objectID: data.objectID, // Required for Algolia
       id: data.id,
+      readableId: data.readableId,
       title: data.title.replace(/<[^>]+>/gm, "").replace(/&nbsp;/g, " "),
       body: data.body.replace(/<[^>]+>/gm, "").replace(/&nbsp;/g, " "),
       date: data.date,

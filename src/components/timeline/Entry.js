@@ -99,8 +99,10 @@ export default function Entry({
 
   const noJsPermalink = useMemo(
     () =>
-      router.route.startsWith("/web1") ? `#${entry.id}` : `?id=${entry.id}`,
-    [entry.id, router.route]
+      router.route.startsWith("/web1")
+        ? `#${entry.readableId}`
+        : `?id=${entry.readableId}`,
+    [entry.readableId, router.route]
   );
 
   const renderIcon = () => {
@@ -130,7 +132,7 @@ export default function Entry({
       return (
         <li>
           {showCopiedPopup && <div className="permalink-popup">Copied</div>}
-          <button onClick={() => permalink(entry.id)}>
+          <button onClick={() => permalink(entry.readableId)}>
             <i className="fas fa-link" aria-hidden={true} />
             <span className="sr-only">Permalink</span>
           </button>
@@ -179,7 +181,7 @@ export default function Entry({
     if (isBrowserRendering) {
       return (
         <h2>
-          <button onClick={() => permalink(entry.id)}>
+          <button onClick={() => permalink(entry.readableId)}>
             <span dangerouslySetInnerHTML={{ __html: entry.title }} />
           </button>
         </h2>
@@ -189,7 +191,7 @@ export default function Entry({
       return (
         <h2>
           <Link href={noJsPermalink}>
-            <a id={entry.id}>
+            <a id={entry.readableId}>
               <span dangerouslySetInnerHTML={{ __html: entry.title }} />
             </a>
           </Link>
