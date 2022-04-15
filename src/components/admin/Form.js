@@ -75,11 +75,14 @@ export default function Form() {
 
   const save = () => {
     setIsUploading(true);
-    upload(
-      { readableId: generatedReadableId, ...entry },
-      imageAttribution,
-      entryAttribution
-    )
+
+    // Set readableId if it hasn't been modified
+    const entryWithReadableId = { ...entry };
+    if (entryWithReadableId.readableId === "") {
+      entryWithReadableId.readableId = generatedReadableId;
+    }
+
+    upload(entryWithReadableId, imageAttribution, entryAttribution)
       .then(() => {
         setIsUploadComplete(true);
         setIsUploading(false);
