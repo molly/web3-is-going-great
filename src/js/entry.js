@@ -12,6 +12,7 @@ export const EMPTY_ENTRY = {
   },
   links: [{ linkText: "", href: "", extraText: "" }],
   title: "",
+  readableId: "",
   image: { src: "", alt: "", caption: "", isLogo: false },
   scamTotal: 0,
 };
@@ -24,6 +25,7 @@ export const LinkFieldPropType = PropTypes.shape({
 
 export const EntryPropType = PropTypes.shape({
   id: PropTypes.string,
+  readableId: PropTypes.string.isRequired,
   filters: PropTypes.shape({
     theme: PropTypes.arrayOf(PropTypes.string).isRequired,
     tech: PropTypes.arrayOf(PropTypes.string),
