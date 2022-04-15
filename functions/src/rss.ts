@@ -10,7 +10,6 @@ import axios from "axios";
 
 const STORAGE_URL_PREFIX = "https://storage.googleapis.com/primary-web3";
 const STATIC_STORAGE_URL_PREFIX = "https://storage.googleapis.com/static-web3";
-
 const writeFeed = async (xml: string): Promise<void> => {
   const file = await storage.bucket("static-web3").file("rss.xml");
   await file.save(xml);

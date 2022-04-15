@@ -22,6 +22,7 @@ type Link = {
 
 export type Entry = {
   id: string;
+  readableId: string;
   title: string;
   body: string;
   date: string;

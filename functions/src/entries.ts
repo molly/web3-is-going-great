@@ -1,6 +1,5 @@
-import { FieldPath, firestore } from "./config/firebase";
+import { firestore } from "./config/firebase";
 import * as functions from "firebase-functions";
-import { Entry } from "./types";
 
 export const moveEntry = functions.https.onRequest(async (req, res) => {
   const collection = await firestore.collection("entries");
@@ -17,18 +16,4 @@ export const moveEntry = functions.https.onRequest(async (req, res) => {
     }
   }
   res.status(400).send(`Document not located at ${req.body.currentId}`);
-});
-
-export const migrate = functions.https.onRequest(async (req, res) => {
-  const collection = await firestore.collection("entries");
-  const query = collection.where(new FieldPath("image", "isLogo"), "==", true);
-  const querySnapshot = await query.get();
-  const imageNames: string[] = [];
-  querySnapshot.forEach((child) => {
-    const childData = child.data() as Entry;
-    if (childData.image?.src) {
-      imageNames.push(childData.image.src);
-    }
-  });
-  res.status(200).send();
 });

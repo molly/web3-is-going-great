@@ -45,7 +45,7 @@ export default function CustomEntryHead({ entry, collectionDescription }) {
       <meta
         property="og:url"
         key="ogurl"
-        content={`https://web3isgoinggreat.com/single/${entry.id}`}
+        content={`https://web3isgoinggreat.com/single/${entry.readableId}`}
       />
       <meta property="og:title" key="ogtitle" content={title} />
       <meta

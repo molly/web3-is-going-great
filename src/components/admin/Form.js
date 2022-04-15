@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import { signOut, upload } from "../../js/admin";
 
@@ -18,7 +18,16 @@ export default function Form() {
     text: "",
     href: "",
   });
-
+  const generatedReadableId = useMemo(
+    () =>
+      entry.title
+        .replace(/(<[^>]+>|&nbsp;)/gm, "")
+        .replace(/[^a-zA-Z0-9\- ]/g, "")
+        .toLowerCase()
+        .replace(/^(an?|the) /m, "")
+        .replace(/[. ]/g, "-"),
+    [entry.title]
+  );
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadComplete, setIsUploadComplete] = useState(false);
 
@@ -63,7 +72,11 @@ export default function Form() {
 
   const save = () => {
     setIsUploading(true);
-    upload(entry, imageAttribution, entryAttribution)
+    upload(
+      { readableId: generatedReadableId, ...entry },
+      imageAttribution,
+      entryAttribution
+    )
       .then(() => {
         setIsUploadComplete(true);
         setIsUploading(false);
@@ -85,6 +98,17 @@ export default function Form() {
             id="title"
             onChange={createFieldSetter("title")}
             value={entry.title}
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="group">
+          <label htmlFor="readableId">Readable ID: </label>
+          <textarea
+            rows={1}
+            id="readableId"
+            onChange={createFieldSetter("readableId")}
+            value={entry.readableId || generatedReadableId}
           />
         </div>
       </div>

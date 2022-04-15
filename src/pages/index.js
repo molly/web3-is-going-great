@@ -39,10 +39,7 @@ export async function getServerSideProps(context) {
       });
     }
 
-    if (
-      context.query.id &&
-      context.query.id.match(/\d{4}-\d{2}-\d{2}-?\d{0,2}/)
-    ) {
+    if (context.query.id) {
       props.startAtId = context.query.id;
     }
   }

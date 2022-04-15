@@ -21,6 +21,29 @@ const getFirstEntryId = async (dbCollection) => {
   return firstEntry.id;
 };
 
+export const getNumericId = async (id) => {
+  if (!id) {
+    return null;
+  }
+  if (id.match(/\d{4}-\d{2}-\d{2}-?\d{0,2}/)) {
+    return id;
+  }
+  const entriesCollection = collection(db, "entries");
+  const q = query(entriesCollection, where("readableId", "==", id));
+  const snapshot = await getDocs(q);
+  if (snapshot.empty) {
+    return null;
+  } else {
+    // There should only be one; if there are multiple we can still just return the first
+    let numericId = null;
+    snapshot.forEach((child) => {
+      numericId = child.id;
+      return true; // Breaks out of loop
+    });
+    return numericId;
+  }
+};
+
 export const getEntries = async ({
   limit: entriesLimit,
   sort,
@@ -39,6 +62,8 @@ export const getEntries = async ({
   const respLimit = entriesLimit ? entriesLimit : DEFAULT_LIMIT;
 
   const dbCollection = collection(db, "entries");
+  const startAtNumericId = await getNumericId(startAtId);
+
   let q = query(
     dbCollection,
     orderBy("id", !!sort && sort === "Ascending" ? "asc" : "desc")
@@ -69,8 +94,8 @@ export const getEntries = async ({
 
   if (cursor) {
     q = query(q, startAfter(cursor));
-  } else if (startAtId) {
-    q = query(q, startAt(startAtId));
+  } else if (startAtId && startAtNumericId) {
+    q = query(q, startAt(startAtNumericId));
   }
   q = query(q, limit(respLimit + 1));
   const snapshot = await getDocs(q);
@@ -84,8 +109,8 @@ export const getEntries = async ({
   });
 
   // Check if this is the first entry available
-  if (cursor || startAtId) {
-    const firstId = cursor || startAtId;
+  if (cursor || startAtNumericId) {
+    const firstId = cursor || startAtNumericId;
     const firstEntryId = await getFirstEntryId(dbCollection);
     resp.hasPrev = firstEntryId !== firstId;
   }
