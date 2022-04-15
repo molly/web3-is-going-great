@@ -21,7 +21,6 @@ import Entry from "./Entry";
 import FixedAtBottom from "./FixedAtBottom";
 import Loader from "../Loader";
 import Error from "../Error";
-import { start } from "@popperjs/core";
 
 export default function Timeline({
   queryResult,
