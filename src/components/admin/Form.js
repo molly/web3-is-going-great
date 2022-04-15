@@ -46,6 +46,7 @@ export default function Form() {
   const setLinks = createFieldSetter("links");
   const setImage = createFieldSetter("image");
   const setScamTotal = createFieldSetter("scamTotal");
+  const setCollection = createFieldSetter("collection");
 
   const toggleImageClass =
     (className) =>
@@ -158,6 +159,19 @@ export default function Form() {
         <FilterSelector filter="theme" entry={entry} setEntry={setEntry} />
         <FilterSelector filter="tech" entry={entry} setEntry={setEntry} />
         <FilterSelector filter="blockchain" entry={entry} setEntry={setEntry} />
+      </div>
+      <div className="row">
+        <div className="group">
+          <label htmlFor="collection">Collection: </label>
+          <input
+            id="collection"
+            onChange={({ target: { value } }) => {
+              const splitCollection = value.split(/, */);
+              setCollection(splitCollection);
+            }}
+            value={entry.collection.join(", ")}
+          />
+        </div>
       </div>
       <hr />
       {entry.links.map((link, ind) => (

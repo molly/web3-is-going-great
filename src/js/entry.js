@@ -15,6 +15,7 @@ export const EMPTY_ENTRY = {
   readableId: "",
   image: { src: "", alt: "", caption: "", isLogo: false },
   scamTotal: 0,
+  collection: [],
 };
 
 export const LinkFieldPropType = PropTypes.shape({
@@ -71,6 +72,9 @@ export const trimEmptyFields = (entry, imageAttribution, entryAttribution) => {
     }
     if (entry.scamTotal === 0) {
       delete newEntry.scamTotal;
+    }
+    if (!entry.collection.length) {
+      delete newEntry.collection;
     }
     const filteredLinks = entry.links
       .filter((link) => link.linkText && link.href)
