@@ -490,7 +490,7 @@ img
   display: flex
   justify-content: center
 
-  button
+  button, a.button
     margin: 10px 0
     background-color: $accent
     color: $title-color
@@ -698,7 +698,7 @@ table.expenses
   .load-top
     justify-content: start
 
-    button
+    button, a.button
       margin-left: 5%
 
   .lightbox-container
@@ -776,8 +776,9 @@ table.expenses
       max-width: 15px
       max-height: 15px
 
-  .load-top button
-    margin-left: 4px
+  .load-top
+    button, a.button
+      margin-left: 4px
 
 .flex-between
   display: flex
@@ -890,9 +891,10 @@ table.expenses
       &.#{$name}
         background-color: darken($color, 20%)
 
-  .load-top button
-    color: $dark-timeline-icon-color
-    background-color: darken($accent, 20%)
+  .load-top
+    button, a.button
+      color: $dark-timeline-icon-color
+      background-color: darken($accent, 20%)
 
   .timeline.dots::before
     background: linear-gradient(180deg, $dark-timeline-line-color 25%, $dark-main-background 25%, $dark-main-background 50%, $dark-timeline-line-color 50%, $dark-timeline-line-color 75%, $dark-main-background 75%, $dark-main-background 100%)

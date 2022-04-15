@@ -113,6 +113,19 @@ export default function Timeline({
   };
 
   const renderGoToTop = () => {
+    if (!isBrowserRendering) {
+      return (
+        <>
+          <div className="load-top">
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a className="button" href="/">
+              <span>Start from the top</span>
+            </a>
+          </div>
+          <div className="timeline dots" />
+        </>
+      );
+    }
     return (
       <>
         <div className="load-top">
