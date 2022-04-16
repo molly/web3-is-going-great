@@ -178,6 +178,9 @@ export default function Timeline({
                   if (pageInd === 0 && entryInd === 0) {
                     className += " first";
                   }
+                  if (entry.body.length < 400) {
+                    className += " short";
+                  }
                   if (entry.scamTotal) {
                     runningScamTotal += entry.scamTotal;
                   }
