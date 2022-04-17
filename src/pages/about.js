@@ -118,6 +118,19 @@ export default function WhatIsWeb3() {
             show and hide the counter or stop the animation of the flames from
             this panel.
           </p>
+          <h3 id="no-true-scotsman">But X isn't web3!</h3>
+          <p>
+            Feel free to replace "web3" in the site name with "blockchain-based
+            technologies" if that helps, but "Web3 is Going Just Great" was
+            already a pretty long name. I use this site to document issues with
+            anything blockchain/crypto/web3-related, and so even though some
+            people will argue things like "Bitcoin isn't web3" or even "Bitcoin
+            isn't cryptocurrency", it's still in scope of the site. Also, your{" "}
+            <a href="https://en.wikipedia.org/wiki/No_true_Scotsman">
+              no true Scotsman
+            </a>{" "}
+            arguments are a little worn out.
+          </p>
         </article>
       </div>
       <Footer />
