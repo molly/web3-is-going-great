@@ -137,6 +137,8 @@ export default function IndexPage({
     } else {
       router.push({ query: {} }, null, { shallow: true });
     }
+    setSelectedEntryFromSearch(null);
+    setFilterState({});
     setCollectionState(coll);
   };
 
