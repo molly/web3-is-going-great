@@ -131,7 +131,7 @@ export default function IndexPage({
   const setCollection = (coll) => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     if (coll) {
-      router.push({ query: { ...router.query, collection: coll } }, null, {
+      router.push({ query: { collection: coll } }, null, {
         shallow: true,
       });
     } else {
