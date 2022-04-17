@@ -175,9 +175,9 @@ export default function WhatIsWeb3() {
               <ExternalLink href="https://rekt.news/">Rekt.news</ExternalLink>
             </li>
             <li>
-              <span>A list of </span>
-              <ExternalLink href="https://github.com/rufuspollock/awesome-crypto-critique">
-                awesome crypto critique
+              <ExternalLink href="https://web3.lifeitself.us/library">
+                An enormous compendium of web3 and crypto-related research and
+                writing
               </ExternalLink>
             </li>
             <li>
