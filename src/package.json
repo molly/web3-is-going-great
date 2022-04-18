@@ -25,7 +25,7 @@
     "react-ga": "^3.3.0",
     "react-intersection-observer": "^8.33.1",
     "react-popper": "^2.2.5",
-    "react-query": "^3.34.19",
+    "react-query": "^3.35.0",
     "react-select": "^5.3.0",
     "use-debounce": "^7.0.1"
   },
