@@ -21,7 +21,7 @@
     "firebase-functions": "^3.20.0",
     "fs": "0.0.1-security",
     "mkdirp": "^1.0.4",
-    "moment": "^2.29.2",
+    "moment": "^2.29.3",
     "os": "^0.1.2",
     "path": "^0.12.7",
     "sharp": "^0.30.3"
