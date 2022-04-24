@@ -79,11 +79,13 @@ export default function Timeline({
     [startAtId, hasPreviousEntries, selectedEntryFromSearch]
   );
 
-  const collectionDescription = useMemo(() => {
-    collection
-      ? `Entries related to ${getCollectionName(collection, allCollections)}`
-      : null;
-  }, [collection, allCollections]);
+  const collectionDescription = useMemo(
+    () =>
+      collection
+        ? `Entries related to ${getCollectionName(collection, allCollections)}`
+        : null,
+    [collection, allCollections]
+  );
 
   const renderHead = () => {
     if (startAtId || collection) {
