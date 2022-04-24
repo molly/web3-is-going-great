@@ -87,32 +87,35 @@ export default function IndexPage({
   useEffect(() => {
     // Restore state when someone hits the back button
     router.beforePopState(({ url }) => {
-      const startOfQueryParams = url.indexOf("?");
-      if (startOfQueryParams) {
-        // Filters
-        const params = new URLSearchParams(url.slice(startOfQueryParams));
-        const restoredFilters = copy(EMPTY_FILTERS_STATE);
-        for (let category of FILTER_CATEGORIES) {
-          if (params.has(category)) {
-            restoredFilters[category] = params.get(category).split(",");
+      if (!url.match(/^\/[^?]/)) {
+        const startOfQueryParams = url.indexOf("?");
+        if (startOfQueryParams > -1) {
+          // Filters
+          const params = new URLSearchParams(url.slice(startOfQueryParams));
+          const restoredFilters = copy(EMPTY_FILTERS_STATE);
+          for (let category of FILTER_CATEGORIES) {
+            if (params.has(category)) {
+              restoredFilters[category] = params.get(category).split(",");
+            }
+          }
+          setFilterState(restoredFilters);
+
+          // Start at ID
+          if (params.has("id")) {
+            setSelectedEntryFromSearch(params.get("id"));
+          } else {
+            setSelectedEntryFromSearch(null);
+          }
+
+          // Collection
+          if (params.has("collection")) {
+            setCollectionState(params.get("collection"));
+          } else {
+            setCollectionState(null);
           }
         }
-        setFilterState(restoredFilters);
-
-        // Start at ID
-        if (params.has("id")) {
-          setSelectedEntryFromSearch(params.get("id"));
-        } else {
-          setSelectedEntryFromSearch(null);
-        }
-
-        // Collection
-        if (params.has("collection")) {
-          setCollectionState(params.get("collection"));
-        } else {
-          setCollectionState(null);
-        }
       }
+      return true;
     });
   }, [router]);
 
