@@ -63,7 +63,16 @@ export default function TimelineEntryContent({ children, glossary }) {
       defineTargets[i].setAttribute("aria-hasPopup", "dialog");
       defineTargets[i].setAttribute("aria-expanded", "false");
     }
-    setHydratedBody(el.innerHTML);
+    const hydratedBody = el.innerHTML.replace(
+      /([.,"'“‘”’!?()\-—–/]*)(<button.*?>.*?<\/button>)([.,"'“‘”’!?()\-—–/]*)/g,
+      (match, g1, g2, g3) => {
+        if (g1 || g3) {
+          return `<span class="no-break">${match}</span>`;
+        }
+        return match;
+      }
+    );
+    setHydratedBody(hydratedBody);
   }, [children]);
 
   useEffect(() => {
