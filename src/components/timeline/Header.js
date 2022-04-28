@@ -99,8 +99,12 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
             Follow updates on{" "}
             <ExternalLink href="https://twitter.com/web3isgreat">
               Twitter
-            </ExternalLink>{" "}
-            or with{" "}
+            </ExternalLink>
+            ,{" "}
+            <ExternalLink href="https://indieweb.social/@web3isgreat" rel="me">
+              Mastodon
+            </ExternalLink>
+            , or with{" "}
             <ExternalLink href="https://web3isgoinggreat.com/feed.xml">
               RSS
             </ExternalLink>
