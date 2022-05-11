@@ -39,6 +39,7 @@ const FILTERS = {
     polygon: "Polygon",
     ripple: "Ripple",
     solana: "Solana",
+    terra: "Terra",
     tezos: "Tezos",
     stablecoins: "stablecoins",
     wax: "WAX",
