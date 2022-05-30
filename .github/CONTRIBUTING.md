@@ -2,7 +2,7 @@
 
 :wave: Thank you for taking time to contribute!
 
-This project and everyone participating in it is governed by the [project Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+This project and everyone participating in it is governed by the [project Code of Conduct](../CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
 ## Contributing an entry
 If you have a new entry, please use the existing issue templates. For new entries, I'd especially appreciate it if you do a quick search of the site to make sure I haven't already included the entry you're suggesting.
