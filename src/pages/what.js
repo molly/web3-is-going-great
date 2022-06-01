@@ -85,18 +85,6 @@ export default function WhatIsWeb3() {
               </ExternalLink>
               <span> on Wikipedia</span>
             </li>
-            <li>
-              <ExternalLink href="https://slate.com/technology/2021/11/web3-explained-crypto-nfts-bored-apes.html">
-                <span>
-                  "What Is Web3 and Why Are All the Crypto People Suddenly
-                  Talking About It?"
-                </span>
-              </ExternalLink>
-              <span>
-                {" "}
-                from <i>Slate</i>
-              </span>
-            </li>
           </ul>
           <h3>Opinion</h3>
           <ul>
@@ -105,6 +93,7 @@ export default function WhatIsWeb3() {
                 My own longer-form writing
               </ExternalLink>
             </li>
+            <h4>Web3</h4>
             <li>
               <ExternalLink href="https://www.stephendiehl.com/blog/web3-bullshit.html">
                 <span>"Web3 is bullshit"</span>
@@ -113,22 +102,15 @@ export default function WhatIsWeb3() {
             </li>
             <li>
               <ExternalLink href="https://www.youtube.com/watch?v=YQ_xWvX1n9g">
-                <span>"The Problem With NFTs"</span>
-                <span> (video) by Dan Olson</span>
+                <span>"Line Goes Up – The Problem With NFTs"</span>
               </ExternalLink>
+              <span> by Dan Olson (video)</span>
             </li>
             <li>
               <ExternalLink href="https://www.oreilly.com/radar/why-its-too-early-to-get-excited-about-web3/">
                 <span>"Why it's too early to get excited about Web3"</span>
               </ExternalLink>
               <span> by Tim O'Reilly</span>
-            </li>
-            <li>
-              Slides and transcript of{" "}
-              <ExternalLink href="https://blog.dshr.org/2022/02/ee380-talk.html">
-                David S. H. Rosenthal's talk to Stanford EE Computer Systems
-                students
-              </ExternalLink>
             </li>
             <li>
               <ExternalLink href="https://society.robinsloan.com/archive/notes-on-web3/">
@@ -149,19 +131,54 @@ export default function WhatIsWeb3() {
               <span> by Nicholas Weaver</span>
             </li>
             <li>
-              <ExternalLink href="https://yesterweb.org/no-to-web3/index.html">
-                <span>"Keep the web free, say no to Web3"</span>
+              <ExternalLink href="https://the-crypto-syllabus.com/web3-a-map-in-search-of-territory/">
+                "Web3: A Map in Search of Territory"
               </ExternalLink>
-              <span> by Yesterweb</span>
+              <span> by Evgeny Morozov</span>
+            </li>
+            <h4>Crypto more broadly</h4>
+            <li>
+              <i>
+                <ExternalLink href="https://davidgerard.co.uk/blockchain/book/">
+                  Attack of the 50 Foot Blockchain
+                </ExternalLink>
+                <span> by David Gerard (book)</span>
+              </i>
+            </li>
+            <li>
+              <ExternalLink href="https://blog.dshr.org/2022/02/ee380-talk.html">
+                Slides and transcript
+              </ExternalLink>
+              <span> or </span>
+              <ExternalLink href="https://www.youtube.com/watch?v=twrduL8aNGE">
+                video
+              </ExternalLink>
+              <span>
+                {" "}
+                of David S. H. Rosenthal's talk to Stanford EE Computer Systems
+                students
+              </span>
+            </li>
+            <li>
+              <ExternalLink href="https://www.youtube.com/watch?v=xCHab0dNnj4">
+                Blockchains and Cryptocurrencies: Burn It With Fire
+              </ExternalLink>
+              <span> lecture by Nicholas Weaver (video)</span>
+            </li>
+            <li>
+              <ExternalLink href="https://onezero.medium.com/the-inevitability-of-trusted-third-parties-a51cbcffc4e2">
+                "The Inevitability of Trusted Third Parties"
+              </ExternalLink>
+              <span> by Cory Doctorow</span>
             </li>
           </ul>
-          <h3>Other resources</h3>
+          <h3>Other collections of resources</h3>
           <ul>
             <li>
               <ExternalLink href="https://web3.lifeitself.us/guide">
                 Making Sense of Crypto and Web3 Guide
-              </ExternalLink>{" "}
-              and its{" "}
+              </ExternalLink>
+              <span> and its </span>
               <ExternalLink href="https://www.zotero.org/groups/4600269/web3/library">
                 enormous reading list
               </ExternalLink>
@@ -171,6 +188,12 @@ export default function WhatIsWeb3() {
                 "Attack of the 50 Foot Blockchain"
               </ExternalLink>
               <span> blog by David Gerard</span>
+            </li>
+            <li>
+              <span>Stephen Diehl's </span>
+              <ExternalLink href="https://www.stephendiehl.com/blog.html">
+                blog
+              </ExternalLink>
             </li>
             <li>
               <ExternalLink href="https://rekt.news/">Rekt.news</ExternalLink>
@@ -183,10 +206,16 @@ export default function WhatIsWeb3() {
               <span> on Twitter</span>
             </li>
             <li>
-              My{" "}
+              <span>My </span>
               <ExternalLink href="https://www.mollywhite.net/reading/blockchain">
                 blockchain reading list
               </ExternalLink>
+            </li>
+            <li>
+              <ExternalLink href="https://cryptocriticscorner.com/">
+                <i>Crypto Critics' Corner</i>
+              </ExternalLink>
+              <span> podcast</span>
             </li>
           </ul>
         </article>
