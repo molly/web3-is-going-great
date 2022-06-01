@@ -2,8 +2,14 @@ import PropTypes from "prop-types";
 
 export default function ExternalLink({ children, href, ...rest }) {
   return (
-    <a target="_blank" rel="noopener" href={href} {...rest}>
-      {children}
+    <a
+      target="_blank"
+      rel="noopener"
+      className="external-link"
+      href={href}
+      {...rest}
+    >
+      <span>{children}</span>
     </a>
   );
 }
