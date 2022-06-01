@@ -106,13 +106,19 @@ export default function WhatIsWeb3() {
                 <ExternalLink href="https://www.oreilly.com/radar/why-its-too-early-to-get-excited-about-web3/">
                   <span>"Why it's too early to get excited about Web3"</span>
                 </ExternalLink>
-                <span> by Tim O'Reilly</span>
+                <span> by </span>
+                <ExternalLink href="https://en.wikipedia.org/wiki/Tim_O%27Reilly">
+                  Tim O'Reilly
+                </ExternalLink>
               </li>
               <li>
                 <ExternalLink href="https://society.robinsloan.com/archive/notes-on-web3/">
                   "Notes on Web3"
                 </ExternalLink>
-                <span> by Robin Sloan</span>
+                <span> by </span>
+                <ExternalLink href="https://en.wikipedia.org/wiki/Robin_Sloan">
+                  Robin Sloan
+                </ExternalLink>
               </li>
               <li>
                 <ExternalLink href="https://tante.cc/2021/12/17/the-third-web/">
@@ -130,7 +136,10 @@ export default function WhatIsWeb3() {
                 <ExternalLink href="https://the-crypto-syllabus.com/web3-a-map-in-search-of-territory/">
                   "Web3: A Map in Search of Territory"
                 </ExternalLink>
-                <span> by Evgeny Morozov</span>
+                <span> by </span>
+                <ExternalLink href="https://en.wikipedia.org/wiki/Evgeny_Morozov">
+                  Evgeny Morozov
+                </ExternalLink>
               </li>
             </ul>
             <h4>Crypto more broadly</h4>
@@ -140,8 +149,8 @@ export default function WhatIsWeb3() {
                   <ExternalLink href="https://davidgerard.co.uk/blockchain/book/">
                     Attack of the 50 Foot Blockchain
                   </ExternalLink>
-                  <span> by David Gerard (book)</span>
                 </i>
+                <span> by David Gerard (book)</span>
               </li>
               <li>
                 <ExternalLink href="https://blog.dshr.org/2022/02/ee380-talk.html">
@@ -153,8 +162,11 @@ export default function WhatIsWeb3() {
                 </ExternalLink>
                 <span>
                   {" "}
-                  of David S. H. Rosenthal's talk to Stanford EE Computer
-                  Systems students
+                  of{" "}
+                  <ExternalLink href="https://en.wikipedia.org/wiki/David_S._H._Rosenthal">
+                    David S. H. Rosenthal's
+                  </ExternalLink>{" "}
+                  talk to Stanford EE Computer Systems students
                 </span>
               </li>
               <li>
@@ -167,7 +179,10 @@ export default function WhatIsWeb3() {
                 <ExternalLink href="https://onezero.medium.com/the-inevitability-of-trusted-third-parties-a51cbcffc4e2">
                   "The Inevitability of Trusted Third Parties"
                 </ExternalLink>
-                <span> by Cory Doctorow</span>
+                <span> by </span>
+                <ExternalLink href="https://en.wikipedia.org/wiki/Cory_Doctorow">
+                  Cory Doctorow
+                </ExternalLink>
               </li>
             </ul>
           </div>
