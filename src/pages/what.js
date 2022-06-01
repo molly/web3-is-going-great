@@ -126,7 +126,8 @@ export default function WhatIsWeb3() {
             <li>
               Slides and transcript of{" "}
               <ExternalLink href="https://blog.dshr.org/2022/02/ee380-talk.html">
-                Dan Rosenthal's talk to Standford EE Computer Systems students
+                David S. H. Rosenthal's talk to Stanford EE Computer Systems
+                students
               </ExternalLink>
             </li>
             <li>
