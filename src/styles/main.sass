@@ -382,10 +382,11 @@ img
 
 .generic-page
   width: 90%
-  max-width: 1000px
+  max-width: 800px
   margin: 0 auto
   padding-bottom: 20px
-  line-height: 130%
+  line-height: 150%
+  font-size: 18px
 
 .navigation-bar
   background-color: $filterbar-background
@@ -422,6 +423,34 @@ img
     h3
       margin: 0
 
+.generic-page, .timeline-body-text-wrapper
+  a[href^="https://"], a[href^="http://"], a[href^="https://en.wikipedia.org/"]
+    &::after
+      color: $timestamp-color
+      margin-left: 2px
+      display: inline-block
+      vertical-align: middle
+
+    &:hover::after
+      text-decoration: none
+
+  a[href^="https://"], a[href^="http://"]
+    &::after
+      content: "\f08e"
+      font: var(--fa-font-solid)
+      font-size: 10px
+      margin-left: 4px
+
+  a[href^="https://en.wikipedia.org/"]
+    &::after
+      content: "\f266"
+      font: var(--fa-font-brands)
+      font-size: 10px
+
+  a[href^="https://web3isgoinggreat.com/"]
+    &::after
+      display: none
+
 .sr-only
   position: absolute
   left: -10000px
@@ -447,6 +476,9 @@ img
 .help-text
   font-size: 90%
   font-style: italic
+
+.indent
+  margin-left: 20px
 
 .error-wrapper
   display: flex
@@ -589,6 +621,12 @@ table.expenses
       height: 20px
       padding-right: 5px
       border-right: 1px solid $timeline-line-color
+
+// What
+.what-page
+  h3, h4, ul
+    margin-top: 0.5em
+    margin-bottom: 0.5em
 
 /* ICON COLORS */
 .timeline-icon

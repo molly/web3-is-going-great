@@ -21,20 +21,20 @@ export default function WhatIsWeb3() {
       </header>
       <BackBar />
       <div className="content-wrapper">
-        <article className="generic-page">
+        <article className="generic-page what-page">
           <p>
             One of the most distinguishing features of "web3" is the sheer level
             of handwaviness surrounding it. While you can find no end of press
-            releases, Twitter crypto bros, and venture capitalists extolling the
-            virtues of web3, you will have a much harder time finding any
-            definition that's not so full of buzzwords that it becomes
-            meaningless.
+            releases, crypto evangelists on Twitter, and venture capitalists
+            extolling the virtues of web3, you will have a much harder time
+            finding any definition that's not so full of buzzwords that it
+            becomes meaningless.
           </p>
           <p>
-            Generally speaking, web3 is an umbrella term to refer to the "future
-            of the Internet", which believers say will be decentralized and
-            based on the blockchain. Proponents tend to tout how data won't be
-            controlled by "Big Tech", and how it will be uncensorable and
+            Generally speaking, "web3" is an umbrella term to refer to the
+            "future of the Internet", which believers say will be decentralized
+            and based on the blockchain. Proponents tend to tout how data won't
+            be controlled by "Big Tech", and how it will be uncensorable and
             egalitarian. There is, however, no shortage of examples in this
             timeline of how many "web3" projects are indeed centralized in
             similar ways to Big Tech, as well as instances where "uncensorable"
@@ -47,7 +47,7 @@ export default function WhatIsWeb3() {
             enormous environmental impacts of blockchain technology
             (particularly{" "}
             <ExternalLink href="https://www.coindesk.com/learn/2020/12/16/what-is-proof-of-work/">
-              <span>proof-of work</span>
+              <span>proof-of-work</span>
             </ExternalLink>{" "}
             blockchains, including Bitcoin and Ethereum). They also often
             mention that an awful lot of web3 projects sound quite a bit like{" "}
@@ -87,93 +87,97 @@ export default function WhatIsWeb3() {
             </li>
           </ul>
           <h3>Opinion</h3>
+          <div className="indent">
+            <h4>Web3</h4>
+            <ul>
+              <li>
+                <ExternalLink href="https://www.stephendiehl.com/blog/web3-bullshit.html">
+                  <span>"Web3 is bullshit"</span>
+                </ExternalLink>
+                <span> by Stephen Diehl</span>
+              </li>
+              <li>
+                <ExternalLink href="https://www.youtube.com/watch?v=YQ_xWvX1n9g">
+                  <span>"Line Goes Up – The Problem With NFTs"</span>
+                </ExternalLink>
+                <span> by Dan Olson (video)</span>
+              </li>
+              <li>
+                <ExternalLink href="https://www.oreilly.com/radar/why-its-too-early-to-get-excited-about-web3/">
+                  <span>"Why it's too early to get excited about Web3"</span>
+                </ExternalLink>
+                <span> by Tim O'Reilly</span>
+              </li>
+              <li>
+                <ExternalLink href="https://society.robinsloan.com/archive/notes-on-web3/">
+                  "Notes on Web3"
+                </ExternalLink>
+                <span> by Robin Sloan</span>
+              </li>
+              <li>
+                <ExternalLink href="https://tante.cc/2021/12/17/the-third-web/">
+                  "The Third Web"
+                </ExternalLink>
+                <span> by tante</span>
+              </li>
+              <li>
+                <ExternalLink href="https://www.usenix.org/publications/loginonline/web3-fraud">
+                  "The Web3 Fraud"
+                </ExternalLink>
+                <span> by Nicholas Weaver</span>
+              </li>
+              <li>
+                <ExternalLink href="https://the-crypto-syllabus.com/web3-a-map-in-search-of-territory/">
+                  "Web3: A Map in Search of Territory"
+                </ExternalLink>
+                <span> by Evgeny Morozov</span>
+              </li>
+            </ul>
+            <h4>Crypto more broadly</h4>
+            <ul>
+              <li>
+                <i>
+                  <ExternalLink href="https://davidgerard.co.uk/blockchain/book/">
+                    Attack of the 50 Foot Blockchain
+                  </ExternalLink>
+                  <span> by David Gerard (book)</span>
+                </i>
+              </li>
+              <li>
+                <ExternalLink href="https://blog.dshr.org/2022/02/ee380-talk.html">
+                  Slides and transcript
+                </ExternalLink>
+                <span> or </span>
+                <ExternalLink href="https://www.youtube.com/watch?v=twrduL8aNGE">
+                  video
+                </ExternalLink>
+                <span>
+                  {" "}
+                  of David S. H. Rosenthal's talk to Stanford EE Computer
+                  Systems students
+                </span>
+              </li>
+              <li>
+                <ExternalLink href="https://www.youtube.com/watch?v=xCHab0dNnj4">
+                  Blockchains and Cryptocurrencies: Burn It With Fire
+                </ExternalLink>
+                <span> lecture by Nicholas Weaver (video)</span>
+              </li>
+              <li>
+                <ExternalLink href="https://onezero.medium.com/the-inevitability-of-trusted-third-parties-a51cbcffc4e2">
+                  "The Inevitability of Trusted Third Parties"
+                </ExternalLink>
+                <span> by Cory Doctorow</span>
+              </li>
+            </ul>
+          </div>
+          <h3>Other collections of resources</h3>
           <ul>
             <li>
               <ExternalLink href="https://blog.mollywhite.net/blockchain/">
                 My own longer-form writing
               </ExternalLink>
             </li>
-            <h4>Web3</h4>
-            <li>
-              <ExternalLink href="https://www.stephendiehl.com/blog/web3-bullshit.html">
-                <span>"Web3 is bullshit"</span>
-              </ExternalLink>
-              <span> by Stephen Diehl</span>
-            </li>
-            <li>
-              <ExternalLink href="https://www.youtube.com/watch?v=YQ_xWvX1n9g">
-                <span>"Line Goes Up – The Problem With NFTs"</span>
-              </ExternalLink>
-              <span> by Dan Olson (video)</span>
-            </li>
-            <li>
-              <ExternalLink href="https://www.oreilly.com/radar/why-its-too-early-to-get-excited-about-web3/">
-                <span>"Why it's too early to get excited about Web3"</span>
-              </ExternalLink>
-              <span> by Tim O'Reilly</span>
-            </li>
-            <li>
-              <ExternalLink href="https://society.robinsloan.com/archive/notes-on-web3/">
-                "Notes on Web3"
-              </ExternalLink>
-              <span> by Robin Sloan</span>
-            </li>
-            <li>
-              <ExternalLink href="https://tante.cc/2021/12/17/the-third-web/">
-                "The Third Web"
-              </ExternalLink>
-              <span> by tante</span>
-            </li>
-            <li>
-              <ExternalLink href="https://www.usenix.org/publications/loginonline/web3-fraud">
-                "The Web3 Fraud"
-              </ExternalLink>
-              <span> by Nicholas Weaver</span>
-            </li>
-            <li>
-              <ExternalLink href="https://the-crypto-syllabus.com/web3-a-map-in-search-of-territory/">
-                "Web3: A Map in Search of Territory"
-              </ExternalLink>
-              <span> by Evgeny Morozov</span>
-            </li>
-            <h4>Crypto more broadly</h4>
-            <li>
-              <i>
-                <ExternalLink href="https://davidgerard.co.uk/blockchain/book/">
-                  Attack of the 50 Foot Blockchain
-                </ExternalLink>
-                <span> by David Gerard (book)</span>
-              </i>
-            </li>
-            <li>
-              <ExternalLink href="https://blog.dshr.org/2022/02/ee380-talk.html">
-                Slides and transcript
-              </ExternalLink>
-              <span> or </span>
-              <ExternalLink href="https://www.youtube.com/watch?v=twrduL8aNGE">
-                video
-              </ExternalLink>
-              <span>
-                {" "}
-                of David S. H. Rosenthal's talk to Stanford EE Computer Systems
-                students
-              </span>
-            </li>
-            <li>
-              <ExternalLink href="https://www.youtube.com/watch?v=xCHab0dNnj4">
-                Blockchains and Cryptocurrencies: Burn It With Fire
-              </ExternalLink>
-              <span> lecture by Nicholas Weaver (video)</span>
-            </li>
-            <li>
-              <ExternalLink href="https://onezero.medium.com/the-inevitability-of-trusted-third-parties-a51cbcffc4e2">
-                "The Inevitability of Trusted Third Parties"
-              </ExternalLink>
-              <span> by Cory Doctorow</span>
-            </li>
-          </ul>
-          <h3>Other collections of resources</h3>
-          <ul>
             <li>
               <ExternalLink href="https://web3.lifeitself.us/guide">
                 Making Sense of Crypto and Web3 Guide
