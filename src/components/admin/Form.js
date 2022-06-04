@@ -6,6 +6,7 @@ import { EMPTY_ENTRY, isValidEntry } from "../../js/entry";
 
 import Entry from "../timeline/Entry";
 import IconSelector from "./IconSelector";
+import EntryTextArea from "./EntryTextArea";
 import FilterSelector from "./FilterSelector";
 import LinkField from "./LinkField.js";
 
@@ -150,17 +151,7 @@ export default function Form() {
             ></input>
           </div>
         </div>
-        <div className="row">
-          <div className="group">
-            <label htmlFor="body">Body: </label>
-            <textarea
-              rows={10}
-              id="body"
-              onChange={createFieldSetter("body")}
-              value={entry.body}
-            />
-          </div>
-        </div>
+        <EntryTextArea entry={entry} onBodyChange={createFieldSetter("body")} />
         <div className="row stretch">
           <FilterSelector filter="theme" entry={entry} setEntry={setEntry} />
           <FilterSelector filter="tech" entry={entry} setEntry={setEntry} />
