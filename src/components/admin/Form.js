@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 
 import { signOut, upload } from "../../js/admin";
+import { generateReadableId } from "../../js/utilities";
 
 import { EMPTY_ENTRY, isValidEntry } from "../../js/entry";
 
@@ -21,14 +22,7 @@ export default function Form() {
     href: "",
   });
   const generatedReadableId = useMemo(
-    () =>
-      entry.title
-        .replace(/(<[^>]+>)/gm, "")
-        .replace(/&nbsp;/g, " ")
-        .replace(/[^a-zA-Z0-9\- ]/g, "")
-        .toLowerCase()
-        .replace(/^(an?|the) /m, "")
-        .replace(/[. ]/g, "-"),
+    () => generateReadableId(entry.title),
     [entry.title]
   );
   const [isUploading, setIsUploading] = useState(false);

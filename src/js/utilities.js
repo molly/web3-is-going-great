@@ -98,3 +98,13 @@ export const getCollectionName = (coll, allCollections) =>
   coll in allCollections
     ? allCollections[coll]
     : sentenceCase(coll.replace("-", " "));
+
+export const generateReadableId = (title) =>
+  title
+    .replace(/(<[^>]+>)/gm, "") // Strip HTML
+    .replace(/&nbsp;/g, " ") // &nbsp -> regular space
+    .replace(/[^a-zA-Z0-9.\- ]/g, "") // Remove non alphanumeric characters
+    .replace(/((?<!\d)\.|\.(?!\d))/g, "") // Remove any .s except for ones between two digits
+    .toLowerCase()
+    .replace(/^(an?|the) /m, "") // Remove "an" or "the" at beginning of title
+    .replace(/[. ]/g, "-"); // Replace spaces and .s with -s
