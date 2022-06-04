@@ -38,7 +38,7 @@ export default function Glossary({ glossary }) {
       </header>
       <BackBar />
       <div className="content-wrapper">
-        <article className="generic-page">
+        <article className="generic-page longform-text">
           <dl>
             {glossary.entries.map((entry) => (
               <div

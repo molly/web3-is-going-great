@@ -105,7 +105,7 @@ export default function Contribute({ money }) {
       </header>
       <BackBar />
       <div className="content-wrapper">
-        <article className="generic-page">
+        <article className="generic-page longform-text">
           <h2>Suggest an addition or change</h2>
           <p>
             The best and quickest way to suggest an addition or change to this

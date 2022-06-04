@@ -31,7 +31,7 @@ export default function Attribution({ attribution }) {
       </header>
       <BackBar />
       <div className="content-wrapper">
-        <article className="generic-page">
+        <article className="generic-page longform-text">
           <p>
             Text is licensed under the{" "}
             <ExternalLink

@@ -21,7 +21,7 @@ export default function WhatIsWeb3() {
       </header>
       <BackBar />
       <div className="content-wrapper">
-        <article className="generic-page what-page">
+        <article className="generic-page what-page longform-text">
           <p>
             One of the most distinguishing features of "web3" is the sheer level
             of handwaviness surrounding it. While you can find no end of press

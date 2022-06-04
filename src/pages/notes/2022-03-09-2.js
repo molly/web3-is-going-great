@@ -15,7 +15,7 @@ export default function Notes202203092() {
       </header>
       <BackBar />
       <div className="content-wrapper">
-        <article className="generic-page">
+        <article className="generic-page longform-text">
           <h2>Translation of RockTrader's tweets</h2>
           <p>
             <a

@@ -248,7 +248,11 @@ export default function Entry({
   };
 
   const renderImage = () => {
-    if (entry.image && (windowWidth !== "sm" || !entry.image.isLogo)) {
+    if (
+      entry.image &&
+      entry.image.src &&
+      (windowWidth !== "sm" || !entry.image.isLogo)
+    ) {
       return (
         <div
           className={clsx(

@@ -21,7 +21,7 @@ export default function WhatIsWeb3() {
       </header>
       <BackBar />
       <div className="content-wrapper">
-        <article className="generic-page">
+        <article className="generic-page longform-text">
           <h3>What is this?</h3>
           <p>
             Web3 Is Going Great is a project to track some examples of how
