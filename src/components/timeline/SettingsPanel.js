@@ -6,6 +6,9 @@ export default function SettingsPanel({
   setIsSettingsPanelShown,
   isAnimationPaused,
   toggleFlamesAnimation,
+  isFireworksAnimationPaused,
+  toggleFireworksAnimation,
+  fireworksEnabled,
   isGriftCounterExpanded,
   toggleShowGriftCounter,
   isGriftCounterCountingUp,
@@ -56,6 +59,15 @@ export default function SettingsPanel({
         >
           Animate flames
         </SettingsCheckbox>
+        {fireworksEnabled && (
+          <SettingsCheckbox
+            id="animate-fireworks"
+            checked={!isFireworksAnimationPaused}
+            toggleCheckbox={toggleFireworksAnimation}
+          >
+            Animate fireworks
+          </SettingsCheckbox>
+        )}
         <div className="radio-group">
           <h4>Grift counter direction</h4>
           <div className="input-group">
@@ -96,6 +108,10 @@ SettingsPanel.propTypes = {
 
   isAnimationPaused: PropTypes.bool, // Can be null
   toggleFlamesAnimation: PropTypes.func.isRequired,
+
+  isFireworksAnimationPaused: PropTypes.bool, // Can be null
+  toggleFireworksAnimation: PropTypes.func.isRequired,
+  fireworksEnabled: PropTypes.bool.isRequired,
 
   isGriftCounterExpanded: PropTypes.bool.isRequired,
   toggleShowGriftCounter: PropTypes.func.isRequired,

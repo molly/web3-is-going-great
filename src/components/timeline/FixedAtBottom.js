@@ -12,6 +12,7 @@ import {
 import ScrollToTop from "./ScrollToTop";
 import GriftCounter from "./GriftCounter";
 import SettingsPanel from "./SettingsPanel";
+import FireworksAnimation from "./FireworksAnimation";
 
 export default function FixedAtBottom({
   headerInView,
@@ -40,6 +41,29 @@ export default function FixedAtBottom({
     getLocalStorage(LOCALSTORAGE_KEYS.flamesAnimationPaused, null) ||
       prefersReducedMotion ||
       null
+  );
+  const [isFireworksAnimationPaused, setIsFireworksAnimationPaused] = useState(
+    getLocalStorage(LOCALSTORAGE_KEYS.fireworksAnimationPaused, null) ||
+      prefersReducedMotion ||
+      null
+  );
+
+  const fireworksEnabled = useMemo(
+    () => griftTotal >= 10000000000,
+    [griftTotal]
+  );
+  const shouldRenderFireworks = useMemo(
+    () =>
+      fireworksEnabled &&
+      !isFireworksAnimationPaused &&
+      !isGriftCounterCountingUp &&
+      isGriftCounterExpanded,
+    [
+      fireworksEnabled,
+      isFireworksAnimationPaused,
+      isGriftCounterCountingUp,
+      isGriftCounterExpanded,
+    ]
   );
 
   const makeToggleFunction = useCallback(
@@ -91,6 +115,15 @@ export default function FixedAtBottom({
       ),
     [makeToggleFunction, isAnimationPaused]
   );
+  const toggleFireworksAnimation = useMemo(
+    () =>
+      makeToggleFunction(
+        isFireworksAnimationPaused,
+        setIsFireworksAnimationPaused,
+        LOCALSTORAGE_KEYS.fireworksAnimationPaused
+      ),
+    [makeToggleFunction, isFireworksAnimationPaused]
+  );
 
   if (!isBrowserRendering) {
     return null;
@@ -111,30 +144,36 @@ export default function FixedAtBottom({
   );
 
   return (
-    <div className="fix-at-bottom">
-      {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
-      {renderSettingsButton()}
-      {isSettingsPanelShown && (
-        <SettingsPanel
-          setIsSettingsPanelShown={setIsSettingsPanelShown}
-          isAnimationPaused={isAnimationPaused}
-          toggleFlamesAnimation={toggleFlamesAnimation}
-          isGriftCounterExpanded={isGriftCounterExpanded}
-          toggleShowGriftCounter={toggleShowGriftCounter}
-          isGriftCounterCountingUp={isGriftCounterCountingUp}
-          toggleIsGriftCounterCountingUp={toggleIsGriftCounterCountingUp}
-        />
-      )}
-      {shouldRenderGriftCounter && isGriftCounterExpanded && (
-        <GriftCounter
-          onClick={toggleShowSettingsPanel}
-          runningGriftTotal={runningGriftTotal}
-          griftTotal={griftTotal}
-          isGriftCounterCountingUp={isGriftCounterCountingUp}
-          isAnimationPaused={isAnimationPaused}
-        />
-      )}
-    </div>
+    <>
+      {shouldRenderFireworks && <FireworksAnimation />}
+      <div className="fix-at-bottom">
+        {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
+        {renderSettingsButton()}
+        {isSettingsPanelShown && (
+          <SettingsPanel
+            setIsSettingsPanelShown={setIsSettingsPanelShown}
+            isAnimationPaused={isAnimationPaused}
+            toggleFlamesAnimation={toggleFlamesAnimation}
+            isFireworksAnimationPaused={isFireworksAnimationPaused}
+            toggleFireworksAnimation={toggleFireworksAnimation}
+            fireworksEnabled={fireworksEnabled}
+            isGriftCounterExpanded={isGriftCounterExpanded}
+            toggleShowGriftCounter={toggleShowGriftCounter}
+            isGriftCounterCountingUp={isGriftCounterCountingUp}
+            toggleIsGriftCounterCountingUp={toggleIsGriftCounterCountingUp}
+          />
+        )}
+        {shouldRenderGriftCounter && isGriftCounterExpanded && (
+          <GriftCounter
+            onClick={toggleShowSettingsPanel}
+            runningGriftTotal={runningGriftTotal}
+            griftTotal={griftTotal}
+            isGriftCounterCountingUp={isGriftCounterCountingUp}
+            isAnimationPaused={isAnimationPaused}
+          />
+        )}
+      </div>
+    </>
   );
 }
 

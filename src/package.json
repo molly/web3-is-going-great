@@ -17,6 +17,7 @@
     "clsx": "^1.1.1",
     "downshift": "^6.1.7",
     "firebase": "^9.8.2",
+    "fireworks-js": "^1.4.0",
     "moment": "^2.29.3",
     "next": "12.1.6",
     "normalize.css": "^8.0.1",
