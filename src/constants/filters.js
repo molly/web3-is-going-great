@@ -29,7 +29,7 @@ const FILTERS = {
   blockchain: {
     avalanche: "Avalanche",
     bitcoin: "Bitcoin",
-    bsc: "BSC",
+    bsc: "BNB Chain",
     celo: "Celo",
     cosmos: "Cosmos",
     ethereum: "Ethereum",
