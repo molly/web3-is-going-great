@@ -43,7 +43,6 @@ const FILTERS = {
     solana: "Solana",
     terra: "Terra",
     tezos: "Tezos",
-    stablecoins: "stablecoins",
     wax: "WAX",
   },
 };
