@@ -30,7 +30,7 @@
     "@firebase/app-compat": "^0.1.26",
     "@types/ejs": "^3.1.1",
     "@types/mkdirp": "^1.0.2",
-    "@types/sharp": "^0.30.2",
+    "@types/sharp": "^0.30.4",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
     "eslint": "^8.16.0",
