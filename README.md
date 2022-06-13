@@ -1,6 +1,6 @@
 # [web3 is going just great](https://web3isgoinggreat.com)
 
-A timeline of some of the greatest hits in cryptocurrencies, NFTs, and other web3 projects since the beginning of 2021.
+A timeline recording only some of the many disasters happening in crypto, decentralized finance, NFTs, and other blockchain-based projects.
 
 ![Website screenshot](/screenshot.png)
 

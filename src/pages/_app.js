@@ -29,7 +29,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           name="description"
           key="description"
-          content="A timeline of some of the greatest hits in cryptocurrencies, NFTs, and other web3 projects since the beginning of 2021."
+          content="A timeline recording only some of the many disasters happening in crypto, decentralized finance, NFTs, and other blockchain-based projects."
         />
         <meta name="author" content="Molly White" />
         <meta name="msapplication-TileColor" content="#603cba" />
@@ -49,7 +49,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           property="og:description"
           key="ogdescription"
-          content="A timeline of some of the greatest hits in cryptocurrencies, NFTs, and other web3 projects since the beginning of 2021"
+          content="A timeline recording only some of the many disasters happening in crypto, decentralized finance, NFTs, and other blockchain-based projects."
         />
         <meta
           property="og:image"
@@ -80,7 +80,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           name="twitter:description"
           key="twitterdescription"
-          content="A timeline of some of the greatest hits in cryptocurrencies, NFTs, and other web3 projects since the beginning of 2021."
+          content="A timeline recording only some of the many disasters happening in crypto, decentralized finance, NFTs, and other blockchain-based projects."
         />
         <meta
           name="twitter:image"
