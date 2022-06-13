@@ -25,6 +25,7 @@ const FILTERS = {
     defi: "DeFi",
     metaverse: "metaverse",
     nft: "NFT",
+    stablecoins: "stablecoins",
   },
   blockchain: {
     avalanche: "Avalanche",
