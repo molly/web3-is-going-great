@@ -16,11 +16,19 @@ const Header = forwardRef(function Header(
     focus: () => componentRef.current.focus(),
   }));
 
-  const renderMainPageLink = (contents) => {
+  const renderMainPageLink = (contents, className = null) => {
     if (clearAllFiltering && isBrowserRendering) {
-      return cloneElement(contents, { onClick: clearAllFiltering });
+      return (
+        <button className={className} onClick={clearAllFiltering}>
+          {contents}
+        </button>
+      );
     }
-    return <Link href="/">{contents}</Link>;
+    return (
+      <Link href="/">
+        <a className={className}>{contents}</a>
+      </Link>
+    );
   };
 
   const renderLinks = () => (
@@ -58,14 +66,13 @@ const Header = forwardRef(function Header(
   const renderImage = () => {
     const imageSize = windowWidth === "xl" ? 500 : 300;
     return renderMainPageLink(
-      <a className="logo-image-link">
-        {/* eslint-disable-next-line @next/next/no-img-element*/}
-        <img
-          className="logo"
-          src={`${STORAGE_URL}/monkey_${imageSize}.webp`}
-          alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
-        />
-      </a>
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        className="logo"
+        src={`${STORAGE_URL}/monkey_${imageSize}.webp`}
+        alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
+      />,
+      "logo-image-link"
     );
   };
 
@@ -95,7 +102,7 @@ const Header = forwardRef(function Header(
         {windowWidth !== "sm" && renderImage()}
         <div className="header-content">
           <h1 ref={componentRef} tabIndex={-1}>
-            {renderMainPageLink(<a>Web3 is going just great</a>)}
+            {renderMainPageLink(<span>Web3 is going just great</span>)}
           </h1>
           <p className="subtitle">
             ...and is definitely not an enormous grift that's pouring lighter

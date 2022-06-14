@@ -41,7 +41,7 @@ button
   padding: 0
   cursor: pointer
 
-h1, h1 a
+h1, h1 a, h1 button
   font-family: $display-font, serif
   margin-top: 0
   color: $title-color
@@ -80,7 +80,7 @@ footer.page-footer
 
 header.page-header .header-content,
 footer.page-footer
-  h1 a, h1 a:hover
+  h1 a, h1 a:hover, h1 button, h1 button:hover
     border-bottom: none
 
   a
@@ -103,7 +103,7 @@ header.page-header.timeline-page
     flex-wrap: nowrap
     justify-content: space-between
 
-  a.logo-image-link, img.logo
+  .logo-image-link, img.logo
     max-height: 300px
     display: block
     border: 0
@@ -852,7 +852,7 @@ table.expenses
   footer.page-footer
     background-color: $dark-header-footer-background
 
-    h1, h1 a, p, ul
+    h1, h1 a, h1 button, p, ul
       color: $dark-header-footer-body-color
 
     img.logo
@@ -863,7 +863,7 @@ table.expenses
       border-bottom: 1px dashed lighten($header-footer-background, 20%)
       color: $dark-header-footer-link-color
 
-    h1 a
+    h1 a, h1 button
       border-bottom: none
 
   header.page-header.timeline-page li:not(:first-child):before
