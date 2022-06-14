@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useImperativeHandle, useRef, cloneElement } from "react";
 import PropTypes from "prop-types";
 import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 
@@ -7,11 +7,21 @@ import { STORAGE_URL } from "../../constants/urls";
 import Link from "next/link";
 import ExternalLink from "../ExternalLink";
 
-const Header = forwardRef(function Header({ windowWidth }, ref) {
+const Header = forwardRef(function Header(
+  { windowWidth, isBrowserRendering, clearAllFiltering },
+  ref
+) {
   const componentRef = useRef();
   useImperativeHandle(ref && ref.focusRef ? ref.focusRef : null, () => ({
     focus: () => componentRef.current.focus(),
   }));
+
+  const renderMainPageLink = (contents) => {
+    if (clearAllFiltering && isBrowserRendering) {
+      return cloneElement(contents, { onClick: clearAllFiltering });
+    }
+    return <Link href="/">{contents}</Link>;
+  };
 
   const renderLinks = () => (
     <>
@@ -47,17 +57,15 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
 
   const renderImage = () => {
     const imageSize = windowWidth === "xl" ? 500 : 300;
-    return (
-      <Link href="/">
-        <a className="logo-image-link">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="logo"
-            src={`${STORAGE_URL}/monkey_${imageSize}.webp`}
-            alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
-          />
-        </a>
-      </Link>
+    return renderMainPageLink(
+      <a className="logo-image-link">
+        {/* eslint-disable-next-line @next/next/no-img-element*/}
+        <img
+          className="logo"
+          src={`${STORAGE_URL}/monkey_${imageSize}.webp`}
+          alt="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames."
+        />
+      </a>
     );
   };
 
@@ -87,9 +95,7 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
         {windowWidth !== "sm" && renderImage()}
         <div className="header-content">
           <h1 ref={componentRef} tabIndex={-1}>
-            <Link href="/">
-              <a>Web3 is going just great</a>
-            </Link>
+            {renderMainPageLink(<a>Web3 is going just great</a>)}
           </h1>
           <p className="subtitle">
             ...and is definitely not an enormous grift that's pouring lighter
@@ -133,6 +139,8 @@ const Header = forwardRef(function Header({ windowWidth }, ref) {
 Header.propTypes = {
   windowWidth: WindowWidthPropType,
   nojs: PropTypes.bool,
+  isBrowserRendering: PropTypes.bool,
+  clearAllFiltering: PropTypes.func,
 };
 
 Header.defaultProps = {

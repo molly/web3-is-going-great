@@ -40,14 +40,14 @@ export async function getServerSideProps(context) {
     }
 
     if (context.query.id) {
-      props.startAtId = context.query.id;
+      props.initialStartAtId = context.query.id;
     }
   }
 
   const promises = [
     getEntries({
       ...props.initialFilters,
-      ...(props.startAtId && { startAtId: props.startAtId }),
+      ...(props.initialStartAtId && { startAtId: props.initialStartAtId }),
     }),
     getGlossaryEntries(),
     getMetadata(),
@@ -70,7 +70,7 @@ export async function getServerSideProps(context) {
 
 export default function IndexPage({
   firstEntries,
-  startAtId,
+  initialStartAtId,
   initialFilters,
   glossary,
   griftTotal,
@@ -82,6 +82,7 @@ export default function IndexPage({
 
   const [collection, setCollectionState] = useState(initialCollection);
   const [filters, setFilterState] = useState(initialFilters);
+  const [startAtId, setStartAtId] = useState(initialStartAtId);
   const [selectedEntryFromSearch, setSelectedEntryFromSearch] = useState(null);
 
   useEffect(() => {
@@ -145,6 +146,17 @@ export default function IndexPage({
     setCollectionState(coll);
   };
 
+  const clearAllFiltering = (scrollToTop = false) => {
+    if (scrollToTop) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+    router.push({ query: {} }, null, { shallow: true });
+    setSelectedEntryFromSearch(null);
+    setFilterState(EMPTY_FILTERS_STATE);
+    setStartAtId(null);
+    setCollectionState(null);
+  };
+
   const getFilteredEntries = useCallback(
     ({ pageParam = null }) => {
       if (selectedEntryFromSearch) {
@@ -161,7 +173,7 @@ export default function IndexPage({
   );
 
   const queryResult = useInfiniteQuery(
-    ["entries", filters, selectedEntryFromSearch, collection],
+    ["entries", filters, selectedEntryFromSearch, collection, startAtId],
     getFilteredEntries,
     {
       refetchOnMount: false,
@@ -198,6 +210,7 @@ export default function IndexPage({
       setCollection={setCollection}
       setFilters={setFilters}
       setSelectedEntryFromSearch={setSelectedEntryFromSearch}
+      clearAllFiltering={clearAllFiltering}
     />
   );
 }
@@ -210,8 +223,8 @@ IndexPage.propTypes = {
   }).isRequired,
   initialFilters: FiltersPropType.isRequired,
   initialCollection: PropTypes.string,
+  initialStartAtId: PropTypes.string,
   glossary: PropTypes.object.isRequired,
-  startAtId: PropTypes.string,
   griftTotal: PropTypes.number.isRequired,
   allCollections: PropTypes.object.isRequired,
 };

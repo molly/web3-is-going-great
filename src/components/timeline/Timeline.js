@@ -34,6 +34,7 @@ export default function Timeline({
   setCollection,
   setFilters,
   setSelectedEntryFromSearch,
+  clearAllFiltering,
 }) {
   const isBrowserRendering = useIsBrowserRendering();
   const windowWidth = useWindowWidth();
@@ -65,7 +66,7 @@ export default function Timeline({
       data.pages &&
       data.pages.length &&
       data.pages[0] &&
-      data.pages[0].hasPrev,
+      !!data.pages[0].hasPrev,
     [data, isSuccess]
   );
 
@@ -74,10 +75,9 @@ export default function Timeline({
     [collection, hasPreviousEntries, startAtId]
   );
 
-  const shouldRenderGoToTop = useMemo(
-    () => (!!startAtId && hasPreviousEntries) || !!selectedEntryFromSearch,
-    [startAtId, hasPreviousEntries, selectedEntryFromSearch]
-  );
+  const shouldRenderGoToTop = useMemo(() => {
+    return (!!startAtId && hasPreviousEntries) || !!selectedEntryFromSearch;
+  }, [startAtId, hasPreviousEntries, selectedEntryFromSearch]);
 
   const collectionDescription = useMemo(
     () =>
@@ -131,9 +131,7 @@ export default function Timeline({
     return (
       <>
         <div className="load-top">
-          <button
-            onClick={() => (window.location.href = window.location.origin)}
-          >
+          <button onClick={() => clearAllFiltering(true)}>
             <span>Start from the top</span>
           </button>
         </div>
@@ -241,7 +239,9 @@ export default function Timeline({
   return (
     <>
       <Header
+        isBrowserRendering={isBrowserRendering}
         windowWidth={windowWidth}
+        clearAllFiltering={clearAllFiltering}
         ref={{ focusRef: headerFocusRef, inViewRef: headerInViewRef }}
       />
       {isBrowserRendering && collection && (
@@ -300,4 +300,5 @@ Timeline.propTypes = {
   setCollection: PropTypes.func.isRequired,
   setFilters: PropTypes.func.isRequired,
   setSelectedEntryFromSearch: PropTypes.func.isRequired,
+  clearAllFiltering: PropTypes.func.isRequired,
 };
