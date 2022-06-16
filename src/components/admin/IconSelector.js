@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import FILTERS from "../../constants/filters";
 
 import Select from "react-select";
+import { useMemo } from "react";
 
 const ALL_ICONS = {
   poo: { type: "fa", value: "poo", text: FILTERS.theme.badIdea },
@@ -36,6 +37,27 @@ const ALL_ICONS = {
 };
 
 export default function IconSelector({ updateEntry, value }) {
+  const selectorOptions = useMemo(
+    () =>
+      Object.keys(ALL_ICONS)
+        .sort((a, b) => {
+          const aText = ALL_ICONS[a].text;
+          const bText = ALL_ICONS[b].text;
+          if (aText < bText) {
+            return -1;
+          }
+          if (aText > bText) {
+            return 1;
+          }
+          return 0;
+        })
+        .reduce((acc, key) => {
+          acc.push({ value: key, label: ALL_ICONS[key].text });
+          return acc;
+        }, []),
+    []
+  );
+
   const onChange = ({ value }) => {
     const selectedIcon = ALL_ICONS[value];
     if (selectedIcon.type === "fa") {
@@ -48,10 +70,7 @@ export default function IconSelector({ updateEntry, value }) {
   return (
     <Select
       instanceId="iconSelector"
-      options={Object.entries(ALL_ICONS).map(([key, value]) => ({
-        value: key,
-        label: value.text,
-      }))}
+      options={selectorOptions}
       placeholder="Icon"
       onChange={onChange}
       value={value ? { value, label: ALL_ICONS[value].text } : null}
