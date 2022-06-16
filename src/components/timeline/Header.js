@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useRef, cloneElement } from "react";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 import PropTypes from "prop-types";
 import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 
