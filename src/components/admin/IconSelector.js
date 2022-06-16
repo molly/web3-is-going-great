@@ -23,7 +23,7 @@ const ALL_ICONS = {
     value: "face-grimace",
     text: FILTERS.theme.yikes,
   },
-  collapse: {
+  burst: {
     type: "fa",
     value: "burst",
     text: FILTERS.theme.collapse,
