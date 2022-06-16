@@ -23,6 +23,11 @@ const ALL_ICONS = {
     value: "face-grimace",
     text: FILTERS.theme.yikes,
   },
+  collapse: {
+    type: "fa",
+    value: "burst",
+    text: FILTERS.theme.collapse,
+  },
 
   hack: { type: "img", value: "hack", text: FILTERS.theme.hack },
   hmm: { type: "img", value: "hmm", text: FILTERS.theme.hmm },
