@@ -69,26 +69,12 @@ export default function Contribute({ money }) {
   const renderOtherDonationLinks = () => {
     return (
       <>
-        <a href="https://www.colorstack.org/" target="_blank" rel="noopener">
+        <ExternalLink href="https://www.colorstack.org/">
           ColorStack
-        </a>
-        ,{" "}
-        <a href="https://www.underdogdevs.org/" target="_blank" rel="noopener">
-          Underdog Devs
-        </a>
-        ,{" "}
-        <a href="https://girlswhocode.com/" target="_blank" rel="noopener">
-          Girls Who Code
-        </a>
-        *, or{" "}
-        <a
-          href="https://www.blackgirlscode.com/"
-          target="_blank"
-          rel="noopener"
-        >
-          Black Girls Code
-        </a>
-        *
+        </ExternalLink>
+        , <ExternalLink>Underdog Devs</ExternalLink>,{" "}
+        <ExternalLink>Girls Who Code</ExternalLink>
+        *, or <ExternalLink>Black Girls Code</ExternalLink>*
       </>
     );
   };
@@ -133,7 +119,12 @@ export default function Contribute({ money }) {
           <h2>Donate</h2>
           <p>
             If you were hoping to donate, please consider donating to causes
-            that need it more than me, like {renderOtherDonationLinks()}.
+            that need it more than me, like {renderOtherDonationLinks()}. This
+            project also benefits enormously from the non-profit{" "}
+            <ExternalLink href="https://free.law/donate/">
+              Free Law Project
+            </ExternalLink>
+            , which provides invaluable access to court records for free.
           </p>
           <p>
             While I accept donations to cover what I pay to keep the site
