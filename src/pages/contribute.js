@@ -71,16 +71,20 @@ export default function Contribute({ money }) {
       <>
         <ExternalLink href="https://www.colorstack.org/">
           ColorStack
-        </ExternalLink>, 
+        </ExternalLink>
+        ,{" "}
         <ExternalLink href="https://www.underdogdevs.org/">
           Underdog Devs
-        </ExternalLink>, 
+        </ExternalLink>
+        ,{" "}
         <ExternalLink href="https://girlswhocode.com/">
           Girls Who Code
-        </ExternalLink>*, 
+        </ExternalLink>
+        *, or{" "}
         <ExternalLink href="https://www.blackgirlscode.com/">
           Black Girls Code
-        </ExternalLink>*
+        </ExternalLink>
+        *
       </>
     );
   };
