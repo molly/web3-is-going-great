@@ -106,7 +106,7 @@ const Header = forwardRef(function Header(
           </h1>
           <p className="subtitle">
             ...and is definitely not an enormous grift that's pouring lighter
-            fluid on our already-smoldering planet.
+            fluid on our already smoldering planet.
           </p>
           <p>
             Follow updates on{" "}
