@@ -6,7 +6,7 @@ const FireworksAnimation = () => {
     initialStart: true,
     initialOptions: {
       traceSpeed: 1,
-      delay: { min: 100, max: 500 },
+      delay: { min: 100, max: 300 },
     },
   });
 
