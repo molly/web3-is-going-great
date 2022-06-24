@@ -21,7 +21,12 @@ const FireworksAnimation = () => {
   }, [setEnabled]);
 
   return (
-    <Fireworks className="fireworks" options={options} enabled={enabled} />
+    <Fireworks
+      className="fireworks"
+      options={options}
+      enabled={enabled}
+      style={{ width: "250px", height: "200px" }}
+    />
   );
 };
 
