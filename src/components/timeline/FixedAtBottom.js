@@ -35,7 +35,7 @@ export default function FixedAtBottom({
     getLocalStorage(LOCALSTORAGE_KEYS.griftCounterExpanded, true)
   );
   const [isGriftCounterCountingUp, setIsGriftCounterCountingUp] = useState(
-    getLocalStorage(LOCALSTORAGE_KEYS.griftCounterCountUp, true)
+    getLocalStorage(LOCALSTORAGE_KEYS.griftCounterCountUp, false)
   );
   const [isAnimationPaused, setIsAnimationPaused] = useState(
     getLocalStorage(LOCALSTORAGE_KEYS.flamesAnimationPaused, null) ||
