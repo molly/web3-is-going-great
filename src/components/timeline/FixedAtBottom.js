@@ -57,11 +57,13 @@ export default function FixedAtBottom({
       fireworksEnabled &&
       !isFireworksAnimationPaused &&
       !isGriftCounterCountingUp &&
+      shouldRenderGriftCounter &&
       isGriftCounterExpanded,
     [
       fireworksEnabled,
       isFireworksAnimationPaused,
       isGriftCounterCountingUp,
+      shouldRenderGriftCounter,
       isGriftCounterExpanded,
     ]
   );
