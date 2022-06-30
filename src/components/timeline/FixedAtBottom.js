@@ -48,10 +48,7 @@ export default function FixedAtBottom({
       null
   );
 
-  const fireworksEnabled = useMemo(
-    () => griftTotal >= 10000000000,
-    [griftTotal]
-  );
+  const fireworksEnabled = false; // Turning this off after $10B milestone, leaving code for the next milestone
   const shouldRenderFireworks = useMemo(
     () =>
       fireworksEnabled &&
