@@ -16,6 +16,7 @@ import {
 import { getEntries } from "../db/entries";
 import { getGlossaryEntries } from "../db/glossary";
 import { getMetadata } from "../db/metadata";
+import { search as searchEntries } from "../db/searchEntries";
 
 import Timeline from "../components/timeline/Timeline";
 
@@ -44,11 +45,14 @@ export async function getServerSideProps(context) {
     }
   }
 
+  const searchTerm = context.query.search;
   const promises = [
-    getEntries({
-      ...props.initialFilters,
-      ...(props.initialStartAtId && { startAtId: props.initialStartAtId }),
-    }),
+    searchTerm
+      ? searchEntries(searchTerm, { ...props.initialFilters }, 0)
+      : getEntries({
+          ...props.initialFilters,
+          ...(props.initialStartAtId && { startAtId: props.initialStartAtId }),
+        }),
     getGlossaryEntries(),
     getMetadata(),
   ];
@@ -172,22 +176,42 @@ export default function IndexPage({
     [collection, filters, selectedEntryFromSearch]
   );
 
+  const searchTerm = router.query.search;
+  const search = useCallback(
+    ({ pageParam }) => searchEntries(searchTerm, filters, pageParam),
+    [searchTerm, filters]
+  );
+
+  const algoliaNextPageParam = ({ offset, length, hasNext }) =>
+    hasNext ? offset + length : undefined;
+
+  const firebaseNextPageParam = (lastPage) => {
+    if (!lastPage) {
+      // This is the first fetch, so we have no cursor
+      return null;
+    }
+    if (!lastPage.hasNext) {
+      // No entries remain, return undefined to signal this to react-query
+      return undefined;
+    }
+    return lastPage.entries[lastPage.entries.length - 1]._key;
+  };
+
   const queryResult = useInfiniteQuery(
-    ["entries", filters, selectedEntryFromSearch, collection, startAtId],
-    getFilteredEntries,
+    [
+      "entries",
+      filters,
+      selectedEntryFromSearch,
+      collection,
+      startAtId,
+      searchTerm,
+    ],
+    searchTerm ? search : getFilteredEntries,
     {
       refetchOnMount: false,
-      getNextPageParam: (lastPage) => {
-        if (!lastPage) {
-          // This is the first fetch, so we have no cursor
-          return null;
-        }
-        if (!lastPage.hasNext) {
-          // No entries remain, return undefined to signal this to react-query
-          return undefined;
-        }
-        return lastPage.entries[lastPage.entries.length - 1]._key;
-      },
+      getNextPageParam: searchTerm
+        ? algoliaNextPageParam
+        : firebaseNextPageParam,
       ...(!selectedEntryFromSearch && {
         initialData: {
           pages: [firstEntries],
