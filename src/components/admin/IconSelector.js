@@ -29,9 +29,9 @@ const ALL_ICONS = {
     value: "burst",
     text: FILTERS.theme.collapse,
   },
-  viruses: {
+  biohazard: {
     type: "fa",
-    value: "viruses",
+    value: "biohazard",
     text: FILTERS.theme.contagion,
   },
 
