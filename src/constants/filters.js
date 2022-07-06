@@ -7,6 +7,7 @@ const FILTERS = {
     bug: "Bug",
     bummer: "Bummer",
     collapse: "Collapse",
+    contagion: "Contagion",
     environment: "Environment",
     goodNews: "Good news",
     hack: "Hack or scam",

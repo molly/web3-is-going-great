@@ -29,6 +29,11 @@ const ALL_ICONS = {
     value: "burst",
     text: FILTERS.theme.collapse,
   },
+  bacterium: {
+    type: "fa",
+    value: "bacterium",
+    text: FILTERS.theme.contagion,
+  },
 
   hack: { type: "img", value: "hack", text: FILTERS.theme.hack },
   hmm: { type: "img", value: "hmm", text: FILTERS.theme.hmm },
