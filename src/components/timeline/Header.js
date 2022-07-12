@@ -34,7 +34,7 @@ const Header = forwardRef(function Header(
 
   const renderLinks = () => (
     <>
-      <ul>
+      <ul role="navigation" aria-label="Main">
         <li>
           <Link href="/what">
             <a>What is web3?</a>
