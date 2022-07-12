@@ -20,6 +20,7 @@ const Header = forwardRef(function Header(
     if (clearAllFiltering && isBrowserRendering) {
       return (
         <button className={className} onClick={clearAllFiltering}>
+          <span className="sr-only">Clear timeline filters</span>
           {contents}
         </button>
       );
@@ -33,7 +34,7 @@ const Header = forwardRef(function Header(
 
   const renderLinks = () => (
     <>
-      <ul>
+      <ul role="navigation" aria-label="Main">
         <li>
           <Link href="/what">
             <a>What is web3?</a>
