@@ -20,6 +20,7 @@ const Header = forwardRef(function Header(
     if (clearAllFiltering && isBrowserRendering) {
       return (
         <button className={className} onClick={clearAllFiltering}>
+          <span className="sr-only">Clear timeline filters</span>
           {contents}
         </button>
       );
