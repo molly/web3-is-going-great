@@ -80,6 +80,9 @@ export const getGriftCounterTotal = functions.https.onRequest(
       .doc("metadata")
       .get();
     const griftTotal = await metadata.get("griftTotal");
-    res.status(200).send({ total: griftTotal });
+    res
+      .set("Cache-Control", "public, max-age=300, s-maxage=600")
+      .status(200)
+      .send({ total: griftTotal });
   }
 );
