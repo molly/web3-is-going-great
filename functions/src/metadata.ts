@@ -72,17 +72,3 @@ export const recalculateGriftTotal = functions.https.onRequest(
     res.status(204).end();
   }
 );
-
-export const getGriftCounterTotal = functions.https.onRequest(
-  async (req, res) => {
-    const metadata = await firestore
-      .collection("metadata")
-      .doc("metadata")
-      .get();
-    const griftTotal = await metadata.get("griftTotal");
-    res
-      .set("Cache-Control", "public, max-age=300, s-maxage=600")
-      .status(200)
-      .send({ total: griftTotal });
-  }
-);
