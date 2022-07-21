@@ -40,12 +40,15 @@ export default function Attribution({ attribution }) {
             >
               Creative Commons Attribution 3.0 Unported License
             </ExternalLink>
-            . There doesn't seem to be a great way to convey this with a
-            license, but under <i>no</i> circumstance do I wish for my work to
-            be used in NFTs, or in any other crypto projects. Do whatever else
-            with it you want. If someone claims to have gotten consent from me
-            to make NFTs that incorporate text/screenshots/links/etc. to this
-            project, they're lying.
+            . Feel free to reuse posts on this site under those terms.
+          </p>
+          <p>
+            There doesn't seem to be a great way to convey this with a license,
+            but under <i>no</i> circumstance do I wish for my work to be used in
+            NFTs, or in any other crypto projects. Do whatever else with it you
+            want. If someone claims to have gotten consent from me to make NFTs
+            that incorporate text/screenshots/links/etc. to this project,
+            they're lying.
           </p>
           <p>
             Source code is{" "}
