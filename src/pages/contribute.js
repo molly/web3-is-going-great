@@ -194,7 +194,7 @@ export default function Contribute({ money }) {
             crypto projects in the past. While I don't support that decision, I
             do think they are doing enormously good work towards helping the
             demographics they focus on. To my knowledge, neither UnderdogDevs
-            nor CloudStack have crypto entanglements, if you are more
+            nor ColorStack have crypto entanglements, if you are more
             comfortable donating to them.
           </p>
           <p className="help-text">
