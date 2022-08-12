@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Fireworks, useFireworks } from "fireworks-js/dist/react";
+import { Fireworks, useFireworks } from "@fireworks-js/react";
 
 const FireworksAnimation = () => {
   const { enabled, options, setEnabled } = useFireworks({
