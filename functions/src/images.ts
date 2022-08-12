@@ -1,5 +1,4 @@
 import { ObjectMetadata } from "firebase-functions/lib/providers/storage";
-import { Bucket } from "@google-cloud/storage";
 import { storage } from "./config/firebase";
 
 import * as fs from "fs";
@@ -25,7 +24,7 @@ const resizeImage = async ({
   object,
   fileName,
 }: {
-  bucket: Bucket;
+  bucket: any; // Issue with Bucket type from newer version of cloud storage
   originalImage: string;
   size: number;
   object: ObjectMetadata;
