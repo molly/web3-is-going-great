@@ -27,7 +27,7 @@
     "sharp": "^0.30.7"
   },
   "devDependencies": {
-    "@firebase/app-compat": "^0.1.28",
+    "@firebase/app-compat": "^0.1.31",
     "@types/ejs": "^3.1.1",
     "@types/mkdirp": "^1.0.2",
     "@types/sharp": "^0.30.5",
