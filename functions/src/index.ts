@@ -1,9 +1,9 @@
 import { transformEntryForSearch } from "./algolia";
 import { onImageUpload } from "./images";
-import { updateGriftTotal } from "./metadata";
+import { updateMetadata } from "./metadata";
 import { updateRssOnChange } from "./rss";
 
 exports.updateRssOnChange = updateRssOnChange;
 exports.transformEntryForSearch = transformEntryForSearch;
-exports.updateGriftTotal = updateGriftTotal;
+exports.updateMetadata = updateMetadata;
 exports.onImageUpload = onImageUpload;
