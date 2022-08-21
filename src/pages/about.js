@@ -78,17 +78,22 @@ export default function WhatIsWeb3() {
           <h3>Privacy and money</h3>
           <p>
             I have a{" "}
-            <a href="https://www.mollywhite.net/crypto-disclosures">
+            <ExternalLink href="https://www.mollywhite.net/crypto-disclosures">
               disclosure statement
-            </a>
-            . The TL;DR is that I hold no cryptocurrencies or NFTs, make no
-            money off this website, and am also not trying to make money off of
-            crypto markets doing poorly. I do accept{" "}
+            </ExternalLink>
+            . The TL;DR is that I hold no cryptocurrencies or NFTs, and am also
+            not trying to make money off of crypto markets doing poorly by
+            shorting the market, etc. I do have a{" "}
+            <ExternalLink href="https://www.patreon.com/mollywhite">
+              Patreon
+            </ExternalLink>{" "}
+            for people who wish to support my otherwise unpaid work (which
+            includes this website, but tends to be pretty wide-ranging), and I
+            also accept{" "}
             <Link href="/contribute">
               <a>donations</a>
             </Link>{" "}
-            for the website, but only up to the amount it costs me to keep the
-            site online—I don't make money from this.
+            for the website.
           </p>
           <p>
             The site does use Google Analytics, mostly for my own curiosity. All
@@ -118,6 +123,11 @@ export default function WhatIsWeb3() {
             at total amount scammed and subtract as you scroll". You can also
             show and hide the counter or stop the animation of the flames from
             this panel.
+          </p>
+          <p>
+            The grift counter does not appear when you visit the website via a
+            permalink, because it throws off the total to start partway through
+            the timeline.
           </p>
         </article>
       </div>

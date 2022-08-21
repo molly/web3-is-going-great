@@ -44,28 +44,6 @@ export default function Contribute({ money }) {
     return nextMonthMoment.format("MMMM YYYY");
   }, [money]);
 
-  const renderDonationLinkSection = () => {
-    if (money.donations >= totalExpenses) {
-      return (
-        <p>
-          Donations are closed for now. Consider making a donation to{" "}
-          {renderOtherDonationLinks()} instead!
-        </p>
-      );
-    }
-    return (
-      <p>
-        Donate via <a href="https://account.venmo.com/u/MollyWhite">Venmo</a>,{" "}
-        <a href="https://cash.app/$molly0xfff">Cash App</a>, or{" "}
-        <a href="https://www.paypal.com/donate/?business=3RM66P9NEQNFA&no_recurring=0&currency_code=USD">
-          Paypal
-        </a>
-        . I manually update the table above, so don't be startled if it takes a
-        little bit for your donation to show up here!
-      </p>
-    );
-  };
-
   const renderOtherDonationLinks = () => {
     return (
       <>
@@ -137,15 +115,27 @@ export default function Contribute({ money }) {
             , which provides invaluable access to court records for free.
           </p>
           <p>
-            While I accept donations to cover what I pay to keep the site
-            online, I created the project with the expectation that I would pay
-            for it out-of-pocket, so this isn't a scenario where the site will
-            come offline if hosting costs aren't covered by donations. I don't
-            want to make money from the site—for that reason I've included
-            details on exactly how much this site has actually cost me to run
-            below, and if the amount I've received in donations surpasses the
-            amount I've paid to date (plus the projected costs for the following
-            month), the donation links will be removed.
+            If you would like to support my work, which includes this website, I
+            have a{" "}
+            <ExternalLink href="https://www.patreon.com/mollywhite">
+              Patreon
+            </ExternalLink>
+            . You can also make one-off donations via{" "}
+            <a href="https://account.venmo.com/u/MollyWhite">Venmo</a>,{" "}
+            <a href="https://cash.app/$molly0xfff">Cash App</a>, or{" "}
+            <a href="https://www.paypal.com/donate/?business=3RM66P9NEQNFA&no_recurring=0&currency_code=USD">
+              Paypal
+            </a>
+            . If you wish to make a one-off donation specifically towards the
+            upkeep of this website, please note that in the message so that I
+            can earmark the funds for this project. There is a transparency
+            report below where I record the cost of keeping this site online, as
+            well as those earmarked funds.
+          </p>
+          <p>
+            Please note that I created the project with the expectation that I
+            would pay for it out-of-pocket, so this isn't a scenario where the
+            site will come offline if hosting costs aren't covered by donations.
           </p>
           <table className="expenses centered">
             <thead>
@@ -188,7 +178,10 @@ export default function Contribute({ money }) {
             donations={money.donations}
             totalExpenses={totalExpenses}
           />
-          {renderDonationLinkSection()}
+          <p>
+            I manually update the table above, so don't be startled if it takes
+            a day or so for your donation to show up here!
+          </p>
           <p className="help-text">
             * Both Girls Who Code and Black Girls Code have partnered with
             crypto projects in the past. While I don't support that decision, I
