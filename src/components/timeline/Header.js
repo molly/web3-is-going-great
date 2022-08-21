@@ -135,7 +135,12 @@ const Header = forwardRef(function Header(
                 {renderIconLinkContents("fas fa-link", "Website")}
               </ExternalLink>
               <span aria-hidden={true}>)</span>
-            </span>{" "}
+              <span>
+                <ExternalLink href="https://www.patreon.com/mollywhite">
+                  Support my work
+                </ExternalLink>
+              </span>
+            </span>
           </p>
           {windowWidth === "sm" ? renderMobileImageAndLinks() : renderLinks()}
         </div>
