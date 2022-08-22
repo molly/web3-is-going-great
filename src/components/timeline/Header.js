@@ -136,6 +136,7 @@ const Header = forwardRef(function Header(
               </ExternalLink>
               <span aria-hidden={true}>)</span>
               <span>
+                {" "}
                 <ExternalLink href="https://www.patreon.com/mollywhite">
                   Support my work
                 </ExternalLink>
