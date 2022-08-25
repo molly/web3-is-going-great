@@ -41,7 +41,7 @@ const FILTERS = {
     litecoin: "Litecoin",
     monero: "Monero",
     polygon: "Polygon",
-    ripple: "Ripple",
+    ripple: "XRP Ledger",
     solana: "Solana",
     terra: "Terra",
     tezos: "Tezos",
