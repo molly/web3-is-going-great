@@ -4,13 +4,24 @@ import { EntryPropType } from "../../js/entry";
 
 export default function EntryTextArea({ entry, onBodyChange }) {
   const textAreaRef = useRef(null);
-  const insertText = (text) => () => {
-    const cursorPosition =
-      textAreaRef.current.selectionStart || entry.body.length;
+  const insertTag = (startTag, endTag) => () => {
+    let cursorPosition = textAreaRef.current.selectionStart;
+    let selectionEnd = textAreaRef.current.selectionEnd;
+
+    if (cursorPosition === 0 && selectionEnd === 0) {
+      // If both positions are 0, cursor is either not in the textarea or it's in the beginning position
+      // In that case, insert the tag at the very end, since that's most likely the intention
+      cursorPosition = entry.body.length;
+      selectionEnd = entry.body.length;
+    }
+
+    const highlightedText = entry.body.substring(cursorPosition, selectionEnd);
     const newText =
       entry.body.substring(0, cursorPosition) +
-      text +
-      entry.body.substring(cursorPosition, entry.body.length);
+      startTag +
+      highlightedText +
+      endTag +
+      entry.body.substring(selectionEnd, entry.body.length);
     onBodyChange(newText);
   };
 
@@ -30,11 +41,14 @@ export default function EntryTextArea({ entry, onBodyChange }) {
       </div>
       <div className="row">
         <button
-          onClick={insertText('<button class="define-target" id=""></button>')}
+          onClick={insertTag(
+            '<button class="define-target" id="">',
+            "</button>"
+          )}
         >
           Add definition
         </button>
-        <button onClick={insertText('<a href="" target="_blank"></a>')}>
+        <button onClick={insertTag('<a href="" target="_blank">', "</a>")}>
           Add link
         </button>
       </div>
