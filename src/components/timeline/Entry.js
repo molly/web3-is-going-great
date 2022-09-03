@@ -177,29 +177,6 @@ export default function Entry({
     );
   };
 
-  const renderTitle = () => {
-    if (isBrowserRendering) {
-      return (
-        <h2>
-          <button onClick={() => permalink(entry.readableId)}>
-            <span dangerouslySetInnerHTML={{ __html: entry.title }} />
-          </button>
-        </h2>
-      );
-    } else {
-      // No JS
-      return (
-        <h2>
-          <Link href={noJsPermalink}>
-            <a id={entry.readableId}>
-              <span dangerouslySetInnerHTML={{ __html: entry.title }} />
-            </a>
-          </Link>
-        </h2>
-      );
-    }
-  };
-
   const renderImageElement = ({ onClick, isLightbox } = {}) => {
     if (!entry.image) {
       return null;
@@ -403,7 +380,11 @@ export default function Entry({
       <div className="timeline-description">
         <div className="entry-wrapper">
           {renderTimestampAndLinkIcons()}
-          {renderTitle()}
+          <h2>
+            <a id={entry.readableId}>
+              <span dangerouslySetInnerHTML={{ __html: entry.title }} />
+            </a>
+          </h2>
           {renderImage(true)}
           <TimelineEntryContent glossary={glossary}>
             {entry.body}
