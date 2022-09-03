@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
 
 import {
@@ -47,6 +47,19 @@ export default function FixedAtBottom({
       prefersReducedMotion ||
       null
   );
+
+  useEffect(() => {
+    // Need to update this value once the browser rendering check passes, otherwise this remains null
+    // regardless of prefers-reduced-motion settings
+    if (prefersReducedMotion !== null) {
+      if (isAnimationPaused === null) {
+        setIsAnimationPaused(prefersReducedMotion);
+      }
+      if (isFireworksAnimationPaused === null) {
+        setIsFireworksAnimationPaused(prefersReducedMotion);
+      }
+    }
+  }, [prefersReducedMotion, isAnimationPaused, isFireworksAnimationPaused]);
 
   const fireworksEnabled = false; // Turning this off after $10B milestone, leaving code for the next milestone
   const shouldRenderFireworks = useMemo(
