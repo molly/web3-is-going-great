@@ -84,17 +84,10 @@ export default function FixedAtBottom({
   const makeToggleFunction = useCallback(
     (isToggledOn, toggleFn, localStorageKey = null) =>
       () => {
-        if (isToggledOn) {
-          if (localStorageKey) {
-            setLocalStorage(localStorageKey, false);
-          }
-          toggleFn(false);
-        } else {
-          if (localStorageKey) {
-            setLocalStorage(localStorageKey, true);
-          }
-          toggleFn(true);
+        if (localStorageKey) {
+          setLocalStorage(localStorageKey, !isToggledOn);
         }
+        toggleFn(!isToggledOn);
       },
     []
   );
