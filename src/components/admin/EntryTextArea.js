@@ -46,10 +46,10 @@ export default function EntryTextArea({ entry, onBodyChange }) {
             "</button>"
           )}
         >
-          Add definition
+          Add <span className="define-target">definition</span>
         </button>
         <button onClick={insertTag('<a href="" target="_blank">', "</a>")}>
-          Add link
+          Add <a style={{ textDecoration: "underline" }}>link</a>
         </button>
       </div>
     </>
