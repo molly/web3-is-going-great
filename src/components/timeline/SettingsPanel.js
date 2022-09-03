@@ -30,14 +30,14 @@ export default function SettingsPanel({
       <div className="settings-section">
         <SettingsCheckbox
           id="use-sans-serif-font"
-          checked={useSansSerif}
+          checked={!!useSansSerif}
           toggleCheckbox={toggleUseSansSerif}
         >
           Use sans-serif font
         </SettingsCheckbox>
         <SettingsCheckbox
           id="use-dark-mode"
-          checked={useDarkMode}
+          checked={!!useDarkMode}
           toggleCheckbox={toggleDarkMode}
         >
           Force dark mode

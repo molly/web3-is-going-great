@@ -8,6 +8,7 @@ import {
   LOCALSTORAGE_KEYS,
   setLocalStorage,
 } from "../../js/localStorage";
+import { fallback } from "../../js/utilities";
 
 import ScrollToTop from "./ScrollToTop";
 import GriftCounter from "./GriftCounter";
@@ -38,14 +39,16 @@ export default function FixedAtBottom({
     getLocalStorage(LOCALSTORAGE_KEYS.griftCounterCountUp, false)
   );
   const [isAnimationPaused, setIsAnimationPaused] = useState(
-    getLocalStorage(LOCALSTORAGE_KEYS.flamesAnimationPaused, null) ||
-      prefersReducedMotion ||
-      null
+    fallback(
+      getLocalStorage(LOCALSTORAGE_KEYS.flamesAnimationPaused, null),
+      prefersReducedMotion
+    )
   );
   const [isFireworksAnimationPaused, setIsFireworksAnimationPaused] = useState(
-    getLocalStorage(LOCALSTORAGE_KEYS.fireworksAnimationPaused, null) ||
-      prefersReducedMotion ||
-      null
+    fallback(
+      getLocalStorage(LOCALSTORAGE_KEYS.fireworksAnimationPaused, null),
+      prefersReducedMotion
+    )
   );
 
   useEffect(() => {

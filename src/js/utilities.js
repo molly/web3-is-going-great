@@ -108,3 +108,13 @@ export const generateReadableId = (title) =>
     .toLowerCase()
     .replace(/^(an?|the) /m, "") // Remove "an" or "the" at beginning of title
     .replace(/[. ]/g, "-"); // Replace spaces and .s with -s
+
+// Return the first non-null/non-undefined (not the first truthy!) value in the list of options
+export const fallback = (...values) => {
+  for (const value of values) {
+    if (value !== null && value !== undefined) {
+      return value;
+    }
+  }
+  return null;
+};
