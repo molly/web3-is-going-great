@@ -333,6 +333,25 @@ export default function Entry({
     );
   };
 
+  const renderCollectionList = (collections) => {
+    return collections.map((coll) => {
+      const collectionName = getCollectionName(coll, allCollections);
+      if (setCollection && typeof setCollection === "function") {
+        return (
+          <button key={coll} onClick={() => setCollection(coll)}>
+            {collectionName}
+          </button>
+        );
+      } else {
+        return (
+          <Link key={coll} href={`/?collection=${coll}`}>
+            <a>{collectionName}</a>
+          </Link>
+        );
+      }
+    });
+  };
+
   const renderCollection = () => {
     if (
       isBrowserRendering &&
@@ -344,14 +363,9 @@ export default function Entry({
         <div className="collection-row">
           <span>
             Other entries related to{" "}
-            {humanizeList(
-              collectionsToRender.map((coll) => (
-                <button key={coll} onClick={() => setCollection(coll)}>
-                  {getCollectionName(coll, allCollections)}
-                </button>
-              )),
-              { exclusive: true }
-            )}
+            {humanizeList(renderCollectionList(collectionsToRender), {
+              exclusive: true,
+            })}
           </span>
         </div>
       );
