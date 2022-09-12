@@ -19,7 +19,7 @@
     "downshift": "^6.1.7",
     "firebase": "^9.9.2",
     "moment": "^2.29.4",
-    "next": "12.2.4",
+    "next": "12.3.0",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
