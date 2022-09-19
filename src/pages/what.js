@@ -49,8 +49,9 @@ export default function WhatIsWeb3() {
             <ExternalLink href="https://www.coindesk.com/learn/2020/12/16/what-is-proof-of-work/">
               <span>proof-of-work</span>
             </ExternalLink>{" "}
-            blockchains, including Bitcoin and Ethereum). They also often
-            mention that an awful lot of web3 projects sound quite a bit like{" "}
+            blockchains, including Bitcoin and until recently Ethereum). They
+            also often mention that an awful lot of web3 projects sound quite a
+            bit like{" "}
             <ExternalLink href="https://en.wikipedia.org/wiki/Ponzi_scheme">
               <span>Ponzi</span>
             </ExternalLink>{" "}
