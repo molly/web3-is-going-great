@@ -16,7 +16,7 @@
     "@popperjs/core": "^2.11.5",
     "algoliasearch": "^4.14.2",
     "clsx": "^1.2.1",
-    "downshift": "^6.1.7",
+    "downshift": "^6.1.11",
     "firebase": "^9.9.2",
     "moment": "^2.29.4",
     "next": "12.2.4",
