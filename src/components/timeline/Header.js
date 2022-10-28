@@ -103,7 +103,7 @@ const Header = forwardRef(function Header(
         {windowWidth !== "sm" && renderImage()}
         <div className="header-content">
           <h1 ref={componentRef} tabIndex={-1}>
-            {renderMainPageLink(<span>Web3 is going just great</span>)}
+            {renderMainPageLink(<span>Web3 is Going Just Great</span>)}
           </h1>
           <p className="subtitle">
             ...and is definitely not an enormous grift that's pouring lighter

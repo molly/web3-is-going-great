@@ -51,7 +51,7 @@ export default function CustomEntryHead({ entry, collectionDescription }) {
       <meta
         property="og:site_name"
         key="ogsitename"
-        content="Web3 Is Going Just Great"
+        content="Web3 is Going Just Great"
       />
       <meta
         property="og:description"

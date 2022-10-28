@@ -12,8 +12,8 @@ export default function WhatIsWeb3() {
   return (
     <>
       <CustomHead
-        title="About – Web3 is going just great"
-        description="About the Web3 is going just great project"
+        title="About – Web3 is Going Just Great"
+        description="About the Web3 is Going Just Great project"
         urlPath="about"
       />
       <header className="page-header">
@@ -24,7 +24,7 @@ export default function WhatIsWeb3() {
         <article className="generic-page longform-text">
           <h3>What is this?</h3>
           <p>
-            Web3 Is Going Great is a project to track some examples of how
+            Web3 is Going Just Great is a project to track some examples of how
             things in the blockchains/crypto/web3 technology space aren't
             actually going as well as its proponents might like you to believe.
             The timeline tracks events in cryptocurrency and blockchain-based

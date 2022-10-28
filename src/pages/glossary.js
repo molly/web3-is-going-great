@@ -29,7 +29,7 @@ export default function Glossary({ glossary }) {
   return (
     <>
       <CustomHead
-        title="Glossary – Web3 is going just great"
+        title="Glossary – Web3 is Going Just Great"
         description="Glossary of common terms pertaining to web3"
         urlPath="glossary"
       />

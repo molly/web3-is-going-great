@@ -22,8 +22,8 @@ export default function Attribution({ attribution }) {
   return (
     <>
       <CustomHead
-        title="Attribution – Web3 is going just great"
-        description="Attribution for text, icons, and images used in the Web3 is Going Great project"
+        title="Attribution – Web3 is Going Just Great"
+        description="Attribution for text, icons, and images used in the Web3 is Going Just Great project"
         urlPath="attribution"
       />
       <header className="page-header attribution-header">

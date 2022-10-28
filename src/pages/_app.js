@@ -23,7 +23,7 @@ function CustomApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title key="title">Web3 is going just great</title>
+        <title key="title">Web3 is Going Just Great</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
@@ -43,7 +43,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           property="og:title"
           key="ogtitle"
-          content="Web3 Is Going Just Great"
+          content="Web3 is Going Just Great"
         />
         <meta property="og:type" key="ogtype" content="website" />
         <meta
@@ -59,7 +59,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           property="og:image:alt"
           key="ogimagealt"
-          content="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames. Text next to it says 'Web3 is going just great.'"
+          content="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames. Text next to it says 'Web3 is Going Just Great.'"
         />
         <meta property="og:image:width" key="ogwidth" content="1200" />
         <meta property="og:image:height" key="ogheight" content="630" />
@@ -75,7 +75,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           name="twitter:title"
           key="twittertitle"
-          content="Web3 is going just great"
+          content="Web3 is Going Just Great"
         />
         <meta
           name="twitter:description"
@@ -90,7 +90,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           name="twitter:image:alt"
           key="twitterimagealt"
-          content="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames. Text next to it says 'Web3 is going just great.'"
+          content="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames. Text next to it says 'Web3 is Going Just Great.'"
         />
       </Head>
       <QueryClientProvider client={queryClient}>

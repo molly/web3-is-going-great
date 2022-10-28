@@ -71,7 +71,7 @@ export default function Contribute({ money }) {
     <>
       <CustomHead
         title="Contribute"
-        description="Contribute content to Web3 Is Going Great, and see how to donate."
+        description="Contribute content to Web3 is Going Just Great, and see how to donate."
         urlPath="contribute"
       />
       <header className="page-header attribution-header">

@@ -10,7 +10,7 @@ export default function WhatIsWeb3() {
   return (
     <>
       <CustomHead
-        title="What is web3? – Web3 is going just great"
+        title="What is web3? – Web3 is Going Just Great"
         description={
           'Generally speaking, web3 is an umbrella term to refer to the "future of the Internet", which believers say will be decentralized and based on the blockchain. Proponents tend to tout how data won\'t be controlled by "Big Tech", and how it will be uncensorable and egalitarian. There is, however, no shortage of examples in this timeline of how many "web3" projects are indeed centralized in similar ways to Big Tech, as well as instances where "uncensorable" or "unmodifiable" platforms have removed or modified data.'
         }

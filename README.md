@@ -1,4 +1,4 @@
-# [web3 is going just great](https://web3isgoinggreat.com)
+# [Web3 is Going Just Great](https://web3isgoinggreat.com)
 
 A timeline recording only some of the many disasters happening in crypto, decentralized finance, NFTs, and other blockchain-based projects.
 

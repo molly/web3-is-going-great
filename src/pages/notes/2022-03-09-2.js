@@ -6,7 +6,7 @@ export default function Notes202203092() {
   return (
     <>
       <CustomHead
-        title="Notes – Web3 is going just great"
+        title="Notes – Web3 is Going Just Great"
         description="Further information about a Web3 is Going Just Great entry"
         urlPath="notes/2022-03-09-2"
       />
