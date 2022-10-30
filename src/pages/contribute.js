@@ -117,8 +117,8 @@ export default function Contribute({ money }) {
           <p>
             If you would like to support my work, which includes this website, I
             have a{" "}
-            <ExternalLink href="https://www.patreon.com/mollywhite">
-              Patreon
+            <ExternalLink href="https://newsletter.mollywhite.net/">
+              Substack
             </ExternalLink>
             . You can also make one-off donations via{" "}
             <a href="https://account.venmo.com/u/MollyWhite">Venmo</a>,{" "}

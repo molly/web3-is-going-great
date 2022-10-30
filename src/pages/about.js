@@ -84,8 +84,8 @@ export default function WhatIsWeb3() {
             . The TL;DR is that I hold no cryptocurrencies or NFTs, and am also
             not trying to make money off of crypto markets doing poorly by
             shorting the market, etc. I do have a{" "}
-            <ExternalLink href="https://www.patreon.com/mollywhite">
-              Patreon
+            <ExternalLink href="https://newsletter.mollywhite.net/">
+              Substack
             </ExternalLink>{" "}
             for people who wish to support my otherwise unpaid work (which
             includes this website, but tends to be pretty wide-ranging), and I
