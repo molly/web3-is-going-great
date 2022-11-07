@@ -24,7 +24,7 @@
     "moment": "^2.29.4",
     "os": "^0.1.2",
     "path": "^0.12.7",
-    "sharp": "^0.30.7"
+    "sharp": "^0.31.2"
   },
   "devDependencies": {
     "@firebase/app-compat": "^0.1.31",
