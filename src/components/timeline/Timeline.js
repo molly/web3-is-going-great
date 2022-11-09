@@ -9,6 +9,7 @@ import { FiltersPropType } from "../../constants/filters";
 import {
   getCollectionName,
   removeQueryParamsFromUrl,
+  stripHtml,
 } from "../../js/utilities";
 
 import Link from "next/link";
@@ -177,7 +178,7 @@ export default function Timeline({
                   let className = entryInd % 2 === 0 ? "even" : "odd";
                   if (pageInd === 0 && entryInd === 0) {
                     className += " first";
-                  } else if (entry.body.length < 400) {
+                  } else if (stripHtml(entry.body).length < 400) {
                     // Don't want to include the short class on the very first entry or it overlaps
                     className += " short";
                   }
