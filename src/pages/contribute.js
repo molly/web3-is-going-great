@@ -59,7 +59,7 @@ export default function Contribute({ money }) {
           Girls Who Code
         </ExternalLink>
         *, or{" "}
-        <ExternalLink href="https://www.blackgirlscode.com/">
+        <ExternalLink href="https://wearebgc.org/">
           Black Girls Code
         </ExternalLink>
         *
