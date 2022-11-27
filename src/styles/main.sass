@@ -596,7 +596,14 @@ table.expenses
     *
       height: 30px
       line-height: 30px
-      padding-right: 5px
+      padding: 0 2px
+
+      span
+        width: 100%
+        text-align: right
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
 
     .used-credits
       background-color: #C0C0C0
@@ -610,8 +617,8 @@ table.expenses
     .extra-donations
       background-color: #39A96B
 
-    .remainder
-      background-color: $timeline-line-color
+    .remaining-expenses
+      background-color: #EEAAB0
 
   .text-bar
     *
@@ -619,6 +626,9 @@ table.expenses
       padding: 4px 5px 4px 0
       border-right: 1px solid $timeline-line-color
       line-height: 1
+
+      &.filler
+        border-right: 0px
 
 // What
 .what-page
