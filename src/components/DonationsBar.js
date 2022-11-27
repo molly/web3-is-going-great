@@ -1,41 +1,84 @@
 import PropTypes from "prop-types";
 import useWindowWidth from "../hooks/useWindowWidth";
+import { formatDollarString } from "../js/utilities";
 
-export default function DonationsBar({ donations, totalExpenses }) {
+export default function DonationsBar({
+  donations,
+  totalExpenses,
+  remainingCredits,
+  usedCredits,
+}) {
   const windowWidth = useWindowWidth();
+  const expensesAfterCredits = totalExpenses - usedCredits;
+  let remainingDonations = donations - expensesAfterCredits;
+  if (remainingDonations < 0) {
+    remainingDonations = 0;
+  }
 
-  const formatUSD = (num) => {
-    return num.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-  };
-
-  if (donations >= totalExpenses) {
-    const paidWidth = (totalExpenses / donations) * 100;
-    const extraWidth = ((donations - totalExpenses) / donations) * 100;
+  if (remainingDonations >= 0 || remainingCredits > 0) {
+    const denominator = totalExpenses + remainingDonations + remainingCredits;
+    const usedCreditsWidth = (usedCredits / denominator) * 100;
+    const paidWidth = (expensesAfterCredits / denominator) * 100;
+    const remainingCreditsWidth = (remainingCredits / denominator) * 100;
+    const remainingDonationsWidth = (remainingDonations / denominator) * 100;
     return (
       <div className="donations-bar-wrapper">
         <div className="text-bar">
-          <div style={{ width: `${paidWidth}%` }}>
-            {formatUSD(totalExpenses)}
+          <div style={{ width: `${usedCreditsWidth + paidWidth}%` }}>
+            {formatDollarString(totalExpenses)}
           </div>
-          {extraWidth !== 0 && (
-            <div style={{ width: `${extraWidth}%` }}>
-              {formatUSD(donations - totalExpenses)}
+          {(remainingCredits !== 0 || remainingDonations !== 0) && (
+            <div
+              style={{
+                width: `${remainingCreditsWidth + remainingDonationsWidth}%`,
+              }}
+            >
+              {formatDollarString(remainingCredits + remainingDonations)}
             </div>
           )}
         </div>
         <div className="donations-bar">
+          <div
+            className="used-credits"
+            style={{ width: `${usedCreditsWidth}%` }}
+          >
+            {windowWidth !== "sm" ? "Credits" : null}
+          </div>
           <div className="paid" style={{ width: `${paidWidth}%` }}>
             {windowWidth !== "sm" ? "Expenses" : null}
           </div>
-          {extraWidth !== 0 && (
+          {remainingCredits !== 0 && (
+            <div
+              className="extra-credits"
+              style={{ width: `${remainingCreditsWidth}%` }}
+            >
+              {windowWidth !== "sm" ? "Remaining credits" : null}
+            </div>
+          )}
+          {remainingDonations !== 0 && (
             <div
               className="extra-donations"
-              style={{ width: `${extraWidth}%` }}
+              style={{ width: `${remainingDonationsWidth}%` }}
             >
               {windowWidth !== "sm" ? "Remaining donations" : null}
+            </div>
+          )}
+        </div>
+        <div className="text-bar">
+          <div style={{ width: `${usedCreditsWidth}%` }}>
+            {formatDollarString(usedCredits)}
+          </div>
+          <div style={{ width: `${paidWidth}%` }}>
+            {formatDollarString(expensesAfterCredits)}
+          </div>
+          {remainingCredits !== 0 && (
+            <div style={{ width: `${remainingCreditsWidth}%` }}>
+              {formatDollarString(remainingCredits)}
+            </div>
+          )}
+          {remainingDonations !== 0 && (
+            <div style={{ width: `${remainingDonationsWidth}%` }}>
+              {formatDollarString(remainingDonations)}
             </div>
           )}
         </div>
@@ -47,9 +90,11 @@ export default function DonationsBar({ donations, totalExpenses }) {
     return (
       <div className="donations-bar-wrapper">
         <div className="text-bar">
-          <div style={{ width: `${paidWidth}%` }}>{formatUSD(donations)}</div>
+          <div style={{ width: `${paidWidth}%` }}>
+            {formatDollarString(donations)}
+          </div>
           <div style={{ width: `${remainderWidth}%` }}>
-            {formatUSD(totalExpenses - donations)}
+            {formatDollarString(totalExpenses - donations)}
           </div>
         </div>
         <div className="donations-bar">
@@ -68,4 +113,6 @@ export default function DonationsBar({ donations, totalExpenses }) {
 DonationsBar.propTypes = {
   donations: PropTypes.number.isRequired,
   totalExpenses: PropTypes.number.isRequired,
+  remainingCredits: PropTypes.number.isRequired,
+  usedCredits: PropTypes.number.isRequired,
 };

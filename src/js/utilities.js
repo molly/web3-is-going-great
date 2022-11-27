@@ -118,3 +118,9 @@ export const fallback = (...values) => {
   }
   return null;
 };
+
+const dollarFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+export const formatDollarString = (amount) => dollarFormatter.format(amount);

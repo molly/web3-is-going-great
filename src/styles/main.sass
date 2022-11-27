@@ -593,17 +593,22 @@ table.expenses
       float: left
 
   .donations-bar
-
     *
       height: 30px
       line-height: 30px
       padding-right: 5px
 
+    .used-credits
+      background-color: #C0C0C0
+
     .paid
-      background-color: #009369
+      background-color: #CCCCCC
+
+    .extra-credits
+      background-color: #74C67A
 
     .extra-donations
-      background-color: #09BC8A
+      background-color: #39A96B
 
     .remainder
       background-color: $timeline-line-color
@@ -611,8 +616,9 @@ table.expenses
   .text-bar
     *
       height: 20px
-      padding-right: 5px
+      padding: 4px 5px 4px 0
       border-right: 1px solid $timeline-line-color
+      line-height: 1
 
 // What
 .what-page

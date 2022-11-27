@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import useGA from "../hooks/useGA";
 
 import moment from "moment";
+import filter from "lodash.filter";
+import { formatDollarString } from "../js/utilities";
+
 import { getMoney } from "../db/money";
 
 import CustomHead from "../components/CustomHead";
@@ -42,6 +45,30 @@ export default function Contribute({ money }) {
       "month"
     );
     return nextMonthMoment.format("MMMM YYYY");
+  }, [money]);
+
+  const tableRows = useMemo(() => {
+    let rows = [];
+    let month = moment([2021, 11]); // Dec 2021
+    const now = moment();
+    while (month.isBefore(now)) {
+      const monthStr = month.format("MMMM YYYY");
+      const expenses = filter(money.expenses, { date: monthStr });
+      let credits = filter(money.credits, { date: monthStr });
+      if (credits.length) {
+        credits = credits.map((c) => ({
+          ...c,
+          label: `${c.label}**`,
+          value: -c.value,
+        }));
+        rows = rows.concat(credits);
+      }
+      if (expenses.length) {
+        rows = rows.concat(expenses);
+      }
+      month = month.add(1, "month");
+    }
+    return rows;
   }, [money]);
 
   const renderOtherDonationLinks = () => {
@@ -137,6 +164,7 @@ export default function Contribute({ money }) {
             would pay for it out-of-pocket, so this isn't a scenario where the
             site will come offline if hosting costs aren't covered by donations.
           </p>
+          <h3>Expenses</h3>
           <table className="expenses centered">
             <thead>
               <tr>
@@ -146,11 +174,11 @@ export default function Contribute({ money }) {
               </tr>
             </thead>
             <tbody>
-              {money.expenses.map((expense) => (
-                <tr key={`${expense.label}-${expense.date}`}>
-                  <td>{expense.label}</td>
-                  <td>{expense.date}</td>
-                  <td className="number">{`$${expense.value.toFixed(2)}`}</td>
+              {tableRows.map((row) => (
+                <tr key={`${row.label}-${row.date}`}>
+                  <td>{row.label}</td>
+                  <td>{row.date}</td>
+                  <td className="number">{formatDollarString(row.value)}</td>
                 </tr>
               ))}
               <tr className="estimate">
@@ -158,25 +186,29 @@ export default function Contribute({ money }) {
                   <i>Cloud services estimate</i>
                 </td>
                 <td>{nextMonth}</td>
-                <td className="number">{`$${money.nextMonthEstimate.toFixed(
-                  2
-                )}`}</td>
+                <td className="number">
+                  {formatDollarString(money.nextMonthEstimate)}
+                </td>
               </tr>
               <tr>
                 <td colSpan={2}>
                   Total expenses to date (including next month's estimate)
                 </td>
-                <td className="number">{`$${totalExpenses.toFixed(2)}`}</td>
+                <td className="number">{formatDollarString(totalExpenses)}</td>
               </tr>
               <tr>
                 <td colSpan={2}>Total donations to date</td>
-                <td className="number">{`$${money.donations.toFixed(2)}`}</td>
+                <td className="number">
+                  {formatDollarString(money.donations)}
+                </td>
               </tr>
             </tbody>
           </table>
           <DonationsBar
             donations={money.donations}
             totalExpenses={totalExpenses}
+            remainingCredits={money.remainingCredits}
+            usedCredits={money.usedCredits}
           />
           <p>
             I manually update the table above, so don't be startled if it takes
@@ -191,8 +223,8 @@ export default function Contribute({ money }) {
             comfortable donating to them.
           </p>
           <p className="help-text">
-            ** Cloud services costs begin in February because those services
-            were covered by intro credits until then.
+            ** Credits refer to free credits for Google Cloud Platform, provided
+            by Google.
           </p>
         </article>
       </div>
@@ -211,6 +243,15 @@ Contribute.propTypes = {
         value: PropTypes.number.isRequired,
       })
     ).isRequired,
+    credits: PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        date: PropTypes.string,
+        value: PropTypes.number.isRequired,
+      })
+    ).isRequired,
     nextMonthEstimate: PropTypes.number.isRequired,
+    remainingCredits: PropTypes.number.isRequired,
+    usedCredits: PropTypes.number.isRequired,
   }),
 };

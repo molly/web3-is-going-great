@@ -18,6 +18,7 @@
     "clsx": "^1.2.1",
     "downshift": "^6.1.7",
     "firebase": "^9.9.2",
+    "lodash.filter": "^4.6.0",
     "moment": "^2.29.4",
     "next": "12.2.4",
     "normalize.css": "^8.0.1",
