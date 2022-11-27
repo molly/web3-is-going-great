@@ -4,6 +4,7 @@ import useGA from "../hooks/useGA";
 
 import moment from "moment";
 import filter from "lodash.filter";
+import find from "lodash.find";
 import { formatDollarString } from "../js/utilities";
 
 import { getMoney } from "../db/money";
@@ -33,17 +34,22 @@ export default function Contribute({ money }) {
   );
 
   const nextMonth = useMemo(() => {
-    let lastMonthOfExpenses = moment();
-    for (let i = money.expenses.length - 1; i >= 0; i--) {
-      if (money.expenses[i].label === "Cloud services") {
-        lastMonthOfExpenses = money.expenses[i].date;
+    let lastMonthOfExpenses = moment().date(1);
+    for (let i = 0; i < 5; i++) {
+      // Could use a while loop, but if something gets screwy in the DB it'll kick off an infinite loop.
+      // If I haven't updated in multiple months, something's wrong here, no need to loop forever.
+      const latestExpense = find(money.expenses, {
+        date: lastMonthOfExpenses.format("MMMM YYYY"),
+        label: "Cloud services",
+      });
+      if (latestExpense) {
         break;
+      } else {
+        lastMonthOfExpenses = lastMonthOfExpenses.subtract(1, "month");
       }
     }
-    const nextMonthMoment = moment(lastMonthOfExpenses, "MMMM YYYY").add(
-      1,
-      "month"
-    );
+
+    const nextMonthMoment = lastMonthOfExpenses.add(1, "month");
     return nextMonthMoment.format("MMMM YYYY");
   }, [money]);
 
