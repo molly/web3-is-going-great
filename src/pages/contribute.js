@@ -130,12 +130,16 @@ export default function Contribute({ money }) {
             <ExternalLink href="https://twitter.com/molly0xFFF">
               @molly0xFFF
             </ExternalLink>{" "}
-            account (I sometimes miss tweets to the{" "}
+            account (I often miss tweets to the{" "}
             <ExternalLink href="https://twitter.com/web3isgreat">
               @web3isgreat
             </ExternalLink>{" "}
-            account, though I do my best!) Make sure to send me a link to
-            reporting about any event you're hoping to see on the timeline!
+            account!) For the Mastodon users, you can toot at{" "}
+            <ExternalLink href="https://hachyderm.io/@molly0xfff">
+              @molly0xfff@hachyderm.io
+            </ExternalLink>
+            . Make sure to send me a link to reporting about any event you're
+            hoping to see on the timeline.
           </p>
           <h2>Donate</h2>
           <p>
