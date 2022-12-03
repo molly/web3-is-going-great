@@ -119,7 +119,6 @@ export default function Entry({
             src={`${STORAGE_URL}/icons/${ICONS[entry.icon]}`}
             alt="" // Decorative, hidden to screenreaders
             aria-hidden="true"
-            layout="fill"
           />
         </div>
       );
