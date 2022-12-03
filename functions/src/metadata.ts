@@ -71,7 +71,7 @@ export const updateMetadata = functions.firestore
 
     // Commit the change if one needs to be made
     if (Object.keys(update).length > 0) {
-      await metadataDocRef.update(update);
+      await metadataDocRef.update({ ...update });
     }
   });
 
