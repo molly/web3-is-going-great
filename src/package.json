@@ -21,7 +21,7 @@
     "lodash.filter": "^4.6.0",
     "lodash.find": "^4.6.0",
     "moment": "^2.29.4",
-    "next": "12.2.4",
+    "next": "13.0.6",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
