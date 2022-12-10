@@ -13,6 +13,7 @@ const FILTERS = {
     hack: "Hack or scam",
     hmm: "Hmm",
     law: "Law",
+    layoffs: "Layoffs",
     reporting: "Reporting",
     rugPull: "Rug pull",
     shady: "Shady business",
