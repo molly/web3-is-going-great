@@ -26,8 +26,8 @@ const Header = forwardRef(function Header(
       );
     }
     return (
-      <Link href="/">
-        <a className={className}>{contents}</a>
+      <Link href="/" className={className}>
+        {contents}
       </Link>
     );
   };
@@ -37,27 +37,27 @@ const Header = forwardRef(function Header(
       <ul role="navigation" aria-label="Main">
         <li>
           <Link href="/what">
-            <a>What is web3?</a>
+            What is web3?
           </Link>
         </li>
         <li>
           <Link href="/glossary">
-            <a>Glossary</a>
+            Glossary
           </Link>
         </li>
         <li>
           <Link href="/about">
-            <a>About this project</a>
+            About this project
           </Link>
         </li>
         <li>
           <Link href="/contribute">
-            <a>Contribute</a>
+            Contribute
           </Link>
         </li>
         <li>
           <Link href="/attribution">
-            <a>License and attribution</a>
+            License and attribution
           </Link>
         </li>
       </ul>

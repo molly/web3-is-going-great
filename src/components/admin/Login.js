@@ -16,27 +16,25 @@ export default function Admin() {
     });
   };
 
-  return (
-    <>
-      <span>
-        This page is for Molly's use only. If you've found yourself here and
-        you're not Molly, you can go{" "}
-        <Link href="/contribute">
-          <a>here</a>
-        </Link>{" "}
-        to learn how to suggest a new entry.
-      </span>
-      <div className="login-form">
-        <label htmlFor="password" type="password">
-          Password:
-        </label>
-        <input
-          type="password"
-          onChange={({ target: { value } }) => setPassword(value)}
-        ></input>
-        <button onClick={login}>Log in</button>
-        {error && <span>{error}</span>}
-      </div>
-    </>
-  );
+  return <>
+    <span>
+      This page is for Molly's use only. If you've found yourself here and
+      you're not Molly, you can go{" "}
+      <Link href="/contribute">
+        here
+      </Link>{" "}
+      to learn how to suggest a new entry.
+    </span>
+    <div className="login-form">
+      <label htmlFor="password" type="password">
+        Password:
+      </label>
+      <input
+        type="password"
+        onChange={({ target: { value } }) => setPassword(value)}
+      ></input>
+      <button onClick={login}>Log in</button>
+      {error && <span>{error}</span>}
+    </div>
+  </>;
 }

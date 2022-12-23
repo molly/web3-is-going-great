@@ -15,8 +15,8 @@ export default function BackBar({ customText, titleText, backFunction }) {
     );
     if (!backFunction) {
       return (
-        <Link href="/">
-          <a className="back-bar-item">{text}</a>
+        <Link href="/" className="back-bar-item">
+          {text}
         </Link>
       );
     } else {

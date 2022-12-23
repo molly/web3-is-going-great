@@ -32,7 +32,7 @@ export default function Web1({ entries, hasPrev, hasNext }) {
         <div className="contents flex-between">
           {hasPrev ? (
             <Link href={`/web1?cursor=${entries[0].id}&direction=prev`}>
-              <a>← Previous</a>
+              ← Previous
             </Link>
           ) : (
             <span />
@@ -43,7 +43,7 @@ export default function Web1({ entries, hasPrev, hasNext }) {
                 entries[entries.length - 1].id
               }&direction=next`}
             >
-              <a>→ Next</a>
+              → Next
             </Link>
           ) : (
             <span />

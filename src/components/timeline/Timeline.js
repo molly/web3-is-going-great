@@ -148,7 +148,7 @@ export default function Timeline({
         <p id="noscript">
           No JavaScript? That's cool too! Check out the{" "}
           <Link href={`/web1?cursor=${cursor}&direction=next`}>
-            <a>Web&nbsp;1.0</a>
+            Web&nbsp;1.0
           </Link>{" "}
           version of the site to see more entries.
         </p>

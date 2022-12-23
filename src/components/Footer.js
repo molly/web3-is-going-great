@@ -14,7 +14,7 @@ export default function Footer() {
           </a>
           . All attribution can be found on the{" "}
           <Link href="/attribution">
-            <a>attribution</a>
+            attribution
           </Link>{" "}
           page.
         </p>
@@ -22,7 +22,7 @@ export default function Footer() {
           <a href="https://github.com/molly/web3-is-going-great">Source code</a>{" "}
           |{" "}
           <Link href="/contribute">
-            <a>Contribute</a>
+            Contribute
           </Link>
         </p>
       </div>

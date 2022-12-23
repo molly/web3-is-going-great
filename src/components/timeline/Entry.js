@@ -140,12 +140,12 @@ export default function Entry({
     } else {
       // No JS
       return (
-        <Link href={noJsPermalink}>
-          <a>
-            <i className="fas fa-link" aria-hidden={true} />
-            <span className="sr-only">Permalink</span>
-          </a>
-        </Link>
+        (<Link href={noJsPermalink}>
+
+          <i className="fas fa-link" aria-hidden={true} />
+          <span className="sr-only">Permalink</span>
+
+        </Link>)
       );
     }
   };
@@ -202,23 +202,21 @@ export default function Entry({
 
   const renderImageCaption = () => {
     if (entry.image) {
-      return (
-        <>
-          {!entry.image.isLogo && entry.image.caption && (
-            <>
-              <span
-                className="caption"
-                dangerouslySetInnerHTML={{ __html: entry.image.caption }}
-              />{" "}
-            </>
-          )}
-          <span className="attribution-link">
-            <Link href="/attribution">
-              <a>(attribution)</a>
-            </Link>
-          </span>
-        </>
-      );
+      return <>
+        {!entry.image.isLogo && entry.image.caption && (
+          <>
+            <span
+              className="caption"
+              dangerouslySetInnerHTML={{ __html: entry.image.caption }}
+            />{" "}
+          </>
+        )}
+        <span className="attribution-link">
+          <Link href="/attribution">
+            (attribution)
+          </Link>
+        </span>
+      </>;
     }
     return null;
   };
@@ -344,7 +342,7 @@ export default function Entry({
       } else {
         return (
           <Link key={coll} href={`/?collection=${coll}`}>
-            <a>{collectionName}</a>
+            {collectionName}
           </Link>
         );
       }
