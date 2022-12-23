@@ -41,7 +41,6 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
     isOpen,
     getMenuProps,
     getInputProps,
-    getComboboxProps,
     highlightedIndex,
     getItemProps,
     openMenu,
@@ -147,7 +146,7 @@ export default function Search({ filters, setSelectedEntryFromSearch }) {
 
   return (
     <div className="search-and-results">
-      <div {...getComboboxProps()} className="search-container">
+      <div className="search-container">
         <input
           {...getInputProps({
             onClick: () => {
