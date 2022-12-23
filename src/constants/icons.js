@@ -41,6 +41,7 @@ export const ALL_ICONS = {
 
   hack: { type: "img", value: "hack", text: FILTERS.theme.hack },
   hmm: { type: "img", value: "hmm", text: FILTERS.theme.hmm },
+  layoffs: { type: "img", value: "layoffs", text: FILTERS.theme.layoffs },
   rug: { type: "img", value: "rug", text: FILTERS.theme.rugPull },
   shady: { type: "img", value: "shady", text: FILTERS.theme.shady },
 };
