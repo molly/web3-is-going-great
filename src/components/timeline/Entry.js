@@ -11,7 +11,7 @@ import clsx from "clsx";
 
 import { STORAGE_URL } from "../../constants/urls";
 import FILTERS from "../../constants/filters";
-import ICONS from "../../constants/icons";
+import { ICON_PATHS, ALL_ICONS } from "../../constants/icons";
 
 import {
   getCollectionName,
@@ -108,15 +108,15 @@ export default function Entry({
   const renderIcon = () => {
     if (entry.faicon) {
       return (
-        <div className="icon-wrapper">
+        <div className="icon-wrapper" title={ALL_ICONS[entry.faicon].text}>
           <i className={`fas fa-${entry.faicon}`} aria-hidden="true"></i>
         </div>
       );
     } else if (entry.icon) {
       return (
-        <div className="icon-wrapper">
+        <div className="icon-wrapper" title={ALL_ICONS[entry.icon].text}>
           <img
-            src={`${STORAGE_URL}/icons/${ICONS[entry.icon]}`}
+            src={`${STORAGE_URL}/icons/${ICON_PATHS[entry.icon]}`}
             alt="" // Decorative, hidden to screenreaders
             aria-hidden="true"
           />
@@ -140,12 +140,10 @@ export default function Entry({
     } else {
       // No JS
       return (
-        (<Link href={noJsPermalink}>
-
+        <Link href={noJsPermalink}>
           <i className="fas fa-link" aria-hidden={true} />
           <span className="sr-only">Permalink</span>
-
-        </Link>)
+        </Link>
       );
     }
   };
@@ -202,21 +200,21 @@ export default function Entry({
 
   const renderImageCaption = () => {
     if (entry.image) {
-      return <>
-        {!entry.image.isLogo && entry.image.caption && (
-          <>
-            <span
-              className="caption"
-              dangerouslySetInnerHTML={{ __html: entry.image.caption }}
-            />{" "}
-          </>
-        )}
-        <span className="attribution-link">
-          <Link href="/attribution">
-            (attribution)
-          </Link>
-        </span>
-      </>;
+      return (
+        <>
+          {!entry.image.isLogo && entry.image.caption && (
+            <>
+              <span
+                className="caption"
+                dangerouslySetInnerHTML={{ __html: entry.image.caption }}
+              />{" "}
+            </>
+          )}
+          <span className="attribution-link">
+            <Link href="/attribution">(attribution)</Link>
+          </span>
+        </>
+      );
     }
     return null;
   };
