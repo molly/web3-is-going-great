@@ -694,7 +694,7 @@ table.expenses
   header.page-header.timeline-page .header-content
     padding-bottom: 20px
 
-@media only screen and (min-width: #{$sm-breakpoint + 1}px)
+@media only screen and (min-width: #{$xs-breakpoint + 1}px)
   .timeline-description:after
     top: 14px
     content: ''
@@ -783,20 +783,22 @@ table.expenses
 
     .mobile-image-and-links
       display: flex
-      align-items: flex-end
       justify-content: space-between
-      flex-wrap: wrap
+      flex-wrap: nowrap
 
       .mobile-image-wrapper
         display: flex
         flex-grow: 1
         justify-content: center
+        align-self: flex-end
 
         img.logo
           margin-left: 0px
           width: 100%
           max-width: 100px
 
+// Small mobile
+@media only screen and (max-width: #{$xs-breakpoint}px)
   .captioned-image
     margin: 20px auto
     text-align: center

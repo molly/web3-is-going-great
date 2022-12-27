@@ -241,7 +241,7 @@ export default function Timeline({
 
   return (
     <>
-      <NavigationBar />
+      <NavigationBar windowWidth={windowWidth} />
       <Header
         isBrowserRendering={isBrowserRendering}
         windowWidth={windowWidth}

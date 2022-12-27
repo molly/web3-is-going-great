@@ -223,7 +223,7 @@ export default function Entry({
     if (
       entry.image &&
       entry.image.src &&
-      (windowWidth !== "sm" || !entry.image.isLogo)
+      (windowWidth !== "xs" || !entry.image.isLogo)
     ) {
       return (
         <div

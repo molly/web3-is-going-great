@@ -3,16 +3,25 @@ import PropTypes from "prop-types";
 import { useThrottledCallback } from "use-debounce";
 
 import {
+  XS_BREAKPOINT,
   SM_BREAKPOINT,
   MD_BREAKPOINT,
   LG_BREAKPOINT,
 } from "../constants/breakpoints";
 
-export const WindowWidthPropType = PropTypes.oneOf(["sm", "md", "lg", "xl"]);
+export const WindowWidthPropType = PropTypes.oneOf([
+  "xs",
+  "xs",
+  "md",
+  "lg",
+  "xl",
+]);
 
 const getWindowWidth = (px) => {
-  if (px < SM_BREAKPOINT) {
-    return "sm";
+  if (px < XS_BREAKPOINT) {
+    return "xs";
+  } else if (px < SM_BREAKPOINT) {
+    return "xs";
   } else if (px < MD_BREAKPOINT) {
     return "md";
   } else if (px < LG_BREAKPOINT) {

@@ -4,7 +4,7 @@ import { formatDollarString } from "../js/utilities";
 
 function DonationLabel({ children }) {
   const windowWidth = useWindowWidth();
-  if (windowWidth === "sm") {
+  if (windowWidth === "xs") {
     return null;
   }
   return <span title={children}>{children}</span>;
