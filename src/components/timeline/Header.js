@@ -71,20 +71,6 @@ const Header = forwardRef(function Header(
             fluid on our already smoldering planet.
           </p>
           <p>
-            Follow updates on{" "}
-            <ExternalLink href="https://twitter.com/web3isgreat">
-              Twitter
-            </ExternalLink>
-            ,{" "}
-            <ExternalLink href="https://indieweb.social/@web3isgreat" rel="me">
-              Mastodon
-            </ExternalLink>
-            , or with{" "}
-            <ExternalLink href="https://web3isgoinggreat.com/feed.xml">
-              RSS
-            </ExternalLink>
-            <i className="fas fa-rss" aria-hidden={true} />
-            <br />
             <span>Created by Molly White </span>
             <span style={{ display: "inline-block" }}>
               <span aria-hidden={true}>(</span>
@@ -96,12 +82,6 @@ const Header = forwardRef(function Header(
                 {renderIconLinkContents("fas fa-link", "Website")}
               </ExternalLink>
               <span aria-hidden={true}>)</span>
-              <span>
-                {" "}
-                <ExternalLink href="https://newsletter.mollywhite.net/">
-                  Support my work
-                </ExternalLink>
-              </span>
             </span>
           </p>
         </div>
