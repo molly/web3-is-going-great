@@ -983,12 +983,14 @@ table.expenses
 .use-dark
   background-color: $dark-main-background
   @include mainDarkMode()
+  @include navigationDarkMode()
   @include filtersDarkMode()
   @include fixedDarkMode()
   @include popoversDarkMode()
 
 @media (prefers-color-scheme: dark)
   @include mainDarkMode()
+  @include navigationDarkMode()
   @include filtersDarkMode()
   @include fixedDarkMode()
   @include popoversDarkMode()

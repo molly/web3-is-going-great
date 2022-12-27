@@ -32,38 +32,6 @@ const Header = forwardRef(function Header(
     );
   };
 
-  const renderLinks = () => (
-    <>
-      <ul role="navigation" aria-label="Main">
-        <li>
-          <Link href="/what">
-            What is web3?
-          </Link>
-        </li>
-        <li>
-          <Link href="/glossary">
-            Glossary
-          </Link>
-        </li>
-        <li>
-          <Link href="/about">
-            About this project
-          </Link>
-        </li>
-        <li>
-          <Link href="/contribute">
-            Contribute
-          </Link>
-        </li>
-        <li>
-          <Link href="/attribution">
-            License and attribution
-          </Link>
-        </li>
-      </ul>
-    </>
-  );
-
   const renderImage = () => {
     const imageSize = windowWidth === "xl" ? 500 : 300;
     return renderMainPageLink(
@@ -76,13 +44,6 @@ const Header = forwardRef(function Header(
       "logo-image-link"
     );
   };
-
-  const renderMobileImageAndLinks = () => (
-    <div className="mobile-image-and-links">
-      {renderLinks()}
-      <div className="mobile-image-wrapper">{renderImage()}</div>
-    </div>
-  );
 
   const renderIconLinkContents = (iconClass, iconText) => (
     <>
@@ -143,7 +104,6 @@ const Header = forwardRef(function Header(
               </span>
             </span>
           </p>
-          {windowWidth === "sm" ? renderMobileImageAndLinks() : renderLinks()}
         </div>
       </div>
     </header>
