@@ -66,6 +66,9 @@
   right: 0
   top: 0
 
+  svg.hamburger-icon
+    fill: $header-footer-body-color
+
 .mobile-navigation-menu
   position: absolute
   top: 0
@@ -94,7 +97,8 @@
 
   .mobile-navigation-toggle
     color: $filter-text
-    font-size: 100%
+    top: 10px
+    font-size: 120%
 
 // All screens > LG
 @media only screen and (min-width: #{$lg-breakpoint + 1}px)
@@ -129,6 +133,9 @@
 
   .mobile-navigation-toggle
     color: $dark-header-footer-body-color
+
+    svg.hamburger-icon
+      fill: $dark-header-footer-body-color
 
   .mobile-navigation-menu
     background-color: $dark-filterbar-background
