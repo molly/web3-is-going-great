@@ -7,6 +7,7 @@ import { getSortedGlossaryEntries } from "../db/glossary";
 import CustomHead from "../components/CustomHead";
 import BackBar from "../components/BackBar";
 import Footer from "../components/Footer";
+import SimpleHeader from "../components/SimpleHeader";
 
 export async function getServerSideProps() {
   return {
@@ -33,9 +34,7 @@ export default function Glossary({ glossary }) {
         description="Glossary of common terms pertaining to web3"
         urlPath="glossary"
       />
-      <header className="page-header">
-        <h1>Glossary</h1>
-      </header>
+      <SimpleHeader>Glossary</SimpleHeader>
       <BackBar />
       <div className="content-wrapper">
         <article className="generic-page longform-text">

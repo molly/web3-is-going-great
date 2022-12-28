@@ -7,6 +7,7 @@ import CustomHead from "../components/CustomHead";
 import BackBar from "../components/BackBar";
 import ExternalLink from "../components/ExternalLink";
 import Footer from "../components/Footer";
+import SimpleHeader from "../components/SimpleHeader";
 
 export async function getServerSideProps() {
   return {
@@ -26,9 +27,7 @@ export default function Attribution({ attribution }) {
         description="Attribution for text, icons, and images used in the Web3 is Going Just Great project"
         urlPath="attribution"
       />
-      <header className="page-header attribution-header">
-        <h1>Attribution</h1>
-      </header>
+      <SimpleHeader className="attribution-header">Attribution</SimpleHeader>
       <BackBar />
       <div className="content-wrapper">
         <article className="generic-page longform-text">

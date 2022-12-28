@@ -10,6 +10,7 @@ import { formatDollarString } from "../js/utilities";
 import { getMoney } from "../db/money";
 
 import CustomHead from "../components/CustomHead";
+import SimpleHeader from "../components/SimpleHeader";
 import BackBar from "../components/BackBar";
 import ExternalLink from "../components/ExternalLink";
 import Footer from "../components/Footer";
@@ -107,9 +108,7 @@ export default function Contribute({ money }) {
         description="Contribute content to Web3 is Going Just Great, and see how to donate."
         urlPath="contribute"
       />
-      <header className="page-header attribution-header">
-        <h1>Contribute</h1>
-      </header>
+      <SimpleHeader>Contribute</SimpleHeader>
       <BackBar />
       <div className="content-wrapper">
         <article className="generic-page longform-text">

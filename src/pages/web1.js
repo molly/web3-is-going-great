@@ -28,7 +28,7 @@ export default function Web1({ entries, hasPrev, hasNext }) {
 
   const renderNavigation = () => {
     return (
-      <nav className="navigation-bar">
+      <nav className="sub-navigation-bar">
         <div className="contents flex-between">
           {hasPrev ? (
             <Link href={`/web1?cursor=${entries[0].id}&direction=prev`}>

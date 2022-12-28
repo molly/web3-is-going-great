@@ -6,6 +6,7 @@
 @import _filters
 @import _fixed-at-bottom
 @import _loading
+@import _navigation
 @import _popovers
 
 html
@@ -59,6 +60,12 @@ a
   &:focus
     text-decoration: underline
 
+header.page-header
+  padding: 20px
+
+footer.page-footer
+  padding: 20px
+
 header.page-header,
 footer.page-footer
   display: flex
@@ -66,7 +73,6 @@ footer.page-footer
   justify-content: center
   align-items: center
   min-height: 80px
-  padding: 20px 20px
   width: 100%
 
   h1
@@ -95,6 +101,7 @@ footer.page-footer
     padding-left: 10px
 
 header.page-header.timeline-page
+  position: relative
   padding-bottom: 0
 
   .constrain-width
@@ -104,7 +111,7 @@ header.page-header.timeline-page
     justify-content: space-between
 
   .logo-image-link, img.logo
-    max-height: 300px
+    max-height: 250px
     display: block
     border: 0
 
@@ -393,7 +400,7 @@ img
   line-height: 150%
   font-size: 18px
 
-.navigation-bar
+.sub-navigation-bar
   background-color: $filterbar-background
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
 
@@ -655,7 +662,7 @@ table.expenses
     border-right-width: 1px
 
   header.page-header.timeline-page
-    min-height: 300px
+    min-height: 250px
     align-items: start
 
     li
@@ -692,7 +699,7 @@ table.expenses
   header.page-header.timeline-page .header-content
     padding-bottom: 20px
 
-@media only screen and (min-width: #{$sm-breakpoint + 1}px)
+@media only screen and (min-width: #{$xs-breakpoint + 1}px)
   .timeline-description:after
     top: 14px
     content: ''
@@ -719,7 +726,7 @@ table.expenses
     h1
       font-size: 1.5em
 
-    p, ul
+    p
       font-size: 14px
 
     .constrain-width
@@ -781,20 +788,22 @@ table.expenses
 
     .mobile-image-and-links
       display: flex
-      align-items: flex-end
       justify-content: space-between
-      flex-wrap: wrap
+      flex-wrap: nowrap
 
       .mobile-image-wrapper
         display: flex
         flex-grow: 1
         justify-content: center
+        align-self: flex-end
 
         img.logo
           margin-left: 0px
           width: 100%
           max-width: 100px
 
+// Small mobile
+@media only screen and (max-width: #{$xs-breakpoint}px)
   .captioned-image
     margin: 20px auto
     text-align: center
@@ -853,7 +862,7 @@ table.expenses
   width: 80%
   text-align: center
 
-.navigation-bar .contents
+.sub-navigation-bar .contents
   font-size: 80%
 
   button.back-bar-item
@@ -908,7 +917,7 @@ table.expenses
   .attribution a
     color: $dark-link-color
 
-  .navigation-bar
+  .sub-navigation-bar
     background-color: $dark-filterbar-background
     color: $dark-filter-text
 
@@ -981,12 +990,14 @@ table.expenses
 .use-dark
   background-color: $dark-main-background
   @include mainDarkMode()
+  @include navigationDarkMode()
   @include filtersDarkMode()
   @include fixedDarkMode()
   @include popoversDarkMode()
 
 @media (prefers-color-scheme: dark)
   @include mainDarkMode()
+  @include navigationDarkMode()
   @include filtersDarkMode()
   @include fixedDarkMode()
   @include popoversDarkMode()

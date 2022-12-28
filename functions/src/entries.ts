@@ -19,29 +19,23 @@ export const moveEntry = functions.https.onRequest(async (req, res) => {
 });
 
 export const runTransform = functions.https.onRequest(async (req, res) => {
-  const entriesSnapshot = await firestore.collection("entries").get();
+  const entriesCollection = await firestore.collection("entries");
+  const query = entriesCollection.where("icon", "==", "layoffs");
+  const entriesSnapshot = await query.get();
 
   const entriesPromises = entriesSnapshot.docs.map(async (child) => {
+    interface keyable {
+      [key: string]: string | string[];
+    }
+
     const data = child.data();
-    let text = data.body;
+    const update: keyable = {};
+    update.filters = {
+      ...data.filters,
+      theme: data.filters.theme.filter((item: string) => item !== "bummer"),
+    };
 
-    let modifiedFlag = false;
-
-    if (/(?<!\d) ?[—–] ?(?![\d$])/.test(text)) {
-      text = text.replace(/(?<!\d) ?[—–] ?(?![\d$])/g, " — ");
-      modifiedFlag = true;
-    }
-
-    if (/[‘’“”]/.test(text)) {
-      text = text.replace(/[‘’]/g, "'");
-      text = text.replace(/[“”]/g, '"');
-      modifiedFlag = true;
-    }
-
-    if (modifiedFlag) {
-      return child.ref.update({ body: text });
-    }
-    return Promise.resolve();
+    return child.ref.update(update);
   });
 
   Promise.all(entriesPromises)

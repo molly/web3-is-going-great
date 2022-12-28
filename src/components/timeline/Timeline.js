@@ -14,7 +14,9 @@ import {
 
 import Link from "next/link";
 import { InView, useInView } from "react-intersection-observer";
+
 import CustomEntryHead from "../CustomEntryHead";
+import NavigationBar from "../navigation/NavigationBar";
 import Header from "./Header";
 import Filters from "./Filters";
 import BackBar from "../BackBar";
@@ -239,6 +241,7 @@ export default function Timeline({
 
   return (
     <>
+      {windowWidth !== "xs" && windowWidth !== "sm" && <NavigationBar />}
       <Header
         isBrowserRendering={isBrowserRendering}
         windowWidth={windowWidth}

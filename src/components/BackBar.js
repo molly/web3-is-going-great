@@ -29,7 +29,7 @@ export default function BackBar({ customText, titleText, backFunction }) {
   };
 
   return (
-    <nav className="navigation-bar">
+    <nav className="sub-navigation-bar">
       <div className="contents" style={{ display: "flex" }}>
         {renderLink()}
         {titleText && <h3 className="back-bar-item title-text">{titleText}</h3>}
