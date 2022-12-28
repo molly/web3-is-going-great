@@ -154,3 +154,15 @@
 
     .mobile-navigation-toggle
       color: $dark-filter-text
+
+// No JS
+.no-js-navigation .navigation-bar
+  a
+    text-decoration: underline
+
+@media only screen and (max-width: #{$lg-breakpoint}px)
+  .no-js-navigation .navigation-bar
+    flex-wrap: wrap
+
+    .navigation-entry
+      padding: 10px

@@ -5,6 +5,7 @@ export const NAVIGATION = [
     children: [
       {
         label: "About this project",
+        short: "About",
         path: "/about",
       },
       {
@@ -13,6 +14,7 @@ export const NAVIGATION = [
       },
       {
         label: "License and attribution",
+        short: "License",
         path: "/attribution",
       },
     ],

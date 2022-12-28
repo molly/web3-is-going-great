@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
 
+import NoJsNavigation from "../components/navigation/NoJsNavigation";
 import Header from "../components/timeline/Header";
 import Entry from "../components/timeline/Entry";
 import Error from "../components/Error";
@@ -26,7 +27,7 @@ export default function Web1({ entries, hasPrev, hasNext }) {
       <Entry key={entry.id} entry={entry} className="single" />
     ));
 
-  const renderNavigation = () => {
+  const renderPageNavigation = () => {
     return (
       <nav className="sub-navigation-bar">
         <div className="contents flex-between">
@@ -55,14 +56,15 @@ export default function Web1({ entries, hasPrev, hasNext }) {
 
   return (
     <>
+      <NoJsNavigation />
       <Header />
-      {renderNavigation()}
+      {renderPageNavigation()}
       <div className="timeline-page content-wrapper">
         <article className="single-timeline-wrapper">
           {entries ? renderEntries() : <Error />}
         </article>
       </div>
-      {renderNavigation()}
+      {renderPageNavigation()}
     </>
   );
 }

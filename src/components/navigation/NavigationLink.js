@@ -29,7 +29,13 @@ export default function NavigationLink({
     );
   } else if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener" {...rest}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener"
+        className={className}
+        {...rest}
+      >
         {label}
       </a>
     );

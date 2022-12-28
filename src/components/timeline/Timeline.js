@@ -24,6 +24,7 @@ import Entry from "./Entry";
 import FixedAtBottom from "./FixedAtBottom";
 import Loader from "../Loader";
 import Error from "../Error";
+import NoJsNavigation from "../navigation/NoJsNavigation";
 
 export default function Timeline({
   queryResult,
@@ -241,6 +242,7 @@ export default function Timeline({
 
   return (
     <>
+      {!isBrowserRendering && <NoJsNavigation />}
       {windowWidth !== "xs" && windowWidth !== "sm" && <NavigationBar />}
       <Header
         isBrowserRendering={isBrowserRendering}
