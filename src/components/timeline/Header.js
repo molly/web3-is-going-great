@@ -6,6 +6,7 @@ import { STORAGE_URL } from "../../constants/urls";
 
 import Link from "next/link";
 import ExternalLink from "../ExternalLink";
+import MobileNavigation from "../navigation/MobileNavigation";
 
 const Header = forwardRef(function Header(
   { windowWidth, isBrowserRendering, clearAllFiltering },
@@ -96,6 +97,7 @@ const Header = forwardRef(function Header(
       className="timeline-page page-header"
       ref={ref && ref.inViewRef ? ref.inViewRef : null}
     >
+      {(windowWidth === "sm" || windowWidth === "xs") && <MobileNavigation />}
       <a href="#timeline" className="show-on-focus">
         Skip to timeline
       </a>

@@ -1,0 +1,125 @@
+@import _tokens
+
+.navigation-bar-wrapper
+  display: flex
+  position: relative
+  z-index: 1
+  background-color: $navigation-background
+  min-height: 50px
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2)
+
+  .navigation-bar
+    display: flex
+    max-width: 1600px
+    align-items: stretch
+
+  .navigation-entry
+    display: flex
+    color: $header-footer-body-color
+    justify-content: center
+    align-items: center
+    padding: 0 20px
+
+    &:hover
+      background-color: $navigation-background-highlight
+
+  .navigation-dropdown-wrapper
+    height: 100%
+
+    .navigation-entry
+      height: 100%
+
+      &:hover .navigation-dropdown-toggle-label
+        text-decoration: underline
+
+  .navigation-dropdown-toggle
+    cursor: pointer
+
+    .fa-angle-down
+      margin-left: 5px
+      font-size: 50%
+
+  .navigation-menu
+    position: absolute
+    background-color: $navigation-background
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2)
+    margin: 0
+    padding: 0
+
+    li
+      list-style: none
+
+      a
+        display: block
+        padding: 20px
+        color: $header-footer-body-color
+
+    .active-menu-item
+      background-color: $navigation-background-highlight
+
+// Mobile nav
+.mobile-navigation-toggle
+  position: absolute
+  color: $header-footer-body-color
+  font-size: 150%
+  padding: 20px
+  right: 0
+  top: 0
+
+.mobile-navigation-menu
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  background-color: $filterbar-background
+  padding: 0px 20px 0 10px
+  z-index: 3
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2)
+
+  ul
+    font-size: 20px
+    margin-left: 20px
+
+  li
+    padding: 10px
+
+    h4
+      margin: 0 0 10px 0
+
+  a
+    display: block
+
+  .mobile-navigation-toggle
+    color: $filter-text
+    font-size: 100%
+
+// All screens > LG
+@media only screen and (min-width: #{$lg-breakpoint + 1}px)
+  .navigation-bar
+    width: 90%
+    margin: 0 auto
+
+// All screens < LG
+@media only screen and (max-width: #{$lg-breakpoint}px)
+  .navigation-bar
+    width: 100%
+
+// Dark mode
+@mixin navigationDarkMode()
+  .navigation-bar-wrapper
+    background-color: $dark-navigation-background
+
+    .navigation-entry
+      color: $dark-header-footer-body-color
+
+      &:hover
+        background-color: $dark-navigation-background-highlight
+
+    .navigation-menu
+      background-color: $dark-navigation-background
+
+      li a
+        color: $dark-header-footer-body-color
+
+      .active-menu-item
+        background-color: $dark-navigation-background-highlight

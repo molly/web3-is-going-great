@@ -11,7 +11,7 @@ import {
 
 export const WindowWidthPropType = PropTypes.oneOf([
   "xs",
-  "xs",
+  "sm",
   "md",
   "lg",
   "xl",
@@ -21,7 +21,7 @@ const getWindowWidth = (px) => {
   if (px < XS_BREAKPOINT) {
     return "xs";
   } else if (px < SM_BREAKPOINT) {
-    return "xs";
+    return "sm";
   } else if (px < MD_BREAKPOINT) {
     return "md";
   } else if (px < LG_BREAKPOINT) {
