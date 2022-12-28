@@ -4,6 +4,7 @@ import CustomHead from "../components/CustomHead";
 import BackBar from "../components/BackBar";
 import ExternalLink from "../components/ExternalLink";
 import Footer from "../components/Footer";
+import SimpleHeader from "../components/SimpleHeader";
 
 export default function WhatIsWeb3() {
   useGA();
@@ -16,9 +17,7 @@ export default function WhatIsWeb3() {
         }
         urlPath="attribution"
       />
-      <header className="page-header">
-        <h1>What is Web3?</h1>
-      </header>
+      <SimpleHeader>What is Web3?</SimpleHeader>
       <BackBar />
       <div className="content-wrapper">
         <article className="generic-page what-page longform-text">

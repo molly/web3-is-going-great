@@ -1,4 +1,5 @@
 import CustomHead from "../../components/CustomHead";
+import SimpleHeader from "../../components/SimpleHeader";
 import BackBar from "../../components/BackBar";
 import Footer from "../../components/Footer";
 
@@ -10,9 +11,7 @@ export default function Notes202203092() {
         description="Further information about a Web3 is Going Just Great entry"
         urlPath="notes/2022-03-09-2"
       />
-      <header className="page-header">
-        <h1>Notes</h1>
-      </header>
+      <SimpleHeader>Notes</SimpleHeader>
       <BackBar />
       <div className="content-wrapper">
         <article className="generic-page longform-text">
