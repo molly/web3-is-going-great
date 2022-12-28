@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NAVIGATION } from "../../constants/navigation";
 import NavigationLink from "./NavigationLink";
 
 export default function MobileNavigation() {
+  const menuRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const outsideClickHandler = (evt) => {
+      if (menuRef.current && !menuRef.current.contains(evt.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", outsideClickHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", outsideClickHandler);
+    };
+  }, [menuRef]);
 
   if (!isOpen) {
     return (
@@ -16,7 +30,7 @@ export default function MobileNavigation() {
     );
   } else {
     return (
-      <nav className="mobile-navigation-menu">
+      <nav className="mobile-navigation-menu" ref={menuRef}>
         <button
           className="mobile-navigation-toggle"
           onClick={() => setIsOpen(!isOpen)}

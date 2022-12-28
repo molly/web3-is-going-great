@@ -80,8 +80,11 @@
     font-size: 20px
     margin-left: 20px
 
-  li
+  li > a
     padding: 10px
+
+    &:hover
+      background-color: $mobile-navigation-background-highlight
 
     h4
       margin: 0 0 10px 0
@@ -123,3 +126,16 @@
 
       .active-menu-item
         background-color: $dark-navigation-background-highlight
+
+  .mobile-navigation-toggle
+    color: $dark-header-footer-body-color
+
+  .mobile-navigation-menu
+    background-color: $dark-filterbar-background
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2)
+
+    li > a:hover
+      background-color: $dark-highlight-background
+
+    .mobile-navigation-toggle
+      color: $dark-filter-text
