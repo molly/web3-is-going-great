@@ -53,6 +53,7 @@ export const getEntries = async ({
   collection: entriesCollection,
   cursor,
   startAtId,
+  orderByField,
 } = {}) => {
   const resp = {
     entries: [],
@@ -66,7 +67,10 @@ export const getEntries = async ({
 
   let q = query(
     dbCollection,
-    orderBy("id", !!sort && sort === "Ascending" ? "asc" : "desc")
+    orderBy(
+      orderByField || "id",
+      !!sort && sort === "Ascending" ? "asc" : "desc"
+    )
   );
 
   if (entriesCollection) {
