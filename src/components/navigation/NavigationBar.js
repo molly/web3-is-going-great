@@ -1,11 +1,12 @@
 import NavigationDropdown from "./NavigationDropdown";
-
+import { useRouter } from "next/router";
 import { NAVIGATION } from "../../constants/navigation";
-import React from "react";
 import NavigationLink from "./NavigationLink";
 
 // Only renders for breakpoints >= MD
 export default function NavigationBar() {
+  const router = useRouter();
+
   const renderNavigationFromConfig = () =>
     NAVIGATION.map((navItem) => {
       if (Object.prototype.hasOwnProperty.call(navItem, "children")) {
@@ -23,6 +24,9 @@ export default function NavigationBar() {
   return (
     <div className="navigation-bar-wrapper">
       <section className="navigation-bar">
+        {router.pathname !== "/" && (
+          <NavigationLink className="navigation-entry" path="/" label="Home" />
+        )}
         {renderNavigationFromConfig()}
       </section>
     </div>

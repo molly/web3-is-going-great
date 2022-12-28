@@ -17,7 +17,9 @@ export default function NavigationLink({
       <Link
         href={path}
         className={clsx(
-          { "active-navigation-entry": path === router.pathname },
+          {
+            "active-navigation-entry": path !== "/" && path === router.pathname,
+          },
           className
         )}
         {...rest}
