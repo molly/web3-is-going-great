@@ -91,6 +91,17 @@ export default function Timeline({
     [collection, allCollections]
   );
 
+  const maybeRenderNavigation = () => {
+    if (!isBrowserRendering) {
+      return <NoJsNavigation />;
+    } else if (windowWidth !== "xs" && windowWidth !== "sm") {
+      return <NavigationBar />;
+    } else {
+      // In this case, <Header/> handles rendering the nav
+      return null;
+    }
+  };
+
   const renderHead = () => {
     if (startAtId || collection) {
       return (
@@ -242,8 +253,7 @@ export default function Timeline({
 
   return (
     <>
-      {!isBrowserRendering && <NoJsNavigation />}
-      {windowWidth !== "xs" && windowWidth !== "sm" && <NavigationBar />}
+      {maybeRenderNavigation()}
       <Header
         isBrowserRendering={isBrowserRendering}
         windowWidth={windowWidth}
