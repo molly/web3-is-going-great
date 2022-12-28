@@ -48,7 +48,7 @@ export default function MobileNavigation() {
         </button>
         <ul>
           {NAVIGATION.map((navItem) => {
-            if (Object.hasOwn(navItem, "children")) {
+            if (Object.prototype.hasOwnProperty.call(navItem, "children")) {
               return (
                 <li key={navItem.key}>
                   <h4>{navItem.label}</h4>

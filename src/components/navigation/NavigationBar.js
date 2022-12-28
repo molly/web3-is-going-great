@@ -8,7 +8,7 @@ import NavigationLink from "./NavigationLink";
 export default function NavigationBar() {
   const renderNavigationFromConfig = () =>
     NAVIGATION.map((navItem) => {
-      if (Object.hasOwn(navItem, "children")) {
+      if (Object.prototype.hasOwnProperty.call(navItem, "children")) {
         return <NavigationDropdown key={navItem.key} config={navItem} />;
       }
       return (
