@@ -6,7 +6,8 @@ import { getEntries } from "../../db/entries";
 import Link from "next/link";
 import BackBar from "../../components/BackBar";
 import SimpleHeader from "../../components/SimpleHeader";
-import { formatDollarString } from "../../js/utilities";
+import { formatDollarString, humanizeDate } from "../../js/utilities";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps() {
   return {
@@ -17,6 +18,7 @@ export async function getServerSideProps() {
 }
 
 export default function Top({ entries }) {
+  const router = useRouter();
   return (
     <>
       <SimpleHeader>Hacks and scams by dollar amount</SimpleHeader>
@@ -33,7 +35,10 @@ export default function Top({ entries }) {
             </thead>
             <tbody>
               {entries.entries.map((entry) => (
-                <tr key={entry.id}>
+                <tr
+                  key={entry.id}
+                  onClick={() => router.push(`/?id=${entry.readableId}`)}
+                >
                   <td>
                     <Link href={`/?id=${entry.readableId}`}>
                       <span
@@ -41,7 +46,7 @@ export default function Top({ entries }) {
                       />
                     </Link>
                   </td>
-                  <td>{entry.date}</td>
+                  <td>{humanizeDate(entry.date)}</td>
                   <td className="number">
                     {formatDollarString(entry.scamTotal, { cents: false })}
                   </td>

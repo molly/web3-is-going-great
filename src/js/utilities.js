@@ -132,7 +132,7 @@ const dollarFormatterNoCents = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
   minimumFractionDigits: 0,
 });
-export const formatDollarString = (amount, { cents = true }) => {
+export const formatDollarString = (amount, { cents } = { cents: true }) => {
   if (cents) {
     return dollarFormatter.format(amount);
   } else {
