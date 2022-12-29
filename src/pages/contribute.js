@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import useGA from "../hooks/useGA";
 
-import moment from "moment";
+import { add, sub, isPast, startOfMonth } from "date-fns";
 import filter from "lodash.filter";
 import find from "lodash.find";
 import { formatDollarString } from "../js/utilities";
@@ -24,6 +24,13 @@ export async function getServerSideProps() {
   };
 }
 
+const humanizeMonthAndYear = (date) =>
+  date.toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "long",
+    timeZone: "utc",
+  });
+
 export default function Contribute({ money }) {
   useGA();
 
@@ -35,31 +42,30 @@ export default function Contribute({ money }) {
   );
 
   const nextMonth = useMemo(() => {
-    let lastMonthOfExpenses = moment().date(1);
+    let lastMonthOfExpenses = startOfMonth(new Date());
     for (let i = 0; i < 5; i++) {
       // Could use a while loop, but if something gets screwy in the DB it'll kick off an infinite loop.
       // If I haven't updated in multiple months, something's wrong here, no need to loop forever.
       const latestExpense = find(money.expenses, {
-        date: lastMonthOfExpenses.format("MMMM YYYY"),
+        date: humanizeMonthAndYear(lastMonthOfExpenses),
         label: "Cloud services",
       });
       if (latestExpense) {
         break;
       } else {
-        lastMonthOfExpenses = lastMonthOfExpenses.subtract(1, "month");
+        lastMonthOfExpenses = sub(lastMonthOfExpenses, { months: 1 });
       }
     }
 
-    const nextMonthMoment = lastMonthOfExpenses.add(1, "month");
-    return nextMonthMoment.format("MMMM YYYY");
+    const nextMonth = add(lastMonthOfExpenses, { months: 1 });
+    return humanizeMonthAndYear(nextMonth);
   }, [money]);
 
   const tableRows = useMemo(() => {
     let rows = [];
-    let month = moment([2021, 11]); // Dec 2021
-    const now = moment();
-    while (month.isBefore(now)) {
-      const monthStr = month.format("MMMM YYYY");
+    let month = new Date("2021-12-01T12:00:00");
+    while (isPast(month)) {
+      const monthStr = humanizeMonthAndYear(month);
       const expenses = filter(money.expenses, { date: monthStr });
       let credits = filter(money.credits, { date: monthStr });
       if (credits.length) {
@@ -73,7 +79,7 @@ export default function Contribute({ money }) {
       if (expenses.length) {
         rows = rows.concat(expenses);
       }
-      month = month.add(1, "month");
+      month = add(month, { months: 1 });
     }
     return rows;
   }, [money]);

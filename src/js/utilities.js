@@ -1,5 +1,3 @@
-import moment from "moment";
-
 export const sentenceCase = function (str) {
   if (typeof str !== "string" || !str.length) {
     return str;
@@ -8,8 +6,13 @@ export const sentenceCase = function (str) {
 };
 
 export const humanizeDate = function (date) {
-  const m = moment(date);
-  return m.format("LL");
+  // Formats date in the format "February 2, 2022"
+  return new Date(date).toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "utc",
+  });
 };
 
 export const humanizeList = function (list, { exclusive }) {
