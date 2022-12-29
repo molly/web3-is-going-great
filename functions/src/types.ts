@@ -29,6 +29,7 @@ export type Entry = {
   id: string;
   readableId: string;
   title: string;
+  shortTitle: string;
   body: string;
   date: string;
   filters: Filter;

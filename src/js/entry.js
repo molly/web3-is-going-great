@@ -12,6 +12,7 @@ export const EMPTY_ENTRY = {
   },
   links: [{ linkText: "", href: "", extraText: "" }],
   title: "",
+  shortTitle: "",
   readableId: "",
   image: { src: "", alt: "", caption: "", isLogo: false },
   scamTotal: 0,
@@ -42,6 +43,7 @@ export const EntryPropType = PropTypes.shape({
   icon: PropTypes.string,
   date: PropTypes.string,
   title: PropTypes.string.isRequired,
+  shortTitle: PropTypes.string.isRequired,
   image: PropTypes.shape({
     src: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired,
@@ -112,7 +114,7 @@ export const trimEmptyFields = (entry, imageAttribution, entryAttribution) => {
 export const isValidEntry = (entry, imageAttribution, entryAttribution) => {
   if (!isEntryEmpty(entry)) {
     // Entry is defined, so validate everything necessary is there
-    if (!entry.title || !entry.body || !entry.date) {
+    if (!entry.title || !entry.shortTitle || !entry.body || !entry.date) {
       return false;
     }
     if (

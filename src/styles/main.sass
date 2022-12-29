@@ -1,8 +1,10 @@
 @import "normalize.css/normalize"
 @import "@fortawesome/fontawesome-free/css/all"
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:ital,wght@0,400;0,900;1,400;1,900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap")
-@import _admin
 @import _tokens
+
+@import _admin
+@import _charts
 @import _filters
 @import _fixed-at-bottom
 @import _loading
@@ -492,6 +494,9 @@ img
 .indent
   margin-left: 20px
 
+td.number
+  text-align: right
+
 .error-wrapper
   display: flex
   flex-direction: column
@@ -583,9 +588,6 @@ table.expenses
   th, td
     border: 1px solid $timeline-line-color
     padding: 5px
-
-  td.number
-    text-align: right
 
   .estimate
     color: $timestamp-color

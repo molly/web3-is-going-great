@@ -105,6 +105,17 @@ export default function Form() {
         </div>
         <div className="row">
           <div className="group">
+            <label htmlFor="shortTitle">Short title: </label>
+            <textarea
+              rows={1}
+              id="shortTitle"
+              onChange={createFieldSetter("shortTitle")}
+              value={entry.shortTitle}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="group">
             <label htmlFor="readableId">Readable ID: </label>
             <textarea
               rows={1}
