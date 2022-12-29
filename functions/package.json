@@ -23,7 +23,7 @@
     "mkdirp": "^1.0.4",
     "os": "^0.1.2",
     "path": "^0.12.7",
-    "sharp": "^0.31.2"
+    "sharp": "^0.31.3"
   },
   "devDependencies": {
     "@firebase/app-compat": "^0.1.39",
