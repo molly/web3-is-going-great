@@ -20,6 +20,11 @@ type Link = {
   extraText?: string;
 };
 
+export type ScamAmountDetails = {
+  total: number;
+  isLongRunning: boolean;
+};
+
 export type Entry = {
   id: string;
   readableId: string;
@@ -33,6 +38,7 @@ export type Entry = {
   faicon?: string;
   icon?: string;
   scamTotal?: number;
+  scamAmountDetails?: ScamAmountDetails;
   dateString?: string;
   tweetId?: string;
   collection?: string[];

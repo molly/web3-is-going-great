@@ -197,8 +197,8 @@ export default function Timeline({
                     className += " short";
                   }
 
-                  if (entry.scamTotal) {
-                    runningScamTotal += entry.scamTotal;
+                  if (entry.scamAmountDetails.total) {
+                    runningScamTotal += entry.scamAmountDetails.total;
                   }
 
                   const entryElement = (

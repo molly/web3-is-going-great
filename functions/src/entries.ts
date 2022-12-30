@@ -20,19 +20,15 @@ export const moveEntry = functions.https.onRequest(async (req, res) => {
 
 export const runTransform = functions.https.onRequest(async (req, res) => {
   const entriesCollection = await firestore.collection("entries");
-  const query = entriesCollection.where("icon", "==", "layoffs");
-  const entriesSnapshot = await query.get();
+  const entriesSnapshot = await entriesCollection.get();
 
   const entriesPromises = entriesSnapshot.docs.map(async (child) => {
-    interface keyable {
-      [key: string]: string | string[];
-    }
-
     const data = child.data();
-    const update: keyable = {};
-    update.filters = {
-      ...data.filters,
-      theme: data.filters.theme.filter((item: string) => item !== "bummer"),
+    const update = {
+      scamAmountDetails: {
+        total: data.scamTotal || 0,
+        isLongRunning: false,
+      },
     };
 
     return child.ref.update(update);

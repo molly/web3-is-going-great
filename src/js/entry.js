@@ -15,6 +15,10 @@ export const EMPTY_ENTRY = {
   readableId: "",
   image: { src: "", alt: "", caption: "", isLogo: false },
   scamTotal: 0,
+  scamAmountDetails: {
+    total: 0,
+    isLongRunning: false,
+  },
   collection: [],
 };
 
@@ -47,7 +51,10 @@ export const EntryPropType = PropTypes.shape({
   }),
   body: PropTypes.string.isRequired,
   links: PropTypes.arrayOf(LinkFieldPropType),
-  scamTotal: PropTypes.number,
+  scamAmountDetails: PropTypes.shape({
+    total: PropTypes.number.isRequired,
+    isLongRunning: PropTypes.bool.isRequired,
+  }).isRequired,
   tweetId: PropTypes.string,
 });
 
@@ -69,9 +76,6 @@ export const trimEmptyFields = (entry, imageAttribution, entryAttribution) => {
       delete newEntry.image;
     } else if (!entry.image.caption) {
       delete newEntry.image.caption;
-    }
-    if (entry.scamTotal === 0) {
-      delete newEntry.scamTotal;
     }
     if (!entry.collection.length) {
       delete newEntry.collection;

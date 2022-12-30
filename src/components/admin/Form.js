@@ -42,7 +42,7 @@ export default function Form() {
   };
   const setLinks = createFieldSetter("links");
   const setImage = createFieldSetter("image");
-  const setScamTotal = createFieldSetter("scamTotal");
+  const setScamAmountDetails = createFieldSetter("scamAmountDetails");
   const setCollection = createFieldSetter("collection");
 
   const toggleImageClass =
@@ -132,17 +132,37 @@ export default function Form() {
           </div>
         </div>
         <div className="row">
-          <div className="half">
+          <div className="group">
             <label htmlFor="scamTotal">Scam total: </label>
             <input
               id="scamTotal"
               onChange={({ target: { value } }) => {
                 const intVal = value ? parseInt(value, 10) : 0;
-                setScamTotal(intVal);
+                setScamAmountDetails({
+                  ...entry.scamAmountDetails,
+                  total: intVal,
+                });
               }}
-              value={entry.scamTotal}
+              value={entry.scamAmountDetails.total}
               type="number"
+              min={0}
             ></input>
+          </div>
+          <div className="third">
+            <div className="inline-checkbox">
+              <input
+                id="is-long-running"
+                type="checkbox"
+                checked={entry.scamAmountDetails.isLongRunning}
+                onChange={({ target: { checked } }) => {
+                  setScamAmountDetails({
+                    ...entry.scamAmountDetails,
+                    isLongRunning: checked,
+                  });
+                }}
+              />
+              <label htmlFor="is-long-running">Long running</label>
+            </div>
           </div>
         </div>
         <EntryTextArea entry={entry} onBodyChange={createFieldSetter("body")} />

@@ -2,14 +2,15 @@ import { firestore } from "./config/firebase";
 import * as functions from "firebase-functions";
 import { Change } from "firebase-functions";
 import { DocumentSnapshot } from "firebase-functions/v1/firestore";
+import { DocumentData, FieldPath } from "firebase-admin/firestore";
 
 interface MetadataUpdate {
   entryCount?: number;
   griftTotal?: number;
 }
 
-const hasScamTotal = (obj: { scamTotal?: any }) =>
-  "scamTotal" in obj && typeof obj.scamTotal === "number";
+const hasScamTotal = (documentData: DocumentData | null) =>
+  documentData !== null && documentData.scamAmountDetails?.total > 0;
 
 const getGriftChange = async (change: Change<DocumentSnapshot>) => {
   let griftChange = 0;
@@ -19,24 +20,26 @@ const getGriftChange = async (change: Change<DocumentSnapshot>) => {
       change.after.data() as FirebaseFirestore.DocumentData; // Already did exists check above
     if (beforeChangeData) {
       if (hasScamTotal(beforeChangeData) && hasScamTotal(afterChangeData)) {
-        // There was an existing entry with a scamTotal, so remove the before scamTotal
+        // There was an existing entry with a scamAmount.total, so subtract the previous scam amount
         // and add the new one to pick up any changes
-        griftChange = afterChangeData.scamTotal - beforeChangeData.scamTotal;
+        griftChange =
+          afterChangeData.scamAmountDetails.total -
+          beforeChangeData.scamAmountDetails.total;
       } else if (hasScamTotal(beforeChangeData)) {
-        // The existing entry had a scamTotal but it was deleted
-        griftChange -= beforeChangeData.scamTotal;
+        // The existing entry had a scam total but it was deleted
+        griftChange -= beforeChangeData.scamAmountDetails.total;
       } else if (hasScamTotal(afterChangeData)) {
-        // There was an existing entry without a scamTotal, but a value was added
-        griftChange = afterChangeData.scamTotal;
+        // There was an existing entry without a scam total, but a value was added
+        griftChange = afterChangeData.scamAmountDetails.total;
       }
     } else if (hasScamTotal(afterChangeData)) {
-      // New entry with scamTotal
-      griftChange = afterChangeData.scamTotal;
+      // New entry with scam total
+      griftChange = afterChangeData.scamAmountDetails.total;
     }
   } else {
-    // Document was deleted; subtract scamTotal if it's set
+    // Document was deleted; subtract scam total if it's set
     if (beforeChangeData && hasScamTotal(beforeChangeData)) {
-      griftChange -= beforeChangeData.scamTotal;
+      griftChange -= beforeChangeData.scamAmountDetails.total;
     }
   }
   return griftChange;
@@ -77,14 +80,15 @@ export const updateMetadata = functions.firestore
 
 export const recalculateGriftTotal = functions.https.onRequest(
   async (req, res) => {
-    const entriesSnapshot = await firestore.collection("entries").get();
+    const entriesDb = await firestore.collection("entries");
+    const entriesSnapshot = await entriesDb
+      .where(new FieldPath("scamAmountDetails", "total"), ">", 0)
+      .get();
 
     let griftTotal = 0;
     entriesSnapshot.forEach((child) => {
       const data = child.data();
-      if ("scamTotal" in data && typeof data.scamTotal === "number") {
-        griftTotal += data.scamTotal;
-      }
+      griftTotal += data.scamAmountDetails.total;
     });
 
     await firestore
