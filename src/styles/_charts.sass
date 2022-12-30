@@ -1,16 +1,77 @@
 @import _tokens
 
-.leaderboard
-  margin-top: 20px
-  border-collapse: collapse
-  background-color: $card-background
-  border: 1px solid $main-text-color
+.chart-page
+  width: 90%
+  max-width: 1000px
+  margin: 0 auto
+  padding: 20px 0
 
-  th, td
+  .leaderboard
+    width: 100%
+    border-collapse: collapse
+    background-color: $card-background
     border: 1px solid $main-text-color
-    padding: 10px
 
-  tbody
-    tr:hover
-      background-color: #efefef
+    th, td
+      border: 1px solid $main-text-color
+      padding: 10px
+
+    tbody
+      tr:hover
+        background-color: $chart-highlight-background
+        cursor: pointer
+
+  .table-filters
+    margin: 10px 0
+
+.date-picker
+  color: $main-text-color
+
+  label
+    margin-right: 10px
+
+  .date-picker-control
+    display: inline-block
+    position: relative
+
+  button
+    border: 1px solid $main-text-color
+    background-color: $card-background
+    padding: 5px
+
+  .date-picker-menu
+    position: absolute
+    width: 200px
+    background-color: $card-background
+    border: 1px solid $main-text-color
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2)
+    list-style: none
+    padding: 0
+    margin: -1px 0 0 0
+
+    li
+      padding: 15px
       cursor: pointer
+
+      &.highlighted-item
+        background-color: $chart-highlight-background
+
+// Dark mode
+@mixin chartsDarkMode()
+  .chart-page .leaderboard
+    background-color: $dark-card-background
+    color: $dark-main-color
+    border-color: $dark-main-color
+
+    th, td
+      border-color: $dark-main-color
+
+    tbody
+      tr:hover
+        background-color: $dark-highlight-background
+
+  .date-picker
+    color: $dark-main-color
+
+    .date-picker-menu
+      background-color: $dark-lightbox-background

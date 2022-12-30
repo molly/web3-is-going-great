@@ -53,7 +53,7 @@ export const getEntries = async ({
   collection: entriesCollection,
   cursor,
   startAtId,
-  orderByField,
+  starred,
 } = {}) => {
   const resp = {
     entries: [],
@@ -67,10 +67,7 @@ export const getEntries = async ({
 
   let q = query(
     dbCollection,
-    orderBy(
-      orderByField || "id",
-      !!sort && sort === "Ascending" ? "asc" : "desc"
-    )
+    orderBy("id", !!sort && sort === "Ascending" ? "asc" : "desc")
   );
 
   if (entriesCollection) {
@@ -94,6 +91,8 @@ export const getEntries = async ({
         blockchain
       )
     );
+  } else if (starred) {
+    q = query(q, where("starred", "==", true));
   }
 
   if (cursor) {
@@ -175,5 +174,52 @@ export const getAllEntries = async ({ cursor, direction }) => {
     }
   }
 
+  return resp;
+};
+
+export const getEntriesForLeaderboard = async ({
+  limit: entriesLimit,
+  sort,
+  cursor,
+  startAtId,
+} = {}) => {
+  const resp = {
+    entries: [],
+    hasPrev: null, // This is only set if there's a cursor
+    hasNext: false,
+  };
+  const respLimit = entriesLimit ? entriesLimit : DEFAULT_LIMIT;
+
+  const dbCollection = collection(db, "entries");
+  const startAtNumericId = await getNumericId(startAtId);
+  const scamTotalPath = new FieldPath("scamAmountDetails", "total");
+
+  let q = query(
+    dbCollection,
+    orderBy(scamTotalPath, !!sort && sort === "Ascending" ? "asc" : "desc")
+  );
+
+  if (cursor) {
+    q = query(q, startAfter(cursor));
+  } else if (startAtId && startAtNumericId) {
+    q = query(q, startAt(startAtNumericId));
+  }
+  q = query(q, limit(respLimit + 1));
+  const snapshot = await getDocs(q);
+
+  snapshot.forEach((child) => {
+    if (resp.entries.length < respLimit) {
+      resp.entries.push({ _key: child.id, ...child.data() });
+    } else {
+      resp.hasNext = true;
+    }
+  });
+
+  // Check if this is the first entry available
+  if (cursor || startAtNumericId) {
+    const firstId = cursor || startAtNumericId;
+    const firstEntryId = await getFirstEntryId(dbCollection);
+    resp.hasPrev = firstEntryId !== firstId;
+  }
   return resp;
 };

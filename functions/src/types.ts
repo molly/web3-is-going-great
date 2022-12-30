@@ -22,7 +22,6 @@ type Link = {
 
 export type ScamAmountDetails = {
   total: number;
-  isLongRunning: boolean;
 };
 
 export type Entry = {

@@ -1,6 +1,5 @@
 import { firestore } from "./config/firebase";
 import * as functions from "firebase-functions";
-import { FieldValue } from "firebase-admin/firestore";
 
 export const moveEntry = functions.https.onRequest(async (req, res) => {
   const collection = await firestore.collection("entries");
@@ -21,12 +20,13 @@ export const moveEntry = functions.https.onRequest(async (req, res) => {
 
 export const runTransform = functions.https.onRequest(async (req, res) => {
   const entriesCollection = await firestore.collection("entries");
-  const entriesSnapshot = await entriesCollection
-    .where("scamTotal", ">=", 0)
-    .get();
+  const entriesSnapshot = await entriesCollection.get();
 
   const entriesPromises = entriesSnapshot.docs.map(async (child) => {
-    return child.ref.update({ scamTotal: FieldValue.delete() });
+    const data = child.data();
+    return child.ref.update({
+      scamAmountDetails: { total: data.scamAmountDetails.total },
+    });
   });
 
   Promise.all(entriesPromises)

@@ -159,22 +159,6 @@ export default function Form() {
               min={0}
             ></input>
           </div>
-          <div className="third">
-            <div className="inline-checkbox">
-              <input
-                id="is-long-running"
-                type="checkbox"
-                checked={entry.scamAmountDetails.isLongRunning}
-                onChange={({ target: { checked } }) => {
-                  setScamAmountDetails({
-                    ...entry.scamAmountDetails,
-                    isLongRunning: checked,
-                  });
-                }}
-              />
-              <label htmlFor="is-long-running">Long running</label>
-            </div>
-          </div>
         </div>
         <EntryTextArea entry={entry} onBodyChange={createFieldSetter("body")} />
         <div className="row stretch">

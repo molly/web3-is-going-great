@@ -1,11 +1,6 @@
 import PropTypes from "prop-types";
 
-export default function SettingsCheckbox({
-  checked,
-  toggleCheckbox,
-  id,
-  children,
-}) {
+export default function Checkbox({ checked, toggleCheckbox, id, children }) {
   return (
     <div className="input-group">
       <input
@@ -20,7 +15,7 @@ export default function SettingsCheckbox({
   );
 }
 
-SettingsCheckbox.propTypes = {
+Checkbox.propTypes = {
   checked: PropTypes.bool.isRequired,
   toggleCheckbox: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,

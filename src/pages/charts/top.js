@@ -1,30 +1,40 @@
+import { useRouter } from "next/router";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { EntryPropType } from "../../js/entry";
 
-import { getEntries } from "../../db/entries";
+import { formatDollarString, humanizeDate } from "../../js/utilities";
+import { getEntriesForLeaderboard } from "../../db/entries";
 
 import Link from "next/link";
 import BackBar from "../../components/BackBar";
 import SimpleHeader from "../../components/SimpleHeader";
-import { formatDollarString, humanizeDate } from "../../js/utilities";
-import { useRouter } from "next/router";
+import DatePicker from "../../components/DatePicker";
 
 export async function getServerSideProps() {
   return {
     props: {
-      entries: await getEntries({ limit: 50, orderByField: "scamTotal" }),
+      entries: await getEntriesForLeaderboard({
+        limit: 50,
+        omitLongRunningScams: true,
+      }),
     },
   };
 }
 
 export default function Top({ entries }) {
   const router = useRouter();
+  const [dateRange, setDateRange] = useState(null);
+
   return (
     <>
       <SimpleHeader>Hacks and scams by dollar amount</SimpleHeader>
       <BackBar />
       <div className="content-wrapper">
-        <article className="generic-page chart-page">
+        <article className="chart-page">
+          <div className="table-filters">
+            <DatePicker setDateRange={setDateRange} />
+          </div>
           <table className="leaderboard">
             <thead>
               <tr>
@@ -48,7 +58,9 @@ export default function Top({ entries }) {
                   </td>
                   <td>{humanizeDate(entry.date)}</td>
                   <td className="number">
-                    {formatDollarString(entry.scamTotal, { cents: false })}
+                    {formatDollarString(entry.scamAmountDetails.total, {
+                      cents: false,
+                    })}
                   </td>
                 </tr>
               ))}

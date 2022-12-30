@@ -18,7 +18,6 @@ export const EMPTY_ENTRY = {
   scamTotal: 0,
   scamAmountDetails: {
     total: 0,
-    isLongRunning: false,
   },
   collection: [],
 };
@@ -55,7 +54,6 @@ export const EntryPropType = PropTypes.shape({
   links: PropTypes.arrayOf(LinkFieldPropType),
   scamAmountDetails: PropTypes.shape({
     total: PropTypes.number.isRequired,
-    isLongRunning: PropTypes.bool.isRequired,
   }).isRequired,
   tweetId: PropTypes.string,
 });
