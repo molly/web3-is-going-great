@@ -37,7 +37,6 @@ export type Entry = {
   color?: string;
   faicon?: string;
   icon?: string;
-  scamTotal?: number;
   scamAmountDetails?: ScamAmountDetails;
   dateString?: string;
   tweetId?: string;
