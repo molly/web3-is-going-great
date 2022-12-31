@@ -418,7 +418,7 @@ Entry.propTypes = {
   collection: PropTypes.string,
 
   glossary: PropTypes.object, // Not defined in web1
-  allCollections: PropTypes.object.isRequired, // Not defined in web1
+  allCollections: PropTypes.object, // Not defined in web1
   setCollection: PropTypes.func, // Not defined in web1
 };
 
