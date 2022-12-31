@@ -24,9 +24,15 @@ export const runTransform = functions.https.onRequest(async (req, res) => {
 
   const entriesPromises = entriesSnapshot.docs.map(async (child) => {
     const data = child.data();
-    return child.ref.update({
-      scamAmountDetails: { total: data.scamAmountDetails.total },
-    });
+    if (data.scamAmountDetails.total > 0) {
+      return child.ref.update({
+        scamAmountDetails: { ...data.scamAmountDetails, hasScamTotal: true },
+      });
+    } else {
+      return child.ref.update({
+        scamAmountDetails: { ...data.scamAmountDetails, hasScamTotal: false },
+      });
+    }
   });
 
   Promise.all(entriesPromises)

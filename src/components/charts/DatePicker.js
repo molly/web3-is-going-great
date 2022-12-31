@@ -1,14 +1,15 @@
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
+import PropTypes from "prop-types";
 import { useState, useEffect, useRef } from "react";
 import { usePopper } from "react-popper";
 import { DateRangePicker } from "react-date-range";
 
-import { MIN_DATE, STATIC_RANGES } from "../js/datepicker";
-import { endOfDay, format } from "date-fns";
+import { MIN_DATE, STATIC_RANGES } from "../../js/datepicker";
+import { endOfDay, format, formatISO } from "date-fns";
 
-export default function DatePicker() {
+export default function DatePicker({ setDateRange }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedRange, setSelectedRange] = useState([
     { startDate: MIN_DATE, endDate: endOfDay(new Date()), key: "selection" },
@@ -88,8 +89,21 @@ export default function DatePicker() {
             editableDateInputs={true}
             shownDate={selectedRange[0].endDate}
             onChange={(item) => {
+              const rangeText = getButtonLabel(item.selection);
               setSelectedRange([item.selection]);
-              setButtonLabel(getButtonLabel(item.selection));
+              setButtonLabel(rangeText);
+              if (rangeText === "All time") {
+                setDateRange(null);
+              } else {
+                setDateRange({
+                  startDate: formatISO(item.selection.startDate, {
+                    representation: "date",
+                  }),
+                  endDate: formatISO(item.selection.endDate, {
+                    representation: "date",
+                  }),
+                });
+              }
             }}
           />
         </div>
@@ -97,3 +111,7 @@ export default function DatePicker() {
     </div>
   );
 }
+
+DatePicker.propTypes = {
+  setDateRange: PropTypes.func.isRequired,
+};

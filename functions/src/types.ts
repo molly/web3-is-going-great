@@ -22,6 +22,7 @@ type Link = {
 
 export type ScamAmountDetails = {
   total: number;
+  hasScamTotal: boolean;
 };
 
 export type Entry = {

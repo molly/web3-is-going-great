@@ -152,6 +152,7 @@ export default function Form() {
                 setScamAmountDetails({
                   ...entry.scamAmountDetails,
                   total: intVal,
+                  hasScamTotal: true,
                 });
               }}
               value={entry.scamAmountDetails.total}

@@ -155,6 +155,12 @@ export default function Entry({
           <time dateTime={entry.date}>{humanizeDate(entry.date)}</time>
         </span>
         <ul className="entry-link-icons">
+          {entry.starred && (
+            <>
+              <i className="fas fa-star starred-entry" aria-hidden={true}></i>
+              <span className="sr-only">Starred</span>
+            </>
+          )}
           {renderLinkIcon()}
           {"tweetId" in entry && (
             <li>

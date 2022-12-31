@@ -10,6 +10,7 @@ import {
   getDocs,
 } from "firebase/firestore/lite";
 import { db } from "./db";
+import _orderBy from "lodash.orderby";
 
 const DEFAULT_LIMIT = 10;
 
@@ -178,48 +179,52 @@ export const getAllEntries = async ({ cursor, direction }) => {
 };
 
 export const getEntriesForLeaderboard = async ({
-  limit: entriesLimit,
+  startDate,
+  endDate,
   sort,
-  cursor,
-  startAtId,
 } = {}) => {
-  const resp = {
-    entries: [],
-    hasPrev: null, // This is only set if there's a cursor
-    hasNext: false,
-  };
-  const respLimit = entriesLimit ? entriesLimit : DEFAULT_LIMIT;
-
+  const resp = { entries: [], hasNext: null, hasPrev: null };
   const dbCollection = collection(db, "entries");
-  const startAtNumericId = await getNumericId(startAtId);
   const scamTotalPath = new FieldPath("scamAmountDetails", "total");
+  const hasScamTotalPath = new FieldPath("scamAmountDetails", "hasScamTotal");
 
-  let q = query(
-    dbCollection,
-    orderBy(scamTotalPath, !!sort && sort === "Ascending" ? "asc" : "desc")
-  );
-
-  if (cursor) {
-    q = query(q, startAfter(cursor));
-  } else if (startAtId && startAtNumericId) {
-    q = query(q, startAt(startAtNumericId));
-  }
-  q = query(q, limit(respLimit + 1));
-  const snapshot = await getDocs(q);
-
-  snapshot.forEach((child) => {
-    if (resp.entries.length < respLimit) {
+  let q = dbCollection;
+  if (startDate && endDate) {
+    // Due to Firestore limitations we can't filter AND sort here :(
+    q = query(
+      q,
+      where("id", ">=", startDate),
+      where("id", "<=", endDate),
+      where(hasScamTotalPath, "==", true)
+    );
+    const snapshot = await getDocs(q);
+    snapshot.forEach((child) => {
       resp.entries.push({ _key: child.id, ...child.data() });
-    } else {
-      resp.hasNext = true;
-    }
-  });
-
-  // Check if this is the first entry available
-  if (cursor || startAtNumericId) {
-    const firstId = cursor || startAtNumericId;
-    const firstEntryId = await getFirstEntryId(dbCollection);
-    resp.hasPrev = firstEntryId !== firstId;
+    });
+    resp.entries = _orderBy(
+      resp.entries,
+      (entry) => entry.scamAmountDetails.total,
+      ["desc"]
+    );
+    resp.hasNext = false;
+    resp.hasPrev = false;
+  } else {
+    const respLimit = 50;
+    q = query(
+      q,
+      where(scamTotalPath, ">", 0),
+      orderBy(scamTotalPath, !!sort && sort === "Ascending" ? "asc" : "desc"),
+      limit(respLimit + 1)
+    );
+    const snapshot = await getDocs(q);
+    snapshot.forEach((child) => {
+      if (resp.entries.length < respLimit) {
+        resp.entries.push({ _key: child.id, ...child.data() });
+      } else {
+        resp.hasNext = true;
+      }
+    });
   }
+
   return resp;
 };
