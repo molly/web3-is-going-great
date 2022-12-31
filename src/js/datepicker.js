@@ -32,7 +32,7 @@ const getPastYears = () => {
 
 export const STATIC_RANGES = createStaticRanges([
   {
-    label: "All time",
+    label: "From January 2021",
     shortLabel: "all",
     range: () => ({ startDate: MIN_DATE, endDate: endOfDay(new Date()) }),
   },

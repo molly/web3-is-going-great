@@ -14,7 +14,7 @@
   .rdrDateRangePickerWrapper
     background-color: $card-background
 
-  .rdrDateDisplayWrapper, .rdrNextPrevButton, .rdrMonthAndYearPickers select:hover
+  .rdrDateDisplayWrapper, .rdrNextPrevButton, .rdrMonthAndYearPickers select:hover, .rdrStaticRange:hover, .rdrStaticRange:hover .rdrStaticRangeLabel, .rdrStaticRange:focus, .rdrStaticRange:focus .rdrStaticRangeLabel
     background-color: $main-background
 
   .rdrDateDisplayItem input, .rdrWeekDay
@@ -22,6 +22,9 @@
 
   .rdrMonthAndYearPickers, .rdrMonthAndYearPickers select
     color: $main-text-color
+
+  .rdrStaticRange
+    border-bottom-color: $main-background
 
   .rdrNextPrevButton:hover
     background-color: $highlight-background
@@ -61,13 +64,13 @@
 // Dark mode
 @mixin reactDateRangeDarkMode()
   .date-picker-menu
-    border: 1px solid #666
+    border: 1px solid $timeline-line-color
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
 
     .rdrDateRangePickerWrapper, .rdrDefinedRangesWrapper, .rdrStaticRange, .rdrCalendarWrapper, .rdrDateDisplayItem
       background-color: $dark-lightbox-background
 
-    .rdrDateDisplayWrapper, .rdrNextPrevButton, .rdrMonthAndYearPickers select:hover
+    .rdrDateDisplayWrapper, .rdrNextPrevButton, .rdrMonthAndYearPickers select:hover.rdrStaticRange:hover, .rdrStaticRange:hover .rdrStaticRangeLabel, .rdrStaticRange:focus, .rdrStaticRange:focus .rdrStaticRangeLabel
       background-color: $dark-filterbar-background
 
     .rdrNextPrevButton:hover, .rdrStaticRange:hover .rdrStaticRangeLabel, .rdrStaticRange:focus .rdrStaticRangeLabel
