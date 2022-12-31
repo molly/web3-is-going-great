@@ -18,7 +18,30 @@
         cursor: pointer
 
   .table-filters
+    display: flex
+    justify-content: space-between
+    align-items: center
     margin: 10px 0
+
+  .leaderboard-paginator
+    display: flex
+    justify-content: flex-end
+    margin-top: 10px
+
+    a
+      display: flex
+      align-items: center
+      justify-content: center
+      background-color: $card-background
+      border: 1px solid $main-text-color
+      width: 30px
+      height: 30px
+
+      &:hover, &:focus
+        text-decoration: none
+
+      &:not(:first-child)
+        margin-left: 10px
 
 .date-picker
   label

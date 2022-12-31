@@ -11,15 +11,25 @@ import {
 } from "firebase/firestore/lite";
 import { db } from "./db";
 import _orderBy from "lodash.orderby";
+import { format, formatISO } from "date-fns";
 
 const DEFAULT_LIMIT = 10;
+const scamTotalPath = new FieldPath("scamAmountDetails", "total");
 
 const getFirstEntryId = async (dbCollection) => {
   const firstEntrySnapshot = await getDocs(
-    query(query(dbCollection, orderBy("id", "desc")), limit(1))
+    query(dbCollection, orderBy("id", "desc"), limit(1))
   );
   const firstEntry = firstEntrySnapshot.docs[0];
   return firstEntry.id;
+};
+
+const getHighestScamTotal = async (dbCollection) => {
+  const highestScamSnapshot = await getDocs(
+    query(dbCollection, orderBy(scamTotalPath, "desc"), limit(1))
+  );
+  const highestScamEntry = highestScamSnapshot.docs[0];
+  return highestScamEntry.get(scamTotalPath);
 };
 
 export const getNumericId = async (id) => {
@@ -179,17 +189,20 @@ export const getAllEntries = async ({ cursor, direction }) => {
 };
 
 export const getEntriesForLeaderboard = async ({
-  startDate,
-  endDate,
-  sort,
+  dateRange,
+  cursor,
+  direction,
 } = {}) => {
-  const resp = { entries: [], hasNext: null, hasPrev: null };
+  const resp = { entries: [], hasNext: false, hasPrev: false };
   const dbCollection = collection(db, "entries");
-  const scamTotalPath = new FieldPath("scamAmountDetails", "total");
   const hasScamTotalPath = new FieldPath("scamAmountDetails", "hasScamTotal");
 
   let q = dbCollection;
-  if (startDate && endDate) {
+  if (dateRange && dateRange.shortLabel !== "all") {
+    const startDate = formatISO(dateRange.startDate, {
+      representation: "date",
+    });
+    const endDate = formatISO(dateRange.endDate, { representation: "date" });
     // Due to Firestore limitations we can't filter AND sort here :(
     q = query(
       q,
@@ -206,24 +219,52 @@ export const getEntriesForLeaderboard = async ({
       (entry) => entry.scamAmountDetails.total,
       ["desc"]
     );
+    // TODO: paginate
     resp.hasNext = false;
     resp.hasPrev = false;
   } else {
+    // This can be paginated normally, and should be because it has a lot of results
     const respLimit = 50;
     q = query(
       q,
       where(scamTotalPath, ">", 0),
-      orderBy(scamTotalPath, !!sort && sort === "Ascending" ? "asc" : "desc"),
-      limit(respLimit + 1)
+      orderBy(scamTotalPath, direction === "next" ? "desc" : "asc")
     );
+
+    if (cursor) {
+      // TODO: Potential bug with entries with same total
+      q = query(q, startAt(parseInt(cursor, 10)));
+    } else {
+      q = query(q, limit(respLimit + 1));
+    }
+
     const snapshot = await getDocs(q);
-    snapshot.forEach((child) => {
-      if (resp.entries.length < respLimit) {
+    if (direction === "next") {
+      snapshot.forEach((child) => {
+        if (resp.entries.length < respLimit) {
+          resp.entries.push({ _key: child.id, ...child.data() });
+        } else {
+          resp.hasNext = true;
+        }
+      });
+    } else {
+      snapshot.forEach((child) => {
         resp.entries.push({ _key: child.id, ...child.data() });
-      } else {
-        resp.hasNext = true;
+        if (resp.entries.length === ALL_ENTRIES_LIMIT) {
+          resp.hasNext = true;
+        }
+      });
+      resp.entries.reverse();
+      if (resp.entries.length > 50) {
+        resp.entries = resp.entries.slice(1);
       }
-    });
+    }
+
+    if (cursor) {
+      const highestScamAmount = await getHighestScamTotal(dbCollection);
+      resp.hasPrev =
+        resp.entries[0].scamAmountDetails.total !== highestScamAmount;
+    }
   }
 
   return resp;

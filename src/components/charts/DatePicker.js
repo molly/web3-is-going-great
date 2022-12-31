@@ -6,15 +6,20 @@ import { useState, useEffect, useRef } from "react";
 import { usePopper } from "react-popper";
 import { DateRangePicker } from "react-date-range";
 
-import { MIN_DATE, STATIC_RANGES } from "../../js/datepicker";
-import { endOfDay, format, formatISO } from "date-fns";
+import {
+  MIN_DATE,
+  STATIC_RANGES,
+  getCustomButtonLabel,
+  getPreset,
+  staticRangeToPreset,
+} from "../../js/datepicker";
+import { useRouter } from "next/router";
+import { formatISO } from "date-fns";
 
-export default function DatePicker({ setDateRange }) {
+export default function DatePicker({ dateRange, setDateRange }) {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedRange, setSelectedRange] = useState([
-    { startDate: MIN_DATE, endDate: endOfDay(new Date()), key: "selection" },
-  ]);
-  const [buttonLabel, setButtonLabel] = useState("All time");
+  const [selectedRange, setSelectedRange] = useState([dateRange]);
 
   const datePickerRef = useRef(null);
   const [referenceElement, setReferenceElement] = useState(null);
@@ -48,18 +53,6 @@ export default function DatePicker({ setDateRange }) {
     };
   }, [datePickerRef, isMenuOpen]);
 
-  const getButtonLabel = (selection) => {
-    for (const preset of STATIC_RANGES) {
-      if (preset.isSelected(selection)) {
-        return preset.label;
-      }
-    }
-    return `${format(selection.startDate, "MMM d, yyyy")} – ${format(
-      selection.endDate,
-      "MMM d, yyyy"
-    )}`;
-  };
-
   return (
     <div className="date-picker" ref={datePickerRef}>
       <label>Date range:</label>
@@ -69,7 +62,7 @@ export default function DatePicker({ setDateRange }) {
         ref={setReferenceElement}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
-        {buttonLabel}
+        {dateRange?.label}
       </button>
 
       {isMenuOpen && (
@@ -89,21 +82,36 @@ export default function DatePicker({ setDateRange }) {
             editableDateInputs={true}
             shownDate={selectedRange[0].endDate}
             onChange={(item) => {
-              const rangeText = getButtonLabel(item.selection);
-              setSelectedRange([item.selection]);
-              setButtonLabel(rangeText);
-              if (rangeText === "All time") {
-                setDateRange(null);
+              let range;
+              let staticRange = getPreset(item.selection);
+              if (!staticRange) {
+                range = {
+                  startDate: item.selection.startDate,
+                  endDate: item.selection.endDate,
+                  label: getCustomButtonLabel(item.selection),
+                };
+                router.push(
+                  {
+                    query: {
+                      startDate: formatISO(range.startDate, {
+                        representation: "date",
+                      }),
+                      endDate: formatISO(range.endDate, {
+                        representation: "date",
+                      }),
+                    },
+                  },
+                  null,
+                  { shallow: true }
+                );
               } else {
-                setDateRange({
-                  startDate: formatISO(item.selection.startDate, {
-                    representation: "date",
-                  }),
-                  endDate: formatISO(item.selection.endDate, {
-                    representation: "date",
-                  }),
+                range = staticRangeToPreset(staticRange);
+                router.push({ query: { dateRange: range.shortLabel } }, null, {
+                  shallow: true,
                 });
               }
+              setSelectedRange([item.selection]);
+              setDateRange(range);
             }}
           />
         </div>
@@ -114,4 +122,10 @@ export default function DatePicker({ setDateRange }) {
 
 DatePicker.propTypes = {
   setDateRange: PropTypes.func.isRequired,
+  dateRange: PropTypes.shape({
+    startDate: PropTypes.instanceOf(Date).isRequired,
+    endDate: PropTypes.instanceOf(Date).isRequired,
+    label: PropTypes.string.isRequired,
+    shortLabel: PropTypes.string,
+  }),
 };

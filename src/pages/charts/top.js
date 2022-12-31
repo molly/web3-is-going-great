@@ -1,42 +1,68 @@
-import { useRouter } from "next/router";
 import { useState, useCallback } from "react";
+import { useRouter } from "next/router";
+import { useQuery } from "react-query";
+
 import PropTypes from "prop-types";
 import { EntryPropType } from "../../js/entry";
 
 import { formatDollarString, humanizeDate } from "../../js/utilities";
 import { getEntriesForLeaderboard } from "../../db/entries";
+import { getDateRangeFromQueryParams } from "../../js/datepicker";
 
 import Link from "next/link";
 import BackBar from "../../components/BackBar";
 import SimpleHeader from "../../components/SimpleHeader";
 import DatePicker from "../../components/charts/DatePicker";
-import { useQuery } from "react-query";
+import LeaderboardPaginator from "../../components/charts/LeaderboardPaginator";
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { cursor, direction, startDate, endDate, dateRange } = context.query;
+  const initialDateRange = getDateRangeFromQueryParams({
+    startDate,
+    endDate,
+    dateRange,
+  });
   return {
     props: {
       initialEntries: await getEntriesForLeaderboard({
-        limit: 50,
+        cursor,
+        direction: direction || "next",
+        dateRange: initialDateRange,
       }),
+      cursor: cursor || null,
+      direction: direction || "next",
+      startDate: startDate || null,
+      endDate: endDate || null,
+      dateRangeParam: dateRange || null,
     },
   };
 }
 
-export default function Top({ initialEntries }) {
+export default function Top({
+  initialEntries,
+  cursor,
+  direction,
+  startDate,
+  endDate,
+  dateRangeParam,
+}) {
   const router = useRouter();
-  const [dateRange, setDateRange] = useState(null);
+  const [dateRange, setDateRange] = useState(
+    getDateRangeFromQueryParams({
+      startDate,
+      endDate,
+      dateRange: dateRangeParam,
+    })
+  );
 
-  const getFilteredEntries = useCallback(() => {
-    if (dateRange) {
-      return getEntriesForLeaderboard(dateRange);
+  const queryResult = useQuery(
+    ["entries", dateRange, cursor, direction],
+    () => getEntriesForLeaderboard({ dateRange, cursor, direction }),
+    {
+      initialData: initialEntries,
+      refetchOnMount: false,
     }
-    return getEntriesForLeaderboard();
-  }, [dateRange]);
-
-  const queryResult = useQuery(["entries", dateRange], getFilteredEntries, {
-    initialData: initialEntries,
-    refetchOnMount: false,
-  });
+  );
 
   return (
     <>
@@ -45,7 +71,7 @@ export default function Top({ initialEntries }) {
       <div className="content-wrapper">
         <article className="chart-page">
           <div className="table-filters">
-            <DatePicker setDateRange={setDateRange} />
+            <DatePicker dateRange={dateRange} setDateRange={setDateRange} />
           </div>
           <table className="leaderboard">
             <thead>
@@ -56,7 +82,7 @@ export default function Top({ initialEntries }) {
               </tr>
             </thead>
             <tbody>
-              {queryResult.data.entries.map((entry) => (
+              {queryResult.data?.entries?.map((entry) => (
                 <tr
                   key={entry.id}
                   onClick={() => router.push(`/?id=${entry.readableId}`)}
@@ -78,6 +104,7 @@ export default function Top({ initialEntries }) {
               ))}
             </tbody>
           </table>
+          <LeaderboardPaginator {...queryResult.data} />
         </article>
       </div>
     </>
@@ -90,4 +117,9 @@ Top.propTypes = {
     hasNext: PropTypes.bool.isRequired,
     hasPrev: PropTypes.bool,
   }).isRequired,
+  cursor: PropTypes.string,
+  direction: PropTypes.oneOf(["next", "prev"]),
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
+  dateRangeParam: PropTypes.string,
 };
