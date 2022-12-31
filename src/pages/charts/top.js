@@ -8,20 +8,28 @@ import { EntryPropType } from "../../js/entry";
 import { formatDollarString, humanizeDate } from "../../js/utilities";
 import { getEntriesForLeaderboard } from "../../db/leaderboard";
 import { getDateRangeFromQueryParams } from "../../js/datepicker";
+import { format } from "date-fns";
 
 import Link from "next/link";
 import BackBar from "../../components/BackBar";
 import SimpleHeader from "../../components/SimpleHeader";
 import DatePicker from "../../components/charts/DatePicker";
 import LeaderboardPaginator from "../../components/charts/LeaderboardPaginator";
+import { getMetadata } from "../../db/metadata";
 
 export async function getServerSideProps(context) {
   const { cursor, direction, startDate, endDate, dateRange } = context.query;
-  const initialDateRange = getDateRangeFromQueryParams({
-    startDate,
-    endDate,
-    dateRange,
-  });
+
+  const promises = [
+    getDateRangeFromQueryParams({
+      startDate,
+      endDate,
+      dateRange,
+    }),
+    getMetadata(),
+  ];
+
+  const [initialDateRange, metadata] = await Promise.all(promises);
   return {
     props: {
       initialEntries: await getEntriesForLeaderboard({
@@ -34,6 +42,7 @@ export async function getServerSideProps(context) {
       startDate: startDate || null,
       endDate: endDate || null,
       dateRangeParam: dateRange || null,
+      scamTotal: metadata.griftTotal,
     },
   };
 }
@@ -45,6 +54,7 @@ export default function Top({
   startDate,
   endDate,
   dateRangeParam,
+  scamTotal,
 }) {
   const router = useRouter();
   const [dateRange, setDateRange] = useState(
@@ -64,6 +74,28 @@ export default function Top({
     }
   );
 
+  const renderScamTotal = () => {
+    const amount =
+      dateRange.shortLabel === "all" ? scamTotal : queryResult.data.scamTotal;
+    if (!amount) {
+      return null;
+    }
+
+    let dateRangeStr = `since ${format(dateRange.startDate, "MMMM d, yyyy")}`;
+    if ("shortLabel" in dateRange && /\d{4}/.test(dateRange.shortLabel)) {
+      // For the ranges that are a single year
+      dateRangeStr = `in ${dateRange.shortLabel}`;
+    } else if (!("shortLabel" in dateRange)) {
+      dateRangeStr = `from ${dateRange.label}`;
+    }
+
+    return (
+      <div className="scam-total">{`${formatDollarString(amount, {
+        cents: false,
+      })} has been lost to hacks, scams, and fraud ${dateRangeStr}`}</div>
+    );
+  };
+
   return (
     <>
       <SimpleHeader>Hacks and scams by dollar amount</SimpleHeader>
@@ -71,9 +103,12 @@ export default function Top({
       <div className="content-wrapper">
         <article className="chart-page">
           <div className="table-filters">
-            <DatePicker dateRange={dateRange} setDateRange={setDateRange} />
+            <div>
+              <DatePicker dateRange={dateRange} setDateRange={setDateRange} />
+            </div>
             <LeaderboardPaginator {...queryResult.data} />
           </div>
+          {renderScamTotal()}
           <table className="leaderboard">
             <thead>
               <tr>
@@ -117,10 +152,12 @@ Top.propTypes = {
     entries: PropTypes.arrayOf(EntryPropType).isRequired,
     hasNext: PropTypes.bool.isRequired,
     hasPrev: PropTypes.bool,
+    scamTotal: PropTypes.number,
   }).isRequired,
   cursor: PropTypes.string,
   direction: PropTypes.oneOf(["next", "prev"]),
   startDate: PropTypes.string,
   endDate: PropTypes.string,
   dateRangeParam: PropTypes.string,
+  scamTotal: PropTypes.number.isRequired,
 };

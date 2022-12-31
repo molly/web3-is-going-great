@@ -63,6 +63,12 @@ export const getEntriesForLeaderboard = async ({
       ["desc"]
     );
 
+    // Get scam total
+    resp.scamTotal = resp.entries.reduce(
+      (total, entry) => total + entry.scamAmountDetails.total,
+      0
+    );
+
     // Limit to <=50 entries, set pagination flags accordingly
     if (!cursor) {
       if (resp.entries.length > LEADERBOARD_LIMIT) {
@@ -75,7 +81,6 @@ export const getEntriesForLeaderboard = async ({
         resp.entries,
         (entry) => entry.scamAmountDetails.total >= cursor
       );
-      console.log(cursorIndex);
       const startIndex = Math.max(cursorIndex - LEADERBOARD_LIMIT, 0);
       resp.hasNext = cursorIndex < resp.entries.length;
       resp.hasPrev = startIndex > 0;
@@ -84,7 +89,6 @@ export const getEntriesForLeaderboard = async ({
       const cursorIndex = resp.entries.findIndex(
         (entry) => entry.scamAmountDetails.total <= cursor
       );
-      console.log(cursorIndex);
       const endIndex = cursorIndex + LEADERBOARD_LIMIT;
       resp.hasNext = endIndex < resp.entries.length;
       resp.hasPrev = cursorIndex > 0;
