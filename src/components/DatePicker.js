@@ -1,104 +1,99 @@
-import PropTypes from "prop-types";
-import clsx from "clsx";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
-import { useSelect } from "downshift";
+import { useState, useEffect, useRef } from "react";
+import { usePopper } from "react-popper";
+import { DateRangePicker } from "react-date-range";
 
-import {
-  startOfMonth,
-  endOfMonth,
-  formatISO,
-  startOfYear,
-  endOfYear,
-} from "date-fns";
+import { MIN_DATE, STATIC_RANGES } from "../js/datepicker";
+import { endOfDay, format } from "date-fns";
 
-const START_YEAR = 2021;
+export default function DatePicker() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedRange, setSelectedRange] = useState([
+    { startDate: MIN_DATE, endDate: endOfDay(new Date()), key: "selection" },
+  ]);
+  const [buttonLabel, setButtonLabel] = useState("All time");
 
-const getPastYearOptions = () => {
-  const years = [];
-  let year = new Date().getFullYear() - 1;
-  while (year >= START_YEAR) {
-    years.push({ text: year.toString(), value: year });
-    year -= 1;
-  }
-  return years;
-};
-
-const DATE_OPTIONS = [
-  { text: "All time", value: "all-time" },
-  { text: "This month", value: "this-month" },
-  { text: "This year to date", value: "ytd" },
-  ...getPastYearOptions(),
-  { text: "Custom range", value: "custom" },
-];
-
-export default function DatePicker({ setDateRange }) {
-  const onSelectedItemChange = ({ selectedItem: { value: selectedRange } }) => {
-    const now = new Date();
-    const fmtOpts = { representation: "date" };
-    let dateRange = {
-      startDate: null,
-      endDate: formatISO(now, fmtOpts),
-    };
-    if (selectedRange === "all-time") {
-      dateRange = null;
-    } else if (selectedRange === "this-month") {
-      dateRange.startDate = formatISO(startOfMonth(now), fmtOpts);
-    } else if (selectedRange === "ytd") {
-      dateRange.startDate = formatISO(startOfYear(now), fmtOpts);
-    } else if (Number.isInteger(selectedRange)) {
-      const selectedYear = new Date(`${selectedRange}-01-01T12:00:00`); // Avoid off-by-one error with TZs
-      dateRange.startDate = formatISO(selectedYear, fmtOpts);
-      dateRange.endDate = formatISO(endOfYear(selectedYear), fmtOpts);
-    } else if (selectedRange === "custom") {
-      // Pass
-    }
-    console.log(dateRange);
-    setDateRange(dateRange);
-  };
-
-  const {
-    isOpen,
-    selectedItem,
-    getToggleButtonProps,
-    getLabelProps,
-    getMenuProps,
-    highlightedIndex,
-    getItemProps,
-  } = useSelect({
-    id: "date-picker",
-    items: DATE_OPTIONS,
-    initialSelectedItem: { text: "All time", value: "all-time" },
-    itemToString: (item) => (item ? item.text : ""),
-    onSelectedItemChange,
+  const datePickerRef = useRef(null);
+  const [referenceElement, setReferenceElement] = useState(null);
+  const [popperElement, setPopperElement] = useState(null);
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    placement: "bottom-start",
+    modifiers: [
+      {
+        name: "offset",
+        options: {
+          offset: [0, -1],
+        },
+      },
+    ],
   });
 
+  useEffect(() => {
+    const outsideClickHandler = (evt) => {
+      if (
+        datePickerRef.current &&
+        !datePickerRef.current.contains(evt.target) &&
+        isMenuOpen
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", outsideClickHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", outsideClickHandler);
+    };
+  }, [datePickerRef, isMenuOpen]);
+
+  const getButtonLabel = (selection) => {
+    for (const preset of STATIC_RANGES) {
+      if (preset.isSelected(selection)) {
+        return preset.label;
+      }
+    }
+    return `${format(selection.startDate, "MMM d, yyyy")} – ${format(
+      selection.endDate,
+      "MMM d, yyyy"
+    )}`;
+  };
+
   return (
-    <div className="date-picker">
-      <label {...getLabelProps()}>Date range:</label>
-      <div className="date-picker-control">
-        <button {...getToggleButtonProps()}>{selectedItem.text}</button>
-        <div {...getMenuProps()}>
-          {isOpen && (
-            <ul className="date-picker-menu">
-              {DATE_OPTIONS.map((item, index) => (
-                <li
-                  key={item.value}
-                  className={clsx({
-                    "highlighted-item": highlightedIndex === index,
-                  })}
-                  {...getItemProps({ item, index })}
-                >
-                  {item.text}
-                </li>
-              ))}
-            </ul>
-          )}
+    <div className="date-picker" ref={datePickerRef}>
+      <label>Date range:</label>
+      <button
+        className="date-picker-toggle-button"
+        type="button"
+        ref={setReferenceElement}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        {buttonLabel}
+      </button>
+
+      {isMenuOpen && (
+        <div
+          ref={setPopperElement}
+          className="date-picker-menu"
+          style={styles.popper}
+          {...attributes.popper}
+        >
+          <DateRangePicker
+            color="#FFFFFF"
+            rangeColors={["#5948a4"]}
+            ranges={selectedRange}
+            inputRanges={[]}
+            staticRanges={STATIC_RANGES}
+            minDate={MIN_DATE}
+            editableDateInputs={true}
+            shownDate={selectedRange[0].endDate}
+            onChange={(item) => {
+              setSelectedRange([item.selection]);
+              setButtonLabel(getButtonLabel(item.selection));
+            }}
+          />
         </div>
-      </div>
+      )}
     </div>
   );
 }
-
-DatePicker.propTypes = {
-  setDateRange: PropTypes.func.isRequired,
-};

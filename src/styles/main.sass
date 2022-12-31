@@ -10,6 +10,7 @@
 @import _loading
 @import _navigation
 @import _popovers
+@import _react-date-range-theme-overrides
 
 html
   width: 100%
@@ -581,7 +582,8 @@ td.number
     padding: 5px
 
 // Contribute
-table.expenses
+table
+  width: 100%
   border: 1px solid $timeline-line-color
   border-collapse: collapse
 
@@ -978,7 +980,7 @@ table.expenses
     border-color: $dark-timeline-line-color
 
   // Contribute
-  table.expenses
+  table
     border-color: $dark-timeline-line-color
 
     th, td
@@ -1000,6 +1002,7 @@ table.expenses
   @include fixedDarkMode()
   @include popoversDarkMode()
   @include chartsDarkMode()
+  @include reactDateRangeDarkMode()
 
 @media (prefers-color-scheme: dark)
   @include mainDarkMode()
@@ -1008,3 +1011,4 @@ table.expenses
   @include fixedDarkMode()
   @include popoversDarkMode()
   @include chartsDarkMode()
+  @include reactDateRangeDarkMode()
