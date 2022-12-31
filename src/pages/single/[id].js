@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import useGA from "../../hooks/useGA";
 import useWindowWidth from "../../hooks/useWindowWidth";
+import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
 
 import { getEntry } from "../../db/singleEntry";
 import { getGlossaryEntries } from "../../db/glossary";
@@ -40,6 +41,7 @@ export default function SingleEntry({
   useGA();
 
   const windowWidth = useWindowWidth();
+  const isBrowserRendering = useIsBrowserRendering();
 
   const renderEntry = () => {
     return (
@@ -72,7 +74,10 @@ export default function SingleEntry({
   return (
     <>
       <CustomEntryHead entry={entry} />
-      <Header windowWidth={windowWidth} />
+      <Header
+        windowWidth={windowWidth}
+        isBrowserRendering={isBrowserRendering}
+      />
       <BackBar customText="Go to full timeline" />
       <div className="timeline-page content-wrapper">{renderBody()}</div>
       <Footer />

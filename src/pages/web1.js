@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
 
-import NoJsNavigation from "../components/navigation/NoJsNavigation";
 import Header from "../components/timeline/Header";
 import Entry from "../components/timeline/Entry";
 import Error from "../components/Error";
@@ -56,7 +55,6 @@ export default function Web1({ entries, hasPrev, hasNext }) {
 
   return (
     <>
-      <NoJsNavigation />
       <Header />
       {renderPageNavigation()}
       <div className="timeline-page content-wrapper">

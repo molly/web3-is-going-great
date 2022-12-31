@@ -16,7 +16,6 @@ import Link from "next/link";
 import { InView, useInView } from "react-intersection-observer";
 
 import CustomEntryHead from "../CustomEntryHead";
-import NavigationBar from "../navigation/NavigationBar";
 import Header from "./Header";
 import Filters from "./Filters";
 import BackBar from "../BackBar";
@@ -24,7 +23,6 @@ import Entry from "./Entry";
 import FixedAtBottom from "./FixedAtBottom";
 import Loader from "../Loader";
 import Error from "../Error";
-import NoJsNavigation from "../navigation/NoJsNavigation";
 
 export default function Timeline({
   queryResult,
@@ -90,17 +88,6 @@ export default function Timeline({
         : null,
     [collection, allCollections]
   );
-
-  const maybeRenderNavigation = () => {
-    if (!isBrowserRendering) {
-      return <NoJsNavigation />;
-    } else if (windowWidth !== "xs" && windowWidth !== "sm") {
-      return <NavigationBar />;
-    } else {
-      // In this case, <Header/> handles rendering the nav
-      return null;
-    }
-  };
 
   const renderHead = () => {
     if (startAtId || collection) {
@@ -253,7 +240,6 @@ export default function Timeline({
 
   return (
     <>
-      {maybeRenderNavigation()}
       <Header
         isBrowserRendering={isBrowserRendering}
         windowWidth={windowWidth}
