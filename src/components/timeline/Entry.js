@@ -35,6 +35,7 @@ export default function Entry({
   collection,
   allCollections,
   setCollection,
+  setStarred,
   shouldScrollToElement,
 }) {
   const ref = useRef();
@@ -156,10 +157,10 @@ export default function Entry({
         </span>
         <ul className="entry-link-icons">
           {entry.starred && (
-            <>
+            <button onClick={() => setStarred(true)}>
               <i className="fas fa-star starred-entry" aria-hidden={true}></i>
               <span className="sr-only">Starred</span>
-            </>
+            </button>
           )}
           {renderLinkIcon()}
           {"tweetId" in entry && (
@@ -426,6 +427,7 @@ Entry.propTypes = {
   glossary: PropTypes.object, // Not defined in web1
   allCollections: PropTypes.object.isRequired, // Not defined in web1
   setCollection: PropTypes.func, // Not defined in web1
+  setStarred: PropTypes.func,
 };
 
 Entry.defaultProps = {
