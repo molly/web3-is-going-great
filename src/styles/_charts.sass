@@ -56,16 +56,16 @@
 
 // Dark mode
 @mixin chartsDarkMode()
-  .chart-page table.leaderboard
-    background-color: $dark-card-background
-    color: $dark-main-color
+  .chart-page
+    table.leaderboard
+      background-color: $dark-card-background
+      color: $dark-main-color
 
-    tbody
-      tr:hover
-        background-color: $dark-highlight-background
+      tbody
+        tr:hover
+          background-color: $dark-highlight-background
 
-  .date-picker
-    .date-picker-toggle-button
+    .date-picker .date-picker-toggle-button, .leaderboard-paginator button
       color: $dark-filter-text
       border-color: $timeline-line-color
       background-color: $dark-lightbox-background
