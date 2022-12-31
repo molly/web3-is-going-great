@@ -53,6 +53,7 @@ export async function getServerSideProps(context) {
     getEntries({
       ...props.initialFilters,
       ...(props.initialStartAtId && { startAtId: props.initialStartAtId }),
+      starred: props.initialStarred,
     }),
     getGlossaryEntries(),
     getMetadata(),
@@ -131,8 +132,19 @@ export default function IndexPage({
         query[category] = filters[category].join(",");
       }
     }
-    router.push({ query }, null, { shallow: true });
-    setStarredState(false);
+
+    // We can't filter by categories AND show the starred filter, but if the only filter
+    // being applied is sorting, we can maintain the starred filter
+    if (Object.keys(query).length) {
+      router.push({ query }, null, { shallow: true });
+      setStarredState(false);
+    } else {
+      if (starred) {
+        query.starred = true;
+      }
+      router.push({ query }, null, { shallow: true });
+    }
+
     setFilterState(filters);
   };
 
@@ -146,7 +158,7 @@ export default function IndexPage({
       router.push({ query: {} }, null, { shallow: true });
     }
     setSelectedEntryFromSearch(null);
-    setFilterState(EMPTY_FILTERS_STATE);
+    setFilterState({ ...EMPTY_FILTERS_STATE, sort: filters.sort });
     setCollectionState(null);
     setStarredState(starred);
   };
