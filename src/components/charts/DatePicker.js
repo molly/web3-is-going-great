@@ -58,9 +58,13 @@ export default function DatePicker({ dateRange, setDateRange }) {
       <label>Date range:</label>
       <button
         className="date-picker-toggle-button"
+        id="date-picker-toggle-button"
         type="button"
         ref={setReferenceElement}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
+        role="button"
+        aria-controls="date-picker-menu"
+        aria-expanded={isMenuOpen}
       >
         {dateRange?.label}
       </button>
@@ -69,6 +73,9 @@ export default function DatePicker({ dateRange, setDateRange }) {
         <div
           ref={setPopperElement}
           className="date-picker-menu"
+          id="date-picker-menu"
+          aria-labelledby="date-picker-toggle-button"
+          role="region"
           style={styles.popper}
           {...attributes.popper}
         >

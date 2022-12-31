@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 
@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { EntryPropType } from "../../js/entry";
 
 import { formatDollarString, humanizeDate } from "../../js/utilities";
-import { getEntriesForLeaderboard } from "../../db/entries";
+import { getEntriesForLeaderboard } from "../../db/leaderboard";
 import { getDateRangeFromQueryParams } from "../../js/datepicker";
 
 import Link from "next/link";
