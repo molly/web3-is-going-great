@@ -54,6 +54,14 @@
     background-color: $card-background
     padding: 5px
 
+@media only screen and (max-width: #{$sm-breakpoint}px)
+  .chart-page
+    width: 100%
+    margin: 0
+
+    .table-filters
+      margin: 10px
+
 // Dark mode
 @mixin chartsDarkMode()
   .chart-page

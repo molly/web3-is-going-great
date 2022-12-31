@@ -11,6 +11,9 @@
     font-size: 14px
 
   // Most colors
+  .rdrDateRangePickerWrapper
+    background-color: $card-background
+
   .rdrDateDisplayWrapper, .rdrNextPrevButton, .rdrMonthAndYearPickers select:hover
     background-color: $main-background
 
@@ -43,6 +46,17 @@
 
   .rdrDay
     height: 2.5em
+
+  .rdrInputRanges
+    display: none
+
+@media only screen and (max-width: #{$sm-breakpoint}px)
+  .date-picker-menu .rdrDateRangePickerWrapper
+    display: flex
+    flex-direction: column
+
+    .rdrDefinedRangesWrapper
+      width: auto
 
 // Dark mode
 @mixin reactDateRangeDarkMode()
