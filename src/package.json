@@ -11,7 +11,6 @@
     "node": "16.x"
   },
   "dependencies": {
-    "@fireworks-js/react": "^2.9.0",
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@popperjs/core": "^2.11.6",
     "algoliasearch": "^4.14.2",

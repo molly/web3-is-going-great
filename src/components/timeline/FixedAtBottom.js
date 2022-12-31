@@ -13,7 +13,6 @@ import { fallback } from "../../js/utilities";
 import ScrollToTop from "./ScrollToTop";
 import GriftCounter from "./GriftCounter";
 import SettingsPanel from "./SettingsPanel";
-import FireworksAnimation from "./FireworksAnimation";
 
 export default function FixedAtBottom({
   headerInView,
@@ -44,12 +43,6 @@ export default function FixedAtBottom({
       prefersReducedMotion
     )
   );
-  const [isFireworksAnimationPaused, setIsFireworksAnimationPaused] = useState(
-    fallback(
-      getLocalStorage(LOCALSTORAGE_KEYS.fireworksAnimationPaused, null),
-      prefersReducedMotion
-    )
-  );
 
   useEffect(() => {
     // Need to update this value once the browser rendering check passes, otherwise this remains null
@@ -58,28 +51,8 @@ export default function FixedAtBottom({
       if (isAnimationPaused === null) {
         setIsAnimationPaused(prefersReducedMotion);
       }
-      if (isFireworksAnimationPaused === null) {
-        setIsFireworksAnimationPaused(prefersReducedMotion);
-      }
     }
-  }, [prefersReducedMotion, isAnimationPaused, isFireworksAnimationPaused]);
-
-  const fireworksEnabled = false; // Turning this off after $10B milestone, leaving code for the next milestone
-  const shouldRenderFireworks = useMemo(
-    () =>
-      fireworksEnabled &&
-      !isFireworksAnimationPaused &&
-      !isGriftCounterCountingUp &&
-      shouldRenderGriftCounter &&
-      isGriftCounterExpanded,
-    [
-      fireworksEnabled,
-      isFireworksAnimationPaused,
-      isGriftCounterCountingUp,
-      shouldRenderGriftCounter,
-      isGriftCounterExpanded,
-    ]
-  );
+  }, [prefersReducedMotion, isAnimationPaused]);
 
   const makeToggleFunction = useCallback(
     (isToggledOn, toggleFn, localStorageKey = null) =>
@@ -123,15 +96,6 @@ export default function FixedAtBottom({
       ),
     [makeToggleFunction, isAnimationPaused]
   );
-  const toggleFireworksAnimation = useMemo(
-    () =>
-      makeToggleFunction(
-        isFireworksAnimationPaused,
-        setIsFireworksAnimationPaused,
-        LOCALSTORAGE_KEYS.fireworksAnimationPaused
-      ),
-    [makeToggleFunction, isFireworksAnimationPaused]
-  );
 
   if (!isBrowserRendering) {
     return null;
@@ -153,7 +117,6 @@ export default function FixedAtBottom({
 
   return (
     <>
-      {shouldRenderFireworks && <FireworksAnimation />}
       <div className="fix-at-bottom">
         {!headerInView && <ScrollToTop scrollToTop={scrollToTop} />}
         {renderSettingsButton()}
@@ -162,9 +125,6 @@ export default function FixedAtBottom({
             setIsSettingsPanelShown={setIsSettingsPanelShown}
             isAnimationPaused={isAnimationPaused}
             toggleFlamesAnimation={toggleFlamesAnimation}
-            isFireworksAnimationPaused={isFireworksAnimationPaused}
-            toggleFireworksAnimation={toggleFireworksAnimation}
-            fireworksEnabled={fireworksEnabled}
             isGriftCounterExpanded={isGriftCounterExpanded}
             toggleShowGriftCounter={toggleShowGriftCounter}
             isGriftCounterCountingUp={isGriftCounterCountingUp}
