@@ -1,9 +1,15 @@
 import PropTypes from "prop-types";
+import clsx from "clsx";
 import { EntryPropType } from "../../js/entry";
 import { useRouter } from "next/router";
 import { copy } from "../../js/utilities";
 
-export default function LeaderboardPaginator({ hasPrev, hasNext, entries }) {
+export default function LeaderboardPaginator({
+  hasPrev,
+  hasNext,
+  entries,
+  standalone,
+}) {
   const router = useRouter();
 
   const navigate = ({ cursor, direction }) => {
@@ -11,8 +17,8 @@ export default function LeaderboardPaginator({ hasPrev, hasNext, entries }) {
   };
 
   return (
-    <div className="leaderboard-paginator">
-      {hasPrev ? (
+    <div className={clsx("leaderboard-paginator", { standalone: standalone })}>
+      {hasPrev && (
         <>
           <button
             onClick={() => {
@@ -35,10 +41,8 @@ export default function LeaderboardPaginator({ hasPrev, hasNext, entries }) {
             <i className="fas fa-angle-left" title="Go to first page" />
           </button>
         </>
-      ) : (
-        <span />
       )}
-      {hasNext ? (
+      {hasNext && (
         <button
           onClick={() =>
             navigate({
@@ -49,8 +53,6 @@ export default function LeaderboardPaginator({ hasPrev, hasNext, entries }) {
         >
           <i className="fas fa-angle-right" title="Go to next page" />
         </button>
-      ) : (
-        <span />
       )}
     </div>
   );
@@ -59,4 +61,5 @@ LeaderboardPaginator.propTypes = {
   entries: PropTypes.arrayOf(EntryPropType).isRequired,
   hasNext: PropTypes.bool.isRequired,
   hasPrev: PropTypes.bool,
+  standalone: PropTypes.bool,
 };

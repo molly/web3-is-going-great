@@ -72,6 +72,7 @@ export default function Top({
         <article className="chart-page">
           <div className="table-filters">
             <DatePicker dateRange={dateRange} setDateRange={setDateRange} />
+            <LeaderboardPaginator {...queryResult.data} />
           </div>
           <table className="leaderboard">
             <thead>
@@ -104,7 +105,7 @@ export default function Top({
               ))}
             </tbody>
           </table>
-          <LeaderboardPaginator {...queryResult.data} />
+          <LeaderboardPaginator {...queryResult.data} standalone={true} />
         </article>
       </div>
     </>
