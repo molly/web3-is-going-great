@@ -96,6 +96,48 @@ export default function Top({
     );
   };
 
+  const renderTableBody = () => {
+    if (queryResult.isFetching) {
+      return (
+        <tbody>
+          <tr className="loading-row">
+            <td colSpan={3}>
+              <span className="loading-wrapper">
+                <span
+                  className="loading-animation"
+                  role="alert"
+                  aria-label="Loading"
+                />
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      );
+    }
+    return (
+      <tbody>
+        {queryResult.data?.entries?.map((entry) => (
+          <tr
+            key={entry.id}
+            onClick={() => router.push(`/?id=${entry.readableId}`)}
+          >
+            <td>
+              <Link href={`/?id=${entry.readableId}`}>
+                <span dangerouslySetInnerHTML={{ __html: entry.shortTitle }} />
+              </Link>
+            </td>
+            <td>{humanizeDate(entry.date)}</td>
+            <td className="number">
+              {formatDollarString(entry.scamAmountDetails.total, {
+                cents: false,
+              })}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    );
+  };
+
   return (
     <>
       <SimpleHeader>Hacks and scams by dollar amount</SimpleHeader>
@@ -117,28 +159,7 @@ export default function Top({
                 <th>Amount</th>
               </tr>
             </thead>
-            <tbody>
-              {queryResult.data?.entries?.map((entry) => (
-                <tr
-                  key={entry.id}
-                  onClick={() => router.push(`/?id=${entry.readableId}`)}
-                >
-                  <td>
-                    <Link href={`/?id=${entry.readableId}`}>
-                      <span
-                        dangerouslySetInnerHTML={{ __html: entry.shortTitle }}
-                      />
-                    </Link>
-                  </td>
-                  <td>{humanizeDate(entry.date)}</td>
-                  <td className="number">
-                    {formatDollarString(entry.scamAmountDetails.total, {
-                      cents: false,
-                    })}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            {renderTableBody()}
           </table>
           <LeaderboardPaginator {...queryResult.data} standalone={true} />
         </article>

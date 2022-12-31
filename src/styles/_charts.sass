@@ -13,9 +13,13 @@
       padding: 10px
 
     tbody
-      tr:hover
+      tr:not(.loading-row):hover
         background-color: $chart-highlight-background
         cursor: pointer
+
+      .loading-wrapper
+        display: block
+        margin-bottom: 60px
 
   .table-filters
     display: flex
