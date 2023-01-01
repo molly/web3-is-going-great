@@ -35,6 +35,7 @@ export default function Entry({
   collection,
   allCollections,
   setCollection,
+  setStarred,
   shouldScrollToElement,
 }) {
   const ref = useRef();
@@ -131,9 +132,8 @@ export default function Entry({
       return (
         <li>
           {showCopiedPopup && <div className="permalink-popup">Copied</div>}
-          <button onClick={() => permalink(entry.readableId)}>
+          <button onClick={() => permalink(entry.readableId)} title="Permalink">
             <i className="fas fa-link" aria-hidden={true} />
-            <span className="sr-only">Permalink</span>
           </button>
         </li>
       );
@@ -141,10 +141,24 @@ export default function Entry({
       // No JS
       return (
         <Link href={noJsPermalink}>
-          <i className="fas fa-link" aria-hidden={true} />
-          <span className="sr-only">Permalink</span>
+          <i className="fas fa-link" title="Permalink" />
         </Link>
       );
+    }
+  };
+
+  const maybeRenderStar = () => {
+    if (entry.starred) {
+      const star = (
+        <>
+          <i className="fas fa-star starred-entry" title="Starred entry"></i>
+        </>
+      );
+      if (setStarred) {
+        return <button onClick={() => setStarred(true)}>{star}</button>;
+      }
+      // Don't make the star clickable in the web1 view
+      return star;
     }
   };
 
@@ -155,12 +169,7 @@ export default function Entry({
           <time dateTime={entry.date}>{humanizeDate(entry.date)}</time>
         </span>
         <ul className="entry-link-icons">
-          {entry.starred && (
-            <>
-              <i className="fas fa-star starred-entry" aria-hidden={true}></i>
-              <span className="sr-only">Starred</span>
-            </>
-          )}
+          {maybeRenderStar()}
           {renderLinkIcon()}
           {"tweetId" in entry && (
             <li>
@@ -171,7 +180,6 @@ export default function Entry({
                 title="Tweet link"
               >
                 <i className="fa-brands fa-twitter" aria-hidden={true} />
-                <span className="sr-only">Tweet link</span>
               </a>
             </li>
           )}
@@ -426,6 +434,7 @@ Entry.propTypes = {
   glossary: PropTypes.object, // Not defined in web1
   allCollections: PropTypes.object.isRequired, // Not defined in web1
   setCollection: PropTypes.func, // Not defined in web1
+  setStarred: PropTypes.func, // Not defined in web1
 };
 
 Entry.defaultProps = {

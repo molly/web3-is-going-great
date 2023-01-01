@@ -110,3 +110,11 @@ export const recalculateEntryCount = functions.https.onRequest(
     res.status(204).end();
   }
 );
+
+export const getEntryCount = functions.https.onRequest(async (req, res) => {
+  const entriesSnapshot = await firestore
+    .collection("entries")
+    .where("date", "<", "2022-01-01")
+    .get();
+  res.send({ size: entriesSnapshot.size });
+});

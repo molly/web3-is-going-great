@@ -22,6 +22,10 @@
 .search-with-button
   display: flex
 
+.input-group
+  display: flex
+  align-items: center
+
 .expand-filters-button,
 .sort-button
   display: flex
@@ -193,6 +197,15 @@
   .sort-button
     margin-left: 0
     justify-content: center
+
+  .inline-checkbox
+    padding: 10px 0
+
+  .filters-group
+    border-bottom: 1px solid $timeline-line-color
+
+  .search-group
+    margin-top: 10px
 
 // Dark mode
 @mixin filtersDarkMode()
