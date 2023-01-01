@@ -119,6 +119,16 @@ export default function Top({
           </tr>
         </tbody>
       );
+    } else if (queryResult.data.entries.length === 0) {
+      return (
+        <tbody>
+          <tr className="loading-row">
+            <td colSpan={3} className="empty-row">
+              There are no entries in this time period.
+            </td>
+          </tr>
+        </tbody>
+      );
     }
     return (
       <tbody>
