@@ -98,7 +98,7 @@ export default function Top({
     return (
       <div className="scam-total">{`${formatDollarString(amount, {
         cents: false,
-      })} has been lost to hacks, scams, and fraud ${dateRangeStr}`}</div>
+      })} has been lost to hacks, scams, and fraud ${dateRangeStr}.`}</div>
     );
   };
 
@@ -151,12 +151,12 @@ export default function Top({
       <div className="content-wrapper">
         <article className="chart-page">
           <div className="table-filters">
-            {renderScamTotal()}
             <div>
               <DatePicker dateRange={dateRange} setDateRange={setDateRange} />
             </div>
             <LeaderboardPaginator {...queryResult.data} />
           </div>
+          {renderScamTotal()}
           <table className="leaderboard">
             <thead>
               <tr>
