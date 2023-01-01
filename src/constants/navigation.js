@@ -12,6 +12,7 @@ export const NAVIGATION = [
         label: "What is web3?",
         path: "/what",
       },
+      { label: "FAQ", path: "/faq" },
       {
         label: "License and attribution",
         short: "License",

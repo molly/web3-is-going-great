@@ -11,6 +11,7 @@ import { getDateRangeFromQueryParams } from "../../js/datepicker";
 import { format } from "date-fns";
 
 import Link from "next/link";
+import CustomHead from "../../components/CustomHead";
 import BackBar from "../../components/BackBar";
 import SimpleHeader from "../../components/SimpleHeader";
 import DatePicker from "../../components/charts/DatePicker";
@@ -156,6 +157,11 @@ export default function Top({
 
   return (
     <>
+      <CustomHead
+        title="Leaderboard – Web3 is Going Just Great"
+        description="List of hacks and scams by dollar amount"
+        urlPath="chart/top"
+      />
       <SimpleHeader>Hacks and scams by dollar amount</SimpleHeader>
       <BackBar />
       <div className="content-wrapper">
