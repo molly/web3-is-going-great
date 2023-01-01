@@ -4,6 +4,8 @@ import {
   endOfYear,
   startOfYear,
   format,
+  isValid,
+  clamp,
 } from "date-fns";
 import find from "lodash.find";
 import { createStaticRanges } from "react-date-range";
@@ -46,7 +48,7 @@ export const STATIC_RANGES = createStaticRanges([
   },
   {
     label: "This year to date",
-    shortLabel: "ytd",
+    shortLabel: `${new Date().getFullYear()}`,
     range: () => ({
       startDate: startOfYear(new Date()),
       endDate: endOfDay(new Date()),
@@ -89,25 +91,32 @@ export const getDateRangeFromQueryParams = ({
   endDate,
   dateRange,
 }) => {
-  if (!dateRange && !(startDate && endDate)) {
-    return ALL_TIME;
-  } else if (dateRange) {
+  if (dateRange) {
     const staticRange = find(
       STATIC_RANGES,
       (range) => range.shortLabel === dateRange
     );
-    return staticRangeToPreset(staticRange) || ALL_TIME;
+    if (staticRange) {
+      return staticRangeToPreset(staticRange) || ALL_TIME;
+    }
   }
-  const startDateObj = new Date(`${startDate}T12:00:00`);
-  const endDateObj = new Date(`${endDate}T12:00:00`);
-  const dateRangeObj = { startDate: startDateObj, endDate: endDateObj };
-  const preset = getPreset(dateRangeObj);
-  if (preset) {
-    return staticRangeToPreset(preset);
+  if (startDate && endDate) {
+    let startDateObj = new Date(`${startDate}T12:00:00`);
+    let endDateObj = new Date(`${endDate}T12:00:00`);
+    if (isValid(startDateObj) && isValid(endDateObj)) {
+      startDateObj = clamp(startDateObj, { start: MIN_DATE, end: new Date() });
+      endDateObj = clamp(endDateObj, { start: MIN_DATE, end: new Date() });
+      const dateRangeObj = { startDate: startDateObj, endDate: endDateObj };
+      const preset = getPreset(dateRangeObj);
+      if (preset) {
+        return staticRangeToPreset(preset);
+      }
+      return {
+        ...dateRangeObj,
+        key: "selection",
+        label: getCustomButtonLabel(dateRangeObj),
+      };
+    }
   }
-  return {
-    ...dateRangeObj,
-    key: "selection",
-    label: getCustomButtonLabel(dateRangeObj),
-  };
+  return ALL_TIME;
 };

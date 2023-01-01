@@ -82,8 +82,14 @@ export default function Top({
     }
 
     let dateRangeStr = `since ${format(dateRange.startDate, "MMMM d, yyyy")}`;
-    if ("shortLabel" in dateRange && /\d{4}/.test(dateRange.shortLabel)) {
-      // For the ranges that are a single year
+    if (
+      "shortLabel" in dateRange &&
+      /\d{4}/.test(dateRange.shortLabel) &&
+      dateRange.shortLabel !== `${new Date().getFullYear()}`
+    ) {
+      // For the ranges that are a single year.
+      // If it is the current year, we still want to use the "since" woding from above
+      // to convey that it is an ongoing time range.
       dateRangeStr = `in ${dateRange.shortLabel}`;
     } else if (!("shortLabel" in dateRange)) {
       dateRangeStr = `from ${dateRange.label}`;
