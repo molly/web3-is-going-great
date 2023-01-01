@@ -68,6 +68,12 @@ export default function FAQ() {
             there are many different tokens involved), so people can perform
             their own estimates if they'd prefer.
           </p>
+          <h3 id="changing-number">Do the estimates change?</h3>
+          <p>
+            Yes. I routinely go back and update entries when new information
+            comes out, and so you'll sometimes see estimates moving around as I
+            strive to keep them as accurate as possible.
+          </p>
           <h3 id="grift-question">
             What's the number in the corner with the flames?
           </h3>
