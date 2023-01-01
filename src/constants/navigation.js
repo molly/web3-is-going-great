@@ -42,6 +42,10 @@ export const NAVIGATION = [
     ],
   },
   {
+    label: "Leaderboard",
+    path: "/charts/top",
+  },
+  {
     label: "Glossary",
     path: "/glossary",
   },

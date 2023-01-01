@@ -151,12 +151,12 @@ export default function Top({
       <div className="content-wrapper">
         <article className="chart-page">
           <div className="table-filters">
+            {renderScamTotal()}
             <div>
               <DatePicker dateRange={dateRange} setDateRange={setDateRange} />
             </div>
             <LeaderboardPaginator {...queryResult.data} />
           </div>
-          {renderScamTotal()}
           <table className="leaderboard">
             <thead>
               <tr>
