@@ -178,7 +178,13 @@ export default function Top({
               <tr>
                 <th>Event</th>
                 <th>Date</th>
-                <th>Amount</th>
+                <th>
+                  Amount{" "}
+                  <Link href="/faq" target="_blank">
+                    <i className="fas fa-circle-info" aria-hidden={true} />
+                    <span className="sr-only">More info</span>
+                  </Link>
+                </th>
               </tr>
             </thead>
             {renderTableBody()}
