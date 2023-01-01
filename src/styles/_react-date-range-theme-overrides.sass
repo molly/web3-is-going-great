@@ -1,0 +1,110 @@
+@import _tokens
+
+.date-picker-menu
+  border: 1px solid $main-text-color
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2)
+
+  *
+    border-radius: 0px !important
+
+  .rdrCalendarWrapper, .rdrDefinedRangesWrapper
+    font-size: 14px
+
+  // Most colors
+  .rdrDateRangePickerWrapper
+    background-color: $card-background
+
+  .rdrDateDisplayWrapper, .rdrNextPrevButton, .rdrMonthAndYearPickers select:hover, .rdrStaticRange:hover, .rdrStaticRange:hover .rdrStaticRangeLabel, .rdrStaticRange:focus, .rdrStaticRange:focus .rdrStaticRangeLabel
+    background-color: $main-background
+
+  .rdrDateDisplayItem input, .rdrWeekDay
+    color: $timestamp-color
+
+  .rdrMonthAndYearPickers, .rdrMonthAndYearPickers select
+    color: $main-text-color
+
+  .rdrStaticRange
+    border-bottom-color: $main-background
+
+  .rdrNextPrevButton:hover
+    background-color: $highlight-background
+
+  .rdrDayToday .rdrDayNumber span:after
+    background: $accent
+    bottom: 2px
+
+  .rdrDayPassive .rdrDayNumber span
+    color: lighten($timestamp-color, 20%)
+
+  // Misc
+  .rdrDateDisplayItem
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2)
+
+  .rdrNextPrevButton
+    height: 26px
+
+  .rdrMonth
+    width: auto
+    padding: 0 0.6em 1.4em 0.6em
+
+  .rdrDay
+    height: 2.5em
+
+  .rdrInputRanges
+    display: none
+
+@media only screen and (max-width: #{$sm-breakpoint}px)
+  .date-picker-menu .rdrDateRangePickerWrapper
+    display: flex
+    flex-direction: column
+
+    .rdrDefinedRangesWrapper
+      width: auto
+
+// Dark mode
+@mixin reactDateRangeDarkMode()
+  .date-picker-menu
+    border: 1px solid $timeline-line-color
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
+
+    .rdrDateRangePickerWrapper, .rdrDefinedRangesWrapper, .rdrStaticRange, .rdrCalendarWrapper, .rdrDateDisplayItem
+      background-color: $dark-lightbox-background
+
+    .rdrDateDisplayWrapper, .rdrNextPrevButton, .rdrMonthAndYearPickers select:hover.rdrStaticRange:hover, .rdrStaticRange:hover .rdrStaticRangeLabel, .rdrStaticRange:focus, .rdrStaticRange:focus .rdrStaticRangeLabel
+      background-color: $dark-filterbar-background
+
+    .rdrNextPrevButton:hover, .rdrStaticRange:hover .rdrStaticRangeLabel, .rdrStaticRange:focus .rdrStaticRangeLabel
+      background-color: $dark-filterbar-border
+
+    .rdrDateDisplayItemActive
+      color: #666 !important
+
+    .rdrMonthAndYearPickers, .rdrMonthAndYearPickers select, .rdrDayNumber span
+      color: $dark-main-color
+
+    .rdrDateDisplayItem input, .rdrWeekDay
+      color: lighten($timestamp-color, 20%)
+
+    .rdrDayPassive .rdrDayNumber span
+      color: $timestamp-color
+
+    .rdrMonthAndYearPickers select
+      border: 1px solid #666
+
+    .rdrStaticRange
+      color: $dark-main-color
+      border-bottom-color: #666
+
+    .rdrDefinedRangesWrapper
+      border-right-color: #666
+
+      .rdrStaticRangeSelected
+        color: $dark-header-footer-link-color !important
+        background-color: $dark-filterbar-background
+
+    .rdrPprevButton i
+      border-color: transparent $dark-main-color transparent transparent
+
+    .rdrNextButton
+      i
+        border-color: transparent transparent transparent $dark-main-color

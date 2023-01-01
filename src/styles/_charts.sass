@@ -1,0 +1,86 @@
+@import _tokens
+
+.chart-page
+  width: 90%
+  max-width: 1000px
+  margin: 0 auto
+  padding: 20px 0
+
+  table.leaderboard
+    background-color: $card-background
+
+    th, td
+      padding: 10px
+
+    tbody
+      tr:not(.loading-row):hover
+        background-color: $chart-highlight-background
+        cursor: pointer
+
+      .loading-wrapper
+        display: block
+        margin-bottom: 60px
+
+  .table-filters
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin: 10px 0
+
+  .leaderboard-paginator
+    display: flex
+    margin-top: 10px
+
+    &.standalone
+      justify-content: flex-end
+
+    button
+      display: flex
+      align-items: center
+      justify-content: center
+      background-color: $card-background
+      border: 1px solid $main-text-color
+      width: 30px
+      height: 30px
+
+      &:hover, &:focus
+        text-decoration: none
+
+      &:not(:first-child)
+        margin-left: 10px
+
+  .scam-total
+    margin-bottom: 10px
+
+.date-picker
+  label
+    margin-right: 10px
+
+  .date-picker-toggle-button
+    border: 1px solid $main-text-color
+    background-color: $card-background
+    padding: 5px
+
+@media only screen and (max-width: #{$sm-breakpoint}px)
+  .chart-page
+    width: 100%
+    margin: 0
+
+    .table-filters, .scam-total
+      margin: 10px
+
+// Dark mode
+@mixin chartsDarkMode()
+  .chart-page
+    table.leaderboard
+      background-color: $dark-card-background
+      color: $dark-main-color
+
+      tbody
+        tr:hover
+          background-color: $dark-highlight-background
+
+    .date-picker .date-picker-toggle-button, .leaderboard-paginator button
+      color: $dark-filter-text
+      border-color: $timeline-line-color
+      background-color: $dark-lightbox-background

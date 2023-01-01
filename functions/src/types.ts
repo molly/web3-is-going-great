@@ -22,13 +22,14 @@ type Link = {
 
 export type ScamAmountDetails = {
   total: number;
-  isLongRunning: boolean;
+  hasScamTotal: boolean;
 };
 
 export type Entry = {
   id: string;
   readableId: string;
   title: string;
+  shortTitle: string;
   body: string;
   date: string;
   filters: Filter;

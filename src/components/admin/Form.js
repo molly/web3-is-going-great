@@ -105,6 +105,17 @@ export default function Form() {
         </div>
         <div className="row">
           <div className="group">
+            <label htmlFor="shortTitle">Short title: </label>
+            <textarea
+              rows={1}
+              id="shortTitle"
+              onChange={createFieldSetter("shortTitle")}
+              value={entry.shortTitle}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="group">
             <label htmlFor="readableId">Readable ID: </label>
             <textarea
               rows={1}
@@ -141,28 +152,13 @@ export default function Form() {
                 setScamAmountDetails({
                   ...entry.scamAmountDetails,
                   total: intVal,
+                  hasScamTotal: true,
                 });
               }}
               value={entry.scamAmountDetails.total}
               type="number"
               min={0}
             ></input>
-          </div>
-          <div className="third">
-            <div className="inline-checkbox">
-              <input
-                id="is-long-running"
-                type="checkbox"
-                checked={entry.scamAmountDetails.isLongRunning}
-                onChange={({ target: { checked } }) => {
-                  setScamAmountDetails({
-                    ...entry.scamAmountDetails,
-                    isLongRunning: checked,
-                  });
-                }}
-              />
-              <label htmlFor="is-long-running">Long running</label>
-            </div>
           </div>
         </div>
         <EntryTextArea entry={entry} onBodyChange={createFieldSetter("body")} />

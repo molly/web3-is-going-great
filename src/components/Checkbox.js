@@ -1,13 +1,15 @@
+import clsx from "clsx";
 import PropTypes from "prop-types";
 
-export default function SettingsCheckbox({
+export default function Checkbox({
   checked,
   toggleCheckbox,
   id,
   children,
+  className,
 }) {
   return (
-    <div className="input-group">
+    <div className={clsx("input-group", className)}>
       <input
         type="checkbox"
         id={id}
@@ -20,9 +22,10 @@ export default function SettingsCheckbox({
   );
 }
 
-SettingsCheckbox.propTypes = {
+Checkbox.propTypes = {
   checked: PropTypes.bool.isRequired,
   toggleCheckbox: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };

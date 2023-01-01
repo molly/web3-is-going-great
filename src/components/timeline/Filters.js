@@ -10,9 +10,12 @@ import { sentenceCase } from "../../js/utilities";
 
 import Select from "react-select";
 import Search from "./Search";
+import Checkbox from "../Checkbox";
 
 export default function Filters({
   filters,
+  starred,
+  setStarred,
   setFilters,
   setSelectedEntryFromSearch,
   windowWidth,
@@ -100,6 +103,14 @@ export default function Filters({
         >
           <div className="filters-group">
             {Object.keys(FILTERS).map(renderFilterGroup)}
+            <Checkbox
+              checked={starred}
+              toggleCheckbox={() => setStarred(!starred)}
+              id="starred-filter"
+              className="inline-checkbox"
+            >
+              Starred
+            </Checkbox>
           </div>
           <div className="search-group">
             <Search
@@ -125,6 +136,8 @@ Filters.propTypes = {
     ).isRequired,
     sort: PropTypes.string.isRequired,
   }).isRequired,
+  starred: PropTypes.bool.isRequired,
+  setStarred: PropTypes.func.isRequired,
   setFilters: PropTypes.func.isRequired,
   setSelectedEntryFromSearch: PropTypes.func.isRequired,
   windowWidth: WindowWidthPropType,

@@ -28,6 +28,7 @@ export default function Timeline({
   queryResult,
   collection,
   filters,
+  starred,
   glossary,
   griftTotal,
   allCollections,
@@ -35,6 +36,7 @@ export default function Timeline({
   startAtId,
   setCollection,
   setFilters,
+  setStarred,
   setSelectedEntryFromSearch,
   clearAllFiltering,
 }) {
@@ -204,6 +206,7 @@ export default function Timeline({
                       collection={collection}
                       allCollections={allCollections}
                       setCollection={setCollection}
+                      setStarred={setStarred}
                     />
                   );
 
@@ -260,6 +263,8 @@ export default function Timeline({
         <Filters
           filters={filters}
           setFilters={setFilters}
+          starred={starred}
+          setStarred={setStarred}
           setSelectedEntryFromSearch={setSelectedEntryFromSearch}
           windowWidth={windowWidth}
         />
@@ -294,6 +299,7 @@ Timeline.propTypes = {
   }),
   filters: FiltersPropType.isRequired,
   collection: PropTypes.string,
+  starred: PropTypes.bool.isRequired,
   glossary: PropTypes.object.isRequired,
   griftTotal: PropTypes.number.isRequired,
   allCollections: PropTypes.object.isRequired,
@@ -301,6 +307,7 @@ Timeline.propTypes = {
   startAtId: PropTypes.string,
   setCollection: PropTypes.func.isRequired,
   setFilters: PropTypes.func.isRequired,
+  setStarred: PropTypes.func.isRequired,
   setSelectedEntryFromSearch: PropTypes.func.isRequired,
   clearAllFiltering: PropTypes.func.isRequired,
 };

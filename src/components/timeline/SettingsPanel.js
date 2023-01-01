@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useAppState } from "../../context/AppContext";
-import SettingsCheckbox from "./SettingsCheckbox";
+import SettingsCheckbox from "../Checkbox";
 
 export default function SettingsPanel({
   setIsSettingsPanelShown,

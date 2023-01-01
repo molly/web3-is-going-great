@@ -126,4 +126,16 @@ const dollarFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
-export const formatDollarString = (amount) => dollarFormatter.format(amount);
+const dollarFormatterNoCents = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+  minimumFractionDigits: 0,
+});
+export const formatDollarString = (amount, { cents } = { cents: true }) => {
+  if (cents) {
+    return dollarFormatter.format(amount);
+  } else {
+    return dollarFormatterNoCents.format(amount);
+  }
+};

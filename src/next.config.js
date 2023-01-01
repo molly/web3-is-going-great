@@ -11,6 +11,7 @@ module.exports = {
         permanent: true,
       },
       { source: "/suggest", destination: "/contribute", permanent: true },
+      { source: "/charts", destination: "/charts/top", permanent: false },
     ];
   },
 };

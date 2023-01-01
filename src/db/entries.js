@@ -15,7 +15,7 @@ const DEFAULT_LIMIT = 10;
 
 const getFirstEntryId = async (dbCollection) => {
   const firstEntrySnapshot = await getDocs(
-    query(query(dbCollection, orderBy("id", "desc")), limit(1))
+    query(dbCollection, orderBy("id", "desc"), limit(1))
   );
   const firstEntry = firstEntrySnapshot.docs[0];
   return firstEntry.id;
@@ -53,6 +53,7 @@ export const getEntries = async ({
   collection: entriesCollection,
   cursor,
   startAtId,
+  starred,
 } = {}) => {
   const resp = {
     entries: [],
@@ -90,6 +91,8 @@ export const getEntries = async ({
         blockchain
       )
     );
+  } else if (starred) {
+    q = query(q, where("starred", "==", true));
   }
 
   if (cursor) {

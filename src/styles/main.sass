@@ -1,13 +1,16 @@
 @import "normalize.css/normalize"
 @import "@fortawesome/fontawesome-free/css/all"
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:ital,wght@0,400;0,900;1,400;1,900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap")
-@import _admin
 @import _tokens
+
+@import _admin
+@import _charts
 @import _filters
 @import _fixed-at-bottom
 @import _loading
 @import _navigation
 @import _popovers
+@import _react-date-range-theme-overrides
 
 html
   width: 100%
@@ -137,6 +140,10 @@ footer.page-footer
 
   .constrain-width p
     text-align: center
+
+.inline-checkbox
+  input[type="checkbox"]
+    margin-right: 5px
 
 div.content-wrapper
   display: flex
@@ -343,6 +350,9 @@ img
   i
     color: $timestamp-color
 
+    &.starred-entry
+      color: #FAB034
+
   ul
     display: flex
     padding: 0
@@ -492,6 +502,9 @@ img
 .indent
   margin-left: 20px
 
+td.number
+  text-align: right
+
 .error-wrapper
   display: flex
   flex-direction: column
@@ -576,16 +589,14 @@ img
     padding: 5px
 
 // Contribute
-table.expenses
+table
+  width: 100%
   border: 1px solid $timeline-line-color
   border-collapse: collapse
 
   th, td
     border: 1px solid $timeline-line-color
     padding: 5px
-
-  td.number
-    text-align: right
 
   .estimate
     color: $timestamp-color
@@ -976,7 +987,7 @@ table.expenses
     border-color: $dark-timeline-line-color
 
   // Contribute
-  table.expenses
+  table
     border-color: $dark-timeline-line-color
 
     th, td
@@ -997,6 +1008,8 @@ table.expenses
   @include filtersDarkMode()
   @include fixedDarkMode()
   @include popoversDarkMode()
+  @include chartsDarkMode()
+  @include reactDateRangeDarkMode()
 
 @media (prefers-color-scheme: dark)
   @include mainDarkMode()
@@ -1004,3 +1017,5 @@ table.expenses
   @include filtersDarkMode()
   @include fixedDarkMode()
   @include popoversDarkMode()
+  @include chartsDarkMode()
+  @include reactDateRangeDarkMode()
