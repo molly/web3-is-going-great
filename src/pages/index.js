@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
     if (context.query.collection) {
       // Filters, starred, and collections are mutually exclusive
       props.initialFilters.collection = context.query.collection;
-    } else if (context.query.starred && Boolean(context.query.starred)) {
+    } else if (context.query.starred && context.query.starred === "true") {
       props.initialStarred = true;
     } else if (FILTER_CATEGORIES.some((filter) => filter in context.query)) {
       let hasFilterCategory = false;
