@@ -83,7 +83,7 @@ export default function SettingsPanel({
             </label>
           </div>
         </div>
-        <a className="help-text" href="/about#grift-question" target="_blank">
+        <a className="help-text" href="/faq#grift-counter" target="_blank">
           What's the grift counter?
         </a>
       </div>
