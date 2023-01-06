@@ -145,7 +145,7 @@ export default function Timeline({
   };
 
   const renderNoJs = () => {
-    if (!isBrowserRendering) {
+    if (!isBrowserRendering && hasNextPage) {
       const cursor = data.pages[0].entries[data.pages[0].entries.length - 1].id;
       return (
         <p id="noscript">
