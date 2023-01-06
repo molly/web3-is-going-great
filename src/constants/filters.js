@@ -45,6 +45,7 @@ const FILTERS = {
     ripple: "XRP Ledger",
     solana: "Solana",
     terra: "Terra",
+    tron: "Tron",
     tezos: "Tezos",
     wax: "WAX",
   },
