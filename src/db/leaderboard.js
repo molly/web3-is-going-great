@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore/lite";
 import _orderBy from "lodash.orderby";
 import findLastIndex from "lodash.findlastindex";
-import { formatISO } from "date-fns";
+import { formatISO, addDays } from "date-fns";
 import { db } from "./db";
 
 const LEADERBOARD_LIMIT = 50;
@@ -42,13 +42,13 @@ export const getEntriesForLeaderboard = async ({
     const startDate = formatISO(dateRange.startDate, {
       representation: "date",
     });
-    const endDate = formatISO(dateRange.endDate, { representation: "date" });
+    const endDate = formatISO(addDays(dateRange.endDate, 1), { representation: "date" });
 
     // Due to Firestore limitations, firestore can't do the sorting along with the filtering :(
     q = query(
       q,
       where("id", ">=", startDate),
-      where("id", "<=", endDate),
+      where("id", "<", endDate),
       where(hasScamTotalPath, "==", true)
     );
     const snapshot = await getDocs(q);
