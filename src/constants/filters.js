@@ -22,7 +22,6 @@ const FILTERS = {
   },
   tech: {
     gaming: "blockchain gaming",
-    currency: "cryptocurrency",
     dao: "DAO",
     dapps: "dApps",
     defi: "DeFi",

@@ -1,5 +1,6 @@
 import { firestore } from "./config/firebase";
 import * as functions from "firebase-functions";
+import { FieldPath } from "firebase-admin/firestore";
 
 export const moveEntry = functions.https.onRequest(async (req, res) => {
   const collection = await firestore.collection("entries");
@@ -20,19 +21,18 @@ export const moveEntry = functions.https.onRequest(async (req, res) => {
 
 export const runTransform = functions.https.onRequest(async (req, res) => {
   const entriesCollection = await firestore.collection("entries");
-  const entriesSnapshot = await entriesCollection.get();
+  const entriesSnapshot = await entriesCollection
+    .where(new FieldPath("filters", "tech"), "array-contains", "currency")
+    .get();
 
   const entriesPromises = entriesSnapshot.docs.map(async (child) => {
     const data = child.data();
-    if (data.scamAmountDetails.total > 0) {
-      return child.ref.update({
-        scamAmountDetails: { ...data.scamAmountDetails, hasScamTotal: true },
-      });
-    } else {
-      return child.ref.update({
-        scamAmountDetails: { ...data.scamAmountDetails, hasScamTotal: false },
-      });
-    }
+    return child.ref.update({
+      filters: {
+        ...data.filters,
+        tech: data.filters.tech.filter((f: string) => f !== "currency"),
+      },
+    });
   });
 
   Promise.all(entriesPromises)
