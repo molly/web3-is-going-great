@@ -26,6 +26,7 @@ const FILTERS = {
     dao: "DAO",
     dapps: "dApps",
     defi: "DeFi",
+    lending: "lending",
     metaverse: "metaverse",
     nft: "NFT",
     stablecoins: "stablecoins",
