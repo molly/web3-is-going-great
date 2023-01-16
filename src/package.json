@@ -32,7 +32,7 @@
     "react-popper": "^2.3.0",
     "react-query": "^3.39.1",
     "react-select": "^5.7.0",
-    "use-debounce": "^9.0.2"
+    "use-debounce": "^9.0.3"
   },
   "devDependencies": {
     "eslint": "8.29.0",
