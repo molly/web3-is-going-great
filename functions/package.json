@@ -20,7 +20,7 @@
     "firebase-admin": "^11.3.0",
     "firebase-functions": "^4.1.0",
     "fs": "0.0.1-security",
-    "mkdirp": "^1.0.4",
+    "mkdirp": "^2.0.0",
     "os": "^0.1.2",
     "path": "^0.12.7",
     "sharp": "^0.31.2"
