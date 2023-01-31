@@ -25,6 +25,24 @@ export default function FAQ() {
       <div className="content-wrapper">
         <article className="generic-page longform-text">
           <div
+            id="not-web3"
+            className={clsx("faq-entry", {
+              highlighted: highlightedEntry === "not-web3",
+            })}
+          >
+            <h3>
+              Why does this site include posts about Bitcoin/cryptocurrency
+              exchanges/other things that are not "web3"?
+            </h3>
+            <p>
+              As mentioned on the <Link href="/about">about page</Link>, this
+              project focuses on anything in the blockchains/crypto/web3
+              technology space. Unfortunately "Cryptocurrencies and
+              Blockchain-based Projects are Going Just Great" doesn't exactly
+              roll off the tongue, even though it would be a more precise title.
+            </p>
+          </div>
+          <div
             id="dollar-amounts"
             className={clsx("faq-entry", {
               highlighted: highlightedEntry === "dollar-amounts",
