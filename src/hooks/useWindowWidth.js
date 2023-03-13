@@ -18,13 +18,13 @@ export const WindowWidthPropType = PropTypes.oneOf([
 ]);
 
 const getWindowWidth = (px) => {
-  if (px < XS_BREAKPOINT) {
+  if (px <= XS_BREAKPOINT) {
     return "xs";
-  } else if (px < SM_BREAKPOINT) {
+  } else if (px <= SM_BREAKPOINT) {
     return "sm";
-  } else if (px < MD_BREAKPOINT) {
+  } else if (px <= MD_BREAKPOINT) {
     return "md";
-  } else if (px < LG_BREAKPOINT) {
+  } else if (px <= LG_BREAKPOINT) {
     return "lg";
   }
   return "xl";
