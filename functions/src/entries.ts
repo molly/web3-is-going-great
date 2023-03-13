@@ -22,16 +22,16 @@ export const moveEntry = functions.https.onRequest(async (req, res) => {
 export const runTransform = functions.https.onRequest(async (req, res) => {
   const entriesCollection = await firestore.collection("entries");
   const entriesSnapshot = await entriesCollection
-    .where(new FieldPath("filters", "tech"), "array-contains", "currency")
+    .where(new FieldPath("collection"), "array-contains", "terra")
     .get();
 
   const entriesPromises = entriesSnapshot.docs.map(async (child) => {
     const data = child.data();
     return child.ref.update({
-      filters: {
-        ...data.filters,
-        tech: data.filters.tech.filter((f: string) => f !== "currency"),
-      },
+      collection: [
+        ...data.collection.filter((c: string) => c !== "terra"),
+        "terra-collapse",
+      ],
     });
   });
 
