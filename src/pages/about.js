@@ -49,12 +49,11 @@ export default function WhatIsWeb3() {
           </p>
           <h3>Who am I?</h3>
           <p>
-            I'm Molly White, a software engineer by trade who is also very
-            passionate about free and open knowledge and resources, and
-            presenting information such that it is more accessible to all.
-            You'll usually find me working on and talking about Wikipedia. I
-            also care very much about equity in the tech industry and online
-            spaces. You can learn more about me on{" "}
+            I'm Molly White, a software engineer, writer, and critical
+            researcher of cryptocurrency and the tech industry more broadly. I
+            am a fellow at the Harvard{" "}
+            <a href="https://lil.law.harvard.edu/">Library Innovation Lab</a>.
+            You can learn more about me on{" "}
             <ExternalLink href="https://www.mollywhite.net/">
               my website
             </ExternalLink>{" "}
@@ -65,9 +64,14 @@ export default function WhatIsWeb3() {
             .
           </p>
           <p>
-            If you are interested, I also have{" "}
+            If you are interested, I also have a{" "}
             <ExternalLink href="https://blog.mollywhite.net/blockchain/">
-              longer-form, less sarcastic thoughts on web3
+              collection
+            </ExternalLink>{" "}
+            of longer-form, less sarcastic thoughts on blockchains and web3, and
+            I also write a{" "}
+            <ExternalLink href="https://newsletter.mollywhite.net/">
+              newsletter
             </ExternalLink>
             .
           </p>
@@ -77,16 +81,15 @@ export default function WhatIsWeb3() {
             <ExternalLink href="https://www.mollywhite.net/crypto-disclosures">
               disclosure statement
             </ExternalLink>
-            . The TL;DR is that I hold no cryptocurrencies or NFTs, and am also
-            not trying to make money off of crypto markets doing poorly by
-            shorting the market, etc. I do have a{" "}
+            . The TL;DR is that I hold no substantial amount of cryptocurrencies
+            and no NFTs, and am also not trying to make money off of crypto
+            markets doing poorly by shorting the market, etc. I do have a{" "}
             <ExternalLink href="https://newsletter.mollywhite.net/">
               Substack
             </ExternalLink>{" "}
-            for people who wish to support my otherwise unpaid work (which
-            includes this website, but tends to be pretty wide-ranging), and I
-            also accept <Link href="/contribute">donations</Link> for the
-            website.
+            for people who wish to support my work, and I also accept{" "}
+            <Link href="/contribute">donations</Link> for the website. I am a
+            paid Fellow at the Harvard Library Innovation Lab.
           </p>
           <p>
             The site does use Google Analytics, mostly for my own curiosity. All

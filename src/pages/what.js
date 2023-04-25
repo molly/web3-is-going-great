@@ -27,7 +27,8 @@ export default function WhatIsWeb3() {
             releases, crypto evangelists on Twitter, and venture capitalists
             extolling the virtues of web3, you will have a much harder time
             finding any definition that's not so full of buzzwords that it
-            becomes meaningless.
+            becomes meaningless. That's because "web3" is first and foremost a
+            marketing term.
           </p>
           <p>
             Generally speaking, "web3" is an umbrella term to refer to the
@@ -42,7 +43,7 @@ export default function WhatIsWeb3() {
           <p>
             Skeptics of web3 tend to point out that decentralization was a
             founding tenet of the Internet and is not something that is only (or
-            best) achieved with the blockchain. They also tend to point out the
+            best) achieved with a blockchain. They also tend to point out the
             enormous environmental impacts of blockchain technology
             (particularly{" "}
             <ExternalLink href="https://www.coindesk.com/learn/2020/12/16/what-is-proof-of-work/">
@@ -91,16 +92,16 @@ export default function WhatIsWeb3() {
             <h4>Web3</h4>
             <ul>
               <li>
-                <ExternalLink href="https://www.stephendiehl.com/blog/web3-bullshit.html">
-                  <span>"Web3 is bullshit"</span>
-                </ExternalLink>
-                <span> by Stephen Diehl</span>
-              </li>
-              <li>
                 <ExternalLink href="https://www.youtube.com/watch?v=YQ_xWvX1n9g">
                   <span>"Line Goes Up – The Problem With NFTs"</span>
                 </ExternalLink>
                 <span> by Dan Olson (video)</span>
+              </li>
+              <li>
+                <ExternalLink href="https://www.youtube.com/watch?v=u-sNSjS8cq0">
+                  <span>"Web3.0: A Libertarian Dystopia"</span>
+                </ExternalLink>{" "}
+                by münecat (video).
               </li>
               <li>
                 <ExternalLink href="https://www.oreilly.com/radar/why-its-too-early-to-get-excited-about-web3/">
@@ -141,8 +142,17 @@ export default function WhatIsWeb3() {
                   Evgeny Morozov
                 </ExternalLink>
               </li>
+              <li>
+                <ExternalLink href="https://moxie.org/2022/01/07/web3-first-impressions.html">
+                  "My first impressions of web3"
+                </ExternalLink>
+                <span> by </span>
+                <ExternalLink href="https://en.wikipedia.org/wiki/Moxie_Marlinspike">
+                  Moxie Marlinspike
+                </ExternalLink>
+              </li>
             </ul>
-            <h4>Crypto more broadly</h4>
+            <h4>Cryptocurrencies and blockchains more broadly</h4>
             <ul>
               <li>
                 <i>
@@ -194,12 +204,8 @@ export default function WhatIsWeb3() {
               </ExternalLink>
             </li>
             <li>
-              <ExternalLink href="https://web3.lifeitself.us/guide">
-                Making Sense of Crypto and Web3 Guide
-              </ExternalLink>
-              <span> and its </span>
-              <ExternalLink href="https://www.zotero.org/groups/4600269/web3/library">
-                enormous reading list
+              <ExternalLink href="https://www.mollywhite.net/speaking/">
+                My lectures
               </ExternalLink>
             </li>
             <li>
@@ -209,10 +215,10 @@ export default function WhatIsWeb3() {
               <span> blog by David Gerard</span>
             </li>
             <li>
-              <span>Stephen Diehl's </span>
-              <ExternalLink href="https://www.stephendiehl.com/blog.html">
-                blog
+              <ExternalLink href="https://cryptocriticscorner.com/">
+                <i>Crypto Critics' Corner</i>
               </ExternalLink>
+              <span> podcast</span>
             </li>
             <li>
               <ExternalLink href="https://rekt.news/">Rekt.news</ExternalLink>
@@ -231,10 +237,13 @@ export default function WhatIsWeb3() {
               </ExternalLink>
             </li>
             <li>
-              <ExternalLink href="https://cryptocriticscorner.com/">
-                <i>Crypto Critics' Corner</i>
+              <ExternalLink href="https://web3.lifeitself.us/guide">
+                Making Sense of Crypto and Web3 Guide
               </ExternalLink>
-              <span> podcast</span>
+              <span> and its </span>
+              <ExternalLink href="https://www.zotero.org/groups/4600269/web3/library">
+                enormous reading list
+              </ExternalLink>
             </li>
           </ul>
         </article>

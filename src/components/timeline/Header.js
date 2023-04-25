@@ -72,48 +72,30 @@ const Header = forwardRef(function Header(
     );
   };
 
-  const renderIconLinkContents = (iconClass, iconText) => (
-    <>
-      <i title={iconText} className={iconClass} aria-hidden={true}></i>
-      <span className="sr-only">{iconText}</span>
-    </>
-  );
-
   const renderLinks = () => (
     <p>
-      <span>Created by Molly White </span>
-      <span style={{ display: "inline-block" }}>
-        <span aria-hidden={true}>(</span>
-        <ExternalLink href="https://twitter.com/molly0xFFF">
-          {renderIconLinkContents("fa-brands fa-twitter", "Twitter")}
-        </ExternalLink>
-        <span aria-hidden={true}>, </span>
+      Follow on{" "}
+      <ExternalLink href="https://twitter.com/web3isgreat">
+        Twitter
+      </ExternalLink>
+      ,{" "}
+      <ExternalLink href="https://indieweb.social/@web3isgreat">
+        Mastodon
+      </ExternalLink>
+      , or <Link href="/feed.xml">RSS</Link>.{" "}
+      <span>
+        Created by{" "}
         <ExternalLink href="https://www.mollywhite.net/">
-          {renderIconLinkContents("fas fa-link", "Website")}
+          Molly White
         </ExternalLink>
-        <span aria-hidden={true}>)</span>
+        .
       </span>
     </p>
   );
 
   const renderMobileImageAndLinks = () => (
     <div className="mobile-image-and-links">
-      <div>
-        <p>
-          <span>Created by Molly White </span>
-          <span style={{ display: "inline-block" }}>
-            <span aria-hidden={true}>(</span>
-            <ExternalLink href="https://twitter.com/molly0xFFF">
-              {renderIconLinkContents("fa-brands fa-twitter", "Twitter")}
-            </ExternalLink>
-            <span aria-hidden={true}>, </span>
-            <ExternalLink href="https://www.mollywhite.net/">
-              {renderIconLinkContents("fas fa-link", "Website")}
-            </ExternalLink>
-            <span aria-hidden={true}>)</span>
-          </span>
-        </p>
-      </div>
+      <div>{renderLinks()}</div>
       <div className="mobile-image-wrapper">{renderImage()}</div>
     </div>
   );
