@@ -132,7 +132,11 @@ export default function Entry({
       return (
         <li>
           {showCopiedPopup && <div className="permalink-popup">Copied</div>}
-          <button onClick={() => permalink(entry.readableId)} title="Permalink">
+          <button
+            onClick={() => permalink(entry.readableId)}
+            title="Permalink"
+            data-url={`${window.location.origin}/?id=${entry.readableId}`}
+          >
             <i className="fas fa-link" aria-hidden={true} />
           </button>
         </li>
