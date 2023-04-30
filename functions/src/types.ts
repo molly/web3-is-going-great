@@ -25,6 +25,12 @@ export type ScamAmountDetails = {
   hasScamTotal: boolean;
 };
 
+export type SocialNetwork = "twitter" | "mastodon" | "bluesky";
+
+export type SocialPostGroup = {
+  [network in SocialNetwork]?: string;
+};
+
 export type Entry = {
   id: string;
   readableId: string;
@@ -41,6 +47,7 @@ export type Entry = {
   scamAmountDetails?: ScamAmountDetails;
   dateString?: string;
   tweetId?: string;
+  socialPostIds: SocialPostGroup;
   collection?: string[];
 };
 

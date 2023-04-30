@@ -175,10 +175,10 @@ export default function Entry({
         <ul className="entry-link-icons">
           {maybeRenderStar()}
           {renderLinkIcon()}
-          {"tweetId" in entry && (
+          {"socialPostIds" in entry && "twitter" in entry.socialPostIds && (
             <li>
               <a
-                href={`https://twitter.com/web3isgreat/status/${entry.tweetId}`}
+                href={`https://twitter.com/web3isgreat/status/${entry.socialPostIds.twitter}`}
                 target="_blank"
                 rel="noopener"
                 title="Tweet link"

@@ -57,7 +57,11 @@ export const EntryPropType = PropTypes.shape({
     total: PropTypes.number.isRequired,
     hasScamTotal: PropTypes.bool.isRequired,
   }).isRequired,
-  tweetId: PropTypes.string,
+  socialPostIds: PropTypes.shape({
+    twitter: PropTypes.string,
+    mastodon: PropTypes.string,
+    bluesky: PropTypes.string,
+  }),
 });
 
 const isEntryEmpty = (entry) =>

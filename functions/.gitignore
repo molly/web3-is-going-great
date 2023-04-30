@@ -10,3 +10,4 @@ node_modules/
 
 **/*.log
 .runtimeconfig.json
+.runtimeconfig.json.tmp
