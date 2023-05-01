@@ -27,6 +27,7 @@ export default function Form() {
   );
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadComplete, setIsUploadComplete] = useState(false);
+  const [entryId, setEntryId] = useState("testtest");
 
   const createFieldSetter = (field) => (val) => {
     let value;
@@ -78,8 +79,10 @@ export default function Form() {
     }
 
     upload(entryWithReadableId, imageAttribution, entryAttribution)
-      .then(() => {
+      .then((entryId) => {
         setIsUploadComplete(true);
+        setEntryId(entryId);
+        navigator.clipboard.writeText(entryId);
         setIsUploading(false);
         setTimeout(() => setIsUploadComplete(false), 2000);
       })
@@ -331,22 +334,25 @@ export default function Form() {
             ></input>
           </div>
         </div>
-        <button
-          className="save-button"
-          disabled={
-            isUploading ||
-            isUploadComplete ||
-            !isValidEntry(entry, imageAttribution, entryAttribution)
-          }
-          onClick={save}
-        >
-          {isUploadComplete && <i className="fas fa-check" />}
-          Save
-        </button>
-        <button onClick={clear}>Clear</button>
-        <button className="signout-button" onClick={signOut}>
-          Sign out
-        </button>
+        <div className="row">
+          <button
+            className="save-button"
+            disabled={
+              isUploading ||
+              isUploadComplete ||
+              !isValidEntry(entry, imageAttribution, entryAttribution)
+            }
+            onClick={save}
+          >
+            {isUploadComplete && <i className="fas fa-check" />}
+            Save
+          </button>
+          <button onClick={clear}>Clear</button>
+          <button className="signout-button" onClick={signOut}>
+            Sign out
+          </button>
+        </div>
+        {entryId && <div className="row">EntryID: {entryId}</div>}
       </div>
       <div className="entry">
         <Entry entry={entry} allCollections={{}} />

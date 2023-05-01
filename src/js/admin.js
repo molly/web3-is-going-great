@@ -37,4 +37,5 @@ export const upload = async (
     promises.push(addEntryAttribution(trimmed.entryAttribution));
   }
   await Promise.all(promises);
+  return promises[0];
 };

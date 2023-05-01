@@ -21,6 +21,7 @@ export const uploadEntry = async (entry) => {
   entry.id = key;
 
   await setDoc(docRef, entry);
+  return entry.id;
 };
 
 export const addAttribution = (field) => async (entry) => {

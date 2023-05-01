@@ -3,6 +3,11 @@ import * as functions from "firebase-functions";
 import { SocialNetwork, SocialPostGroup } from "./types";
 
 const NETWORKS: SocialNetwork[] = ["twitter", "mastodon", "bluesky"];
+const ID_FORMATS = {
+  twitter: /\d+/,
+  mastodon: /\d+/,
+  bluesky: /[a-z0-9]+/,
+};
 
 export const addSocialPostIds = functions.https.onRequest(async (req, res) => {
   const collection = await firestore.collection("entries");
@@ -18,7 +23,7 @@ export const addSocialPostIds = functions.https.onRequest(async (req, res) => {
     let hasErrors = false;
 
     for (const network of NETWORKS) {
-      if (/\d+/.test(req.body[network])) {
+      if (ID_FORMATS[network].test(req.body[network])) {
         update[network] = req.body[network];
         response[network] = "Success";
       } else {
