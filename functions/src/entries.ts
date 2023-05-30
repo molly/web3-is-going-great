@@ -24,8 +24,8 @@ export const runTransform = functions.https.onRequest(async (req, res) => {
 
   const entriesPromises = entriesCollection.docs.map(async (child) => {
     const data = child.data();
-    if ("scamTotal" in data) {
-      return child.ref.update({ scamTotal: FieldValue.delete() });
+    if ("tweetId" in data) {
+      return child.ref.update({ tweetId: FieldValue.delete() });
     } else {
       return Promise.resolve();
     }

@@ -27,7 +27,7 @@ export default function Form() {
   );
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadComplete, setIsUploadComplete] = useState(false);
-  const [entryId, setEntryId] = useState("testtest");
+  const [entryId, setEntryId] = useState();
 
   const createFieldSetter = (field) => (val) => {
     let value;

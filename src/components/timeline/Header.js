@@ -73,24 +73,30 @@ const Header = forwardRef(function Header(
   };
 
   const renderLinks = () => (
-    <p>
-      Follow on{" "}
-      <ExternalLink href="https://twitter.com/web3isgreat">
-        Twitter
-      </ExternalLink>
-      ,{" "}
-      <ExternalLink href="https://indieweb.social/@web3isgreat">
-        Mastodon
-      </ExternalLink>
-      , or <Link href="/feed.xml">RSS</Link>.{" "}
-      <span>
+    <>
+      <p>
+        Follow on{" "}
+        <ExternalLink href="https://twitter.com/web3isgreat">
+          Twitter
+        </ExternalLink>
+        ,{" "}
+        <ExternalLink href="https://indieweb.social/@web3isgreat">
+          Mastodon
+        </ExternalLink>
+        , or <Link href="/feed.xml">RSS</Link>.{" "}
+      </p>
+      <p>
         Created by{" "}
         <ExternalLink href="https://www.mollywhite.net/">
           Molly White
         </ExternalLink>
-        .
-      </span>
-    </p>
+        . Subscribe to{" "}
+        <ExternalLink href="https://newsletter.mollywhite.net/">
+          her newsletter
+        </ExternalLink>{" "}
+        for weekly recaps.
+      </p>
+    </>
   );
 
   const renderMobileImageAndLinks = () => (
