@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import { signOut, upload } from "../../js/admin";
 import { generateReadableId } from "../../js/utilities";
@@ -28,6 +28,21 @@ export default function Form() {
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadComplete, setIsUploadComplete] = useState(false);
   const [entryId, setEntryId] = useState();
+
+  const onWindowClose = (evt) => {
+    if (entry !== EMPTY_ENTRY) {
+      evt.preventDefault();
+      evt.returnValue = "";
+      return "";
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", onWindowClose);
+    return () => {
+      window.removeEventListener("beforeunload", onWindowClose);
+    };
+  });
 
   const createFieldSetter = (field) => (val) => {
     let value;
