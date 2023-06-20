@@ -23,12 +23,14 @@ export const addSocialPostIds = functions.https.onRequest(async (req, res) => {
     let hasErrors = false;
 
     for (const network of NETWORKS) {
-      if (ID_FORMATS[network].test(req.body[network])) {
-        update[network] = req.body[network];
-        response[network] = "Success";
-      } else {
-        hasErrors = true;
-        response[network] = `Error: malformed ${network} ID`;
+      if (network in req.body) {
+        if (ID_FORMATS[network].test(req.body[network])) {
+          update[network] = req.body[network];
+          response[network] = "Success";
+        } else {
+          hasErrors = true;
+          response[network] = `Error: malformed ${network} ID`;
+        }
       }
     }
 
