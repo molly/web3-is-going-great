@@ -15,7 +15,6 @@ import { db } from "./db";
 
 const LEADERBOARD_LIMIT = 50;
 const scamTotalPath = new FieldPath("scamAmountDetails", "total");
-const hasScamTotalPath = new FieldPath("scamAmountDetails", "hasScamTotal");
 
 const getHighestScamTotal = async (dbCollection) => {
   const highestScamSnapshot = await getDocs(
@@ -42,14 +41,16 @@ export const getEntriesForLeaderboard = async ({
     const startDate = formatISO(dateRange.startDate, {
       representation: "date",
     });
-    const endDate = formatISO(addDays(dateRange.endDate, 1), { representation: "date" });
+    const endDate = formatISO(addDays(dateRange.endDate, 1), {
+      representation: "date",
+    });
 
     // Due to Firestore limitations, firestore can't do the sorting along with the filtering :(
     q = query(
       q,
       where("id", ">=", startDate),
       where("id", "<", endDate),
-      where(hasScamTotalPath, "==", true)
+      where(scamTotalPath, ">", 0)
     );
     const snapshot = await getDocs(q);
     snapshot.forEach((child) => {

@@ -1,4 +1,3 @@
-import { FieldValue } from "firebase-admin/firestore";
 import { firestore } from "./config/firebase";
 import * as functions from "firebase-functions";
 
@@ -24,10 +23,11 @@ export const runTransform = functions.https.onRequest(async (req, res) => {
 
   const entriesPromises = entriesCollection.docs.map(async (child) => {
     const data = child.data();
-    if ("tweetId" in data) {
-      return child.ref.update({ tweetId: FieldValue.delete() });
+    if ("scamAmountDetails" in data) {
+      const total = data.scamAmountDetails.total || 0;
+      return child.ref.update({ scamAmountDetails: { total: total } });
     } else {
-      return Promise.resolve();
+      return child.ref.update({ scamAmountDetails: { total: 0 } });
     }
   });
 

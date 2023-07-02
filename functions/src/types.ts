@@ -21,8 +21,11 @@ type Link = {
 };
 
 export type ScamAmountDetails = {
-  total: number;
-  hasScamTotal: boolean;
+  total: number; // Amount used in the grift counter
+  lowerBound?: number; // Lower estimate, if there is a range
+  upperBound?: number; // Upper estimate, if there is a range
+  recovered?: number; // Amount recovered (returned by hacker, etc.), if any
+  textOverride?: string; // Text override (used in leaderboard)
 };
 
 export type SocialNetwork = "twitter" | "mastodon" | "bluesky";
