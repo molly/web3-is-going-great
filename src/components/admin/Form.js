@@ -22,9 +22,10 @@ export default function Form() {
     href: "",
   });
   const generatedReadableId = useMemo(
-    () => generateReadableId(entry.title),
-    [entry.title]
+    () => generateReadableId(entry.shortTitle || entry.title),
+    [entry.shortTitle, entry.title]
   );
+  const [showScamDetails, setShowScamDetails] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadComplete, setIsUploadComplete] = useState(false);
   const [entryId, setEntryId] = useState();
@@ -60,6 +61,7 @@ export default function Form() {
   const setImage = createFieldSetter("image");
   const setScamAmountDetails = createFieldSetter("scamAmountDetails");
   const setCollection = createFieldSetter("collection");
+  const setStarred = createFieldSetter("starred");
 
   const toggleImageClass =
     (className) =>
@@ -87,13 +89,16 @@ export default function Form() {
   const save = () => {
     setIsUploading(true);
 
-    // Set readableId if it hasn't been modified
-    const entryWithReadableId = { ...entry };
-    if (entryWithReadableId.readableId === "") {
-      entryWithReadableId.readableId = generatedReadableId;
+    // Set readableId and shortTitle if it hasn't been modified
+    const entryWithDefaults = { ...entry };
+    if (entryWithDefaults.readableId === "") {
+      entryWithDefaults.readableId = generatedReadableId;
+    }
+    if (entryWithDefaults.shortTitle === "") {
+      entryWithDefaults.shortTitle = entry.title;
     }
 
-    upload(entryWithReadableId, imageAttribution, entryAttribution)
+    upload(entryWithDefaults, imageAttribution, entryAttribution)
       .then((entryId) => {
         setIsUploadComplete(true);
         setEntryId(entryId);
@@ -128,7 +133,7 @@ export default function Form() {
               rows={1}
               id="shortTitle"
               onChange={createFieldSetter("shortTitle")}
-              value={entry.shortTitle}
+              value={entry.shortTitle || entry.title.slice()}
             />
           </div>
         </div>
@@ -144,7 +149,7 @@ export default function Form() {
           </div>
         </div>
         <div className="row">
-          <div className="half">
+          <div className="grow">
             <label htmlFor="date">Date: </label>
             <input
               id="date"
@@ -153,15 +158,24 @@ export default function Form() {
               value={entry.date}
             ></input>
           </div>
-          <div className="half">
+          <div className="grow">
             <IconSelector
               updateEntry={updateEntry}
               value={entry.faicon || entry.icon}
             />
           </div>
+          <div className="shrink row">
+            <input
+              id="starred"
+              type="checkbox"
+              checked={entry.starred || false}
+              onChange={({ target: { checked } }) => setStarred(checked)}
+            />
+            <label htmlFor="starred">&nbsp;Starred</label>
+          </div>
         </div>
         <div className="row">
-          <div className="group">
+          <div className="grow">
             <label htmlFor="scamTotal">Scam total: </label>
             <input
               id="scamTotal"
@@ -170,7 +184,6 @@ export default function Form() {
                 setScamAmountDetails({
                   ...entry.scamAmountDetails,
                   total: intVal,
-                  hasScamTotal: true,
                 });
               }}
               value={entry.scamAmountDetails.total}
@@ -178,7 +191,94 @@ export default function Form() {
               min={0}
             ></input>
           </div>
+          <div className="shrink">
+            <button onClick={() => setShowScamDetails(true)}>
+              Show details
+            </button>
+          </div>
         </div>
+        {showScamDetails && (
+          <>
+            <div className="row">
+              <div className="grow">
+                <label htmlFor="lowerBound">Lower bound: </label>
+                <input
+                  id="lowerBound"
+                  onChange={({ target: { value } }) => {
+                    const intVal = value ? parseInt(value, 10) : undefined;
+                    setScamAmountDetails({
+                      ...entry.scamAmountDetails,
+                      lowerBound: intVal,
+                    });
+                  }}
+                  value={
+                    entry.scamAmountDetails.lowerBound === undefined
+                      ? ""
+                      : entry.scamAmountDetails.lowerBound
+                  }
+                  type="number"
+                  min={0}
+                ></input>
+              </div>
+              <div className="grow">
+                <label htmlFor="upperBound">Upper bound: </label>
+                <input
+                  id="upperBound"
+                  onChange={({ target: { value } }) => {
+                    const intVal = value ? parseInt(value, 10) : undefined;
+                    setScamAmountDetails({
+                      ...entry.scamAmountDetails,
+                      upperBound: intVal,
+                    });
+                  }}
+                  value={
+                    entry.scamAmountDetails.upperBound === undefined
+                      ? ""
+                      : entry.scamAmountDetails.upperBound
+                  }
+                  type="number"
+                  min={0}
+                ></input>
+              </div>
+              <div className="grow">
+                <label htmlFor="recovered">Recovered: </label>
+                <input
+                  id="recovered"
+                  onChange={({ target: { value } }) => {
+                    const intVal = value ? parseInt(value, 10) : undefined;
+                    setScamAmountDetails({
+                      ...entry.scamAmountDetails,
+                      recovered: intVal,
+                    });
+                  }}
+                  value={
+                    entry.scamAmountDetails.recovered === undefined
+                      ? ""
+                      : entry.scamAmountDetails.recovered
+                  }
+                  type="number"
+                  min={0}
+                ></input>
+              </div>
+            </div>
+            <div className="row">
+              <div className="group">
+                <label htmlFor="scamTextOverride">Text override: </label>
+                <textarea
+                  rows={1}
+                  id="scamTextOverride"
+                  onChange={({ target: { value } }) => {
+                    setScamAmountDetails({
+                      ...entry.scamAmountDetails,
+                      textOverride: value,
+                    });
+                  }}
+                  value={entry.scamAmountDetails.textOverride || ""}
+                />
+              </div>
+            </div>
+          </>
+        )}
         <EntryTextArea entry={entry} onBodyChange={createFieldSetter("body")} />
         <div className="row stretch">
           <FilterSelector filter="theme" entry={entry} setEntry={setEntry} />

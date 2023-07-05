@@ -15,6 +15,7 @@ import { db } from "./db";
 
 const LEADERBOARD_LIMIT = 50;
 const scamTotalPath = new FieldPath("scamAmountDetails", "total");
+const hasScamAmountPath = new FieldPath("scamAmountDetails", "hasScamAmount");
 
 const getHighestScamTotal = async (dbCollection) => {
   const highestScamSnapshot = await getDocs(
@@ -28,6 +29,8 @@ export const getEntriesForLeaderboard = async ({
   dateRange,
   cursor,
   direction,
+  sortKey,
+  sortDirection,
 } = {}) => {
   cursor = parseInt(cursor, 10);
   if (isNaN(cursor)) {
@@ -37,40 +40,47 @@ export const getEntriesForLeaderboard = async ({
   const dbCollection = collection(db, "entries");
 
   let q = dbCollection;
-  if (dateRange && dateRange.shortLabel !== "all") {
-    const startDate = formatISO(dateRange.startDate, {
-      representation: "date",
-    });
-    const endDate = formatISO(addDays(dateRange.endDate, 1), {
-      representation: "date",
-    });
-
+  if ((dateRange && dateRange.shortLabel !== "all") || sortKey === "date") {
     // Due to Firestore limitations, firestore can't do the sorting along with the filtering :(
-    q = query(
-      q,
-      where("id", ">=", startDate),
-      where("id", "<", endDate),
-      where(scamTotalPath, ">", 0)
-    );
+    q = query(q, where(hasScamAmountPath, "==", true));
+
+    if (dateRange && dateRange.shortLabel !== "all") {
+      const startDate = formatISO(dateRange.startDate, {
+        representation: "date",
+      });
+      const endDate = formatISO(addDays(dateRange.endDate, 1), {
+        representation: "date",
+      });
+
+      q = query(q, where("id", ">=", startDate), where("id", "<", endDate));
+    }
     const snapshot = await getDocs(q);
     snapshot.forEach((child) => {
       resp.entries.push({ _key: child.id, ...child.data() });
     });
 
     // Sort
-    resp.entries = _orderBy(
-      resp.entries,
-      (entry) => entry.scamAmountDetails.total,
-      ["desc"]
-    );
+    if (sortKey === "date") {
+      resp.entries = _orderBy(resp.entries, (entry) => entry.date, [
+        sortDirection || "desc",
+      ]);
+    } else {
+      resp.entries = _orderBy(
+        resp.entries,
+        (entry) => entry.scamAmountDetails.total,
+        [sortDirection || "desc"]
+      );
+    }
 
-    // Get scam total
-    resp.scamTotal = resp.entries.reduce(
-      (total, entry) => total + entry.scamAmountDetails.total,
-      0
-    );
+    if (dateRange && dateRange.shortLabel !== "all") {
+      // Get scam total
+      resp.scamTotal = resp.entries.reduce(
+        (total, entry) => total + entry.scamAmountDetails.total,
+        0
+      );
+    }
 
-    // Limit to <=50 entries, set pagination flags accordingly
+    // Limit to <= LEADERBOARD_LIMIT entries, set pagination flags accordingly
     if (!cursor) {
       if (resp.entries.length > LEADERBOARD_LIMIT) {
         resp.hasNext = true;
@@ -97,10 +107,17 @@ export const getEntriesForLeaderboard = async ({
     }
   } else {
     // This can be paginated normally
+    let orderByDirection;
+    if (sortDirection === "asc") {
+      orderByDirection = direction === "next" ? "asc" : "desc";
+    } else {
+      orderByDirection = direction === "next" ? "desc" : "asc";
+    }
+
     q = query(
       q,
       where(scamTotalPath, ">", 0),
-      orderBy(scamTotalPath, direction === "next" ? "desc" : "asc")
+      orderBy(scamTotalPath, orderByDirection)
     );
 
     if (cursor) {

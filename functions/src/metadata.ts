@@ -72,7 +72,7 @@ export const updateMetadata = functions.firestore
       update.griftTotal = previousGriftTotal + griftChange;
     }
 
-    // Commit the change if one needs to be made
+    // Commit the change to the grift total if one needs to be made
     if (Object.keys(update).length > 0) {
       await metadataDocRef.update({ ...update });
     }

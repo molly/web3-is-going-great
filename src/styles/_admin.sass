@@ -48,9 +48,13 @@
       &.stretch
         align-items: stretch
 
-    .half, .group, .third
+    .half, .group, .third, .shrink, .grow
       display: flex
       flex-direction: column
+
+      &.row
+        flex-direction: row
+        align-items: center
 
     .half
       width: 50%
@@ -58,9 +62,12 @@
     .third
       width: 33%
 
-    .half, .third
+    .half, .third, .shrink, .grow
       &:not(:first-child)
         padding-left: 10px
+
+    .grow
+      flex-grow: 1
 
     fieldset
       display: flex

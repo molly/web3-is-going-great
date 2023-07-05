@@ -22,6 +22,9 @@ type Link = {
 
 export type ScamAmountDetails = {
   total: number; // Amount used in the grift counter
+  hasScamAmount: boolean; // Boolean representing (total > 0). Needed due to Firebase query limitations.
+
+  // Optional
   lowerBound?: number; // Lower estimate, if there is a range
   upperBound?: number; // Upper estimate, if there is a range
   recovered?: number; // Amount recovered (returned by hacker, etc.), if any
@@ -52,6 +55,7 @@ export type Entry = {
   tweetId?: string;
   socialPostIds: SocialPostGroup;
   collection?: string[];
+  starred?: boolean;
 };
 
 export interface RssEntry extends Entry {

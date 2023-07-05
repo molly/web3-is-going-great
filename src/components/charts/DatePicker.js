@@ -100,6 +100,7 @@ export default function DatePicker({ dateRange, setDateRange }) {
                 router.push(
                   {
                     query: {
+                      ...router.query,
                       startDate: formatISO(range.startDate, {
                         representation: "date",
                       }),
@@ -113,9 +114,13 @@ export default function DatePicker({ dateRange, setDateRange }) {
                 );
               } else {
                 range = staticRangeToPreset(staticRange);
-                router.push({ query: { dateRange: range.shortLabel } }, null, {
-                  shallow: true,
-                });
+                router.push(
+                  { query: { ...router.query, dateRange: range.shortLabel } },
+                  null,
+                  {
+                    shallow: true,
+                  }
+                );
               }
               setSelectedRange([item.selection]);
               setDateRange(range);

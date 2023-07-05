@@ -25,9 +25,13 @@ export const runTransform = functions.https.onRequest(async (req, res) => {
     const data = child.data();
     if ("scamAmountDetails" in data) {
       const total = data.scamAmountDetails.total || 0;
-      return child.ref.update({ scamAmountDetails: { total: total } });
+      return child.ref.update({
+        scamAmountDetails: { total: total, hasScamAmount: total > 0 },
+      });
     } else {
-      return child.ref.update({ scamAmountDetails: { total: 0 } });
+      return child.ref.update({
+        scamAmountDetails: { total: 0, hasScamAmount: false },
+      });
     }
   });
 

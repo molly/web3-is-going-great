@@ -54,6 +54,11 @@ export const EntryPropType = PropTypes.shape({
   links: PropTypes.arrayOf(LinkFieldPropType),
   scamAmountDetails: PropTypes.shape({
     total: PropTypes.number.isRequired,
+    hasScamAmount: PropTypes.bool.isRequired,
+    lowerBound: PropTypes.number,
+    upperBound: PropTypes.number,
+    recovered: PropTypes.number,
+    textOverride: PropTypes.string,
   }).isRequired,
   socialPostIds: PropTypes.shape({
     twitter: PropTypes.string,
@@ -64,6 +69,10 @@ export const EntryPropType = PropTypes.shape({
 
 const isEntryEmpty = (entry) =>
   JSON.stringify(entry) === JSON.stringify(EMPTY_ENTRY);
+
+const hasValue = (obj, key) => {
+  return key in obj && obj[key] !== undefined && obj[key] !== null;
+};
 
 export const trimEmptyFields = (entry, imageAttribution, entryAttribution) => {
   const trimmed = {};
@@ -80,6 +89,34 @@ export const trimEmptyFields = (entry, imageAttribution, entryAttribution) => {
       delete newEntry.image;
     } else if (!entry.image.caption) {
       delete newEntry.image.caption;
+    }
+    if (
+      "lowerBound" in entry.scamAmountDetails &&
+      entry.scamAmountDetails.lowerBound === 0 &&
+      (!hasValue(entry.scamAmountDetails, "upperBound") ||
+        entry.scamAmountDetails.upperBound === 0)
+    ) {
+      delete newEntry.scamAmountDetails.lowerBound;
+    }
+    if (
+      "upperBound" in entry.scamAmountDetails &&
+      entry.scamAmountDetails.upperBound === 0 &&
+      (!hasValue(entry.scamAmountDetails, "lowerBound") ||
+        entry.scamAmountDetails.lowerBound === 0)
+    ) {
+      delete newEntry.scamAmountDetails.upperBound;
+    }
+    if (
+      "recovered" in entry.scamAmountDetails &&
+      entry.scamAmountDetails.recovered === 0
+    ) {
+      delete newEntry.scamAmountDetails.recovered;
+    }
+    if (
+      "textOverride" in entry.scamAmountDetails &&
+      entry.scamAmountDetails.textOverride === ""
+    ) {
+      delete newEntry.scamAmountDetails.textOverride;
     }
     if (!entry.collection.length) {
       delete newEntry.collection;
@@ -116,7 +153,7 @@ export const trimEmptyFields = (entry, imageAttribution, entryAttribution) => {
 export const isValidEntry = (entry, imageAttribution, entryAttribution) => {
   if (!isEntryEmpty(entry)) {
     // Entry is defined, so validate everything necessary is there
-    if (!entry.title || !entry.shortTitle || !entry.body || !entry.date) {
+    if (!entry.title || !entry.body || !entry.date) {
       return false;
     }
     if (
@@ -129,6 +166,14 @@ export const isValidEntry = (entry, imageAttribution, entryAttribution) => {
       return false;
     }
     if (!entry.faicon && !entry.icon) {
+      return false;
+    }
+    if (
+      (hasValue(entry.scamAmountDetails, "lowerBound") &&
+        !hasValue(entry.scamAmountDetails, "upperBound")) ||
+      (!hasValue(entry.scamAmountDetails, "lowerBound") &&
+        hasValue(entry.scamAmountDetails, "upperBound"))
+    ) {
       return false;
     }
   }

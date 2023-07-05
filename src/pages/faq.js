@@ -126,6 +126,21 @@ export default function FAQ() {
             </p>
           </div>
           <div
+            id="recovered"
+            className={clsx("faq-entry", {
+              highlighted: highlightedEntry === "recovered",
+            })}
+          >
+            <h3>What is the "recovered" column in the leaderboard table?</h3>
+            <p>
+              This reflects lost funds that were recovered, either because they
+              were returned by a thief, or recovered by law enforcement or some
+              other entity. It does not include funds that were "covered" by an
+              infusion of new funds, as the original assets are still missing in
+              those cases.
+            </p>
+          </div>
+          <div
             id="grift-counter"
             className={clsx("faq-entry", {
               highlighted: highlightedEntry === "grift-counter",
@@ -150,8 +165,27 @@ export default function FAQ() {
             </p>
             <p>
               The grift counter does not appear when you visit the website via a
-              permalink, because it throws off the total to start partway
-              through the timeline.
+              permalink to an entry, because it throws off the total to start
+              partway through the timeline.
+            </p>
+          </div>
+          <div
+            id="grift-counter-higher"
+            className={clsx("faq-entry", {
+              highlighted: highlightedEntry === "grift-counter-higher",
+            })}
+          >
+            <h3>Did the grift counter go way up recently?</h3>
+            <p>
+              In July 2023, I updated the grift counter to include some of the
+              larger cryptocurrency collapses, which I previously omitted due to
+              challenges in reflecting uncertainty in these amounts. The{" "}
+              <Link href="/charts/top" target="_blank">
+                Leaderboard
+              </Link>{" "}
+              now reflects uncertainty more explicitly. Prior to the update, the
+              grift counter showed the total amount at around
+              $12.66&nbsp;billion.
             </p>
           </div>
         </article>

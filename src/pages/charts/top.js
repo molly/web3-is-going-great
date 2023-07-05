@@ -19,7 +19,15 @@ import LeaderboardPaginator from "../../components/charts/LeaderboardPaginator";
 import { getMetadata } from "../../db/metadata";
 
 export async function getServerSideProps(context) {
-  const { cursor, direction, startDate, endDate, dateRange } = context.query;
+  const {
+    cursor,
+    direction,
+    startDate,
+    endDate,
+    dateRange,
+    sortKey,
+    sortDirection,
+  } = context.query;
 
   const promises = [
     getDateRangeFromQueryParams({
@@ -37,6 +45,8 @@ export async function getServerSideProps(context) {
         cursor,
         direction: direction || "next",
         dateRange: initialDateRange,
+        sortKey,
+        sortDirection,
       }),
       cursor: cursor || null,
       direction: direction || "next",
@@ -44,6 +54,8 @@ export async function getServerSideProps(context) {
       endDate: endDate || null,
       dateRangeParam: dateRange || null,
       scamTotal: metadata.griftTotal,
+      sortKey: sortKey || null,
+      sortDirection: sortDirection || null,
     },
   };
 }
@@ -56,6 +68,8 @@ export default function Top({
   endDate,
   dateRangeParam,
   scamTotal,
+  sortKey,
+  sortDirection,
 }) {
   const router = useRouter();
   const [dateRange, setDateRange] = useState(
@@ -67,13 +81,44 @@ export default function Top({
   );
 
   const queryResult = useQuery(
-    ["entries", dateRange, cursor, direction],
-    () => getEntriesForLeaderboard({ dateRange, cursor, direction }),
+    ["entries", dateRange, cursor, direction, sortKey, sortDirection],
+    () =>
+      getEntriesForLeaderboard({
+        dateRange,
+        cursor,
+        direction,
+        sortKey,
+        sortDirection,
+      }),
     {
       initialData: initialEntries,
       refetchOnMount: false,
     }
   );
+
+  const sortTable = (newSortKey) => {
+    const newQuery = { ...router.query };
+
+    if (newSortKey !== "amount") {
+      // Amount is the default sortKey so no need to explicitly set it
+      newQuery.sortKey = newSortKey;
+    } else {
+      delete newQuery.sortKey;
+    }
+
+    if (sortKey === newSortKey || (newSortKey === "amount" && !sortKey)) {
+      // Key's staying the same, direction's changing
+      if (sortDirection === "asc") {
+        delete newQuery.sortDirection;
+      } else {
+        newQuery.sortDirection = "asc";
+      }
+    } else {
+      // Key changed
+      delete newQuery.sortDirection;
+    }
+    router.push({ query: newQuery });
+  };
 
   const renderScamTotal = () => {
     const amount =
@@ -89,7 +134,7 @@ export default function Top({
       dateRange.shortLabel !== `${new Date().getFullYear()}`
     ) {
       // For the ranges that are a single year.
-      // If it is the current year, we still want to use the "since" woding from above
+      // If it is the current year, we still want to use the "since" wording from above
       // to convey that it is an ongoing time range.
       dateRangeStr = `in ${dateRange.shortLabel}`;
     } else if (!("shortLabel" in dateRange)) {
@@ -103,12 +148,74 @@ export default function Top({
     );
   };
 
+  const renderColumnSortButton = (colSortKey) => {
+    let iconName = "sort";
+    let newDirection = "desc";
+    if (colSortKey === "date") {
+      if (sortKey === "date") {
+        if (sortDirection === "asc") {
+          iconName = "sort-down";
+        } else {
+          iconName = "sort-up";
+          newDirection = "asc";
+        }
+      }
+    } else {
+      if (!sortKey) {
+        if (sortDirection === "asc") {
+          iconName = "sort-down";
+        } else {
+          iconName = "sort-up";
+          newDirection = "asc";
+        }
+      }
+    }
+    const icon = (
+      <>
+        <i className={`fas fa-${iconName}`}></i>
+        <span className="sr-only">{`Sort table by ${
+          sortKey || "amount"
+        }, ${newDirection}ending`}</span>
+      </>
+    );
+    return <button onClick={() => sortTable(colSortKey)}>{icon}</button>;
+  };
+
+  const renderHeaderInfoIcon = (faqAnchor) => {
+    return (
+      <Link href={`/faq${faqAnchor ? `#${faqAnchor}` : ""}`} target="_blank">
+        <i className="fas fa-circle-info" aria-hidden={true} />
+        <span className="sr-only">More info</span>
+      </Link>
+    );
+  };
+
+  const renderEntryScamAmount = (scamAmountDetails) => {
+    if ("textOverride" in scamAmountDetails) {
+      return (
+        <span
+          dangerouslySetInnerHTML={{ __html: scamAmountDetails.textOverride }}
+        />
+      );
+    } else if ("lowerBound" in scamAmountDetails) {
+      return `$${formatDollarString(scamAmountDetails.lowerBound, {
+        cents: false,
+      })} – ${formatDollarString(scamAmountDetails.upperBound, {
+        cents: false,
+      })}`;
+    } else {
+      return formatDollarString(scamAmountDetails.total, {
+        cents: false,
+      });
+    }
+  };
+
   const renderTableBody = () => {
     if (queryResult.isFetching) {
       return (
         <tbody>
           <tr className="loading-row">
-            <td colSpan={3}>
+            <td colSpan={4}>
               <span className="loading-wrapper">
                 <span
                   className="loading-animation"
@@ -124,7 +231,7 @@ export default function Top({
       return (
         <tbody>
           <tr className="loading-row">
-            <td colSpan={3} className="empty-row">
+            <td colSpan={4} className="empty-row">
               There are no entries in this time period.
             </td>
           </tr>
@@ -145,9 +252,13 @@ export default function Top({
             </td>
             <td>{humanizeDate(entry.date)}</td>
             <td className="number">
-              {formatDollarString(entry.scamAmountDetails.total, {
-                cents: false,
-              })}
+              {renderEntryScamAmount(entry.scamAmountDetails)}
+            </td>
+            <td>
+              {"recovered" in entry.scamAmountDetails &&
+                formatDollarString(entry.scamAmountDetails.recovered, {
+                  cents: false,
+                })}
             </td>
           </tr>
         ))}
@@ -177,13 +288,15 @@ export default function Top({
             <thead>
               <tr>
                 <th>Event</th>
-                <th>Date</th>
-                <th>
-                  Amount{" "}
-                  <Link href="/faq" target="_blank">
-                    <i className="fas fa-circle-info" aria-hidden={true} />
-                    <span className="sr-only">More info</span>
-                  </Link>
+                <th className="date-column">
+                  Date {renderColumnSortButton("date")}
+                </th>
+                <th className="amount-column">
+                  Amount {renderHeaderInfoIcon("dollar-amounts")}{" "}
+                  {renderColumnSortButton("amount")}
+                </th>
+                <th className="recovered-column">
+                  Recovered {renderHeaderInfoIcon("recovered")}
                 </th>
               </tr>
             </thead>
@@ -209,4 +322,6 @@ Top.propTypes = {
   endDate: PropTypes.string,
   dateRangeParam: PropTypes.string,
   scamTotal: PropTypes.number.isRequired,
+  sortKey: PropTypes.oneOf(["date"]), // If undefined, table is sorted by amount
+  sortDirection: PropTypes.oneOf(["asc", "desc"]), // If undefined, default to desc
 };
