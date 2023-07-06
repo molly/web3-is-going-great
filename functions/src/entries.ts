@@ -24,23 +24,33 @@ export const runTransform = functions.https.onRequest(async (req, res) => {
   const entriesPromises = entriesCollection.docs.map(async (child) => {
     const data = child.data();
     if ("scamAmountDetails" in data) {
-      const total = data.scamAmountDetails.total || 0;
-      return child.ref.update({
-        scamAmountDetails: {
-          total: total,
-          hasScamAmount: total > 0,
-          preRecoveryAmount: total,
-        },
-      });
-    } else {
-      return child.ref.update({
-        scamAmountDetails: {
-          total: 0,
-          hasScamAmount: false,
-          preRecoveryAmount: 0,
-        },
-      });
+      const detailsCopy = JSON.parse(JSON.stringify(data.scamAmountDetails));
+      let changeFlag = false;
+
+      for (const key of [
+        "preRecoveryAmount",
+        "lowerBound",
+        "upperBound",
+        "recovered",
+      ]) {
+        if (key in detailsCopy && typeof detailsCopy[key] === "string") {
+          detailsCopy[key] = parseInt(detailsCopy[key], 10);
+          changeFlag = true;
+        }
+      }
+
+      if (!detailsCopy.hasScamAmount && detailsCopy.total > 0) {
+        detailsCopy.hasScamAmount = true;
+        changeFlag = true;
+      }
+
+      if (changeFlag) {
+        return child.ref.update({
+          scamAmountDetails: detailsCopy,
+        });
+      }
     }
+    return Promise.resolve();
   });
 
   Promise.all(entriesPromises)
