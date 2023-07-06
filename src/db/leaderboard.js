@@ -14,15 +14,18 @@ import { formatISO, addDays } from "date-fns";
 import { db } from "./db";
 
 const LEADERBOARD_LIMIT = 50;
-const scamTotalPath = new FieldPath("scamAmountDetails", "total");
+const preRecoveryAmountPath = new FieldPath(
+  "scamAmountDetails",
+  "preRecoveryAmount"
+);
 const hasScamAmountPath = new FieldPath("scamAmountDetails", "hasScamAmount");
 
 const getHighestScamTotal = async (dbCollection) => {
   const highestScamSnapshot = await getDocs(
-    query(dbCollection, orderBy(scamTotalPath, "desc"), limit(1))
+    query(dbCollection, orderBy(preRecoveryAmountPath, "desc"), limit(1))
   );
   const highestScamEntry = highestScamSnapshot.docs[0];
-  return highestScamEntry.get(scamTotalPath);
+  return highestScamEntry.get(preRecoveryAmountPath);
 };
 
 export const getEntriesForLeaderboard = async ({
@@ -67,7 +70,7 @@ export const getEntriesForLeaderboard = async ({
     } else {
       resp.entries = _orderBy(
         resp.entries,
-        (entry) => entry.scamAmountDetails.total,
+        (entry) => entry.scamAmountDetails.preRecoveryAmount,
         [sortDirection || "desc"]
       );
     }
@@ -75,6 +78,7 @@ export const getEntriesForLeaderboard = async ({
     if (dateRange && dateRange.shortLabel !== "all") {
       // Get scam total
       resp.scamTotal = resp.entries.reduce(
+        // Intentionally using total here and not preRecoveryAmount
         (total, entry) => total + entry.scamAmountDetails.total,
         0
       );
@@ -90,7 +94,7 @@ export const getEntriesForLeaderboard = async ({
     } else if (direction === "prev") {
       const cursorIndex = findLastIndex(
         resp.entries,
-        (entry) => entry.scamAmountDetails.total >= cursor
+        (entry) => entry.scamAmountDetails.preRecoveryAmount >= cursor
       );
       const startIndex = Math.max(cursorIndex - LEADERBOARD_LIMIT, 0);
       resp.hasNext = cursorIndex < resp.entries.length;
@@ -98,7 +102,7 @@ export const getEntriesForLeaderboard = async ({
       resp.entries = resp.entries.slice(startIndex, cursorIndex);
     } else {
       const cursorIndex = resp.entries.findIndex(
-        (entry) => entry.scamAmountDetails.total <= cursor
+        (entry) => entry.scamAmountDetails.preRecoveryAmount <= cursor
       );
       const endIndex = cursorIndex + LEADERBOARD_LIMIT;
       resp.hasNext = endIndex < resp.entries.length;
@@ -116,8 +120,8 @@ export const getEntriesForLeaderboard = async ({
 
     q = query(
       q,
-      where(scamTotalPath, ">", 0),
-      orderBy(scamTotalPath, orderByDirection)
+      where(preRecoveryAmountPath, ">", 0),
+      orderBy(preRecoveryAmountPath, orderByDirection)
     );
 
     if (cursor) {
@@ -151,7 +155,8 @@ export const getEntriesForLeaderboard = async ({
     if (cursor) {
       const highestScamAmount = await getHighestScamTotal(dbCollection);
       resp.hasPrev =
-        resp.entries[0].scamAmountDetails.total !== highestScamAmount;
+        resp.entries[0].scamAmountDetails.preRecoveryAmount !==
+        highestScamAmount;
     }
   }
 

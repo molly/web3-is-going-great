@@ -22,6 +22,7 @@ type Link = {
 
 export type ScamAmountDetails = {
   total: number; // Amount used in the grift counter
+  preRecoveryAmount: number; // Initial amount stolen. This differs from total iff some funds were recovered
   hasScamAmount: boolean; // Boolean representing (total > 0). Needed due to Firebase query limitations.
 
   // Optional

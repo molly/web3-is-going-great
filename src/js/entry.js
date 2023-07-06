@@ -18,6 +18,8 @@ export const EMPTY_ENTRY = {
   scamTotal: 0,
   scamAmountDetails: {
     total: 0,
+    hasScamAmount: false,
+    preRecoveryAmount: 0,
   },
   collection: [],
 };
@@ -55,6 +57,7 @@ export const EntryPropType = PropTypes.shape({
   scamAmountDetails: PropTypes.shape({
     total: PropTypes.number.isRequired,
     hasScamAmount: PropTypes.bool.isRequired,
+    preRecoveryAmount: PropTypes.number.isRequired,
     lowerBound: PropTypes.number,
     upperBound: PropTypes.number,
     recovered: PropTypes.number,

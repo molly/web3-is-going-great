@@ -191,7 +191,6 @@ export default function Top({
   };
 
   const renderEntryScamAmount = (scamAmountDetails) => {
-    const recovered = scamAmountDetails.recovered || 0;
     if ("textOverride" in scamAmountDetails) {
       return (
         <span
@@ -199,13 +198,13 @@ export default function Top({
         />
       );
     } else if ("lowerBound" in scamAmountDetails) {
-      return `${formatDollarString(scamAmountDetails.lowerBound + recovered, {
+      return `${formatDollarString(scamAmountDetails.lowerBound, {
         cents: false,
-      })} – ${formatDollarString(scamAmountDetails.upperBound + recovered, {
+      })} – ${formatDollarString(scamAmountDetails.upperBound, {
         cents: false,
       })}`;
     } else {
-      return formatDollarString(scamAmountDetails.total + recovered, {
+      return formatDollarString(scamAmountDetails.preRecoveryAmount, {
         cents: false,
       });
     }

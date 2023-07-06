@@ -89,13 +89,18 @@ export default function Form() {
   const save = () => {
     setIsUploading(true);
 
-    // Set readableId and shortTitle if it hasn't been modified
+    // Set defaults if they haven't been modified
     const entryWithDefaults = { ...entry };
     if (entryWithDefaults.readableId === "") {
       entryWithDefaults.readableId = generatedReadableId;
     }
     if (entryWithDefaults.shortTitle === "") {
       entryWithDefaults.shortTitle = entry.title;
+    }
+    if (!entryWithDefaults.scamAmountDetails.preRecoveryAmount) {
+      entryWithDefaults.preRecoveryAmount =
+        entryWithDefaults.scamAmountDetails.total +
+        (entryWithDefaults.scamAmountDetails.recovery || 0);
     }
 
     upload(entryWithDefaults, imageAttribution, entryAttribution)
@@ -240,6 +245,8 @@ export default function Form() {
                   min={0}
                 ></input>
               </div>
+            </div>
+            <div className="row">
               <div className="grow">
                 <label htmlFor="recovered">Recovered: </label>
                 <input
@@ -255,6 +262,26 @@ export default function Form() {
                     entry.scamAmountDetails.recovered === undefined
                       ? ""
                       : entry.scamAmountDetails.recovered
+                  }
+                  type="number"
+                  min={0}
+                ></input>
+              </div>
+              <div className="grow">
+                <label htmlFor="preRecoveryAmount">Pre-recovery amount: </label>
+                <input
+                  id="preRecoveryAmount"
+                  onChange={({ target: { value } }) => {
+                    const intVal = value ? parseInt(value, 10) : undefined;
+                    setScamAmountDetails({
+                      ...entry.scamAmountDetails,
+                      preRecoveryAmount: intVal,
+                    });
+                  }}
+                  value={
+                    entry.scamAmountDetails.preRecoveryAmount ||
+                    entry.scamAmountDetails.total +
+                      (entry.scamAmountDetails.recovered || 0)
                   }
                   type="number"
                   min={0}
