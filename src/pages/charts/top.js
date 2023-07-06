@@ -147,7 +147,7 @@ export default function Top({
     return (
       <div className="scam-total">{`${formatDollarString(amount, {
         cents: false,
-      })} has been lost to hacks, scams, and fraud ${dateRangeStr}.`}</div>
+      })} has been lost to hacks, scams, fraud, and other disasters in ${dateRangeStr}.`}</div>
     );
   };
 
