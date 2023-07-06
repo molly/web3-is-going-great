@@ -198,7 +198,7 @@ export default function Top({
         />
       );
     } else if ("lowerBound" in scamAmountDetails) {
-      return `$${formatDollarString(scamAmountDetails.lowerBound, {
+      return `${formatDollarString(scamAmountDetails.lowerBound, {
         cents: false,
       })} – ${formatDollarString(scamAmountDetails.upperBound, {
         cents: false,
