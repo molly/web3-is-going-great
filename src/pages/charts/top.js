@@ -98,6 +98,9 @@ export default function Top({
 
   const sortTable = (newSortKey) => {
     const newQuery = { ...router.query };
+    if ("cursor" in newQuery) {
+      delete newQuery.cursor;
+    }
 
     if (newSortKey !== "amount") {
       // Amount is the default sortKey so no need to explicitly set it
@@ -302,7 +305,11 @@ export default function Top({
             </thead>
             {renderTableBody()}
           </table>
-          <LeaderboardPaginator {...queryResult.data} standalone={true} />
+          <LeaderboardPaginator
+            {...queryResult.data}
+            standalone={true}
+            sortKey={sortKey}
+          />
         </article>
       </div>
     </>

@@ -53,6 +53,49 @@ export default function DatePicker({ dateRange, setDateRange }) {
     };
   }, [datePickerRef, isMenuOpen]);
 
+  const getNewQueryParams = (range) => {
+    const newQuery = {
+      ...router.query,
+    };
+
+    if ("shortLabel" in range) {
+      newQuery.dateRange = range.shortLabel;
+    } else {
+      newQuery.startDate = formatISO(range.startDate, {
+        representation: "date",
+      });
+      newQuery.endDate = formatISO(range.endDate, {
+        representation: "date",
+      });
+    }
+
+    // Reset pagination on date range change
+    if ("cursor" in newQuery) {
+      delete newQuery.cursor;
+    }
+
+    return newQuery;
+  };
+
+  const onChange = (item) => {
+    let range;
+    let staticRange = getPreset(item.selection);
+    if (!staticRange) {
+      range = {
+        startDate: item.selection.startDate,
+        endDate: item.selection.endDate,
+        label: getCustomButtonLabel(item.selection),
+      };
+    } else {
+      range = staticRangeToPreset(staticRange);
+    }
+    router.push({ query: getNewQueryParams(range) }, null, {
+      shallow: true,
+    });
+    setSelectedRange([item.selection]);
+    setDateRange(range);
+  };
+
   return (
     <div className="date-picker" ref={datePickerRef}>
       <label>Date range:</label>
@@ -88,43 +131,7 @@ export default function DatePicker({ dateRange, setDateRange }) {
             minDate={MIN_DATE}
             editableDateInputs={true}
             shownDate={selectedRange[0].endDate}
-            onChange={(item) => {
-              let range;
-              let staticRange = getPreset(item.selection);
-              if (!staticRange) {
-                range = {
-                  startDate: item.selection.startDate,
-                  endDate: item.selection.endDate,
-                  label: getCustomButtonLabel(item.selection),
-                };
-                router.push(
-                  {
-                    query: {
-                      ...router.query,
-                      startDate: formatISO(range.startDate, {
-                        representation: "date",
-                      }),
-                      endDate: formatISO(range.endDate, {
-                        representation: "date",
-                      }),
-                    },
-                  },
-                  null,
-                  { shallow: true }
-                );
-              } else {
-                range = staticRangeToPreset(staticRange);
-                router.push(
-                  { query: { ...router.query, dateRange: range.shortLabel } },
-                  null,
-                  {
-                    shallow: true,
-                  }
-                );
-              }
-              setSelectedRange([item.selection]);
-              setDateRange(range);
-            }}
+            onChange={onChange}
           />
         </div>
       )}

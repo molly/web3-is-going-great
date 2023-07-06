@@ -16,6 +16,11 @@ export default function LeaderboardPaginator({
     router.push({ query: { ...router.query, cursor, direction } });
   };
 
+  const getCursor = (direction) => {
+    const index = direction === "next" ? entries.length - 1 : 0;
+    return entries[index].id;
+  };
+
   return (
     <div className={clsx("leaderboard-paginator", { standalone: standalone })}>
       {hasPrev && (
@@ -28,17 +33,17 @@ export default function LeaderboardPaginator({
               router.push({ query: newQuery });
             }}
           >
-            <i className="fas fa-angles-left" title="Go to previous page" />
+            <i className="fas fa-angles-left" title="Go to first page" />
           </button>
           <button
             onClick={() =>
               navigate({
-                cursor: entries[0].scamAmountDetails.total,
+                cursor: getCursor("prev"),
                 direction: "prev",
               })
             }
           >
-            <i className="fas fa-angle-left" title="Go to first page" />
+            <i className="fas fa-angle-left" title="Go to previous page" />
           </button>
         </>
       )}
@@ -46,7 +51,7 @@ export default function LeaderboardPaginator({
         <button
           onClick={() =>
             navigate({
-              cursor: entries[entries.length - 1].scamAmountDetails.total,
+              cursor: getCursor("next"),
               direction: "next",
             })
           }
