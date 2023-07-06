@@ -254,7 +254,7 @@ export default function Top({
             <td className="number">
               {renderEntryScamAmount(entry.scamAmountDetails)}
             </td>
-            <td>
+            <td className="number">
               {"recovered" in entry.scamAmountDetails &&
                 formatDollarString(entry.scamAmountDetails.recovered, {
                   cents: false,
