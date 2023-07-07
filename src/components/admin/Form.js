@@ -97,10 +97,13 @@ export default function Form() {
     if (entryWithDefaults.shortTitle === "") {
       entryWithDefaults.shortTitle = entry.title;
     }
-    if (!entryWithDefaults.scamAmountDetails.preRecoveryAmount) {
-      entryWithDefaults.preRecoveryAmount =
-        entryWithDefaults.scamAmountDetails.total +
-        (entryWithDefaults.scamAmountDetails.recovery || 0);
+    if (entryWithDefaults.scamAmountDetails.total) {
+      entryWithDefaults.scamAmountDetails.hasScamAmount = true;
+      if (!entryWithDefaults.scamAmountDetails.preRecoveryAmount) {
+        entryWithDefaults.scamAmountDetails.preRecoveryAmount =
+          entryWithDefaults.scamAmountDetails.total +
+          (entryWithDefaults.scamAmountDetails.recovery || 0);
+      }
     }
 
     upload(entryWithDefaults, imageAttribution, entryAttribution)

@@ -15,7 +15,6 @@ export const EMPTY_ENTRY = {
   shortTitle: "",
   readableId: "",
   image: { src: "", alt: "", caption: "", isLogo: false },
-  scamTotal: 0,
   scamAmountDetails: {
     total: 0,
     hasScamAmount: false,
