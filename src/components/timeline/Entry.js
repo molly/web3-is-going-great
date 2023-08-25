@@ -276,6 +276,36 @@ export default function Entry({
     }
   };
 
+  const renderArchiveLink = (link) => {
+    if (!link.archiveHref && !link.archiveTweetPath) {
+      return null;
+    }
+    let linkEl;
+    if (link.archiveHref) {
+      linkEl = (
+        <a
+          className="archive-link"
+          href={link.archiveHref}
+          target="_blank"
+          rel="noreferrer"
+        >
+          [archive]
+        </a>
+      );
+    } else if (link.archiveTweetPath) {
+      linkEl = (
+        <Link
+          className="archive-link"
+          href={`/archive/${link.archiveTweetPath}`}
+          target="_blank"
+        >
+          [archive]
+        </Link>
+      );
+    }
+    return <span> {linkEl}</span>;
+  };
+
   const renderLinks = () => {
     if (entry.links && entry.links.length) {
       return (
@@ -288,6 +318,7 @@ export default function Entry({
               {link.extraText && (
                 <span dangerouslySetInnerHTML={{ __html: link.extraText }} />
               )}
+              {renderArchiveLink(link)}
             </li>
           ))}
         </ul>
