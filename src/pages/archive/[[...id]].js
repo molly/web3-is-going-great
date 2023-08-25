@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { Fragment } from "react";
 import PropTypes from "prop-types";
 import { getEntry } from "../../db/singleEntry";
 import { EntryPropType } from "../../js/entry";
@@ -33,20 +34,21 @@ export async function getServerSideProps(context) {
 }
 
 export default function TweetArchive({ entryId, linkIndex, entry }) {
-  const renderArchiveAsset = (asset) => {
-    const match = asset.match(/^(\d+)-(\d+)\./);
-    const tweetNumber = parseInt(match[1], 10) + 1;
-    const imageNumber = parseInt(match[2], 10) + 1;
-    const imagePath = `${BUCKET_PATH}/${entryId}/${linkIndex}/assets/${asset}`;
+  const link = entry.links[linkIndex];
+
+  const renderArchiveImage = (tweetIndex, imageIndex) => {
+    const imagePath = `${BUCKET_PATH}/${entryId}/${linkIndex}/assets/${tweetIndex}-${imageIndex}.webp`;
+    const archivesForTweet = link.archiveTweetAssets[tweetIndex];
+    const imageIndexStr = imageIndex.toString();
 
     let alt = "Image";
-    if ("archiveTweetAssetsAlt" in entry.links[linkIndex]) {
-      alt = entry.links[linkIndex]["archiveTweetAssetsAlt"][asset];
+    if ("alt" in archivesForTweet && imageIndexStr in archivesForTweet["alt"]) {
+      alt = archivesForTweet["alt"][imageIndexStr];
     }
 
     return (
-      <div key={`${tweetNumber}-${imageNumber}`}>
-        <h3>{`Tweet #${tweetNumber}, image #${imageNumber}:`}</h3>
+      <div key={`${tweetIndex}-${imageIndex}`}>
+        <h4>{`Image #${parseInt(imageIndex, 10) + 1}:`}</h4>
         <div className="image-wrapper">
           <a href={imagePath} target="_blank" rel="noreferrer">
             <img src={imagePath} alt={alt} />
@@ -56,12 +58,54 @@ export default function TweetArchive({ entryId, linkIndex, entry }) {
     );
   };
 
+  const renderArchiveImages = (tweetIndex) => {
+    const archivesForTweet = link.archiveTweetAssets[tweetIndex];
+    if ("images" in archivesForTweet) {
+      let images = [];
+      for (let i = 0; i < archivesForTweet.images; i++) {
+        images.push(renderArchiveImage(tweetIndex, i));
+      }
+      return images;
+    }
+  };
+
+  const renderArchiveLinks = (tweetIndex) => {
+    const archivesForTweet = link.archiveTweetAssets[tweetIndex];
+    if ("links" in archivesForTweet) {
+      return (
+        <>
+          <h4>Links:</h4>
+          <ul>
+            {archivesForTweet.links.map((href) => (
+              <li key={href}>
+                <a href={href} target="_blank" rel="noreferrer">
+                  {href}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      );
+    }
+  };
+
+  const renderArchiveAssetsForTweet = (tweetIndex) => {
+    return (
+      <Fragment key={tweetIndex}>
+        <h3>{`Tweet #${parseInt(tweetIndex, 10) + 1}`}</h3>
+        {renderArchiveImages(tweetIndex)}
+        {renderArchiveLinks(tweetIndex)}
+      </Fragment>
+    );
+  };
+
   const renderArchiveAssetsColumn = () => {
-    if ("archiveTweetAssets" in entry.links[linkIndex]) {
+    if ("archiveTweetAssets" in link) {
+      const tweetKeys = Object.keys(link.archiveTweetAssets);
+      tweetKeys.sort();
       return (
         <div className="tweet-assets">
-          <h2>Images from tweet:</h2>
-          {entry.links[linkIndex].archiveTweetAssets.map(renderArchiveAsset)}
+          {tweetKeys.map(renderArchiveAssetsForTweet)}
         </div>
       );
     }
@@ -82,21 +126,17 @@ export default function TweetArchive({ entryId, linkIndex, entry }) {
         <div className="tweet-archive">
           <div className="tweet">
             <h2>
-              <a
-                href={entry.links[linkIndex].href}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href={link.href} target="_blank" rel="noreferrer">
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: entry.links[linkIndex].linkText,
+                    __html: link.linkText,
                   }}
                 />
               </a>
-              {entry.links[linkIndex].extraText && (
+              {link.extraText && (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: entry.links[linkIndex].extraText,
+                    __html: link.extraText,
                   }}
                 />
               )}
@@ -104,10 +144,7 @@ export default function TweetArchive({ entryId, linkIndex, entry }) {
             </h2>
             <div className="image-wrapper">
               <a href={screenshotPath} target="_blank" rel="noopener">
-                <img
-                  src={screenshotPath}
-                  alt={entry.links[linkIndex].archiveTweetAlt}
-                />
+                <img src={screenshotPath} alt={link.archiveTweetAlt} />
               </a>
             </div>
           </div>
