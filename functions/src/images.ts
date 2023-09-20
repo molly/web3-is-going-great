@@ -9,6 +9,7 @@ import * as path from "path";
 import * as sharp from "sharp";
 
 import { ResizeResult } from "./types";
+import { Bucket } from "@google-cloud/storage";
 
 const supportedContentTypes = [
   "image/jpeg",
@@ -24,7 +25,7 @@ const resizeImage = async ({
   object,
   fileName,
 }: {
-  bucket: any; // Issue with Bucket type from newer version of cloud storage
+  bucket: Bucket;
   originalImage: string;
   size: number;
   object: ObjectMetadata;
