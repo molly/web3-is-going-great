@@ -23,7 +23,11 @@ export const addSocialPostIds = functions.https.onRequest(async (req, res) => {
     let hasErrors = false;
 
     for (const network of NETWORKS) {
-      if (network in req.body) {
+      if (
+        network in req.body &&
+        req.body[network] !== null &&
+        req.body[network] !== undefined
+      ) {
         if (ID_FORMATS[network].test(req.body[network])) {
           update[network] = req.body[network];
           response[network] = "Success";
