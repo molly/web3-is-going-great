@@ -28,7 +28,7 @@
   "devDependencies": {
     "@firebase/app-compat": "^0.2.19",
     "@types/ejs": "^3.1.2",
-    "@types/node": "^20.6.3",
+    "@types/node": "^20.6.5",
     "@types/sharp": "^0.32.0",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
