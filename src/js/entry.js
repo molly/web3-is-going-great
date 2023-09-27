@@ -27,6 +27,11 @@ export const LinkFieldPropType = PropTypes.shape({
   linkText: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
   extraText: PropTypes.string,
+
+  archiveHref: PropTypes.string,
+  archiveTweetPath: PropTypes.string,
+  archiveTweetAlt: PropTypes.string,
+  archiveTweetAssets: PropTypes.object,
 });
 
 export const EntryPropType = PropTypes.shape({

@@ -18,6 +18,15 @@ type Link = {
   linkText: string;
   href: string;
   extraText?: string;
+
+  // Archiving
+  // For non-tweet links:
+  archiveHref?: string;
+
+  // For tweet links:
+  archiveTweetPath?: string;
+  archiveTweetAlt?: string;
+  archiveTweetAssets?: object;
 };
 
 export type ScamAmountDetails = {
