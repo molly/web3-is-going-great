@@ -93,7 +93,7 @@ footer.page-footer
 header.page-header .header-content,
 footer.page-footer
   h1 a, h1 a:hover, h1 button, h1 button:hover
-    border-bottom: none
+  border-bottom: none
 
   a
     border-bottom: 1px dashed lighten($header-footer-background, 20%)
@@ -246,11 +246,14 @@ article.timeline
       text-decoration: none
 
   i .define-target
-    font-style: italic
+      font-style: italic
 
   .entry-wrapper
     margin-left: 20px
     margin-right: 20px
+
+  .archive-link
+    font-size: 80%
 
   .entry-footer
     clear: both
@@ -275,7 +278,7 @@ article.timeline
     border-bottom: 1px solid transparentize($timeline-line-color, 0.5)
 
     a > i.fa-twitter
-      color: $main-text-color
+    color: $main-text-color
 
   .tags
     padding: 5px
@@ -665,6 +668,26 @@ table
     margin-top: 0.5em
     margin-bottom: 0.5em
 
+// Archive
+.tweet-archive
+  display: flex
+  max-width: 1600px
+  margin: 0 auto 20px auto
+  padding: 0 10px
+
+  .tweet, .tweet-assets
+    max-width: 775px
+
+    img
+      width: 100%
+      max-width: 100%
+      display: block
+      object-fit: contain
+
+  .tweet-assets
+    margin-left: 50px
+    overflow-wrap: break-word
+
 /* ICON COLORS */
 .timeline-icon
   @each $name, $color in $icon-colors
@@ -784,6 +807,17 @@ table
 
   .lightbox-container
     width: 90%
+
+  .tweet-archive
+    flex-direction: column
+    margin: 0
+    padding: 0
+
+    .tweet, .tweet-assets
+      max-width: 100%
+
+    .tweet-assets
+      margin-left: 0
 
 @media only screen and (max-width: #{$sm-breakpoint}px)
   header.page-header
@@ -944,7 +978,7 @@ table
 
     h2
       button .permalink-popup
-        color: $dark-main-color
+      color: $dark-main-color
 
       a
         color: $dark-main-color
