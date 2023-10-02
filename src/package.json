@@ -13,7 +13,7 @@
     "algoliasearch": "^4.20.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
-    "downshift": "^8.2.1",
+    "downshift": "^8.2.2",
     "firebase": "^10.4.0",
     "lodash.filter": "^4.6.0",
     "lodash.find": "^4.6.0",
