@@ -28,7 +28,7 @@
     "react-intersection-observer": "^9.5.2",
     "react-popper": "^2.3.0",
     "react-query": "^3.39.3",
-    "react-select": "^5.7.5",
+    "react-select": "^5.7.7",
     "use-debounce": "^9.0.4"
   },
   "devDependencies": {
