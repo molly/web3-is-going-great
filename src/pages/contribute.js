@@ -217,6 +217,17 @@ export default function Contribute({ money }) {
                   {formatDollarString(money.donations)}
                 </td>
               </tr>
+              <tr>
+                <td colSpan={2}>Remaining donations</td>
+                <td className="number">
+                  {formatDollarString(
+                    Math.max(
+                      money.donations - (totalExpenses - money.usedCredits),
+                      0
+                    )
+                  )}
+                </td>
+              </tr>
             </tbody>
           </table>
           <DonationsBar
