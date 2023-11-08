@@ -14,12 +14,12 @@
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
     "downshift": "^8.2.2",
-    "firebase": "^10.4.0",
+    "firebase": "^10.5.2",
     "lodash.filter": "^4.6.0",
     "lodash.find": "^4.6.0",
     "lodash.findindex": "^4.6.0",
     "lodash.orderby": "^4.6.0",
-    "next": "13.5.4",
+    "next": "14.0.1",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-date-range": "^1.4.0",
@@ -28,13 +28,13 @@
     "react-intersection-observer": "^9.5.2",
     "react-popper": "^2.3.0",
     "react-query": "^3.39.3",
-    "react-select": "^5.7.7",
-    "use-debounce": "^9.0.4"
+    "react-select": "^5.8.0",
+    "use-debounce": "^10.0.0"
   },
   "devDependencies": {
-    "eslint": "8.51.0",
-    "eslint-config-next": "13.5.4",
+    "eslint": "8.53.0",
+    "eslint-config-next": "14.0.1",
     "eslint-plugin-react": "^7.33.2",
-    "sass": "^1.69.1"
+    "sass": "^1.69.5"
   }
 }
