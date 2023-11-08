@@ -71,7 +71,7 @@ export default function Contribute({ money }) {
       if (credits.length) {
         credits = credits.map((c) => ({
           ...c,
-          label: `${c.label}**`,
+          label: `${c.label}*`,
           value: -c.value,
         }));
         rows = rows.concat(credits);
@@ -83,29 +83,6 @@ export default function Contribute({ money }) {
     }
     return rows;
   }, [money]);
-
-  const renderOtherDonationLinks = () => {
-    return (
-      <>
-        <ExternalLink href="https://www.colorstack.org/">
-          ColorStack
-        </ExternalLink>
-        ,{" "}
-        <ExternalLink href="https://www.underdogdevs.org/">
-          Underdog Devs
-        </ExternalLink>
-        ,{" "}
-        <ExternalLink href="https://girlswhocode.com/">
-          Girls Who Code
-        </ExternalLink>
-        *, or{" "}
-        <ExternalLink href="https://wearebgc.org/">
-          Black Girls Code
-        </ExternalLink>
-        *
-      </>
-    );
-  };
 
   return (
     <>
@@ -148,15 +125,6 @@ export default function Contribute({ money }) {
           </p>
           <h2>Donate</h2>
           <p>
-            If you were hoping to donate, please consider donating to causes
-            that need it more than me, like {renderOtherDonationLinks()}. This
-            project also benefits enormously from the non-profit{" "}
-            <ExternalLink href="https://free.law/donate/">
-              Free Law Project
-            </ExternalLink>
-            , which provides invaluable access to court records for free.
-          </p>
-          <p>
             If you would like to support my work, which includes this website, I
             have a{" "}
             <ExternalLink href="https://newsletter.mollywhite.net/">
@@ -173,11 +141,6 @@ export default function Contribute({ money }) {
             can earmark the funds for this project. There is a transparency
             report below where I record the cost of keeping this site online, as
             well as those earmarked funds.
-          </p>
-          <p>
-            Please note that I created the project with the expectation that I
-            would pay for it out-of-pocket, so this isn't a scenario where the
-            site will come offline if hosting costs aren't covered by donations.
           </p>
           <h3>Expenses</h3>
           <table className="expenses centered">
@@ -241,15 +204,7 @@ export default function Contribute({ money }) {
             a day or so for your donation to show up here!
           </p>
           <p className="help-text">
-            * Both Girls Who Code and Black Girls Code have partnered with
-            crypto projects in the past. While I don't support that decision, I
-            do think they are doing enormously good work towards helping the
-            demographics they focus on. To my knowledge, neither UnderdogDevs
-            nor ColorStack have crypto entanglements, if you are more
-            comfortable donating to them.
-          </p>
-          <p className="help-text">
-            ** Credits refer to free credits for Google Cloud Platform, provided
+            * Credits refer to free credits for Google Cloud Platform, provided
             by Google.
           </p>
         </article>
