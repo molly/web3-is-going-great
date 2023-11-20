@@ -11,7 +11,7 @@ export default function SettingsPanel({
   isGriftCounterCountingUp,
   toggleIsGriftCounterCountingUp,
 }) {
-  const { useDarkMode, useSansSerif, toggleUseSansSerif, toggleDarkMode } =
+  const { useTheme, setTheme, useSansSerif, toggleUseSansSerif } =
     useAppState();
 
   return (
@@ -32,13 +32,49 @@ export default function SettingsPanel({
         >
           Use sans-serif font
         </SettingsCheckbox>
-        <SettingsCheckbox
-          id="use-dark-mode"
-          checked={!!useDarkMode}
-          toggleCheckbox={toggleDarkMode}
-        >
-          Force dark mode
-        </SettingsCheckbox>
+
+        <div className="radio-group">
+          <h4>Theme</h4>
+          <div className="input-group">
+            <input
+              type="radio"
+              id="use-system-theme"
+              name="system-theme"
+              value="use-system-theme"
+              checked={useTheme === "system"}
+              onChange={(e) => {
+                setTheme("system");
+              }}
+            />
+            <label htmlFor="use-system-theme">System theme</label>
+          </div>
+          <div className="input-group">
+            <input
+              type="radio"
+              id="use-dark-mode"
+              name="dark-mode"
+              value="use-dark-mode"
+              checked={useTheme === "dark"}
+              onChange={(e) => {
+                setTheme("dark");
+              }}
+            />
+            <label htmlFor="use-dark-mode">Force dark mode</label>
+          </div>
+          <div className="input-group">
+            <input
+              type="radio"
+              id="use-light-mode"
+              name="light-mode"
+              value="use-light-mode"
+              checked={useTheme === "light"}
+              onChange={(e) => {
+                setTheme("light");
+              }}
+            />
+            <label htmlFor="use-light-mode">Force light mode</label>
+          </div>
+        </div>
       </div>
       <h3>Grift counter</h3>
       <div className="settings-section">
