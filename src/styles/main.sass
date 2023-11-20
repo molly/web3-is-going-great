@@ -232,6 +232,9 @@ article.timeline
   pointer-events: auto
   border: 1px solid $timeline-line-color
 
+  &.highlight
+    border: 3px solid $timeline-highlight-color
+
   &::after
     background-color: $card-background
     border-color: $timeline-line-color
@@ -975,6 +978,9 @@ table
   .timeline-description
     background-color: $dark-card-background
     border-color: $dark-timeline-line-color
+    
+    &.highlight
+      border: 3px solid $dark-timeline-highlight-color
 
     h2
       button .permalink-popup

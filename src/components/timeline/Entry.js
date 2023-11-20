@@ -23,6 +23,7 @@ import {
 import { InView } from "react-intersection-observer";
 import Link from "next/link";
 import TimelineEntryContent from "./TimelineEntryContent";
+import { useSearchParams } from "next/navigation";
 
 export default function Entry({
   entry,
@@ -40,7 +41,9 @@ export default function Entry({
 }) {
   const ref = useRef();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const isBrowserRendering = useIsBrowserRendering();
+  const ishighlighted = entry.readableId === searchParams.get("id");
 
   const [showCopiedPopup, setShowCopiedPopup] = useState(false);
   const [showLightbox, setShowLightbox] = useState(false);
@@ -431,11 +434,17 @@ export default function Entry({
       className={`timeline-entry ${className}`}
       ref={shouldScrollToElement ? ref : null}
     >
-      <div className={`timeline-icon ${entry.color || "purple"}`}>
+      <div
+        className={`timeline-icon ${
+          (ishighlighted && "yellow") || entry.color || "purple"
+        }`}
+      >
         {renderIcon()}
       </div>
 
-      <div className="timeline-description">
+      <div
+        className={clsx("timeline-description", { highlight: ishighlighted })}
+      >
         <div className="entry-wrapper">
           {renderTimestampAndLinkIcons()}
           <h2>
