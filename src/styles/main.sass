@@ -131,9 +131,7 @@ header.page-header.timeline-page
 
   ul
     padding: 0px
-
-    li
-      list-style: none
+    list-style: none
 
 footer.page-footer
   padding: 10px 10px
@@ -708,14 +706,8 @@ table
     li
       display: inline
 
-      &:not(:first-child):before
-        color: $header-footer-body-color
-        padding: 10px
-
-        // Avoid screenreaders reading the decorative character where supported
-        // https://github.com/molly/web3-is-going-great/pull/25#issuecomment-1004279568
-        content: "•"
-        content: "•" / ""
+      a
+        border-bottom: none
 
   .timeline-entry.single
     display: flex

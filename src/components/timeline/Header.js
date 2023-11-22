@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { WindowWidthPropType } from "../../hooks/useWindowWidth";
 
 import { STORAGE_URL } from "../../constants/urls";
+import { SOCIAL } from "../../constants/navigation";
 
 import Link from "next/link";
 import ExternalLink from "../ExternalLink";
@@ -75,17 +76,6 @@ const Header = forwardRef(function Header(
   const renderLinks = () => (
     <>
       <p>
-        Follow on{" "}
-        <ExternalLink href="https://twitter.com/web3isgreat">
-          Twitter
-        </ExternalLink>
-        ,{" "}
-        <ExternalLink href="https://indieweb.social/@web3isgreat">
-          Mastodon
-        </ExternalLink>
-        , or <Link href="/feed.xml">RSS</Link>.{" "}
-      </p>
-      <p>
         Created by{" "}
         <ExternalLink href="https://www.mollywhite.net/">
           Molly White
@@ -96,6 +86,17 @@ const Header = forwardRef(function Header(
         </ExternalLink>{" "}
         for weekly recaps.
       </p>
+      <ul className="social-links">
+        {SOCIAL.map((link) => (
+          <li key={link.label}>
+            <ExternalLink href={link.href}>
+              <i className={`fa-fw ${link.icon}`} aria-hidden={true} alt="">
+                <span className="sr-only">{link.label}</span>
+              </i>
+            </ExternalLink>
+          </li>
+        ))}
+      </ul>
     </>
   );
 
