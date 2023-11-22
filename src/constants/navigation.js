@@ -33,6 +33,18 @@ export const NAVIGATION = [
         href: "https://indieweb.social/@web3isgreat",
       },
       {
+        label: "Bluesky",
+        href: "https://bsky.app/profile/web3isgoinggreat.com",
+      },
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/web3isgoinggreat/",
+      },
+      {
+        label: "Threads",
+        href: "https://www.threads.net/@web3isgoinggreat",
+      },
+      {
         label: "Newsletter",
         href: "https://newsletter.mollywhite.net/",
       },
