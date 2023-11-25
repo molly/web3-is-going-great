@@ -236,6 +236,13 @@ article.timeline
   pointer-events: auto
   border: 1px solid $timeline-line-color
 
+  &.highlighted
+    border: 3px solid $timeline-highlight-color
+    box-shadow: 0px 0px 10px 0px $timeline-highlight-glow-color
+    
+    &::after
+      border-color: $timeline-highlight-color
+
   &::after
     background-color: $card-background
     border-color: $timeline-line-color
@@ -700,10 +707,16 @@ table
 
 /* RESPONSIVENESS */
 @media only screen and (min-width: #{$md-breakpoint + 1}px)
-  .timeline-entry.even .timeline-description:after
-    right: -8px
-    border-top-width: 1px
-    border-right-width: 1px
+  .timeline-entry.even 
+    .timeline-description:after
+      right: -8px
+      border-top-width: 1px
+      border-right-width: 1px
+    
+    .timeline-description.highlighted:after
+      right: -9px
+      border-top-width: 3px
+      border-right-width: 3px
 
   header.page-header.timeline-page
     min-height: 250px
@@ -723,10 +736,16 @@ table
       width: 80%
 
 @media only screen and (max-width: #{$md-breakpoint}px) and (min-width: #{$xs-breakpoint + 1}px)
-  .timeline-entry.even .timeline-description:after
-    left: -8px
-    border-bottom-width: 1px
-    border-left-width: 1px
+  .timeline-entry.even
+    .timeline-description:after
+      left: -8px
+      border-bottom-width: 1px
+      border-left-width: 1px
+    
+    .timeline-description.highlighted:after
+      right: -9px
+      border-top-width: 3px
+      border-right-width: 3px
 
 @media only screen and (min-width: #{$xs-breakpoint + 1}px)
   .timeline-description:after
@@ -740,10 +759,16 @@ table
     border-style: solid
     box-sizing: border-box
 
-  .timeline-entry.odd .timeline-description:after
-    left: -8px
-    border-bottom-width: 1px
-    border-left-width: 1px
+  .timeline-entry.odd
+    .timeline-description:after
+      left: -8px
+      border-bottom-width: 1px
+      border-left-width: 1px
+
+    .timeline-description.highlighted:after
+      left: -9px
+      border-bottom-width: 3px
+      border-left-width: 3px
 
   .image-right
     width: clamp(150px, 40%, 400px)
@@ -971,6 +996,10 @@ table
     background-color: $dark-card-background
     border-color: $dark-timeline-line-color
 
+    &.highlighted
+      border-color: $dark-timeline-highlight-color
+      box-shadow: 0px 0px 10px 0px $dark-timeline-highlight-glow-color 
+
     h2
       button .permalink-popup
       color: $dark-main-color
@@ -1002,18 +1031,25 @@ table
     @each $name, $color in $icon-colors
       &.#{$name}
         background-color: darken($color, 20%)
-
+  
   .load-top
     button, a.button
       color: $dark-timeline-icon-color
       background-color: darken($accent, 20%)
 
   .timeline.dots::before
-    background: linear-gradient(180deg, $dark-timeline-line-color 25%, $dark-main-background 25%, $dark-main-background 50%, $dark-timeline-line-color 50%, $dark-timeline-line-color 75%, $dark-main-background 75%, $dark-main-background 100%)
+    background: linear-gradient(180deg, $dark-timeline-line-color 25%, $dark-main-background 25%, $dark-main-background 50%, $dark-timeline-line-color 50%, $dark-timeline-line-color 75%, $dark-main-background 75%, $dark-main-background 100%)  
 
-  .timeline-description:after
-    background-color: $dark-card-background
-    border-color: $dark-timeline-line-color
+  .timeline-description
+    &:after
+      background-color: $dark-card-background
+      border-color: $dark-timeline-line-color
+      
+    &.highlighted
+      border-color: $dark-timeline-highlight-color 
+
+      &::after
+        border-color: $dark-timeline-highlight-color
 
   // Contribute
   table
