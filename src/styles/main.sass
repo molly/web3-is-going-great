@@ -133,6 +133,12 @@ header.page-header.timeline-page
     padding: 0px
     list-style: none
 
+  li
+    display: inline
+
+    a
+      border-bottom: none
+
 footer.page-footer
   padding: 10px 10px
 
@@ -703,12 +709,6 @@ table
     min-height: 250px
     align-items: start
 
-    li
-      display: inline
-
-      a
-        border-bottom: none
-
   .timeline-entry.single
     display: flex
     justify-content: center
@@ -766,6 +766,9 @@ table
 
     img.logo
       max-height: 200px
+
+    li
+      padding: 0 5px
 
   .timeline::before
     left: 0
