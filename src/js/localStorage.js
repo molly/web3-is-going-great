@@ -1,6 +1,6 @@
 export const LOCALSTORAGE_KEYS = {
   // General appearance
-  useTheme: "use-theme",
+  theme: "theme",
   useSansSerif: "use-sans-serif",
 
   // Grift counter

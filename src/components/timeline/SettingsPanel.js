@@ -11,8 +11,7 @@ export default function SettingsPanel({
   isGriftCounterCountingUp,
   toggleIsGriftCounterCountingUp,
 }) {
-  const { useTheme, setTheme, useSansSerif, toggleUseSansSerif } =
-    useAppState();
+  const { theme, setTheme, useSansSerif, toggleUseSansSerif } = useAppState();
 
   return (
     <div className="settings-panel">
@@ -41,7 +40,7 @@ export default function SettingsPanel({
               id="use-system-theme"
               name="system-theme"
               value="use-system-theme"
-              checked={useTheme === "system"}
+              checked={theme === "system"}
               onChange={() => {
                 setTheme("system");
               }}
@@ -54,7 +53,7 @@ export default function SettingsPanel({
               id="use-dark-mode"
               name="dark-mode"
               value="use-dark-mode"
-              checked={useTheme === "dark"}
+              checked={theme === "dark"}
               onChange={() => {
                 setTheme("dark");
               }}
@@ -67,7 +66,7 @@ export default function SettingsPanel({
               id="use-light-mode"
               name="light-mode"
               value="use-light-mode"
-              checked={useTheme === "light"}
+              checked={theme === "light"}
               onChange={() => {
                 setTheme("light");
               }}

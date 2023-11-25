@@ -3,15 +3,15 @@ import clsx from "clsx";
 import { useAppState } from "../context/AppContext";
 
 export default function Layout({ children }) {
-  const { useSansSerif, useTheme } = useAppState();
+  const { useSansSerif, theme } = useAppState();
 
   return (
     <main
       className={clsx([
         {
           "use-sans-serif": useSansSerif,
-          "use-dark": useTheme === "dark",
-          "use-system": useTheme === "system",
+          "use-dark": theme === "dark",
+          "use-system": theme === "system",
         },
       ])}
     >
