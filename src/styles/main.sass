@@ -1076,11 +1076,13 @@ table
   @include chartsDarkMode()
   @include reactDateRangeDarkMode()
 
-@media (prefers-color-scheme: dark)
-  @include mainDarkMode()
-  @include navigationDarkMode()
-  @include filtersDarkMode()
-  @include fixedDarkMode()
-  @include popoversDarkMode()
-  @include chartsDarkMode()
-  @include reactDateRangeDarkMode()
+.use-system
+  @media (prefers-color-scheme: dark)
+    background-color: $dark-main-background
+    @include mainDarkMode()
+    @include navigationDarkMode()
+    @include filtersDarkMode()
+    @include fixedDarkMode()
+    @include popoversDarkMode()
+    @include chartsDarkMode()
+    @include reactDateRangeDarkMode()

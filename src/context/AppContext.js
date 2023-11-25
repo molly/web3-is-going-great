@@ -16,30 +16,30 @@ import {
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
-  const [useDarkMode, setUseDarkMode] = useState(null);
-  const [useSansSerif, setUseSansSerif] = useState(null);
+  const [theme, _setTheme] = useState("system");
+  const [useSansSerif, _setUseSansSerif] = useState(null);
 
   const toggleUseSansSerif = useCallback(() => {
     setLocalStorage(LOCALSTORAGE_KEYS.useSansSerif, !useSansSerif);
-    setUseSansSerif(!useSansSerif);
+    _setUseSansSerif(!useSansSerif);
   }, [useSansSerif]);
 
-  const toggleDarkMode = useCallback(() => {
-    setLocalStorage(LOCALSTORAGE_KEYS.useDarkMode, !useDarkMode);
-    setUseDarkMode(!useDarkMode);
-  }, [useDarkMode]);
+  const setTheme = useCallback((theme) => {
+    setLocalStorage(LOCALSTORAGE_KEYS.theme, theme);
+    _setTheme(theme);
+  }, []);
 
   useEffect(() => {
     // Localstorage can't be accessed during SSR
-    setUseSansSerif(getLocalStorage(LOCALSTORAGE_KEYS.useSansSerif));
-    setUseDarkMode(getLocalStorage(LOCALSTORAGE_KEYS.useDarkMode));
-  }, [setUseSansSerif, setUseDarkMode]);
+    _setUseSansSerif(getLocalStorage(LOCALSTORAGE_KEYS.useSansSerif));
+    _setTheme(getLocalStorage(LOCALSTORAGE_KEYS.theme, "system"));
+  }, [_setUseSansSerif, _setTheme]);
 
   const state = {
-    useDarkMode,
+    theme,
+    setTheme,
     useSansSerif,
     toggleUseSansSerif,
-    toggleDarkMode,
   };
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
