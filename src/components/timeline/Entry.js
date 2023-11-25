@@ -43,7 +43,6 @@ export default function Entry({
   const router = useRouter();
   const searchParams = useSearchParams();
   const isBrowserRendering = useIsBrowserRendering();
-  const ishighlighted = entry.readableId === searchParams.get("id");
 
   const [showCopiedPopup, setShowCopiedPopup] = useState(false);
   const [showLightbox, setShowLightbox] = useState(false);
@@ -107,6 +106,11 @@ export default function Entry({
         ? `#${entry.readableId}`
         : `?id=${entry.readableId}`,
     [entry.readableId, router.route]
+  );
+
+  const isEntryHighlighted = useMemo(
+    () => entry.readableId === searchParams.get("id"),
+    [entry.readableId, searchParams]
   );
 
   const renderIcon = () => {
@@ -435,15 +439,18 @@ export default function Entry({
       ref={shouldScrollToElement ? ref : null}
     >
       <div
-        className={`timeline-icon ${
-          (ishighlighted && "yellow") || entry.color || "purple"
-        }`}
+        className={clsx(
+          "timeline-icon",
+          entry.color || "purple"
+        )}
       >
         {renderIcon()}
       </div>
 
       <div
-        className={clsx("timeline-description", { highlight: ishighlighted })}
+        className={clsx("timeline-description", {
+          highlighted: isEntryHighlighted,
+        })}
       >
         <div className="entry-wrapper">
           {renderTimestampAndLinkIcons()}
