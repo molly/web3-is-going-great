@@ -42,11 +42,11 @@ export default function SettingsPanel({
               name="system-theme"
               value="use-system-theme"
               checked={useTheme === "system"}
-              onChange={(e) => {
+              onChange={() => {
                 setTheme("system");
               }}
             />
-            <label htmlFor="use-system-theme">System theme</label>
+            <label htmlFor="use-system-theme">Use system theme</label>
           </div>
           <div className="input-group">
             <input
@@ -55,7 +55,7 @@ export default function SettingsPanel({
               name="dark-mode"
               value="use-dark-mode"
               checked={useTheme === "dark"}
-              onChange={(e) => {
+              onChange={() => {
                 setTheme("dark");
               }}
             />
@@ -68,7 +68,7 @@ export default function SettingsPanel({
               name="light-mode"
               value="use-light-mode"
               checked={useTheme === "light"}
-              onChange={(e) => {
+              onChange={() => {
                 setTheme("light");
               }}
             />
