@@ -8,13 +8,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@fortawesome/fontawesome-free": "^6.5.1",
     "@popperjs/core": "^2.11.8",
     "algoliasearch": "^4.20.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
     "downshift": "^8.2.3",
-    "firebase": "^10.6.0",
+    "firebase": "^10.7.0",
     "lodash.filter": "^4.6.0",
     "lodash.find": "^4.6.0",
     "lodash.findindex": "^4.6.0",
@@ -32,7 +32,7 @@
     "use-debounce": "^10.0.0"
   },
   "devDependencies": {
-    "eslint": "8.54.0",
+    "eslint": "8.55.0",
     "eslint-config-next": "14.0.3",
     "eslint-plugin-react": "^7.33.2",
     "sass": "^1.69.5"
