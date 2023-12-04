@@ -41,7 +41,12 @@ export type ScamAmountDetails = {
   textOverride?: string; // Text override (used in leaderboard)
 };
 
-export type SocialNetwork = "twitter" | "mastodon" | "bluesky";
+export type SocialNetwork =
+  | "twitter"
+  | "mastodon"
+  | "bluesky"
+  | "instagram"
+  | "threads";
 
 export type SocialPostGroup = {
   [network in SocialNetwork]?: string;

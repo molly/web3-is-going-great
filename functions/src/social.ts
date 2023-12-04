@@ -2,11 +2,19 @@ import { firestore } from "./config/firebase";
 import * as functions from "firebase-functions";
 import { SocialNetwork, SocialPostGroup } from "./types";
 
-const NETWORKS: SocialNetwork[] = ["twitter", "mastodon", "bluesky"];
+const NETWORKS: SocialNetwork[] = [
+  "twitter",
+  "mastodon",
+  "bluesky",
+  "instagram",
+  "threads",
+];
 const ID_FORMATS = {
   twitter: /\d+/,
   mastodon: /\d+/,
   bluesky: /[a-z0-9]+/,
+  instagram: /[a-z0-9]+/,
+  threads: /[a-z0-9]+/,
 };
 
 export const addSocialPostIds = functions.https.onRequest(async (req, res) => {
