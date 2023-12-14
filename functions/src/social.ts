@@ -13,8 +13,8 @@ const ID_FORMATS = {
   twitter: /\d+/,
   mastodon: /\d+/,
   bluesky: /[a-z0-9]+/,
-  instagram: /[a-zA-Z0-9]+/,
-  threads: /[a-zA-Z0-9]+/,
+  instagram: /[a-zA-Z0-9-]+/,
+  threads: /[a-zA-Z0-9-]+/,
 };
 
 export const addSocialPostIds = functions.https.onRequest(async (req, res) => {
