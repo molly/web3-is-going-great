@@ -55,7 +55,7 @@ export const NAVIGATION = [
       ...SOCIAL,
       {
         label: "Newsletter",
-        href: "https://newsletter.mollywhite.net/",
+        href: "https://citationneeded.news/",
       },
       {
         label: "RSS",

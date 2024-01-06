@@ -126,11 +126,12 @@ export default function Contribute({ money }) {
           <h2>Donate</h2>
           <p>
             If you would like to support my work, which includes this website, I
-            have a{" "}
-            <ExternalLink href="https://newsletter.mollywhite.net/">
-              Substack
-            </ExternalLink>
-            . You can also make one-off donations via{" "}
+            have a newsletter called{" "}
+            <ExternalLink href="https://citationneeded.news/">
+              <i>Citation Needed</i>
+            </ExternalLink>{" "}
+            where you can sign up for a pay-what-you-want subscription . You can
+            also make one-off donations via{" "}
             <a href="https://account.venmo.com/u/MollyWhite">Venmo</a>,{" "}
             <a href="https://cash.app/$molly0xfff">Cash App</a>, or{" "}
             <a href="https://www.paypal.com/donate/?business=3RM66P9NEQNFA&no_recurring=0&currency_code=USD">

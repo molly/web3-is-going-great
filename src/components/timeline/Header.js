@@ -81,7 +81,7 @@ const Header = forwardRef(function Header(
           Molly White
         </ExternalLink>
         . Subscribe to{" "}
-        <ExternalLink href="https://newsletter.mollywhite.net/">
+        <ExternalLink href="https://citationneeded.news/">
           her newsletter
         </ExternalLink>{" "}
         for weekly recaps.

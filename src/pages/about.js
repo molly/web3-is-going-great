@@ -69,9 +69,9 @@ export default function WhatIsWeb3() {
               collection
             </ExternalLink>{" "}
             of longer-form, less sarcastic thoughts on blockchains and web3, and
-            I also write a{" "}
-            <ExternalLink href="https://newsletter.mollywhite.net/">
-              newsletter
+            I also write a newsletter called{" "}
+            <ExternalLink href="http://citationneeded.news/">
+              <i>Citation Needed</i>
             </ExternalLink>
             .
           </p>
@@ -84,12 +84,11 @@ export default function WhatIsWeb3() {
             . The TL;DR is that I hold no substantial amount of cryptocurrencies
             and no NFTs, and am also not trying to make money off of crypto
             markets doing poorly by shorting the market, etc. I do have a{" "}
-            <ExternalLink href="https://newsletter.mollywhite.net/">
-              Substack
+            <ExternalLink href="http://citationneeded.news/">
+              newsletter
             </ExternalLink>{" "}
-            for people who wish to support my work, and I also accept{" "}
-            <Link href="/contribute">donations</Link> for the website. I am a
-            paid Fellow at the Harvard Library Innovation Lab.
+            where some people financially support my work, and I also accept{" "}
+            <Link href="/contribute">donations</Link> for this website.
           </p>
           <p>
             The site does use Google Analytics, mostly for my own curiosity. All
