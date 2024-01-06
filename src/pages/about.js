@@ -50,10 +50,8 @@ export default function WhatIsWeb3() {
           <h3>Who am I?</h3>
           <p>
             I'm Molly White, a software engineer, writer, and critical
-            researcher of cryptocurrency and the tech industry more broadly. I
-            am a fellow at the Harvard{" "}
-            <a href="https://lil.law.harvard.edu/">Library Innovation Lab</a>.
-            You can learn more about me on{" "}
+            researcher of cryptocurrency and the tech industry more broadly. You
+            can learn more about me on{" "}
             <ExternalLink href="https://www.mollywhite.net/">
               my website
             </ExternalLink>{" "}
