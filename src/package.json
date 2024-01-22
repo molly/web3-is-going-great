@@ -12,7 +12,7 @@
     "@popperjs/core": "^2.11.8",
     "algoliasearch": "^4.20.0",
     "clsx": "^2.0.0",
-    "date-fns": "^2.30.0",
+    "date-fns": "^3.3.0",
     "downshift": "^8.2.3",
     "firebase": "^10.7.0",
     "lodash.filter": "^4.6.0",
