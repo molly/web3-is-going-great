@@ -86,7 +86,7 @@ const resizeImage = async ({
 };
 
 export const onImageUpload = functions.storage
-  .bucket("primary-web3")
+  .bucket("primary-web3-regional")
   .object()
   .onFinalize(async (object) => {
     if (

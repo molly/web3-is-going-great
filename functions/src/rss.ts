@@ -8,10 +8,10 @@ import * as ejs from "ejs";
 import { Entry, RssEntry } from "./types";
 import axios from "axios";
 
-const STORAGE_URL_PREFIX = "https://storage.googleapis.com/primary-web3";
-const STATIC_STORAGE_URL_PREFIX = "https://storage.googleapis.com/static-web3";
+const STORAGE_URL_PREFIX = "https://primary-cdn.web3isgoinggreat.com";
+const STATIC_STORAGE_URL_PREFIX = "https://static-cdn.web3isgoinggreat.com";
 const writeFeed = async (xml: string): Promise<void> => {
-  const file = await storage.bucket("static-web3").file("rss.xml");
+  const file = await storage.bucket("static-web3-regional").file("rss.xml");
   await file.save(xml);
   await file.setMetadata({
     contentType: "application/atom+xml;charset=UTF-8",
@@ -66,7 +66,7 @@ export const updateRssOnChange = functions.firestore
     let resp;
     try {
       const stagingFile = await storage
-        .bucket("static-web3")
+        .bucket("static-web3-regional")
         .file("stagedRss.xml");
       await stagingFile.save(xml);
       await stagingFile.setMetadata({

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<feed
-  xmlns="http://www.w3.org/2005/Atom"
-  xmlns:webfeeds="http://webfeeds.org/rss/1.0"
->
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:webfeeds="http://webfeeds.org/rss/1.0">
   <id>https://web3isgoinggreat.com/feed.xml</id>
   <title type="html">Web3 is Going Just Great</title>
   <author>
@@ -14,11 +11,10 @@
   <link rel="alternate" href="https://web3isgoinggreat.com" />
   <icon>https://web3isgoinggreat.com/favicon-32x32.png</icon>
   <webfeeds:icon>https://web3isgoinggreat.com/favicon-32x32.png</webfeeds:icon>
-  <webfeeds:cover
-    image="https://storage.googleapis.com/primary-web3/entryImages/monkey-og.png"
-  ></webfeeds:cover>
+  <webfeeds:cover image="https://primary-cdn.web3isgoinggreat.com/entryImages/monkey-og.png">
+  </webfeeds:cover>
   <webfeeds:accentColor>5948a4</webfeeds:accentColor>
-  <category term="technology"/>
+  <category term="technology" />
   <rights type="html">CC-BY-SA 3.0</rights>
   <updated><%= updated %></updated>
   <% entries.forEach(function(entry){ %>
@@ -26,22 +22,20 @@
     <title type="html"><%= entry.title %></title>
     <published><%= entry.createdAt %></published>
     <updated><%= entry.updatedAt %></updated>
-    <link href="https://web3isgoinggreat.com/single/<%= entry.readableId %>"/> 
+    <link href="https://web3isgoinggreat.com/single/<%= entry.readableId %>" />
     <id>https://web3isgoinggreat.com/single/<%= entry.readableId %></id>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <% if (entry.image){%><img
           src="<%= storageUrlPrefix %>/entryImages/<%= entry.image.isLogo ? 'logos/' : '' %>resized/<%= entry.image.src.split('.')[0] %>_<%= entry.image.isLogo ? '300' : '500' %>.webp"
-          alt="<%= entry.image.alt %>"
-          width="300px"
-        /><% } %>
+          alt="<%= entry.image.alt %>" width="300px" /><% } %>
         <p><%- entry.body %></p>
         <% if (entry.links && entry.links.length){%><ul><% entry.links.forEach(function (link){ %>
-            <li>
-              <a href="<%= link.href%>">
-                <%- link.linkText %>
-              </a> <%- link.extraText %>
-            </li><% }); %>
+          <li>
+            <a href="<%= link.href%>">
+              <%- link.linkText %>
+            </a> <%- link.extraText %>
+          </li><% }); %>
         </ul><% } %>
       </div>
     </content>

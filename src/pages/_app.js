@@ -54,7 +54,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           property="og:image"
           key="ogimage"
-          content="https://storage.googleapis.com/primary-web3/monkey-og.png"
+          content="https://primary-cdn.web3isgoinggreat.com/monkey-og.png"
         />
         <meta
           property="og:image:alt"
@@ -85,7 +85,7 @@ function CustomApp({ Component, pageProps }) {
         <meta
           name="twitter:image"
           key="twitterimage"
-          content="https://storage.googleapis.com/primary-web3/monkey-twitter.png"
+          content="https://primary-cdn.web3isgoinggreat.com/monkey-twitter.png"
         />
         <meta
           name="twitter:image:alt"

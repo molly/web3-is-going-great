@@ -9,7 +9,7 @@ import BackBar from "../../components/BackBar";
 import SimpleHeader from "../../components/SimpleHeader";
 import Footer from "../../components/Footer";
 
-const BUCKET_PATH = "https://storage.googleapis.com/tweet-archives";
+const BUCKET_PATH = "https://tweet-archives-cdn.web3isgoinggreat.com";
 
 export async function getServerSideProps(context) {
   const props = {};

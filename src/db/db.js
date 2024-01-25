@@ -9,11 +9,11 @@ const app = initializeApp({
   authDomain: "web3-334501.firebaseapp.com",
   databaseURL: "https://web3-334501-default-rtdb.firebaseio.com",
   projectId: "web3-334501",
-  storageBucket: "primary-web3",
+  storageBucket: "primary-web3-regional",
   messagingSenderId: "645239520683",
   appId: "1:645239520683:web:3e90522f06ea69822ce6ee",
 });
 
 export const db = getFirestore(app);
 export const storage = getStorage(app);
-export const staticStorage = getStorage(app, "gs://static-web3");
+export const staticStorage = getStorage(app, "gs://static-web3-regional");
