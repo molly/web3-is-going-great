@@ -16,7 +16,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@google-cloud/storage": "6.12.0",
-    "axios": "^1.6.2",
+    "axios": "^1.6.7",
     "ejs": "^3.1.9",
     "firebase-admin": "^11.11.1",
     "firebase-functions": "^4.5.0",
@@ -24,17 +24,17 @@
     "mkdirp": "^3.0.1",
     "os": "^0.1.2",
     "path": "^0.12.7",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "@types/ejs": "^3.1.5",
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
-    "eslint": "^8.55.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "eslint": "^8.56.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.29.0",
-    "firebase-functions-test": "^3.1.0",
-    "typescript": "^5.3.2"
+    "eslint-plugin-import": "^2.29.1",
+    "firebase-functions-test": "^3.1.1",
+    "typescript": "^5.3.3"
   },
   "private": true
 }
