@@ -1,5 +1,14 @@
 module.exports = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.web3isgoinggreat.com",
+        port: "",
+      },
+    ],
+  },
   async redirects() {
     return [
       {

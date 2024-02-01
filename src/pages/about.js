@@ -99,6 +99,15 @@ export default function WhatIsWeb3() {
             </a>
             , or you can disable JavaScript for this site.
           </p>
+          <h3>Infrastructure</h3>
+          <p>
+            The code for <i>Web3 is Going Just Great</i> is open source and on{" "}
+            <a href="https://github.com/molly/web3-is-going-great">Github</a>.
+            The site is hosted with Google Cloud. Additional cloud services
+            (caching, etc.) are generously provided by Fastly through their{" "}
+            <a href="https://www.fastly.com/fast-forward">Fast Forward</a>{" "}
+            program.
+          </p>
         </article>
       </div>
       <Footer />
