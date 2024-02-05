@@ -73,7 +73,7 @@
   min-width: 300px
   max-width: 600px
   max-height: 50%
-  overflow: scroll
+  overflow: hidden auto
   border: 1px solid $filterbar-border
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2)
   z-index: 6
@@ -262,6 +262,7 @@
     .search-results-menu
       background-color: $dark-lightbox-background
       border: 1px solid $dark-filterbar-border
+      scrollbar-color: #606060 $dark-lightbox-background
 
     .search-result
       &:not(:last-child)
