@@ -8,7 +8,8 @@ export const getServerSideProps = async ({ res }) => {
   try {
     res.setHeader("Content-Type", "application/atom+xml;charset=UTF-8");
     const bytes = await getBytes(fileRef);
-    res.write(bytes);
+    const buffer = Buffer.from(bytes);
+    res.write(buffer);
     res.end();
   } catch (e) {
     console.log(e);
