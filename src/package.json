@@ -35,6 +35,6 @@
     "eslint": "8.56.0",
     "eslint-config-next": "14.1.0",
     "eslint-plugin-react": "^7.33.2",
-    "sass": "^1.70.0"
+    "sass": "^1.71.1"
   }
 }
