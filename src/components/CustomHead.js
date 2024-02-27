@@ -31,16 +31,6 @@ export default function CustomEntryHead({ title, description, urlPath }) {
         key="twitterdescription"
         content={description}
       />
-      <link
-        rel="alternate"
-        type="application/json+oembed"
-        href={`https://www.web3isgoinggreat.com/api/oembed?url=https://web3isgoinggreat.com/${urlPath}&format=json`}
-      />
-      <link
-        rel="alternate"
-        type="application/xml+oembed"
-        href={`https://www.web3isgoinggreat.com/api/oembed?url=https://www.web3isgoinggreat.com/${urlPath}&format=xml`}
-      />
     </Head>
   );
 }

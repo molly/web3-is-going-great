@@ -92,16 +92,6 @@ function CustomApp({ Component, pageProps }) {
           key="twitterimagealt"
           content="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames. Text next to it says 'Web3 is Going Just Great.'"
         />
-        <link
-          rel="alternate"
-          type="application/json+oembed"
-          href="https://www.web3isgoinggreat.com/api/oembed?url=https://web3isgoinggreat.com/&format=json"
-        />
-        <link
-          rel="alternate"
-          type="application/xml+oembed"
-          href="https://www.web3isgoinggreat.com/api/oembed?url=https://www.web3isgoinggreat.com/&format=xml"
-        />
       </Head>
       <QueryClientProvider client={queryClient}>
         <AppProvider>
