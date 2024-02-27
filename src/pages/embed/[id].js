@@ -10,7 +10,6 @@ import Error from "../../components/Error";
 import Entry from "../../components/timeline/Entry";
 import { getMetadata } from "../../db/metadata";
 import { EntryPropType } from "../../js/entry";
-import { getOembedHeaders } from "../../js/oembed";
 
 export async function getServerSideProps(context) {
   const props = { entry: null };
@@ -50,10 +49,7 @@ export default function EmbedEntry({
   }
   return (
     <>
-      <CustomEntryHead
-        entry={entry}
-        additionalHead={getOembedHeaders(entry.id)}
-      />
+      <CustomEntryHead entry={entry} />
       <article className="embed-wrapper">
         <Entry
           className="single even"

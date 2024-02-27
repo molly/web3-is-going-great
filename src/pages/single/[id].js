@@ -14,7 +14,6 @@ import Entry from "../../components/timeline/Entry";
 import Header from "../../components/timeline/Header";
 import { getMetadata } from "../../db/metadata";
 import { EntryPropType } from "../../js/entry";
-import { getOembedHeaders } from "../../js/oembed";
 
 export async function getServerSideProps(context) {
   const props = { entry: null };
@@ -74,10 +73,7 @@ export default function SingleEntry({
 
   return (
     <>
-      <CustomEntryHead
-        entry={entry}
-        additionalHead={getOembedHeaders(entry.id)}
-      />
+      <CustomEntryHead entry={entry} />
       <Header
         windowWidth={windowWidth}
         isBrowserRendering={isBrowserRendering}

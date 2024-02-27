@@ -15,7 +15,6 @@ import {
 import Link from "next/link";
 import { InView, useInView } from "react-intersection-observer";
 
-import { getOembedHeaders } from "../../js/oembed";
 import BackBar from "../BackBar";
 import CustomEntryHead from "../CustomEntryHead";
 import Error from "../Error";
@@ -98,7 +97,6 @@ export default function Timeline({
         <CustomEntryHead
           entry={data.pages[0].entries[0]}
           collectionDescription={collectionDescription}
-          additionalHead={startAtId ? getOembedHeaders(startAtId) : null}
         />
       );
     }

@@ -98,6 +98,16 @@ export default function CustomEntryHead({
         key="twitterdescription"
         content={description}
       />
+      <link
+        rel="alternate"
+        type="application/json+oembed"
+        href={`https://www.web3isgoinggreat.com/api/oembed?url=https://www.web3isgoinggreat.com/single/${entry.id}&format=json`}
+      />
+      <link
+        rel="alternate"
+        type="application/xml+oembed"
+        href={`https://www.web3isgoinggreat.com/api/oembed?url=https://www.web3isgoinggreat.com/single/${entry.id}&format=xml`}
+      />
       {additionalHead}
     </Head>
   );

@@ -1,10 +1,10 @@
-import "../styles/main.sass";
+import Head from "next/head";
 import PropTypes from "prop-types";
 import ReactGA from "react-ga";
-import Head from "next/head";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Layout from "../components/Layout";
 import { AppProvider } from "../context/AppContext";
+import "../styles/main.sass";
 
 if (typeof window !== "undefined") {
   ReactGA.initialize("UA-215114522-1");
@@ -91,6 +91,16 @@ function CustomApp({ Component, pageProps }) {
           name="twitter:image:alt"
           key="twitterimagealt"
           content="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames. Text next to it says 'Web3 is Going Just Great.'"
+        />
+        <link
+          rel="alternate"
+          type="application/json+oembed"
+          href="https://www.web3isgoinggreat.com/api/oembed?url=https://web3isgoinggreat.com/&format=json"
+        />
+        <link
+          rel="alternate"
+          type="application/xml+oembed"
+          href="https://www.web3isgoinggreat.com/api/oembed?url=https://www.web3isgoinggreat.com/&format=xml"
         />
       </Head>
       <QueryClientProvider client={queryClient}>

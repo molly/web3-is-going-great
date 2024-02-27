@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
 import Head from "next/head";
+import PropTypes from "prop-types";
 
 export default function CustomEntryHead({ title, description, urlPath }) {
   return (
@@ -30,6 +30,16 @@ export default function CustomEntryHead({ title, description, urlPath }) {
         name="twitter:description"
         key="twitterdescription"
         content={description}
+      />
+      <link
+        rel="alternate"
+        type="application/json+oembed"
+        href={`https://www.web3isgoinggreat.com/api/oembed?url=https://web3isgoinggreat.com/${urlPath}&format=json`}
+      />
+      <link
+        rel="alternate"
+        type="application/xml+oembed"
+        href={`https://www.web3isgoinggreat.com/api/oembed?url=https://www.web3isgoinggreat.com/${urlPath}&format=xml`}
       />
     </Head>
   );
