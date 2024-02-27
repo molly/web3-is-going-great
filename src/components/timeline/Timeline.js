@@ -1,9 +1,9 @@
-import { Fragment, useCallback, useState, useRef, useMemo } from "react";
-import PropTypes from "prop-types";
 import clsx from "clsx";
+import PropTypes from "prop-types";
+import { Fragment, useCallback, useMemo, useRef, useState } from "react";
 
-import useWindowWidth from "../../hooks/useWindowWidth";
 import useIsBrowserRendering from "../../hooks/useIsBrowserRendering";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 import { FiltersPropType } from "../../constants/filters";
 import {
@@ -15,14 +15,15 @@ import {
 import Link from "next/link";
 import { InView, useInView } from "react-intersection-observer";
 
-import CustomEntryHead from "../CustomEntryHead";
-import Header from "./Header";
-import Filters from "./Filters";
+import { getOembedHeaders } from "../../js/oembed";
 import BackBar from "../BackBar";
-import Entry from "./Entry";
-import FixedAtBottom from "./FixedAtBottom";
-import Loader from "../Loader";
+import CustomEntryHead from "../CustomEntryHead";
 import Error from "../Error";
+import Loader from "../Loader";
+import Entry from "./Entry";
+import Filters from "./Filters";
+import FixedAtBottom from "./FixedAtBottom";
+import Header from "./Header";
 
 export default function Timeline({
   queryResult,
@@ -97,6 +98,7 @@ export default function Timeline({
         <CustomEntryHead
           entry={data.pages[0].entries[0]}
           collectionDescription={collectionDescription}
+          additionalHead={startAtId ? getOembedHeaders(startAtId) : null}
         />
       );
     }

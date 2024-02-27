@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
 import Head from "next/head";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import { EntryPropType } from "../js/entry";
 
-import { stripHtml, getImageDimensions } from "../js/utilities";
 import { getImageUrl } from "../js/images";
+import { getImageDimensions, stripHtml } from "../js/utilities";
 
-export default function CustomEntryHead({ entry, collectionDescription }) {
+export default function CustomEntryHead({
+  entry,
+  collectionDescription,
+  additionalHead,
+}) {
   const [isWaitingForImageDimensions, setIsWaitingForImageDimensions] =
     useState(true);
   const [imageDimensions, setImageDimensions] = useState({
@@ -94,6 +98,7 @@ export default function CustomEntryHead({ entry, collectionDescription }) {
         key="twitterdescription"
         content={description}
       />
+      {additionalHead}
     </Head>
   );
 }
@@ -101,4 +106,5 @@ export default function CustomEntryHead({ entry, collectionDescription }) {
 CustomEntryHead.propTypes = {
   entry: EntryPropType,
   collectionDescription: PropTypes.string,
+  additionalHead: PropTypes.node,
 };
