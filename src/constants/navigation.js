@@ -12,7 +12,7 @@ export const SOCIAL = [
   {
     label: "Bluesky",
     href: "https://bsky.app/profile/web3isgoinggreat.com",
-    icon: "fas fa-square",
+    icon: "fab fa-bluesky",
   },
   {
     label: "Instagram",
