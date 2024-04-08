@@ -1,7 +1,7 @@
 import useGA from "../hooks/useGA";
 
-import CustomHead from "../components/CustomHead";
 import BackBar from "../components/BackBar";
+import CustomHead from "../components/CustomHead";
 import ExternalLink from "../components/ExternalLink";
 import Footer from "../components/Footer";
 import SimpleHeader from "../components/SimpleHeader";
@@ -46,7 +46,7 @@ export default function WhatIsWeb3() {
             best) achieved with a blockchain. They also tend to point out the
             enormous environmental impacts of blockchain technology
             (particularly{" "}
-            <ExternalLink href="https://www.coindesk.com/learn/2020/12/16/what-is-proof-of-work/">
+            <ExternalLink href="https://www.coindesk.com/learn/what-is-proof-of-work">
               <span>proof-of-work</span>
             </ExternalLink>{" "}
             blockchains, including Bitcoin and until recently Ethereum). They
