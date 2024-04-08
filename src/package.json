@@ -34,7 +34,7 @@
     "use-debounce": "^10.0.0"
   },
   "devDependencies": {
-    "eslint": "8.57.0",
+    "eslint": "9.0.0",
     "eslint-config-next": "14.1.4",
     "eslint-plugin-react": "^7.34.1",
     "sass": "^1.72.0"
