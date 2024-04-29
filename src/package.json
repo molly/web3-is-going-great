@@ -23,7 +23,7 @@
     "lodash.orderby": "^4.6.0",
     "next": "14.1.4",
     "normalize.css": "^8.0.1",
-    "react": "^18.2.0",
+    "react": "^18.3.1",
     "react-date-range": "^2.0.0-alpha.4",
     "react-dom": "^18.2.0",
     "react-ga": "^3.3.1",
