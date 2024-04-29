@@ -29,7 +29,7 @@
   "devDependencies": {
     "@types/ejs": "^3.1.5",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
-    "@typescript-eslint/parser": "^7.5.0",
+    "@typescript-eslint/parser": "^7.7.1",
     "eslint": "^8.57.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.29.1",
