@@ -151,7 +151,10 @@ export default function Entry({
     } else {
       // No JS
       return (
-        <Link href={noJsPermalink}>
+        <Link
+          href={noJsPermalink}
+          data-url={`https://www.web3isgoinggreat.com/?id=${entry.readableId}`}
+        >
           <i className="fas fa-link" title="Permalink" />
         </Link>
       );
@@ -438,12 +441,7 @@ export default function Entry({
       className={`timeline-entry ${className}`}
       ref={shouldScrollToElement ? ref : null}
     >
-      <div
-        className={clsx(
-          "timeline-icon",
-          entry.color || "purple"
-        )}
-      >
+      <div className={clsx("timeline-icon", entry.color || "purple")}>
         {renderIcon()}
       </div>
 
