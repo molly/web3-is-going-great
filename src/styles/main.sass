@@ -104,7 +104,7 @@ footer.page-footer
   border-bottom: none
 
   a
-    border-bottom: 1px dashed lighten($header-footer-background, 20%)
+    border-bottom: 0.0625em dashed lighten($header-footer-background, 20%)
     color: $header-footer-link-color
 
     &:hover, &:focus
@@ -476,21 +476,21 @@ img
 
     &::after
       color: $timestamp-color
-      margin-left: 2px
+      margin-left: 0.125em
       vertical-align: middle
 
   a[href^="https://"], a[href^="http://"]
     &::after
       content: "\f08e"
       font: var(--fa-font-solid)
-      font-size: 10px
-      margin-left: 4px
+      font-size: 0.625em
+      margin-left: 0.25em
 
   a[href^="https://en.wikipedia.org/"]
     &::after
       content: "\f266"
       font: var(--fa-font-brands)
-      font-size: 10px
+      font-size: 0.625em
 
   a[href^="https://web3isgoinggreat.com/"]
     &::after
@@ -812,14 +812,14 @@ table
 
   .timeline-entry,
   .timeline-entry.short
-    margin-top: 25px
+    margin-top: 1.5em
 
   .timeline-entry.odd .timeline-description,
   .timeline-entry.even .timeline-description
-    margin-left: 50px
+    margin-left: 3.125em
 
   .timeline-entry.single .timeline-description
-    margin-left: 30px
+    margin-left: 1.875em
 
   .timestamp-and-link-icons ul li:not(:first-child)
     font-size: 120%
@@ -898,13 +898,13 @@ table
   .timeline-entry.even,
   .timeline-entry.odd
     .timeline-description
-      margin-left: 10px
-      padding-top: 10px
+      margin-left: 0.625em
+      padding-top: 0.625em
       width: calc( 100vw - 20px )
 
       .entry-wrapper
-        margin-left: 10px
-        margin-right: 10px
+        margin-left: 0.625em
+        margin-right: 0.625em
 
   .timeline:after
     display: none
@@ -981,7 +981,7 @@ table
 
   header.page-header .header-content
     a
-      border-bottom: 1px dashed lighten($header-footer-background, 20%)
+      border-bottom: 0.0625em dashed lighten($header-footer-background, 20%)
       color: $dark-header-footer-link-color
 
     h1 a, h1 button
