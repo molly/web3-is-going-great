@@ -92,6 +92,7 @@ function CustomApp({ Component, pageProps }) {
           key="twitterimagealt"
           content="Illustration: A sad-looking Bored Ape Yacht Club NFT monkey looks at a world engulfed in flames. Text next to it says 'Web3 is Going Just Great.'"
         />
+        <meta name="fediverse:creator" content="@molly0xfff@hachyderm.io" />
       </Head>
       <QueryClientProvider client={queryClient}>
         <AppProvider>
