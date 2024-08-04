@@ -27,19 +27,21 @@ export default function DonationsBar({
     0
   );
 
-  let denominator;
-  if (remainingDonations >= 0 || remainingCredits > 0) {
-    denominator = totalExpenses + remainingDonations + remainingCredits;
-  } else {
-    denominator = totalExpenses;
-  }
+  const denominator = totalExpenses + remainingDonations + remainingCredits;
 
-  const usedCreditsWidth = (usedCredits / denominator) * 100;
-  const paidWidth =
-    (Math.min(expensesAfterCredits, donations) / denominator) * 100;
-  const remainingCreditsWidth = (remainingCredits / denominator) * 100;
-  const remainingDonationsWidth = (remainingDonations / denominator) * 100;
-  const remainingExpensesWidth = (remainingExpenses / denominator) * 100;
+  const usedCreditsWidth = Math.floor((usedCredits / denominator) * 100);
+  const paidWidth = Math.floor(
+    (Math.min(expensesAfterCredits, donations) / denominator) * 100
+  );
+  const remainingCreditsWidth = Math.floor(
+    (remainingCredits / denominator) * 100
+  );
+  const remainingDonationsWidth = Math.floor(
+    (remainingDonations / denominator) * 100
+  );
+  const remainingExpensesWidth = Math.floor(
+    (remainingExpenses / denominator) * 100
+  );
 
   return (
     <div className="donations-bar-wrapper">

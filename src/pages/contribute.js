@@ -1,20 +1,20 @@
-import React, { useMemo } from "react";
 import PropTypes from "prop-types";
+import React, { useMemo } from "react";
 import useGA from "../hooks/useGA";
 
-import { add, sub, isPast, startOfMonth } from "date-fns";
+import { add, isPast, startOfMonth, sub } from "date-fns";
 import filter from "lodash.filter";
 import find from "lodash.find";
 import { formatDollarString } from "../js/utilities";
 
 import { getMoney } from "../db/money";
 
-import CustomHead from "../components/CustomHead";
-import SimpleHeader from "../components/SimpleHeader";
 import BackBar from "../components/BackBar";
+import CustomHead from "../components/CustomHead";
+import DonationsBar from "../components/DonationsBar";
 import ExternalLink from "../components/ExternalLink";
 import Footer from "../components/Footer";
-import DonationsBar from "../components/DonationsBar";
+import SimpleHeader from "../components/SimpleHeader";
 
 export async function getServerSideProps() {
   return {
@@ -187,6 +187,19 @@ export default function Contribute({ money }) {
                   {formatDollarString(
                     Math.max(
                       money.donations - (totalExpenses - money.usedCredits),
+                      0
+                    )
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td colSpan={2}>
+                  Remaining expenses (after donations and credits)
+                </td>
+                <td className="number">
+                  {formatDollarString(
+                    Math.max(
+                      totalExpenses - money.usedCredits - money.donations,
                       0
                     )
                   )}
