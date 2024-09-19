@@ -1,6 +1,6 @@
-import NavigationDropdown from "./NavigationDropdown";
 import { useRouter } from "next/router";
 import { NAVIGATION } from "../../constants/navigation";
+import NavigationDropdown from "./NavigationDropdown";
 import NavigationLink from "./NavigationLink";
 
 // Only renders for breakpoints >= MD
@@ -14,7 +14,7 @@ export default function NavigationBar() {
       }
       return (
         <NavigationLink
-          key={navItem.path}
+          key={navItem.path || navItem.label}
           {...navItem}
           className="navigation-entry"
         />

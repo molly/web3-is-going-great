@@ -54,10 +54,6 @@ export const NAVIGATION = [
     children: [
       ...SOCIAL,
       {
-        label: "Newsletter",
-        href: "https://citationneeded.news/",
-      },
-      {
         label: "RSS",
         path: "/feed.xml",
       },
@@ -74,5 +70,13 @@ export const NAVIGATION = [
   {
     label: "Contribute",
     path: "/contribute",
+  },
+  {
+    label: "Newsletter",
+    href: "https://citationneeded.news/",
+  },
+  {
+    label: "Store",
+    href: "https://store.mollywhite.net/",
   },
 ];
