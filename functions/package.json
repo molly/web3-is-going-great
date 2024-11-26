@@ -33,7 +33,7 @@
     "eslint": "^8.57.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.29.1",
-    "firebase-functions-test": "^3.1.1",
+    "firebase-functions-test": "^3.2.0",
     "typescript": "^5.4.3"
   },
   "private": true
