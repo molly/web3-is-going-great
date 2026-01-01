@@ -15,7 +15,7 @@
     "date-fns": "^3.6.0",
     "downshift": "^9.0.4",
     "escape-html": "^1.0.3",
-    "firebase": "^10.10.0",
+    "firebase": "^10.11.1",
     "image-size": "^1.1.1",
     "lodash.filter": "^4.6.0",
     "lodash.find": "^4.6.0",
