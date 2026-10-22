@@ -1,6 +1,6 @@
 import * as escapeHtml from "escape-html";
 import * as https from "https";
-import sizeOf from "image-size";
+import { imageSize } from "image-size";
 import { getEntry } from "../../db/singleEntry";
 
 const BASE_RESPONSE = {
@@ -33,7 +33,7 @@ const getImageSize = async (imageUrl) => {
         })
         .on("end", function () {
           const buffer = Buffer.concat(chunks);
-          const dimensions = sizeOf(buffer);
+          const dimensions = imageSize(buffer);
           resolve({
             thumbnail_width: dimensions.width,
             thumbnail_height: dimensions.height,

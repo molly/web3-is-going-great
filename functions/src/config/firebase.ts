@@ -1,7 +1,8 @@
-import * as admin from "firebase-admin";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+import { getStorage } from "firebase-admin/storage";
 
-admin.initializeApp();
+initializeApp();
 
-export const firestore = admin.firestore();
-export const FieldPath = admin.firestore.FieldPath;
-export const storage = admin.storage();
+export const firestore = getFirestore();
+export const storage = getStorage();

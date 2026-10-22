@@ -9,7 +9,7 @@ import * as fs from "fs";
 import { mkdirp } from "mkdirp";
 import * as os from "os";
 import * as path from "path";
-import * as sharp from "sharp";
+import sharp from "sharp";
 
 import { ResizeResult } from "./types";
 
@@ -60,7 +60,7 @@ const resizeImage = async ({
       metadata: object.metadata || { cacheControl: object.cacheControl },
     };
 
-    await sharp(originalImage, { failOnError: false })
+    await sharp(originalImage, { failOn: "none" })
       .rotate()
       .resize(size, size, {
         fit: "inside",
